@@ -59,3 +59,13 @@ Aset: [idn-finlogos 2.5.0](https://github.com/hafidznoor/idn-finlogos), koleksi 
 - Logo KPw menyesuaikan zoom: 27/34/42 px; kas titipan 19/25/30 px. Kelompok 32/40/46 px. Tidak ada perpindahan koordinat untuk merapikan marker.
 - Tema studio memakai gradasi ringan, permukaan transparan, font Manrope dan DM Sans lokal, serta pointer glow hanya untuk pointer halus dan tanpa preferensi reduced motion. Tidak ada library animasi tambahan. Tidak ada permintaan API berbayar.
 - Uji matematika: `npm test` (5 pengujian, termasuk referensi WGS84, pasangan hampir antipodal, simetri, titik sama, dan status akurasi).
+
+## Kesiapan sarpras banjir
+
+Menu **Kesiapan sarpras** (`#sarpras`) mencakup 46 KPw dari daftar aplikasi. Checklist ditranskripsi dari infografik yang diberikan pengguna: perlindungan gedung (5), evakuasi (9), kesehatan/kebutuhan dasar (5), komunikasi/operasional (5), dan langkah preventif (4). Sumber ini tidak diklaim sebagai dokumen petunjuk teknis resmi yang sudah diverifikasi.
+
+Seluruh isian awal kosong. Pengguna dapat mencatat status, jumlah/satuan, catatan tiap butir, PIC, dan catatan kantor. Ringkasan membedakan belum diisi, belum lengkap, ada kekurangan, tercatat siap, dan semua tidak relevan. Tidak ada persentase kesiapan yang dibuat dari data kosong. Progres menunjukkan **kelengkapan pengisian**, bukan skor risiko atau audit kesiapan. Tercatat siap berarti semua butir relevan ditandai siap oleh pengisi, bukan sertifikasi kapasitas/kelayakan.
+
+Data otomatis disimpan hanya dalam localStorage browser (`ruang-risiko-readiness-v1`), **belum tersinkron antarpengguna/perangkat**. Informasi ini ditampilkan di UI. Tombol Unduh rekap menghasilkan JSON untuk 46 KPw lengkap beserta isian dan ringkasan; tidak ada API/backend atau pengiriman data eksternal. Kegagalan penyimpanan browser ditampilkan, dengan anjuran mengunduh rekap.
+
+Popup KPw di peta menampilkan ringkasan kondisi dan empat kategori sarpras dari isian browser, serta tautan langsung ke checklist KPw. Kas titipan tidak diberi kesiapan KPw yang dibuat-buat. Di HP, menu sarpras tersedia melalui ikon perisai pada header.
