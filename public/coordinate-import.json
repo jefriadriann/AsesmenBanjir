@@ -1,0 +1,13 @@
+{
+  "sourceFile": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
+  "sha256": "e9282445ee8b1dadeea27af2764301a608e4cf8bfae8afeab74ae4c2b81dc943",
+  "total": 133,
+  "withCoordinates": 52,
+  "statusCounts": {
+    "ready_for_review": 44,
+    "not_found": 81,
+    "needs_confirmation": 8
+  },
+  "policy": "No inferred coordinates; submitted review status is not independent verification.",
+  "additionalRowsImported": 0
+}

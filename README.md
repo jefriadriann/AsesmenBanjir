@@ -1,5 +1,7 @@
 # Ruang Risiko · Peta Risiko Banjir
 
+**Data koordinat terkini:** impor file pengguna `Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx`. 52 titik tersedia (44 siap ditinjau, 8 perlu konfirmasi); 81 lokasi belum memiliki koordinat. Bagian sejarah di bawah yang menyebut semua titik pusat kota sudah digantikan impor ini. Tidak ada status yang dipromosikan menjadi verified.
+
 Workspace peta jaringan kas Indonesia. Vite, Leaflet, font lokal DM Sans/Manrope, peta jalan OpenStreetMap, dan peta sederhana Natural Earth. Tidak memerlukan API key berbayar.
 
 ## Pengembangan
@@ -69,3 +71,13 @@ Seluruh isian awal kosong. Pengguna dapat mencatat status, jumlah/satuan, catata
 Data otomatis disimpan hanya dalam localStorage browser (`ruang-risiko-readiness-v1`), **belum tersinkron antarpengguna/perangkat**. Informasi ini ditampilkan di UI. Tombol Unduh rekap menghasilkan JSON untuk 46 KPw lengkap beserta isian dan ringkasan; tidak ada API/backend atau pengiriman data eksternal. Kegagalan penyimpanan browser ditampilkan, dengan anjuran mengunduh rekap.
 
 Popup KPw di peta menampilkan ringkasan kondisi dan empat kategori sarpras dari isian browser, serta tautan langsung ke checklist KPw. Kas titipan tidak diberi kesiapan KPw yang dibuat-buat. Di HP, menu sarpras tersedia melalui ikon perisai pada header.
+
+## Impor koordinat terbaru
+
+`python scripts/import_coordinates.py <file.xlsx>` membutuhkan openpyxl. Skrip memvalidasi seluruh 133 ID, rentang angka, dan duplikasi, lalu mempertahankan nilai koordinat tanpa pembulatan. Nama, bank, alamat, status, catatan, dan URL sumber mengikuti file. Sheet lokasi tambahan yang hanya berisi baris usulan kosong tidak diimpor. SHA-256 dan jumlah status dicatat di `public/coordinate-import.json`.
+
+- `ready_for_review`: 44 titik berstatus Siap ditinjau di Excel; bukan verifikasi independen.
+- `needs_confirmation`: 8 titik kandidat berstatus Perlu diperiksa, diberi tanda ! dan label Perlu konfirmasi.
+- `not_found`: 81 lokasi tanpa koordinat, tetap ada di daftar/filter dan detail tetapi tidak diberi marker palsu atau titik pusat kota pengganti. Endpoint ini dinonaktifkan di pengukuran.
+- `coords` memuat koordinat kiriman atau null. `legacyCityCoords` menyimpan perkiraan lama hanya untuk arsip. `verifiedOfficeCoords` tetap null.
+- Penggaris hanya tersedia di navigasi (sidebar desktop, navigasi atas HP), bukan popup atau toolbar header peta. Popup tetap menyediakan detail dan sarpras.

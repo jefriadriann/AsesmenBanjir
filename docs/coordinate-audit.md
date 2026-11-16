@@ -1,5 +1,7 @@
 # Audit koordinat — 16 November 2026
 
+**Arsip audit sebelum impor Excel pengguna.** Data aktif kini mengikuti `public/coordinate-import.json`: 52 koordinat tersedia (44 siap ditinjau, 8 perlu konfirmasi), 81 belum ditemukan. Catatan di bawah menjelaskan versi lama dan tidak menggantikan status file baru.
+
 133 lokasi diperiksa: 46 KPw, 87 kas titipan. **0 koordinat kantor terverifikasi.** Ini audit kualitas dan asal data, bukan pengesahan lokasi.
 
 Semua koordinat lama berstatus `approximate` dan berpresisi dua desimal. Asalnya perkiraan pusat kota yang dibuat saat prototipe; bukan Google Maps, bukan geocoding alamat, dan bukan sumber kantor resmi. Dua desimal saja tidak membuktikan salah, tetapi asal perkiraan tersebut tidak memadai untuk menempatkan kantor atau menghitung paparan banjir.
