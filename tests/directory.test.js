@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {childrenOf,directoryFamilies} from '../src/directory.js';
+const data=JSON.parse(readFileSync(new URL('../public/locations.json',import.meta.url)));
+test('all 87 kas titipan have exactly one parent KPw according to the source',()=>{const parents=data.filter(d=>d.type==='kpw');const all=parents.flatMap(p=>childrenOf(data,p.id));assert.equal(all.length,87);assert.equal(new Set(all.map(d=>d.id)).size,87);});
+test('Aceh and Sumut child offices remain distinct',()=>{assert.deepEqual(childrenOf(data,'KPW-01').map(d=>d.name),['Blangpidie','Meulaboh']);assert.deepEqual(childrenOf(data,'KPW-02').map(d=>d.name),['Kabanjahe','Subulussalam']);});
+test('child search results reveal their parent rather than flattening the tree',()=>{const rows=data.filter(d=>d.name==='Blangpidie');const families=directoryFamilies(data,rows);assert.equal(families.length,1);assert.equal(families[0].id,'KPW-01');assert.equal(directoryFamilies(data,data).length,46);});
+test('missing coordinates do not remove a child from its parent list',()=>{const d=childrenOf(data,'KPW-02').find(d=>d.name==='Kabanjahe');assert.equal(d.coords,null);assert.ok(directoryFamilies(data,[d]).some(p=>p.id==='KPW-02'));});

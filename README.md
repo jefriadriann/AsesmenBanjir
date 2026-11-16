@@ -102,3 +102,13 @@ File `Kesiapan_Sarpras_4_Final.xlsx` menjadi bukti per KPw; infografik pengguna 
 **Tidak memakai skor keseluruhan sheet 19 butir sebagai skor kesiapan penuh acuan 28 butir.** Progres di layar adalah cakupan bukti, bukan persentase kesiapan. Nilai mentah sumber tetap disimpan untuk keterlacakan. Tidak ada label kesiapan penuh yang disimpulkan dari data tidak lengkap.
 
 Menu Kesiapan Sarpras, detail KPw, popup peta, dan unduhan JSON semuanya khusus banjir. Tidak ada tab bencana lain atau tampilan inventaris umum. Semua pengguna membaca dataset file yang sama; cache isian checklist lama tetap dipertahankan di localStorage tetapi tidak menimpa data sumber yang baru. Belum ada penyuntingan dataset bersama melalui backend.
+
+## Penyempurnaan alur navigasi dan tampilan bersih
+
+Daftar lokasi aktif kini berjenjang: **KPw → kas titipan di bawahnya → detail lokasi**. `src/directory.js` menghubungkan 87 kas titipan ke 46 KPw menggunakan kolom KPw induk dari file; tidak menebak berdasarkan jarak atau provinsi. Pencarian kas titipan menampilkan kelompok kantor induknya. Setiap kelompok menyediakan alamat dan bank anak, status koordinat, detail kantor, jaringan di peta, serta akses sarpras. KPw tanpa kas titipan memiliki empty state yang jelas; lokasi tanpa koordinat tetap tampil.
+
+Panel mempunyai tombol kembali dan tutup yang terlihat. Kembali dari detail anak mempertahankan KPw induk. Kembali dari sarpras ke peta menutup panel dan mereset filter agar tidak ada kontrol tertutup atau filter kelompok tersembunyi. Ketika kelompok dipilih, chip nama KPw di peta menunjukkan lingkup yang aktif dan bisa dihapus. Fokus keyboard dipindahkan ke navigasi panel saat dibuka dan dikembalikan ke tombol daftar saat ditutup.
+
+Catatan interpretasi dipusatkan di Sumber & cara baca; rincian sel sarpras dapat ditampilkan atas permintaan. Status data dan kategori sebagian/tidak tersedia tetap terlihat. Layer InaRISK tidak otomatis membuka panel pada awal halaman. Panel layer, daftar lokasi, dan pengukuran saling menutup agar peta tidak tertutup beberapa panel sekaligus.
+
+Gradasi header/permukaan diseragamkan ke biru-kehijauan yang halus, dengan palet gelap tersendiri. Preferensi tema baru memakai `ruang-theme-v4`, bawaan terang; preferensi lama tidak memaksakan palet campuran. Validasi UI mencakup alur pergi-pulang peta/daftar/detail/sarpras, filter, kantor tanpa anak, koordinat kosong, sumber on demand, pengukuran, dan ukuran desktop/HP.
