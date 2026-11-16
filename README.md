@@ -50,3 +50,12 @@ Tema terang menjadi bawaan, termasuk untuk pengguna yang sebelumnya menyimpan mo
 Logo KPw memakai monogram Bank Indonesia (44 px); kas titipan memakai logo bank pengelola (31 px). Kelompok titik menampilkan logo perwakilan dan jumlah lokasi, bukan satu kantor tunggal. 67 dari 87 bank pengelola dapat dikenali dari nama dalam sumber; 20 data kosong/ambigu memakai ikon netral. Tidak ada bank yang ditebak dari wilayahnya.
 
 Aset: [idn-finlogos 2.5.0](https://github.com/hafidznoor/idn-finlogos), koleksi komunitas (bukan sumber resmi institusi), CC BY-NC 4.0 untuk aset. Bentuk logo tidak digambar ulang; namespace SVG ditambahkan untuk pemuatan sebagai gambar eksternal. Lisensi dan pemberitahuan disertakan dalam `public/bank-logos`. Semua merek milik institusi masing-masing; pemakaian untuk identifikasi.
+
+## Pengukuran jarak dan tampilan interaktif
+
+- Buka **Ukur jarak** dari navigasi atau header. Pilih A/B dari daftar, atau klik Ukur jarak dari sini pada popup lalu pilih titik tujuan di peta. Saat alat aktif, klik marker memilih titik A/B. Tombol tutup/Escape menyembunyikan alat dan garis; pilihan dipertahankan sampai Hapus pilihan.
+- `src/distance.js` memakai GeographicLib Geodesic pada elipsoid WGS84 (algoritma Karney). Jarak adalah geodesik permukaan bumi, bukan rute jalan atau durasi perjalanan. Garis dibuat dari 65 titik geodesik.
+- Jika kedua endpoint punya `status: verified` dan `verifiedOfficeCoords: [lat,lng]`, jarak tampil dengan 2 desimal km. Jika salah satu masih perkiraan, hasil diberi tanda ≈, dibulatkan ke km, dan dijelaskan sebagai perkiraan antarpusat kota. Ketelitian algoritma tidak memperbaiki ketepatan koordinat sumber.
+- Logo KPw menyesuaikan zoom: 27/34/42 px; kas titipan 19/25/30 px. Kelompok 32/40/46 px. Tidak ada perpindahan koordinat untuk merapikan marker.
+- Tema studio memakai gradasi ringan, permukaan transparan, font Manrope dan DM Sans lokal, serta pointer glow hanya untuk pointer halus dan tanpa preferensi reduced motion. Tidak ada library animasi tambahan. Tidak ada permintaan API berbayar.
+- Uji matematika: `npm test` (5 pengujian, termasuk referensi WGS84, pasangan hampir antipodal, simetri, titik sama, dan status akurasi).
