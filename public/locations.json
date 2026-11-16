@@ -11,7 +11,18 @@
       95.32
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-02",
@@ -25,7 +36,19 @@
       98.67
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Pengguna melaporkan titik Sumatera Utara salah; screenshot menunjukkan kantor BI di sekitar Jalan Raden Saleh, Medan. Koordinat bangunan belum diperoleh."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-03",
@@ -39,7 +62,18 @@
       99.06
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-04",
@@ -53,7 +87,18 @@
       98.78
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-05",
@@ -67,7 +112,18 @@
       100.36
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-06",
@@ -81,7 +137,18 @@
       101.45
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-07",
@@ -95,7 +162,18 @@
       104.05
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-08",
@@ -109,7 +187,18 @@
       103.61
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-09",
@@ -123,7 +212,18 @@
       104.76
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-10",
@@ -137,7 +237,18 @@
       102.26
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-11",
@@ -151,7 +262,18 @@
       105.26
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-12",
@@ -165,7 +287,18 @@
       106.11
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-13",
@@ -179,7 +312,18 @@
       106.83
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-14",
@@ -193,7 +337,18 @@
       106.15
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-15",
@@ -207,7 +362,18 @@
       107.61
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-16",
@@ -221,7 +387,18 @@
       108.56
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-17",
@@ -235,7 +412,18 @@
       108.22
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-18",
@@ -249,7 +437,18 @@
       109.14
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-19",
@@ -263,7 +462,18 @@
       109.24
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-20",
@@ -277,7 +487,18 @@
       110.42
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-21",
@@ -291,7 +512,18 @@
       110.82
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-22",
@@ -305,7 +537,18 @@
       110.37
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-23",
@@ -319,7 +562,18 @@
       112.75
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-24",
@@ -333,7 +587,18 @@
       112.63
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-25",
@@ -347,7 +612,18 @@
       112.01
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-26",
@@ -361,7 +637,18 @@
       113.7
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-27",
@@ -375,7 +662,18 @@
       115.22
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-28",
@@ -389,7 +687,18 @@
       116.1
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-29",
@@ -403,7 +712,18 @@
       123.61
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-30",
@@ -417,7 +737,18 @@
       109.34
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-31",
@@ -431,7 +762,18 @@
       114.59
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-32",
@@ -445,7 +787,18 @@
       113.92
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-33",
@@ -459,7 +812,18 @@
       117.15
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-34",
@@ -473,7 +837,18 @@
       116.85
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-35",
@@ -487,7 +862,18 @@
       117.63
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-36",
@@ -501,7 +887,18 @@
       119.42
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-37",
@@ -515,7 +912,18 @@
       124.84
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-38",
@@ -529,7 +937,18 @@
       119.87
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-39",
@@ -543,7 +962,18 @@
       122.51
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-40",
@@ -557,7 +987,18 @@
       123.06
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-41",
@@ -571,7 +1012,18 @@
       118.89
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-42",
@@ -585,7 +1037,18 @@
       128.18
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-43",
@@ -599,7 +1062,18 @@
       127.38
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-44",
@@ -613,7 +1087,18 @@
       140.72
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-45",
@@ -627,7 +1112,18 @@
       134.06
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KPW-46",
@@ -641,7 +1137,18 @@
       97.15
     ],
     "status": "approximate",
-    "source": "Daftar awal KPw — perlu validasi direktori BI"
+    "source": "Daftar awal KPw — perlu validasi direktori BI",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-001",
@@ -656,7 +1163,18 @@
       96.85
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-002",
@@ -671,7 +1189,18 @@
       96.13
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-003",
@@ -686,7 +1215,18 @@
       124.52
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-004",
@@ -701,7 +1241,18 @@
       102.91
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-005",
@@ -716,7 +1267,19 @@
       101.12
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Identitas bank belum cukup spesifik untuk memilih cabang."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-006",
@@ -731,7 +1294,18 @@
       102.86
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-007",
@@ -746,7 +1320,18 @@
       103.46
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-008",
@@ -761,7 +1346,18 @@
       102.13
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-009",
@@ -776,7 +1372,18 @@
       107.63
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-010",
@@ -791,7 +1398,18 @@
       104.45
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-011",
@@ -806,7 +1424,18 @@
       116.19
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-012",
@@ -821,7 +1450,18 @@
       103.43
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-013",
@@ -836,7 +1476,18 @@
       121.94
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-014",
@@ -851,7 +1502,18 @@
       113.86
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-015",
@@ -866,7 +1528,18 @@
       112.95
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-016",
@@ -881,7 +1554,18 @@
       108.38
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-017",
@@ -896,7 +1580,18 @@
       108.99
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-018",
@@ -911,7 +1606,18 @@
       104.08
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-019",
@@ -926,7 +1632,18 @@
       116.0
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-020",
@@ -941,7 +1658,18 @@
       115.38
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-021",
@@ -956,7 +1684,18 @@
       111.39
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-022",
@@ -971,7 +1710,18 @@
       117.55
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-023",
@@ -986,7 +1736,18 @@
       109.98
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-024",
@@ -1001,7 +1762,18 @@
       116.64
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-025",
@@ -1016,7 +1788,18 @@
       112.93
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-026",
@@ -1031,7 +1814,18 @@
       117.65
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-027",
@@ -1046,7 +1840,18 @@
       114.89
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-028",
@@ -1061,7 +1866,18 @@
       111.62
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-029",
@@ -1076,7 +1892,18 @@
       117.37
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-030",
@@ -1091,7 +1918,18 @@
       97.97
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-031",
@@ -1106,7 +1944,18 @@
       96.85
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-032",
@@ -1121,7 +1970,18 @@
       117.49
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-033",
@@ -1136,7 +1996,18 @@
       114.84
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-034",
@@ -1151,7 +2022,18 @@
       131.3
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-035",
@@ -1166,7 +2048,18 @@
       132.3
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-036",
@@ -1181,7 +2074,18 @@
       128.01
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-037",
@@ -1196,7 +2100,18 @@
       127.48
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-038",
@@ -1211,7 +2126,18 @@
       118.73
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-039",
@@ -1226,7 +2152,18 @@
       123.42
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-040",
@@ -1241,7 +2178,18 @@
       119.88
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-041",
@@ -1256,7 +2204,19 @@
       136.08
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-042",
@@ -1271,7 +2231,18 @@
       117.42
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-043",
@@ -1286,7 +2257,18 @@
       124.89
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-044",
@@ -1301,7 +2283,18 @@
       121.66
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-045",
@@ -1316,7 +2309,18 @@
       122.22
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-046",
@@ -1331,7 +2335,18 @@
       120.46
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-047",
@@ -1346,7 +2361,18 @@
       119.41
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-048",
@@ -1361,7 +2387,18 @@
       127.1
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-049",
@@ -1376,7 +2413,18 @@
       120.26
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-050",
@@ -1391,7 +2439,19 @@
       140.4
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-051",
@@ -1406,7 +2466,19 @@
       136.24
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-052",
@@ -1421,7 +2493,19 @@
       131.25
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-053",
@@ -1436,7 +2520,19 @@
       136.89
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-054",
@@ -1451,7 +2547,18 @@
       132.75
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-055",
@@ -1466,7 +2573,19 @@
       138.94
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-056",
@@ -1481,7 +2600,19 @@
       135.5
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-057",
@@ -1496,7 +2627,18 @@
       132.02
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-058",
@@ -1511,7 +2653,18 @@
       120.33
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-059",
@@ -1526,7 +2679,18 @@
       99.83
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-060",
@@ -1541,7 +2705,18 @@
       119.63
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-061",
@@ -1556,7 +2731,18 @@
       102.55
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-062",
@@ -1571,7 +2757,19 @@
       100.3
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-063",
@@ -1586,7 +2784,18 @@
       97.61
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-064",
@@ -1601,7 +2810,18 @@
       99.06
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-065",
@@ -1616,7 +2836,18 @@
       99.27
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-066",
@@ -1631,7 +2862,19 @@
       119.34
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Identitas bank belum cukup spesifik untuk memilih cabang."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-067",
@@ -1646,7 +2889,18 @@
       115.7
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-068",
@@ -1661,7 +2915,19 @@
       121.09
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-069",
@@ -1676,7 +2942,19 @@
       120.2
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-070",
@@ -1691,7 +2969,18 @@
       101.39
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-071",
@@ -1706,7 +2995,18 @@
       111.5
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-072",
@@ -1721,7 +3021,19 @@
       120.19
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-073",
@@ -1736,7 +3048,19 @@
       121.97
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-074",
@@ -1751,7 +3075,19 @@
       120.82
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-075",
@@ -1766,7 +3102,19 @@
       122.79
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-076",
@@ -1781,7 +3129,19 @@
       120.75
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-077",
@@ -1796,7 +3156,19 @@
       119.37
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-078",
@@ -1811,7 +3183,18 @@
       133.52
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-079",
@@ -1826,7 +3209,18 @@
       125.4
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-080",
@@ -1841,7 +3235,18 @@
       125.5
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-081",
@@ -1856,7 +3261,18 @@
       122.6
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-082",
@@ -1871,7 +3287,18 @@
       126.68
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-083",
@@ -1886,7 +3313,18 @@
       121.6
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-084",
@@ -1901,7 +3339,18 @@
       104.09
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-085",
@@ -1916,7 +3365,18 @@
       104.17
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-086",
@@ -1931,7 +3391,19 @@
       98.49
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   },
   {
     "id": "KT-087",
@@ -1946,6 +3418,18 @@
       98.0
     ],
     "status": "approximate",
-    "source": "Rekap Kas Titipan (1).xlsx"
+    "source": "Rekap Kas Titipan (1).xlsx",
+    "coordinateAccuracy": "city_estimate",
+    "verifiedOfficeCoords": null,
+    "coordinateEvidence": [],
+    "coordinateReview": {
+      "status": "needs_verification",
+      "issues": [
+        "Koordinat lama adalah perkiraan pusat kota, bukan hasil verifikasi lokasi kantor.",
+        "Nama bank pengelola tidak tersedia dalam file sumber."
+      ],
+      "reviewedOn": "2026-11-16",
+      "reviewScope": "Audit kelengkapan data; verifikasi posisi kantor belum dilakukan karena sumber eksternal diblokir jaringan."
+    }
   }
 ]
