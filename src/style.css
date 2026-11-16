@@ -111,3 +111,6 @@
 .logo-pin>.bank-logo,.cluster-brand>.bank-logo,.cluster-secondary>.bank-logo,.row-symbol>.bank-logo,.bank-brand-symbol>.bank-logo{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);min-width:0;min-height:0;max-width:none;object-fit:contain}
 .cluster-secondary>.bank-logo{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px)}
 .bank-logo-fallback{min-width:0;min-height:0;overflow:hidden}
+/* Leaflet sets marker images to width:auto!important; constrain nested brand images. */
+.leaflet-container .bank-logo{width:calc(100% - 8px)!important;height:calc(100% - 8px)!important;object-fit:contain!important}
+.leaflet-container .cluster-secondary>.bank-logo{width:calc(100% - 4px)!important;height:calc(100% - 4px)!important}
