@@ -33,7 +33,7 @@ const regions=['Sumatera','Jawa','Kalimantan','Balinusra','Sulampua'];
 document.documentElement.dataset.theme=theme;
 document.querySelector('#app').innerHTML=`
 <aside class="sidebar" aria-label="Navigasi utama">
- <a class="wordmark" href="/" aria-label="Ruang Risiko beranda"><span class="brand-symbol">${i('network')}</span><span>Ruang Risiko<small>ASESMEN BANJIR</small></span></a>
+ <a class="wordmark" href="/" aria-label="Ruang Risiko beranda"><span class="brand-symbol brand-drop"><img src="/brand/ruang-risiko-drop.png" alt="" width="44" height="44" decoding="async" fetchpriority="high"></span><span>Ruang Risiko<small>ASESMEN BANJIR</small></span></a>
  <div class="workspace-switch"><span class="workspace-symbol">BI</span><span>Jaringan kas Indonesia<small>Seluruh Indonesia</small></span><span class="workspace-status" title="Data lokal tersedia"></span></div>
  <div class="nav-label">WORKSPACE</div>
  <a id="map-nav" class="nav-item active" href="#peta" aria-current="page">${i('map')}<span>Peta risiko banjir</span><span class="nav-number">01</span></a>

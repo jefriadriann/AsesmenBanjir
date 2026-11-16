@@ -128,3 +128,9 @@ Perhitungan mengikuti script pengguna: `NASA/NASADEM_HGT/001`, band elevation, `
 **Status runtime saat implementasi:** SLOPE_TILE_URL belum tersedia. File credential Google generik ada tetapi tidak memuat tipe/project Earth Engine yang dapat dipakai; tidak ada kredensial yang disalin atau ditampilkan. Sumber Code Editor diblokir jaringan cloud, namun pengguna sudah memberikan JavaScript lengkap. Button, legenda, sumber, validasi/proxy, dan interaksi sudah diuji dengan gambar fixture; hasil raster Earth Engine live belum dimuat/diverifikasi. Saat belum tersambung, UI menampilkan status jujur dan tidak membuat warna kemiringan palsu.
 
 Proxy membatasi HTTPS ke host Earth Engine yang diizinkan, memvalidasi XYZ, tidak mengikuti redirect, serta meredaksi error provider. Vite dev/preview dan Vercel menggunakan handler API yang sama.
+
+## Logo terpilih dan diagnosis konfigurasi kemiringan
+
+Logo aplikasi memakai opsi tetes air/topografi yang dipilih pengguna, dalam PNG transparan lokal `public/brand/ruang-risiko-drop.png`; digunakan di navigasi dan favicon. Aset diisolasi/dirapikan dengan image generation dari opsi kedua. Logo BI dan bank pada marker tidak berubah.
+
+Endpoint config kemiringan membedakan `missing_variable` (SLOPE_TILE_URL tidak diisi), `invalid_template` (bukan URL XYZ Earth Engine yang didukung), dan `configured`. Nilai asli/URL/token tidak ditampilkan. Whitespace, tanda kutip pembungkus, serta placeholder ter-encode `%7Bz%7D`/`%7Bx%7D`/`%7By%7D` dinormalisasi. Untuk website production, isi variabel server pada environment Production lalu redeploy; konfigurasi lokal/cloud tidak otomatis mengubah Vercel. Pesan pada screenshot pengguna menunjukkan config belum valid, bukan hasil kegagalan kalkulasi NASADEM.
