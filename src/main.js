@@ -1,3 +1,4 @@
+import {mountInarisk} from './inarisk.js';
 import {createReadiness} from './readiness.js';
 import {locationCoords,isVerified,measureLocations} from './distance.js';
 import {bankLogo,bankBrand} from './banks.js';
@@ -68,11 +69,11 @@ L.control.scale({position:'bottomleft',imperial:false,maxWidth:90}).addTo(map);
 const failedTiles=new Set();let tileTimer;
 const tileKey=e=>`${e.coords.z}/${e.coords.x}/${e.coords.y}`;
 function mapNotice(message){document.querySelector('#tile-status').textContent=message;document.querySelector('#map-service-text').textContent=message;document.querySelector('#map-service-note').classList.toggle('hidden',!message||mapStyle!=='street');}
-streetTiles.on('loading',()=>{clearTimeout(tileTimer);tileTimer=setTimeout(()=>{if(mapStyle==='street')mapNotice('Peta jalan belum termuat. Periksa koneksi internet, lalu coba lagi.');},12000);});
+streetTiles.on('loading',()=>{clearTimeout(tileTimer);tileTimer=setTimeout(()=>{if(mapStyle==='street')fallbackMap();},12000);});
 streetTiles.on('tileerror',e=>{failedTiles.add(tileKey(e));if(mapStyle==='street')mapNotice('Peta jalan belum termuat sepenuhnya. Periksa koneksi internet.');});
 streetTiles.on('tileload',e=>{if(!e.tile.src.startsWith('data:'))failedTiles.delete(tileKey(e));});
 streetTiles.on('tileunload',e=>{failedTiles.delete(tileKey(e));});
-streetTiles.on('load',()=>{clearTimeout(tileTimer);if(!failedTiles.size)mapNotice('');else if(mapStyle==='street')mapNotice('Peta jalan belum termuat sepenuhnya. Periksa koneksi internet.');});
+streetTiles.on('load',()=>{clearTimeout(tileTimer);if(!failedTiles.size)mapNotice('');else if(mapStyle==='street'){mapNotice('Peta jalan belum termuat sepenuhnya. Periksa koneksi internet.');if(Object.values(streetTiles._tiles).every(t=>t.el.src.startsWith('data:')))queueMicrotask(()=>{if(mapStyle==='street')fallbackMap();});}});
 function setMapStyle(next,notify=false){
  mapStyle=next;const street=next==='street';document.querySelector('.map-frame').classList.toggle('is-street',street);
  if(street){map.removeLayer(labels);map.removeLayer(grids);streetTiles.addTo(map);}else{clearTimeout(tileTimer);streetTiles.remove();labels.addTo(map);grids.addTo(map);mapNotice('');}
@@ -80,9 +81,10 @@ function setMapStyle(next,notify=false){
  document.querySelector('#map-zoom-hint').classList.toggle('hidden',!street||map.getZoom()>=13);
  if(notify)showToast(street?'Peta jalan OpenStreetMap ditampilkan.':'Peta sederhana ditampilkan.');
 }
-document.querySelector('#retry-map').onclick=()=>{mapNotice('');streetTiles.redraw();};
+function fallbackMap(){setMapStyle('atlas');document.querySelector('#map-service-text').textContent='Peta jalan tidak terjangkau. Peta Indonesia lokal tetap tersedia.';document.querySelector('#map-service-note').classList.remove('hidden');if(!selected)nationalView();}
+document.querySelector('#retry-map').onclick=()=>{mapNotice('');setMapStyle('street');streetTiles.redraw();};
 
-function nationalView(animate=false){const zoom=map.getBoundsZoom(bounds,false,L.point(32,32));map.setMinZoom(zoom);map.fitBounds(bounds,{padding:[16,16],animate});}
+function nationalView(animate=false){const frame=document.querySelector('.map-frame');if(frame.clientWidth<80||frame.clientHeight<80||document.querySelector('#peta').classList.contains('hidden'))return;map.stop();map.invalidateSize({pan:false});map.setMinZoom(3);const zoom=Math.max(3,Math.min(7,map.getBoundsZoom(bounds,false,L.point(32,32))));map.setMinZoom(zoom);map.setView(bounds.getCenter(),zoom,{animate});}
 function currentRows(){return data.filter(d=>(coordinateFilter==='all'||d.status===coordinateFilter)&&(type==='all'||d.type===type)&&(region==='all'||d.region===region)&&`${d.name} ${d.bank} ${d.kpw} ${d.city||''}`.toLocaleLowerCase('id').includes(query.toLocaleLowerCase('id')));}
 function updateViewForRows(){const rows=currentRows().filter(hasCoords);if(region==='all'&&!query){nationalView(true);}else if(rows.length){map.fitBounds(L.latLngBounds(rows.map(d=>locationCoords(d))),{padding:[60,80],maxZoom:8,animate:true});}}
 function renderMarkers(){
@@ -169,8 +171,8 @@ window.addEventListener('hashchange',applyWorkspace);document.querySelector('#re
 document.querySelector('#distance-nav').onclick=()=>{if(location.hash.startsWith('#sarpras')){location.hash='peta';}toggleDistance(!distanceOpen);};
 // A restrained pointer glow on application chrome; map controls keep normal interactions.
 if(matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){let frame;document.addEventListener('pointermove',e=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px');});},{passive:true});}
-map.on('zoomend moveend',()=>{renderMarkers();document.querySelector('#map-zoom-hint').classList.toggle('hidden',mapStyle!=='street'||map.getZoom()>=13||!!selected);});
-new ResizeObserver(()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{map.invalidateSize({pan:false});if(!selected&&!query&&region==='all')nationalView();renderMarkers();},120);}).observe(document.querySelector('.map-frame'));
-map.invalidateSize();nationalView();setMapStyle('street');render();applyWorkspace();
+map.on('zoomend moveend',()=>{const node=document.querySelector('#map');node.dataset.viewZoom=String(map.getZoom());node.dataset.viewCenter=map.getCenter().lat.toFixed(6)+','+map.getCenter().lng.toFixed(6);renderMarkers();document.querySelector('#map-zoom-hint').classList.toggle('hidden',mapStyle!=='street'||map.getZoom()>=13||!!selected);});
+new ResizeObserver(()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{map.invalidateSize({pan:false});if(document.querySelector('#peta').classList.contains('hidden'))return;if(!selected&&!query&&region==='all')nationalView();renderMarkers();},120);}).observe(document.querySelector('.map-frame'));
+map.invalidateSize();nationalView();setMapStyle('street');render();applyWorkspace();mountInarisk({map,bounds,refreshIcons});
 }
 init().catch(error=>{console.error(error);document.querySelector('#app').innerHTML='<div class="load-error"><h1>Peta belum dapat dimuat.</h1><p>Periksa koneksi dan muat ulang halaman.</p><button onclick="location.reload()">Coba lagi</button></div>';});
