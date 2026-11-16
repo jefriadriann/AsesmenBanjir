@@ -1,23 +1,34 @@
-# Asesmen Banjir · Nusa
+# Ruang Risiko · Asesmen Banjir
 
-Peta jaringan kas dengan tampilan Ruang Risiko, dibangun menggunakan Vite, Leaflet, dan Google Maps JavaScript API (opsional saat key belum tersedia).
+Workspace peta jaringan kas Indonesia. Vite, Leaflet, font lokal DM Sans/Manrope, dan atlas Natural Earth lokal. Tidak memerlukan API key berbayar.
 
-## Jalankan
+## Pengembangan
 
-Node.js 22+; `npm ci`, lalu `npm run dev -- --port 3000`. Build: `npm run build`. Vercel: preset Vite, build `npm run build`, output `dist`.
+Node.js 22+. Gunakan checkout yang ada; setiap cloud task sudah terisolasi, tidak perlu membuat worktree.
 
-## Google Maps
+```sh
+npm ci
+npm run dev -- --port 3000
+```
 
-Aktifkan billing dan Maps JavaScript API pada Google Cloud project. Buat browser API key, batasi API ke Maps JavaScript API, serta HTTP referrer ke domain Vercel dan localhost yang dipakai. Salin `.env.example` ke `.env.local` untuk lokal; isi `VITE_GOOGLE_MAPS_API_KEY`. Pada Vercel, isi variabel tersebut di Project Settings → Environment Variables, lalu rebuild/redeploy. Key browser memang terlihat di browser: pembatasan API/domain wajib. Script menggunakan channel `v=weekly`. Tanpa key, peta Natural Earth lokal digunakan.
+Build produksi: `npm run build`. Uji build dengan `npm run preview -- --port 3001`.
 
-Untuk pencarian koordinat kantor, aktifkan Places API (New) dan gunakan key server terpisah melalui backend, dibatasi ke API tersebut. Jangan beri awalan VITE_ pada key server. Integrasi pengambilan Places dan verifikasi koordinat belum dikerjakan; tidak ada klaim bahwa data sudah diverifikasi Google Maps. Data Places perlu dipakai/disimpan mengikuti ketentuan Google Maps Platform.
+Vercel: preset **Vite**, build `npm run build`, direktori output `dist`. Tidak ada environment variable wajib atau Google Maps SDK. Tautan Google Maps hanya membuka pencarian eksternal saat dipilih pengguna.
+
+## Interaksi
+
+- Tampilan nasional otomatis menyesuaikan area peta, termasuk saat ukuran layar atau panel berubah.
+- Kelompok marker diberi jumlah dan cincin komposisi KPw (cyan) / kas titipan (amber). Klik untuk memperbesar kelompok. Marker tunggal KPw berbentuk persegi, kas berbentuk lingkaran.
+- Filter jenis, filter wilayah, pencarian kota/KPw/bank, reset filter, dan ekspor JSON mengikuti data yang sedang difilter.
+- Detail lokasi tampil di direktori desktop atau panel bawah pada HP. Escape menutup detail/dialog. `/` membuka pencarian.
+- Mode terang/gelap disimpan di localStorage. Panel direktori dapat disembunyikan.
+- Atlas lokal tersedia tanpa permintaan tile. OpenStreetMap opsional di menu peta dasar; kegagalan jaringan ditampilkan dan atlas tetap tersedia di bawahnya.
+- Kualitas data membuka keterangan sumber, kelengkapan, dan batas penggunaan.
 
 ## Status data
 
 - 46 entri KPw merupakan daftar awal, belum divalidasi terhadap direktori resmi BI.
-- Excel sumber memuat **87** baris kas titipan, bukan 88. Semua baris dipertahankan, termasuk bank/plafond yang kosong dan angka sumber yang mungkin perlu diperiksa (mis. Natuna dan Tana Paser).
-- Semua koordinat saat ini estimasi pusat kota, **bukan koordinat kantor bank**. Jangan digunakan untuk analisis jarak/radius banjir atau keputusan operasional.
-- `public/locations.json` mencatat jenis titik, sumber, dan status `approximate`. Perlu alamat cabang, pencocokan hasil Places, dan konfirmasi sebelum status dapat berubah.
-- Bentuk daratan: Natural Earth melalui datasets/geo-countries, public domain. Basemap eksternal opsional: OpenStreetMap/CARTO. Google Maps memerlukan API key dan koneksi.
-
-Fitur: filter jenis/wilayah, pencarian, detail jaringan, tautan pencarian Google Maps, ekspor JSON, zoom/reset, dan responsif.
+- Excel sumber memuat **87** baris kas titipan, bukan 88. Seluruh baris dipertahankan, termasuk bank/plafond yang kosong dan angka sumber yang perlu diperiksa (mis. Natuna dan Tana Paser).
+- Semua koordinat estimasi pusat kota, **bukan koordinat kantor bank**. Jangan digunakan untuk analisis jarak/radius banjir atau keputusan operasional.
+- `public/locations.json` mencatat jenis, sumber, dan status `approximate`. Perlu alamat cabang dan konfirmasi sumber resmi sebelum status dapat berubah.
+- Bentuk daratan: Natural Earth melalui datasets/geo-countries, public domain. Layanan jalan opsional: OpenStreetMap; pengguna wajib mengikuti tile usage policy untuk penggunaan lanjutan.
