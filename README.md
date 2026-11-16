@@ -112,3 +112,19 @@ Panel mempunyai tombol kembali dan tutup yang terlihat. Kembali dari detail anak
 Catatan interpretasi dipusatkan di Sumber & cara baca; rincian sel sarpras dapat ditampilkan atas permintaan. Status data dan kategori sebagian/tidak tersedia tetap terlihat. Layer InaRISK tidak otomatis membuka panel pada awal halaman. Panel layer, daftar lokasi, dan pengukuran saling menutup agar peta tidak tertutup beberapa panel sekaligus.
 
 Gradasi header/permukaan diseragamkan ke biru-kehijauan yang halus, dengan palet gelap tersendiri. Preferensi tema baru memakai `ruang-theme-v4`, bawaan terang; preferensi lama tidak memaksakan palet campuran. Validasi UI mencakup alur pergi-pulang peta/daftar/detail/sarpras, filter, kantor tanpa anak, koordinat kosong, sumber on demand, pengukuran, dan ukuran desktop/HP.
+
+## Layer Kemiringan lahan (Earth Engine)
+
+Tombol **Kemiringan lahan** menyalakan/mematikan raster di pane tersendiri (di atas peta dasar, di bawah marker), menampilkan legenda, opacity, dan atribusi. Layer banjir dimatikan saat layer kemiringan diaktifkan agar palet tidak bercampur. Layer tidak dianggap aktif sebelum ada gambar tile yang berhasil dimuat.
+
+Perhitungan mengikuti script pengguna: `NASA/NASADEM_HGT/001`, band elevation, `ee.Terrain.slope`, konversi `tan(deg × π/180) × 100`, mask `num != 0`, kemudian clip ke Indonesia dari `USDOS/LSIB_SIMPLE/2017`. Ambang kelas persen: 8, 15, 25, 40; palet persis `e4f3cc, add881, f6d567, ec9141, 942f24`. Metadata dan sumber resmi tersedia di `public/slope-source.json`. Ini kelas kemiringan, bukan kelas risiko banjir.
+
+### Menghubungkan hasil Earth Engine
+
+1. Jalankan `docs/earth-engine-slope-export.js` pada Code Editor dengan akun/project Earth Engine Anda yang sudah dapat menjalankan script asli. Script memakai algoritma yang sama dan mencetak `result.urlFormat` melalui getMapId. Bentuk getMapId/urlFormat telah diperiksa pada SDK resmi @google/earthengine 1.7.52; eksekusi project pengguna belum dilakukan dari cloud.
+2. Isi URL itu secara privat di **Vercel → Project Settings → Environment Variables → SLOPE_TILE_URL**, lalu redeploy. Jangan mengirim URL map/token ke chat, memasukkannya ke source control, atau memberi awalan VITE_. Nilai tidak pernah dikirim lewat endpoint config publik; browser memuat gambar melalui proxy `/api/slope`.
+3. Klik Kemiringan lahan. URL map Earth Engine bersifat sementara; bila kadaluarsa, jalankan ulang kode dan perbarui environment/redeploy. Untuk penerbitan jangka panjang, diperlukan integrasi Earth Engine terautentikasi yang dapat membuat map ID baru atau layanan tile hasil ekspor; itu belum dikonfigurasi.
+
+**Status runtime saat implementasi:** SLOPE_TILE_URL belum tersedia. File credential Google generik ada tetapi tidak memuat tipe/project Earth Engine yang dapat dipakai; tidak ada kredensial yang disalin atau ditampilkan. Sumber Code Editor diblokir jaringan cloud, namun pengguna sudah memberikan JavaScript lengkap. Button, legenda, sumber, validasi/proxy, dan interaksi sudah diuji dengan gambar fixture; hasil raster Earth Engine live belum dimuat/diverifikasi. Saat belum tersambung, UI menampilkan status jujur dan tidak membuat warna kemiringan palsu.
+
+Proxy membatasi HTTPS ke host Earth Engine yang diizinkan, memvalidasi XYZ, tidak mengikuti redirect, serta meredaksi error provider. Vite dev/preview dan Vercel menggunakan handler API yang sama.

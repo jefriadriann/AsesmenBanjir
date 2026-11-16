@@ -1,1 +1,10 @@
-{"functions":{"api/inarisk.js":{"maxDuration":30}}}
+{
+  "functions": {
+    "api/inarisk.js": {
+      "maxDuration": 30
+    },
+    "api/slope.js": {
+      "maxDuration": 30
+    }
+  }
+}

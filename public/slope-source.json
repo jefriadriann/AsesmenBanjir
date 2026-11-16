@@ -1,0 +1,17 @@
+{
+  "title":"Kemiringan lahan",
+  "unit":"persen",
+  "asset":"NASA/NASADEM_HGT/001",
+  "sourceName":"NASADEM · NASA/USGS",
+  "resolution":"±30 m",
+  "catalogUrl":"https://developers.google.com/earth-engine/datasets/catalog/NASA_NASADEM_HGT_001",
+  "scriptUrl":"https://code.earthengine.google.com/5741b5ce7d77ea228a71201783d7ba25",
+  "method":"ee.Terrain.slope(elevation), kemudian tan(derajat × π / 180) × 100; mask num ≠ 0; clip batas Indonesia USDOS/LSIB_SIMPLE/2017.",
+  "legend":[
+    {"color":"#e4f3cc","label":"0–<8% · Datar","min":0,"max":8},
+    {"color":"#add881","label":"8–<15% · Landai","min":8,"max":15},
+    {"color":"#f6d567","label":"15–<25% · Agak curam","min":15,"max":25},
+    {"color":"#ec9141","label":"25–<40% · Curam","min":25,"max":40},
+    {"color":"#942f24","label":"≥40% · Sangat curam","min":40,"max":null}
+  ]
+}
