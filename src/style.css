@@ -81,3 +81,33 @@
 @media(min-width:1700px){.sidebar{width:218px;padding-left:18px;padding-right:18px}.app-main{margin-left:218px}.topbar{height:62px;padding:0 24px}.map-title h1{font-size:23px}main{height:calc(100dvh - 62px);padding:10px 14px 14px}.toast{left:calc(50% + 109px)}}
 @media(min-width:641px) and (max-width:1050px){.sidebar{width:172px;padding:24px 11px 0}.app-main{margin-left:172px}.wordmark>span:last-child{font-size:14px}.wordmark{gap:7px}.wordmark small{font-size:6px}.brand-symbol{width:31px;height:33px}.nav-item{font-size:10px;padding-left:10px;gap:8px}.map-title h1{font-size:19px}.map-title>span{display:none}.map-actions #reset>span{display:none}.topbar-actions{gap:11px}.map-filters button{font-size:9px;padding:8px}.map-filters button>span{font-size:8px}}
 @media(max-width:640px){.sidebar{height:54px}.app-main{margin:54px 0 0;height:calc(100dvh - 54px);min-height:0}.topbar{height:46px;padding:0 13px;gap:8px}.map-title h1{font-size:18px;letter-spacing:-.5px}.map-title>span{display:none}.topbar-actions{gap:10px}.topbar .export-button{padding:6px;border:0;background:none}.topbar .export-button svg{width:15px;height:15px}.topbar .header-icon{padding:2px}.topbar .header-icon svg{width:14px;height:14px}main{height:auto;flex:1;padding:0 7px 8px;min-height:0}.explorer{min-height:270px;border-radius:8px}.map-frame,.panel-hidden .map-frame{min-height:250px;flex:1}.explorer-top{top:58px;right:10px}.explorer-top .map-actions{gap:3px;padding:3px}.map-actions #reset{padding:6px}.map-actions #reset span{display:none}.map-actions #panel-toggle{padding:5px;gap:5px}.map-actions #panel-toggle span{font-size:8px}.map-actions svg{width:12px;height:12px}.map-filters{left:10px;top:11px;padding:4px}.map-filters button{font-size:8px;padding:8px 10px}.map-service-note{top:103px;left:10px;right:10px}.map-bottom{left:10px;right:10px;bottom:23px}.map-actions .control-separator{height:14px}.network-popup .leaflet-popup-content{width:250px!important}.popup-eyebrow{font-size:7px}.toast{left:50%}.directory{width:min(320px,94%)}.theme-toggle>span{display:none}}
+/* Bright, neutral surfaces keep the map and institution marks in focus. */
+:root[data-theme=light]{--bg:#f2f5f7;--sidebar:#fff;--surface:#fff;--surface-2:#f1f5f8;--surface-hover:#e9f1f8;--line:#dce5ed;--line-soft:#e9eef3;--text:#203a50;--muted:#587083;--subtle:#748997;--cyan:#087f98;--amber:#b77b2b;--map:#e0edf1;--overlay:#fffffff5;--input:#f7f9fb;--shadow:0 15px 45px #203a5015}
+[data-theme=light] .nav-item.active{background:#eaf3fb;border-color:#c8dfef;color:#155d8f;box-shadow:inset 3px 0 0 #217bb5}
+[data-theme=light] .brand-symbol{background:#eaf3fa;border-color:#c8deeb;color:#1d6d9e;box-shadow:none}
+[data-theme=light] .map-filters button.active{background:#eaf2f9;color:#1b608e;box-shadow:inset 0 0 0 1px #c9deeb}
+[data-theme=light] .map-actions #reset{color:#416a83}
+[data-theme=light] .map-actions #reset:hover{background:#edf4f9}
+.bank-logo{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;filter:none;max-width:100%}
+.map-pin.logo-pin{padding:4px;background:#fff;border:2px solid #fff;box-shadow:0 2px 9px #16384a38;display:grid;place-items:center}
+.map-pin.logo-pin.kpw{width:44px;height:44px;border-radius:50%;outline:1px solid #3879a644;z-index:2}
+.map-pin.logo-pin.kas{width:31px;height:31px;border-radius:8px;outline:1px solid #c5d2dd99}
+.map-pin.logo-pin.kpw:hover,.map-pin.logo-pin.kpw.selected{box-shadow:0 0 0 5px #357caa22,0 2px 12px #16384a38;transform:scale(1.08)}
+.map-pin.logo-pin.kas:hover,.map-pin.logo-pin.kas.selected{box-shadow:0 0 0 4px #d0a15130,0 2px 10px #16384a30;transform:scale(1.1)}
+.logo-cluster{position:relative;width:48px;height:48px;padding:0;background:none;border:0;display:grid;place-items:center}
+.cluster-brand{width:39px;height:39px;border-radius:50%;padding:4px;background:white;box-shadow:0 2px 9px #16384a35;outline:1px solid #3879a644;display:grid;place-items:center}
+.banks-only .cluster-brand{width:31px;height:31px;border-radius:8px;padding:3px;outline-color:#c5d2dd99}
+.cluster-secondary{position:absolute;bottom:1px;right:-1px;width:23px;height:23px;padding:2px;border-radius:6px;background:#fff;border:1px solid #e0e6eb;box-shadow:0 1px 4px #16384a30}
+.cluster-count{position:absolute;right:-1px;top:0;min-width:18px;height:18px;border-radius:10px;background:#225d86;color:#fff;border:2px solid #fff;padding:0 3px;display:grid;place-items:center;font-size:8px;font-weight:650;font-family:var(--font-heading)}
+.banks-only .cluster-count{background:#816b46}
+.logo-cluster:hover .cluster-brand{box-shadow:0 0 0 5px #3a7d9b1c,0 2px 9px #16384a35}
+.bank-logo-fallback{display:flex!important;justify-content:center;align-items:center;gap:2px;width:100%!important;height:100%!important;background:#eef2f6!important;border-radius:4px;border-top:2px solid #8195a5;border-bottom:2px solid #8195a5;min-height:14px;padding:4px}
+.bank-logo-fallback span{display:block;width:2px;height:9px;background:#8195a5}
+.row-symbol{padding:4px;background:#fff!important;border-color:var(--line)!important}
+.bank-brand-symbol{padding:5px;background:white!important;border-color:#dae4ea!important}
+.logo-credit{font-size:8px!important;line-height:1.8!important;color:var(--subtle);margin:0 0 17px!important}.logo-credit a{text-decoration:underline;color:var(--muted)}
+[data-theme=light] .network-popup-card{background:linear-gradient(135deg,#f1f7fc,#fff 65%)}[data-theme=light] .network-popup-card.kas{background:linear-gradient(135deg,#fff9ef,#fff 65%)}[data-theme=light] .network-popup .leaflet-popup-content-wrapper{border-color:#ccdce7;box-shadow:0 12px 35px #183d5226}[data-theme=light] .popup-detail-button,[data-theme=light] .primary-button{background:#216da0;border-color:#216da0;color:white}[data-theme=light] .popup-detail-button:hover,[data-theme=light] .primary-button:hover{background:#1a5c88;color:white}
+.logo-pin,.cluster-brand,.cluster-secondary,.row-symbol,.bank-brand-symbol{position:relative;overflow:hidden}
+.logo-pin>.bank-logo,.cluster-brand>.bank-logo,.cluster-secondary>.bank-logo,.row-symbol>.bank-logo,.bank-brand-symbol>.bank-logo{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);min-width:0;min-height:0;max-width:none;object-fit:contain}
+.cluster-secondary>.bank-logo{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px)}
+.bank-logo-fallback{min-width:0;min-height:0;overflow:hidden}
