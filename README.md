@@ -20,8 +20,8 @@ Vercel: preset **Vite**, build `npm run build`, direktori output `dist`. Tidak a
 - Tampilan nasional otomatis menyesuaikan area peta, termasuk saat ukuran layar atau panel berubah.
 - Kelompok marker diberi jumlah dan cincin komposisi KPw (cyan) / kas titipan (amber). Klik untuk memperbesar kelompok. Marker tunggal KPw berbentuk persegi, kas berbentuk lingkaran.
 - Filter jenis, filter wilayah, pencarian kota/KPw/bank, reset filter, dan ekspor JSON mengikuti data yang sedang difilter.
-- Detail lokasi tampil di daftar desktop atau panel bawah pada HP. Escape menutup detail/dialog. `/` membuka pencarian.
-- Mode terang/gelap disimpan di localStorage. Panel direktori dapat disembunyikan.
+- Klik titik untuk membuka popup berisi nama KPw atau kas titipan, bank pengelola, dan wilayah. Tombol Lihat detail membuka informasi lengkap di panel desktop atau panel bawah pada HP. Escape menutup detail/dialog. `/` membuka pencarian.
+- Mode terang/gelap disimpan di localStorage. Daftar lokasi tertutup saat halaman dibuka dan dapat ditampilkan lewat tombol Daftar lokasi. Panel ini mengambang di atas peta agar tidak mengurangi ukuran peta.
 - OpenStreetMap menjadi peta utama dengan zoom hingga level 19 untuk melihat jalan, bangunan, dan nama tempat yang tercatat. Tombol Lihat area sekitar memperbesar area kota hingga level 17. Peta sederhana Natural Earth tersedia lewat menu Jenis peta. Gangguan koneksi ditampilkan dengan opsi mencoba kembali; peta sederhana tetap ada di bawah lapisan jalan.
 - Kualitas data membuka keterangan sumber, kelengkapan, dan batas penggunaan.
 
