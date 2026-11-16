@@ -10,6 +10,7 @@ let fail='',version=1;
 await page.route('https://tile.openstreetmap.org/**',route=>route.abort());
 await page.route('**/api/inarisk?*',async route=>{
  const mode=new URL(route.request().url()).searchParams.get('mode');
+ if(fail==='deployment')return route.fulfill({status:404,contentType:'text/html',body:'Not Found'});
  if(mode===fail)return route.fulfill({status:502,json:{error:'Controlled source failure'}});
  if(mode==='image')return route.fulfill({contentType:'image/png',body:png});
  return route.fulfill({json:mode==='catalog'?{services:[service('BAHAYA_BANJIR'),service('BAHAYA_BANJIR_ALTERNATIF')]}:{metadata:{name:'Fixture '+version},legend:{layers:[{layerName:'Fixture',legend:[{label:'Class '+version}]}]}}});
@@ -47,6 +48,9 @@ try{
  await page.evaluate(()=>localStorage.removeItem('ruang-inarisk-last-good-v1'));
  fail='catalog';await page.reload();await ready();assert.equal(await layers().count(),0);
  assert.match(await page.locator('#inarisk-status').innerText(),/belum terhubung/);
+ assert.match(await page.locator('#inarisk-connection-error').textContent(),/Katalog layanan InaRISK \(HTTP 502\): Controlled source failure/);
+ fail='deployment';await page.reload();await ready();assert.equal(await layers().count(),0);
+ assert.match(await page.locator('#inarisk-connection-error').textContent(),/HTTP 404.*deployment/);
  assert.deepEqual(errors,[]);
  console.log('PASS: refresh catalog, metadata and image failures retain raster, legend, selection and opacity; successful replacement, visibility and cold failure. Controlled fixtures, not live BNPB verification.');
 }finally{await browser.close();}
