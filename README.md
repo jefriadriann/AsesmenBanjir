@@ -1,4 +1,4 @@
-# Ruang Risiko · Asesmen Banjir
+# Ruang Risiko · Peta Risiko Banjir
 
 Workspace peta jaringan kas Indonesia. Vite, Leaflet, font lokal DM Sans/Manrope, peta jalan OpenStreetMap, dan peta sederhana Natural Earth. Tidak memerlukan API key berbayar.
 
@@ -36,3 +36,9 @@ Vercel: preset **Vite**, build `npm run build`, direktori output `dist`. Tidak a
 ## Koneksi peta
 
 Browser memerlukan akses HTTPS ke `tile.openstreetmap.org`. Tidak ada API key atau billing. Peta jalan tersedia sesuai kelengkapan OpenStreetMap; tidak setiap bangunan atau landmark memiliki nama. Peta ini tidak mengubah koordinat perkiraan menjadi lokasi kantor terverifikasi. Saat pengujian cloud, permintaan tile ditolak jaringan; alur zoom, pergantian peta, pemuatan tile, dan penanganan error diuji di browser dengan respons layanan terkontrol. Tampilan tile asli perlu diperiksa pada jaringan yang mengizinkan domain tersebut.
+
+## Tampilan dan batas peta
+
+Header diringkas menjadi satu baris, navigasi desktop menampilkan nama menu, dan keterangan berulang dipindahkan dari area peta. Peta memenuhi sisa tinggi layar. Batas pergeseran, zoom keluar, serta permintaan tile dibatasi ke kawasan Indonesia (94,4–141,5 BT; 11,7 LS–6,3 LU). Tile yang bersinggungan dengan batas tetap dapat memperlihatkan sebagian negara tetangga; aplikasi tidak mengunduh peta seluruh dunia. `keepBuffer: 0`, `noWrap`, dan `updateWhenIdle` membatasi pengambilan tile. Geografi lokal hanya memuat fitur Indonesia.
+
+Judul Peta Risiko Banjir menyatakan tujuan workspace; lapisan bahaya banjir belum terpasang, sebagaimana dijelaskan di Kualitas data.
