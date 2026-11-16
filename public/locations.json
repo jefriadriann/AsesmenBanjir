@@ -1,0 +1,1951 @@
+[
+  {
+    "id": "KPW-01",
+    "type": "kpw",
+    "name": "Aceh",
+    "city": "Banda Aceh",
+    "kpw": "Aceh",
+    "bank": "Bank Indonesia",
+    "coords": [
+      5.55,
+      95.32
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-02",
+    "type": "kpw",
+    "name": "Sumatera Utara",
+    "city": "Medan",
+    "kpw": "Sumatera Utara",
+    "bank": "Bank Indonesia",
+    "coords": [
+      3.59,
+      98.67
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-03",
+    "type": "kpw",
+    "name": "Pematangsiantar",
+    "city": "Pematangsiantar",
+    "kpw": "Pematangsiantar",
+    "bank": "Bank Indonesia",
+    "coords": [
+      2.96,
+      99.06
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-04",
+    "type": "kpw",
+    "name": "Sibolga",
+    "city": "Sibolga",
+    "kpw": "Sibolga",
+    "bank": "Bank Indonesia",
+    "coords": [
+      1.74,
+      98.78
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-05",
+    "type": "kpw",
+    "name": "Sumatera Barat",
+    "city": "Padang",
+    "kpw": "Sumatera Barat",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -0.95,
+      100.36
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-06",
+    "type": "kpw",
+    "name": "Riau",
+    "city": "Pekanbaru",
+    "kpw": "Riau",
+    "bank": "Bank Indonesia",
+    "coords": [
+      0.51,
+      101.45
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-07",
+    "type": "kpw",
+    "name": "Kepulauan Riau",
+    "city": "Batam",
+    "kpw": "Kepulauan Riau",
+    "bank": "Bank Indonesia",
+    "coords": [
+      1.13,
+      104.05
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-08",
+    "type": "kpw",
+    "name": "Jambi",
+    "city": "Jambi",
+    "kpw": "Jambi",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -1.61,
+      103.61
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-09",
+    "type": "kpw",
+    "name": "Sumatera Selatan",
+    "city": "Palembang",
+    "kpw": "Sumatera Selatan",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -2.99,
+      104.76
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-10",
+    "type": "kpw",
+    "name": "Bengkulu",
+    "city": "Bengkulu",
+    "kpw": "Bengkulu",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -3.8,
+      102.26
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-11",
+    "type": "kpw",
+    "name": "Lampung",
+    "city": "Bandar Lampung",
+    "kpw": "Lampung",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -5.43,
+      105.26
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-12",
+    "type": "kpw",
+    "name": "Kepulauan Bangka Belitung",
+    "city": "Pangkalpinang",
+    "kpw": "Kepulauan Bangka Belitung",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -2.13,
+      106.11
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-13",
+    "type": "kpw",
+    "name": "DKI Jakarta",
+    "city": "Jakarta",
+    "kpw": "DKI Jakarta",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -6.18,
+      106.83
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-14",
+    "type": "kpw",
+    "name": "Banten",
+    "city": "Serang",
+    "kpw": "Banten",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -6.12,
+      106.15
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-15",
+    "type": "kpw",
+    "name": "Jawa Barat",
+    "city": "Bandung",
+    "kpw": "Jawa Barat",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -6.91,
+      107.61
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-16",
+    "type": "kpw",
+    "name": "Cirebon",
+    "city": "Cirebon",
+    "kpw": "Cirebon",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -6.71,
+      108.56
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-17",
+    "type": "kpw",
+    "name": "Tasikmalaya",
+    "city": "Tasikmalaya",
+    "kpw": "Tasikmalaya",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.33,
+      108.22
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-18",
+    "type": "kpw",
+    "name": "Tegal",
+    "city": "Tegal",
+    "kpw": "Tegal",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -6.87,
+      109.14
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-19",
+    "type": "kpw",
+    "name": "Purwokerto",
+    "city": "Purwokerto",
+    "kpw": "Purwokerto",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.42,
+      109.24
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-20",
+    "type": "kpw",
+    "name": "Jawa Tengah",
+    "city": "Semarang",
+    "kpw": "Jawa Tengah",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -6.99,
+      110.42
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-21",
+    "type": "kpw",
+    "name": "Solo",
+    "city": "Surakarta",
+    "kpw": "Solo",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.57,
+      110.82
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-22",
+    "type": "kpw",
+    "name": "DI Yogyakarta",
+    "city": "Yogyakarta",
+    "kpw": "DI Yogyakarta",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.8,
+      110.37
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-23",
+    "type": "kpw",
+    "name": "Jawa Timur",
+    "city": "Surabaya",
+    "kpw": "Jawa Timur",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.25,
+      112.75
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-24",
+    "type": "kpw",
+    "name": "Malang",
+    "city": "Malang",
+    "kpw": "Malang",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.98,
+      112.63
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-25",
+    "type": "kpw",
+    "name": "Kediri",
+    "city": "Kediri",
+    "kpw": "Kediri",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -7.82,
+      112.01
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-26",
+    "type": "kpw",
+    "name": "Jember",
+    "city": "Jember",
+    "kpw": "Jember",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -8.17,
+      113.7
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-27",
+    "type": "kpw",
+    "name": "Bali",
+    "city": "Denpasar",
+    "kpw": "Bali",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -8.65,
+      115.22
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-28",
+    "type": "kpw",
+    "name": "Nusa Tenggara Barat",
+    "city": "Mataram",
+    "kpw": "Nusa Tenggara Barat",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -8.58,
+      116.1
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-29",
+    "type": "kpw",
+    "name": "Nusa Tenggara Timur",
+    "city": "Kupang",
+    "kpw": "Nusa Tenggara Timur",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -10.17,
+      123.61
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-30",
+    "type": "kpw",
+    "name": "Kalimantan Barat",
+    "city": "Pontianak",
+    "kpw": "Kalimantan Barat",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -0.03,
+      109.34
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-31",
+    "type": "kpw",
+    "name": "Kalimantan Selatan",
+    "city": "Banjarmasin",
+    "kpw": "Kalimantan Selatan",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -3.32,
+      114.59
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-32",
+    "type": "kpw",
+    "name": "Kalimantan Tengah",
+    "city": "Palangkaraya",
+    "kpw": "Kalimantan Tengah",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -2.21,
+      113.92
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-33",
+    "type": "kpw",
+    "name": "Kalimantan Timur",
+    "city": "Samarinda",
+    "kpw": "Kalimantan Timur",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -0.5,
+      117.15
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-34",
+    "type": "kpw",
+    "name": "Balikpapan",
+    "city": "Balikpapan",
+    "kpw": "Balikpapan",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -1.24,
+      116.85
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-35",
+    "type": "kpw",
+    "name": "Kalimantan Utara",
+    "city": "Tarakan",
+    "kpw": "Kalimantan Utara",
+    "bank": "Bank Indonesia",
+    "coords": [
+      3.3,
+      117.63
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-36",
+    "type": "kpw",
+    "name": "Sulawesi Selatan",
+    "city": "Makassar",
+    "kpw": "Sulawesi Selatan",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -5.14,
+      119.42
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-37",
+    "type": "kpw",
+    "name": "Sulawesi Utara",
+    "city": "Manado",
+    "kpw": "Sulawesi Utara",
+    "bank": "Bank Indonesia",
+    "coords": [
+      1.47,
+      124.84
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-38",
+    "type": "kpw",
+    "name": "Sulawesi Tengah",
+    "city": "Palu",
+    "kpw": "Sulawesi Tengah",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -0.9,
+      119.87
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-39",
+    "type": "kpw",
+    "name": "Sulawesi Tenggara",
+    "city": "Kendari",
+    "kpw": "Sulawesi Tenggara",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -3.99,
+      122.51
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-40",
+    "type": "kpw",
+    "name": "Gorontalo",
+    "city": "Gorontalo",
+    "kpw": "Gorontalo",
+    "bank": "Bank Indonesia",
+    "coords": [
+      0.54,
+      123.06
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-41",
+    "type": "kpw",
+    "name": "Sulawesi Barat",
+    "city": "Mamuju",
+    "kpw": "Sulawesi Barat",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -2.68,
+      118.89
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-42",
+    "type": "kpw",
+    "name": "Maluku",
+    "city": "Ambon",
+    "kpw": "Maluku",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -3.69,
+      128.18
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-43",
+    "type": "kpw",
+    "name": "Maluku Utara",
+    "city": "Ternate",
+    "kpw": "Maluku Utara",
+    "bank": "Bank Indonesia",
+    "coords": [
+      0.79,
+      127.38
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-44",
+    "type": "kpw",
+    "name": "Papua",
+    "city": "Jayapura",
+    "kpw": "Papua",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -2.53,
+      140.72
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-45",
+    "type": "kpw",
+    "name": "Papua Barat",
+    "city": "Manokwari",
+    "kpw": "Papua Barat",
+    "bank": "Bank Indonesia",
+    "coords": [
+      -0.86,
+      134.06
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KPW-46",
+    "type": "kpw",
+    "name": "Lhokseumawe",
+    "city": "Lhokseumawe",
+    "kpw": "Lhokseumawe",
+    "bank": "Bank Indonesia",
+    "coords": [
+      5.18,
+      97.15
+    ],
+    "status": "approximate",
+    "source": "Daftar awal KPw — perlu validasi direktori BI"
+  },
+  {
+    "id": "KT-001",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Aceh",
+    "name": "Blangpidie",
+    "bank": "PT Bank Syariah Indonesia KC Blangpidie",
+    "plafond": 200000000000.0,
+    "coords": [
+      3.74,
+      96.85
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-002",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Aceh",
+    "name": "Meulaboh",
+    "bank": "PT Bank Syariah Indonesia KCP Meulaboh",
+    "plafond": 200000000000.0,
+    "coords": [
+      4.14,
+      96.13
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-003",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Alor",
+    "bank": "BPD NTT KC KALABAHI",
+    "plafond": 100000000000.0,
+    "coords": [
+      -8.22,
+      124.52
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-004",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Bengkulu",
+    "name": "Manna",
+    "bank": "PT Bank Rakyta Indonesia KC Manna",
+    "plafond": 150000000000.0,
+    "coords": [
+      -4.46,
+      102.91
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-005",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Bengkulu",
+    "name": "Mukomuko",
+    "bank": "BPD KC Mukomuko",
+    "plafond": 150000000000.0,
+    "coords": [
+      -2.58,
+      101.12
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-006",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Bengkulu",
+    "name": "Lubuk Linggau",
+    "bank": "PT Bank Rankyat Indonesia KC Lubuk Linggau",
+    "plafond": 250000000000.0,
+    "coords": [
+      -3.29,
+      102.86
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-007",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Jambi",
+    "name": "Kuala Tungkal",
+    "bank": "BNI",
+    "plafond": 150000000000.0,
+    "coords": [
+      -0.82,
+      103.46
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-008",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Jambi",
+    "name": "Muara Bungo",
+    "bank": "BNI",
+    "plafond": 300000000000.0,
+    "coords": [
+      -1.5,
+      102.13
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-009",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Kepulauan Bangka Belitung",
+    "name": "Tanjungpandan",
+    "bank": "PT Bank Mandiri",
+    "plafond": 350000000000.0,
+    "coords": [
+      -2.75,
+      107.63
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-010",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Kepulauan Riau",
+    "name": "Tanjung Pinang",
+    "bank": "Bank Mandiri KC Tanjungpinang",
+    "plafond": 200000000000.0,
+    "coords": [
+      0.92,
+      104.45
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-011",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Balikpapan",
+    "name": "Tana Paser",
+    "bank": "PT BPD Kaltim dan Kaltara",
+    "plafond": 200000000.0,
+    "coords": [
+      -1.91,
+      116.19
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-012",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Kepulauan Riau",
+    "name": "Tanjung Balai Karimun",
+    "bank": "BNI KC Tanjung Balai Karimun",
+    "plafond": 150000000000.0,
+    "coords": [
+      0.99,
+      103.43
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-013",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Gorontalo",
+    "name": "Pohuwato",
+    "bank": "BPD Sulutgo KC Marisa",
+    "plafond": 150000000000.0,
+    "coords": [
+      0.46,
+      121.94
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-014",
+    "type": "kas",
+    "region": "Jawa",
+    "kpw": "Jawa Timur",
+    "name": "Sumenep",
+    "bank": "BRI Cabang Sumenep",
+    "plafond": 200000000000.0,
+    "coords": [
+      -7.01,
+      113.86
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-015",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Tengah",
+    "name": "Sampit",
+    "bank": "BRI Cabang Sampit",
+    "plafond": 300000000000.0,
+    "coords": [
+      -2.53,
+      112.95
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-016",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Kepulauan Riau",
+    "name": "Natuna",
+    "bank": "BRKS Ranai Natuna",
+    "plafond": 150000000.0,
+    "coords": [
+      3.94,
+      108.38
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-017",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Barat",
+    "name": "Singkawang",
+    "bank": "PT BPD Kalbar KC Singkawang",
+    "plafond": 250000000000.0,
+    "coords": [
+      0.91,
+      108.99
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-018",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Lampung",
+    "name": "Liwa",
+    "bank": "PT Bank Rakyat Indonesia KC Liwa",
+    "plafond": 150000000000.0,
+    "coords": [
+      -5.04,
+      104.08
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-019",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Selatan",
+    "name": "Batu Licin",
+    "bank": "BPD Kalsel KC Batu Licin",
+    "plafond": 150000000000.0,
+    "coords": [
+      -3.46,
+      116.0
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-020",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Selatan",
+    "name": "Tanjung",
+    "bank": "BPD Kalsel KC Tanjung",
+    "plafond": 150000000000.0,
+    "coords": [
+      -2.16,
+      115.38
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-021",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Tengah",
+    "name": "Nanga Bulik",
+    "bank": "BPD Kalteng",
+    "plafond": 150000000000.0,
+    "coords": [
+      -2.21,
+      111.39
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-022",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Timur",
+    "name": "Sangatta",
+    "bank": "PT BPD Kaltim dan Kaltara KC Sangatta",
+    "plafond": 200000000000.0,
+    "coords": [
+      0.5,
+      117.55
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-023",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Barat",
+    "name": "Ketapang",
+    "bank": "PT BPD Kalbar KC Ketapang",
+    "plafond": 250000000000.0,
+    "coords": [
+      -1.85,
+      109.98
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-024",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Utara",
+    "name": "Malinau",
+    "bank": "BPD Kaltim Kaltara KC Malinau",
+    "plafond": 100000000000.0,
+    "coords": [
+      3.58,
+      116.64
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-025",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Barat",
+    "name": "Putussibau",
+    "bank": "PT BPD Kalbar KC Putussibau",
+    "plafond": 100000000000.0,
+    "coords": [
+      0.84,
+      112.93
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-026",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Utara",
+    "name": "Nunukan",
+    "bank": "BPD Kaltim Kaltara KC Nunukan",
+    "plafond": 100000000000.0,
+    "coords": [
+      4.14,
+      117.65
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-027",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Tengah",
+    "name": "Muara Teweh",
+    "bank": "BPD Kalteng KC Muara Teweh",
+    "plafond": 150000000000.0,
+    "coords": [
+      -0.95,
+      114.89
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-028",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Tengah",
+    "name": "Pangkalan Bun",
+    "bank": "BPD Kalteng KC Pangkalan Bun",
+    "plafond": 200000000000.0,
+    "coords": [
+      -2.68,
+      111.62
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-029",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Utara",
+    "name": "Tanjung Selor",
+    "bank": "BPD Kaltim Kaltara KC Tanjung Selor",
+    "plafond": 150000000000.0,
+    "coords": [
+      2.84,
+      117.37
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-030",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Lhokseumawe",
+    "name": "Langsa",
+    "bank": "PT Bank Syariah Indonesia Tbk, Kantor Cabang Pembantu Langsa Kota",
+    "plafond": 150000000000.0,
+    "coords": [
+      4.47,
+      97.97
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-031",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Lhokseumawe",
+    "name": "Takengon",
+    "bank": "BSI KC Takengon",
+    "plafond": 150000000000.0,
+    "coords": [
+      4.62,
+      96.85
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-032",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Timur",
+    "name": "Tanjung Redeb",
+    "bank": "BPD Kaltim dan Kaltara KC Tanjung Redeb",
+    "plafond": 150000000000.0,
+    "coords": [
+      2.15,
+      117.49
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-033",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Tengah",
+    "name": "Buntok",
+    "bank": "BPD Kalteng",
+    "plafond": 150000000000.0,
+    "coords": [
+      -1.72,
+      114.84
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-034",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Maluku",
+    "name": "Saumlaki",
+    "bank": "PT BPD Maluku dan Maluku Utara KC Saumlaki",
+    "plafond": 100000000000.0,
+    "coords": [
+      -7.98,
+      131.3
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-035",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Maluku",
+    "name": "Fakfak",
+    "bank": "PT BPD Papua KC Fakfak",
+    "plafond": 150000000000.0,
+    "coords": [
+      -2.92,
+      132.3
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-036",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Maluku Utara",
+    "name": "Tobelo",
+    "bank": "PT Bank Rankyat Indonesia KC Tobelo",
+    "plafond": 150000000000.0,
+    "coords": [
+      1.73,
+      128.01
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-037",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Maluku Utara",
+    "name": "Labuha",
+    "bank": "PT BPD Maluku dan Maluku Utara",
+    "plafond": 150000000000.0,
+    "coords": [
+      -0.63,
+      127.48
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-038",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Barat",
+    "name": "Bima",
+    "bank": "BPD NTB Syariah KC Bima",
+    "plafond": 225000000000.0,
+    "coords": [
+      -8.46,
+      118.73
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-039",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Lewoleba",
+    "bank": "BPD NTT KC LEWOLEBA",
+    "plafond": 100000000000.0,
+    "coords": [
+      -8.37,
+      123.42
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-040",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Labuan Bajo",
+    "bank": "BPD NTT KC Labuan Bajo",
+    "plafond": 200000000000.0,
+    "coords": [
+      -8.49,
+      119.88
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-041",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Biak",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -1.18,
+      136.08
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-042",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Barat",
+    "name": "Sumbawa",
+    "bank": "Bank NTB Syariah KC Sumbawa",
+    "plafond": 150000000000.0,
+    "coords": [
+      -8.49,
+      117.42
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-043",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Atambua",
+    "bank": "BPD NTT KC Atambua",
+    "plafond": 200000000000.0,
+    "coords": [
+      -9.11,
+      124.89
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-044",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Ende",
+    "bank": "BPD NTT KC ENDE",
+    "plafond": 200000000000.0,
+    "coords": [
+      -8.84,
+      121.66
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-045",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Maumere",
+    "bank": "BPD NTT KC MAUMERE",
+    "plafond": 200000000000.0,
+    "coords": [
+      -8.62,
+      122.22
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-046",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Ruteng",
+    "bank": "BPD NTT KC RUTENG",
+    "plafond": 200000000000.0,
+    "coords": [
+      -8.61,
+      120.46
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-047",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Waikabubak",
+    "bank": "BPD NTT KC WAIKABUBAK",
+    "plafond": 200000000000.0,
+    "coords": [
+      -9.64,
+      119.41
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-048",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Maluku",
+    "name": "Namlea",
+    "bank": "BPD Maluku dan Malut KC Namlea",
+    "plafond": 140000000000.0,
+    "coords": [
+      -3.26,
+      127.1
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-049",
+    "type": "kas",
+    "region": "Balinusra",
+    "kpw": "Nusa Tenggara Timur",
+    "name": "Waingapu",
+    "bank": "BRI KC WAINGAPU",
+    "plafond": 200000000000.0,
+    "coords": [
+      -9.65,
+      120.26
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-050",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Merauke",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -8.49,
+      140.4
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-051",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Serui",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -1.88,
+      136.24
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-052",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Sorong",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -0.88,
+      131.25
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-053",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Timika",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -4.55,
+      136.89
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-054",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Maluku",
+    "name": "Tual",
+    "bank": "BRI KC Langgur",
+    "plafond": 150000000000.0,
+    "coords": [
+      -5.63,
+      132.75
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-055",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Wamena",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -4.1,
+      138.94
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-056",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua",
+    "name": "Nabire",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -3.36,
+      135.5
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-057",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua Barat",
+    "name": "Sorong Selatan",
+    "bank": "BNI KCP Teminabuan",
+    "plafond": 50000000000.0,
+    "coords": [
+      -1.44,
+      132.02
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-058",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Selatan",
+    "name": "Bone",
+    "bank": "PT Bank Pembangunan Daerah Sulawesi Selatan dan Sulawesi Barat, Kantor Cabang Utama Bone",
+    "plafond": 200000000000.0,
+    "coords": [
+      -4.54,
+      120.33
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-059",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Pematangsiantar",
+    "name": "Rantauprapat",
+    "bank": "PT Bank Mandiri KC Rantauprapat",
+    "plafond": 300000000000.0,
+    "coords": [
+      2.1,
+      99.83
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-060",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Selatan",
+    "name": "Parepare",
+    "bank": "PT Bank Pembangunan Daerah Sulawesi Selatan dan Sulawesi Barat, Kantor Cabang Parepare",
+    "plafond": 200000000000.0,
+    "coords": [
+      -4.01,
+      119.63
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-061",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Riau",
+    "name": "Rengat",
+    "bank": "PT Bank Negara Indonesia KC Rengat",
+    "plafond": 300000000000.0,
+    "coords": [
+      -0.37,
+      102.55
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-062",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Riau",
+    "name": "Pasir Pengaraian",
+    "bank": "",
+    "plafond": 150000000000.0,
+    "coords": [
+      0.86,
+      100.3
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-063",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sibolga",
+    "name": "Gunung Sitoli",
+    "bank": "PT Bank Negara Indonesia KC Gunungsitoli",
+    "plafond": 250000000000.0,
+    "coords": [
+      1.28,
+      97.61
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-064",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sibolga",
+    "name": "Balige",
+    "bank": "PT Bank Negara Indonesia KC Balige",
+    "plafond": 200000000000.0,
+    "coords": [
+      2.33,
+      99.06
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-065",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sibolga",
+    "name": "Padangsidimpuan",
+    "bank": "PT Bank Rakyat Indonesia KC Padangsidimpuan",
+    "plafond": 250000000000.0,
+    "coords": [
+      1.38,
+      99.27
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-066",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Barat",
+    "name": "Polewali Mandar",
+    "bank": "PT BPD KC Polewali Mandar",
+    "plafond": 150000000000.0,
+    "coords": [
+      -3.43,
+      119.34
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-067",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Timur",
+    "name": "Sendawar",
+    "bank": "PT BPD Kaltim Kaltara KC Sendawar",
+    "plafond": 200000000000.0,
+    "coords": [
+      -0.24,
+      115.7
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-068",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Selatan",
+    "name": "Malili",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -2.64,
+      121.09
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-069",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Selatan",
+    "name": "Palopo",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -3.0,
+      120.2
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-070",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sumatera Barat",
+    "name": "Sungai Penuh",
+    "bank": "PT BNI KC Sungai Penuh",
+    "plafond": 150000000000.0,
+    "coords": [
+      -2.06,
+      101.39
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-071",
+    "type": "kas",
+    "region": "Kalimantan",
+    "kpw": "Kalimantan Barat",
+    "name": "Sintang",
+    "bank": "PT BPD Kalbar KC Sintang",
+    "plafond": 350000000000.0,
+    "coords": [
+      0.08,
+      111.5
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-072",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Selatan",
+    "name": "Bulukumba",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -5.55,
+      120.19
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-073",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tengah",
+    "name": "Bungku",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -2.55,
+      121.97
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-074",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tengah",
+    "name": "Toli-toli",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      1.04,
+      120.82
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-075",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tengah",
+    "name": "Luwuk",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -0.95,
+      122.79
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-076",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tengah",
+    "name": "Poso",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -1.4,
+      120.75
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-077",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tengah",
+    "name": "Pasangkayu",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      -1.18,
+      119.37
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-078",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Papua Barat",
+    "name": "Bintuni",
+    "bank": "BPD Papua",
+    "plafond": 50000000000.0,
+    "coords": [
+      -2.11,
+      133.52
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-079",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Utara",
+    "name": "Siau",
+    "bank": "BPD SulutGo",
+    "plafond": 100000000000.0,
+    "coords": [
+      2.74,
+      125.4
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-080",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Utara",
+    "name": "Tahuna",
+    "bank": "Bank Mandiri KC Tahuna",
+    "plafond": 100000000000.0,
+    "coords": [
+      3.61,
+      125.5
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-081",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tenggara",
+    "name": "Baubau",
+    "bank": "BNI KC Baubau",
+    "plafond": 250000000000.0,
+    "coords": [
+      -5.47,
+      122.6
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-082",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Utara",
+    "name": "Melonguane",
+    "bank": "PT BPD Sulutgo KC Melonguane",
+    "plafond": 70000000000.0,
+    "coords": [
+      4.05,
+      126.68
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-083",
+    "type": "kas",
+    "region": "Sulampua",
+    "kpw": "Sulawesi Tenggara",
+    "name": "Kolaka",
+    "bank": "BNI KC Kolaka",
+    "plafond": 200000000000.0,
+    "coords": [
+      -4.05,
+      121.6
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-084",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sumatera Selatan",
+    "name": "Musi Banyuasin",
+    "bank": "PT BPD Sumatera Selatan dan Bangka Belitung, KCP Sungai Lilin",
+    "plafond": 200000000000.0,
+    "coords": [
+      -2.26,
+      104.09
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-085",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sumatera Selatan",
+    "name": "Baturaja",
+    "bank": "BRI",
+    "plafond": 250000000000.0,
+    "coords": [
+      -4.13,
+      104.17
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-086",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sumatera Utara",
+    "name": "Kabanjahe",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      3.1,
+      98.49
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  },
+  {
+    "id": "KT-087",
+    "type": "kas",
+    "region": "Sumatera",
+    "kpw": "Sumatera Utara",
+    "name": "Subulussalam",
+    "bank": "",
+    "plafond": null,
+    "coords": [
+      2.64,
+      98.0
+    ],
+    "status": "approximate",
+    "source": "Rekap Kas Titipan (1).xlsx"
+  }
+]
