@@ -1,0 +1,2593 @@
+{
+  "schemaVersion": 1,
+  "sourceFile": "Kesiapan_Sarpras_4_Final.xlsx",
+  "sha256": "129b98da94a9c3adbff80fdbd2e27a5fa2a147d6d2dd5c96f961741538e1c2f7",
+  "policy": "Imported as supplied; scores not reclassified as disaster risk; null excluded from denominator.",
+  "hazards": {
+    "Banjir": {
+      "name": "Banjir",
+      "itemCount": 19,
+      "items": [
+        {
+          "id": "C",
+          "label": "Sand Bag / Karung Pasir",
+          "column": "C"
+        },
+        {
+          "id": "D",
+          "label": "Pompa Penyedot Air / Portable Pump",
+          "column": "D"
+        },
+        {
+          "id": "E",
+          "label": "Sump Pit Pump",
+          "column": "E"
+        },
+        {
+          "id": "F",
+          "label": "Perahu Karet",
+          "column": "F"
+        },
+        {
+          "id": "G",
+          "label": "Motor Tempel",
+          "column": "G"
+        },
+        {
+          "id": "H",
+          "label": "Dayung",
+          "column": "H"
+        },
+        {
+          "id": "I",
+          "label": "Life Vest / Life Jacket",
+          "column": "I"
+        },
+        {
+          "id": "J",
+          "label": "Sepatu Karet",
+          "column": "J"
+        },
+        {
+          "id": "K",
+          "label": "Tandu",
+          "column": "K"
+        },
+        {
+          "id": "L",
+          "label": "Kursi Roda",
+          "column": "L"
+        },
+        {
+          "id": "M",
+          "label": "Emergency Lamp",
+          "column": "M"
+        },
+        {
+          "id": "N",
+          "label": "Kendaraan Pengangkut / Mobilisasi",
+          "column": "N"
+        },
+        {
+          "id": "O",
+          "label": "Waterproof Cover / Lembar Plastik Peralatan",
+          "column": "O"
+        },
+        {
+          "id": "P",
+          "label": "Shelter / Rumah Penampungan Sementara",
+          "column": "P"
+        },
+        {
+          "id": "Q",
+          "label": "Ambulans",
+          "column": "Q"
+        },
+        {
+          "id": "R",
+          "label": "Perlengkapan Medis / Obat-obatan",
+          "column": "R"
+        },
+        {
+          "id": "S",
+          "label": "Handy Talky (HT)",
+          "column": "S"
+        },
+        {
+          "id": "T",
+          "label": "Paging Call",
+          "column": "T"
+        },
+        {
+          "id": "U",
+          "label": "Genset",
+          "column": "U"
+        }
+      ],
+      "legend": {
+        "1": "Tersedia lengkap & berfungsi baik",
+        "0.5": "Tersedia tetapi kurang / ada yang tidak berfungsi baik",
+        "0": "Tidak tersedia",
+        "null": "Data tidak tersedia pada sumber; tidak masuk denominator"
+      }
+    }
+  },
+  "offices": {
+    "KPW-01": {
+      "id": "KPW-01",
+      "name": "Aceh",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Aceh",
+          "sheet": "Banjir",
+          "row": 3,
+          "values": {
+            "C": 1,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0,
+            "K": 1,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.7916666666666666,
+          "readyCount": 9,
+          "partialCount": 1,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Aceh",
+        "sheet": "Sarpas All",
+        "row": 11,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;Inmarsat;",
+          "AN": "24 Jam",
+          "AO": "335 KVA",
+          "AQ": "1800 L",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-02": {
+      "id": "KPW-02",
+      "name": "Sumatera Utara",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sumatera Utara",
+          "sheet": "Banjir",
+          "row": 5,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0.5,
+            "G": null,
+            "H": 0.5,
+            "I": 1,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 0.5,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 4,
+          "partialCount": 7,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sumatera Utara",
+        "sheet": "Sarpas All",
+        "row": 15,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "24 jam/ hari",
+          "AO": "1000kva & 635kva",
+          "AQ": "4000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-03": {
+      "id": "KPW-03",
+      "name": "Pematangsiantar",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Pematangsiantar",
+          "sheet": "Banjir",
+          "row": 7,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 0,
+            "K": 0.5,
+            "L": 0,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.4166666666666667,
+          "readyCount": 3,
+          "partialCount": 4,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Pematangsiantar",
+        "sheet": "Sarpas All",
+        "row": 45,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Inmarsat;",
+          "AN": "12",
+          "AO": "410 kva dan 60 KVA",
+          "AQ": "1800",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-04": {
+      "id": "KPW-04",
+      "name": "Sibolga",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Sibolga",
+          "sheet": "Banjir",
+          "row": 6,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0.5,
+            "K": 1,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0,
+            "U": 1
+          },
+          "score": 0.6666666666666666,
+          "readyCount": 7,
+          "partialCount": 2,
+          "unavailableCount": 3,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Sibolga",
+        "sheet": "Sarpas All",
+        "row": 34,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "standby 24 Jam",
+          "AO": "150 KVA dan 100 KVA",
+          "AQ": "440",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-05": {
+      "id": "KPW-05",
+      "name": "Sumatera Barat",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sumatera Barat",
+          "sheet": "Banjir",
+          "row": 10,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0.5,
+            "U": 1
+          },
+          "score": 0.875,
+          "readyCount": 10,
+          "partialCount": 1,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sumatera Barat",
+        "sheet": "Sarpas All",
+        "row": 13,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "120 jam",
+          "AO": "Terdapat 2 unit, dengan kapasitas masing-masing 600 KVA",
+          "AQ": "11.040 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-06": {
+      "id": "KPW-06",
+      "name": "Riau",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Riau",
+          "sheet": "Banjir",
+          "row": 8,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.9166666666666666,
+          "readyCount": 11,
+          "partialCount": 0,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Riau",
+        "sheet": "Sarpas All",
+        "row": 31,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Inmarsat;",
+          "AN": "21 jm",
+          "AO": "625 kva x 2 unit, 350 kva x 1 unit",
+          "AQ": "11.000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-07": {
+      "id": "KPW-07",
+      "name": "Kepulauan Riau",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kepulauan Riau",
+          "sheet": "Banjir",
+          "row": 9,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 0,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0.5,
+            "U": 0.5
+          },
+          "score": 0.4583333333333333,
+          "readyCount": 4,
+          "partialCount": 3,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kepulauan Riau",
+        "sheet": "Sarpas All",
+        "row": 14,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Inmarsat;",
+          "AN": "12 Jam",
+          "AO": "670 KVa",
+          "AQ": "1700L",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-08": {
+      "id": "KPW-08",
+      "name": "Jambi",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Jambi",
+          "sheet": "Banjir",
+          "row": 11,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 1,
+            "K": 1,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 7,
+          "partialCount": 1,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Jambi",
+        "sheet": "Sarpas All",
+        "row": 12,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "Rata-rata 1 jam/Day (PLN Normal)",
+          "AO": "365 KVA",
+          "AQ": "500 Liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-09": {
+      "id": "KPW-09",
+      "name": "Sumatera Selatan",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sumatera Selatan",
+          "sheet": "Banjir",
+          "row": 13,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0,
+            "J": 1,
+            "K": 0,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0.5,
+            "U": 1
+          },
+          "score": 0.5416666666666666,
+          "readyCount": 6,
+          "partialCount": 1,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sumatera Selatan",
+        "sheet": "Sarpas All",
+        "row": 17,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "125 jam",
+          "AO": "800KVA",
+          "AQ": "5.000",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-10": {
+      "id": "KPW-10",
+      "name": "Bengkulu",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Bengkulu",
+          "sheet": "Banjir",
+          "row": 12,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 0,
+            "L": 1,
+            "M": 0,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.75,
+          "readyCount": 9,
+          "partialCount": 0,
+          "unavailableCount": 3,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Bengkulu",
+        "sheet": "Sarpas All",
+        "row": 32,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "24 jam (17-30 ltr /jam) ",
+          "AO": "500kva",
+          "AQ": "500 L",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-11": {
+      "id": "KPW-11",
+      "name": "Lampung",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Lampung",
+          "sheet": "Banjir",
+          "row": 15,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 0,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.75,
+          "readyCount": 8,
+          "partialCount": 2,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Lampung",
+        "sheet": "Sarpas All",
+        "row": 5,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Inmarsat;Thuraya;",
+          "AN": "15 hari",
+          "AO": "800 kva",
+          "AQ": "700 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-12": {
+      "id": "KPW-12",
+      "name": "Kepulauan Bangka Belitung",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kepulauan Bangka Belitung",
+          "sheet": "Banjir",
+          "row": 14,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 0,
+            "K": 0,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5,
+          "readyCount": 5,
+          "partialCount": 2,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kepulauan Bangka Belitung",
+        "sheet": "Sarpas All",
+        "row": 18,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "1023/575/800",
+          "AO": "600Kva/600Kva/250Kva",
+          "AQ": "1600",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-13": {
+      "id": "KPW-13",
+      "name": "DKI Jakarta",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov DKI Jakarta",
+          "sheet": "Banjir",
+          "row": 17,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 0.5,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.8333333333333334,
+          "readyCount": 9,
+          "partialCount": 2,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov DKI Jakarta",
+        "sheet": "Sarpas All",
+        "row": 39,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "40 Jam",
+          "AO": "250 KVA",
+          "AQ": "3000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-14": {
+      "id": "KPW-14",
+      "name": "Banten",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Banten",
+          "sheet": "Banjir",
+          "row": 16,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 0.5,
+            "G": null,
+            "H": 0.5,
+            "I": 0.5,
+            "J": 1,
+            "K": 0.5,
+            "L": 1,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 5,
+          "partialCount": 5,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Banten",
+        "sheet": "Sarpas All",
+        "row": 36,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "307 Jam 36 Menit.",
+          "AO": "600 KVA 2 Unit,300 KVA 1 Unit Semua unit genset berfungsi dengan baik.",
+          "AQ": "8000 ltr",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-15": {
+      "id": "KPW-15",
+      "name": "Jawa Barat",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Jawa Barat",
+          "sheet": "Banjir",
+          "row": 18,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0.5,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.875,
+          "readyCount": 10,
+          "partialCount": 1,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Jawa Barat",
+        "sheet": "Sarpas All",
+        "row": 38,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya",
+          "AN": "13 jam operasional",
+          "AO": "ada 2 unit genset yaitu Genset 750 KVA dan Genset 640 KVA",
+          "AQ": "5000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-16": {
+      "id": "KPW-16",
+      "name": "Cirebon",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Cirebon",
+          "sheet": "Banjir",
+          "row": 19,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 0.5,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 0.5,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0.5,
+            "U": 1
+          },
+          "score": 0.6666666666666666,
+          "readyCount": 5,
+          "partialCount": 6,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Cirebon",
+        "sheet": "Sarpas All",
+        "row": 6,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "26,6 JAM",
+          "AO": "1000 KVA",
+          "AQ": "3000 LITER",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-17": {
+      "id": "KPW-17",
+      "name": "Tasikmalaya",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Tasikmalaya",
+          "sheet": "Banjir",
+          "row": 20,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 1,
+            "K": 1,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 0.5
+          },
+          "score": 0.5833333333333334,
+          "readyCount": 6,
+          "partialCount": 2,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Tasikmalaya",
+        "sheet": "Sarpas All",
+        "row": 25,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "24",
+          "AO": "472",
+          "AQ": "2500",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-18": {
+      "id": "KPW-18",
+      "name": "Tegal",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Tegal",
+          "sheet": "Banjir",
+          "row": 22,
+          "values": {
+            "C": 1,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.9166666666666666,
+          "readyCount": 11,
+          "partialCount": 0,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Tegal",
+        "sheet": "Sarpas All",
+        "row": 42,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "24 Jam (Continous Prime) namun perlu ",
+          "AO": "200 KVA",
+          "AQ": "200 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-19": {
+      "id": "KPW-19",
+      "name": "Purwokerto",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Purwokerto",
+          "sheet": "Banjir",
+          "row": 23,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0,
+            "J": 0,
+            "K": 0.5,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.4583333333333333,
+          "readyCount": 5,
+          "partialCount": 1,
+          "unavailableCount": 6,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Purwokerto",
+        "sheet": "Sarpas All",
+        "row": 37,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "8 Jam",
+          "AO": "250 Kva (1 unit), 150 KVa (1 unit) 35 Kva (5 unit)",
+          "AQ": "1200 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-20": {
+      "id": "KPW-20",
+      "name": "Jawa Tengah",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Jawa Tengah",
+          "sheet": "Banjir",
+          "row": 21,
+          "values": {
+            "C": 1,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.9583333333333334,
+          "readyCount": 11,
+          "partialCount": 1,
+          "unavailableCount": 0,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Jawa Tengah",
+        "sheet": "Sarpas All",
+        "row": 41,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "Dalam 1 Bulan kurang lebih 5-6 Jam (Pemanasan Genset)",
+          "AO": "Genset 1 800 KVA , Genset 2 800 KVA , Genset 3 125 KVA",
+          "AQ": "6000L",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-21": {
+      "id": "KPW-21",
+      "name": "Solo",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Solo",
+          "sheet": "Banjir",
+          "row": 24,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0,
+            "K": 0,
+            "L": 0.5,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5833333333333334,
+          "readyCount": 6,
+          "partialCount": 2,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Solo",
+        "sheet": "Sarpas All",
+        "row": 44,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "20 jam",
+          "AO": "750Kv",
+          "AQ": "2000 lt",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-22": {
+      "id": "KPW-22",
+      "name": "DI Yogyakarta",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov DI Yogyakarta",
+          "sheet": "Banjir",
+          "row": 25,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0.5,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 7,
+          "partialCount": 1,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov DI Yogyakarta",
+        "sheet": "Sarpas All",
+        "row": 29,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "1.  Genset  : 679 jam    2.  Genset  : 672 jam",
+          "AO": "Kapasitas : 2 x 500 kVA",
+          "AQ": "Tangki bulanan : 3220 liter  •⁠  ⁠Tangki backup : 880 liter •⁠  ⁠Total Stock : 4100 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-23": {
+      "id": "KPW-23",
+      "name": "Jawa Timur",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Jawa Timur",
+          "sheet": "Banjir",
+          "row": 26,
+          "values": {
+            "C": 0.5,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 0.5,
+            "J": 1,
+            "K": 1,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 0
+          },
+          "score": 0.7916666666666666,
+          "readyCount": 8,
+          "partialCount": 3,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Jawa Timur",
+        "sheet": "Sarpas All",
+        "row": 20,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": null,
+          "AN": "48 jam",
+          "AO": "10000",
+          "AQ": "150",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-24": {
+      "id": "KPW-24",
+      "name": "Malang",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Malang",
+          "sheet": "Banjir",
+          "row": 29,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 0,
+            "K": 1,
+            "L": 1,
+            "M": 0,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0,
+            "U": 1
+          },
+          "score": 0.375,
+          "readyCount": 4,
+          "partialCount": 1,
+          "unavailableCount": 7,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Malang",
+        "sheet": "Sarpas All",
+        "row": 22,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "60 jam",
+          "AO": "500KVA",
+          "AQ": "495lt",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-25": {
+      "id": "KPW-25",
+      "name": "Kediri",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Kediri",
+          "sheet": "Banjir",
+          "row": 28,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 0,
+            "J": 0,
+            "K": 1,
+            "L": 0,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5416666666666666,
+          "readyCount": 6,
+          "partialCount": 1,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Kediri",
+        "sheet": "Sarpas All",
+        "row": 10,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "20-30 menit per minggu (warming up) karena Kediri langganan listrik premium",
+          "AO": "500 KVA",
+          "AQ": "400 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-26": {
+      "id": "KPW-26",
+      "name": "Jember",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Jember",
+          "sheet": "Banjir",
+          "row": 27,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.875,
+          "readyCount": 10,
+          "partialCount": 1,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Jember",
+        "sheet": "Sarpas All",
+        "row": 28,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "24 jam",
+          "AO": "500KVA",
+          "AQ": "2000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-27": {
+      "id": "KPW-27",
+      "name": "Bali",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Bali",
+          "sheet": "Banjir",
+          "row": 36,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0,
+            "J": 0.5,
+            "K": 1,
+            "L": 1,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5833333333333334,
+          "readyCount": 6,
+          "partialCount": 2,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Bali",
+        "sheet": "Sarpas All",
+        "row": 9,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "3528",
+          "AO": "600,400",
+          "AQ": "7000",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-28": {
+      "id": "KPW-28",
+      "name": "Nusa Tenggara Barat",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Nusa Tenggara Barat",
+          "sheet": "Banjir",
+          "row": 37,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 1,
+            "J": 0,
+            "K": 1,
+            "L": 0,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5,
+          "readyCount": 5,
+          "partialCount": 2,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Nusa Tenggara Barat",
+        "sheet": "Sarpas All",
+        "row": 8,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "72 Jam",
+          "AO": "400 kVA (1 unit) dan 100 kVA (1 unit)",
+          "AQ": "800 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-29": {
+      "id": "KPW-29",
+      "name": "Nusa Tenggara Timur",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Nusa Tenggara Timur",
+          "sheet": "Banjir",
+          "row": 38,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 1,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 0,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5,
+          "readyCount": 4,
+          "partialCount": 4,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Nusa Tenggara Timur",
+        "sheet": "Sarpas All",
+        "row": 46,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "Estimasi daya tahan operasional :: 5.4 jam per hari dgn daya tahan 5 hari operasional",
+          "AO": "400kVA 2 unit , 135kVA 1 unit",
+          "AQ": "5100 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-30": {
+      "id": "KPW-30",
+      "name": "Kalimantan Barat",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kalimantan Barat",
+          "sheet": "Banjir",
+          "row": 31,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.75,
+          "readyCount": 9,
+          "partialCount": 0,
+          "unavailableCount": 3,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kalimantan Barat",
+        "sheet": "Sarpas All",
+        "row": 23,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "1-12 jam",
+          "AO": "Genset 1: 500 Kva, Genset 2: 500 Kva, Genset 3: 100 Kva",
+          "AQ": "7.000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-31": {
+      "id": "KPW-31",
+      "name": "Kalimantan Selatan",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kalimantan Selatan",
+          "sheet": "Banjir",
+          "row": 30,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.9166666666666666,
+          "readyCount": 11,
+          "partialCount": 0,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kalimantan Selatan",
+        "sheet": "Sarpas All",
+        "row": 43,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "1.182 Hm",
+          "AO": "400 KVA",
+          "AQ": "3500 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-32": {
+      "id": "KPW-32",
+      "name": "Kalimantan Tengah",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kalimantan Tengah",
+          "sheet": "Banjir",
+          "row": 34,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5416666666666666,
+          "readyCount": 5,
+          "partialCount": 3,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kalimantan Tengah",
+        "sheet": "Sarpas All",
+        "row": 30,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Thuraya;",
+          "AN": "750 KVA 146,8 Jam, dan 275 KVA 56,4 Jam",
+          "AO": "1 unit 750 KVA dan 2 unit 275 KVA",
+          "AQ": "Stok BBM 8.400 Liter di tangki utama dan 1000 liter di tangki harian",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-33": {
+      "id": "KPW-33",
+      "name": "Kalimantan Timur",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kalimantan Timur",
+          "sheet": "Banjir",
+          "row": 32,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.9166666666666666,
+          "readyCount": 11,
+          "partialCount": 0,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kalimantan Timur",
+        "sheet": "Sarpas All",
+        "row": 3,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;Inmarsat;",
+          "AN": "72 jam",
+          "AO": "840 kVa, 840 kVa, 140 kVa",
+          "AQ": "7.000 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-34": {
+      "id": "KPW-34",
+      "name": "Balikpapan",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Balikpapan",
+          "sheet": "Banjir",
+          "row": 33,
+          "values": {
+            "C": 1,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.9166666666666666,
+          "readyCount": 11,
+          "partialCount": 0,
+          "unavailableCount": 1,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Balikpapan",
+        "sheet": "Sarpas All",
+        "row": 48,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "72 jam",
+          "AO": "800 KVA dan 180 KVA",
+          "AQ": "5250 ltr",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-35": {
+      "id": "KPW-35",
+      "name": "Kalimantan Utara",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Kalimantan Utara",
+          "sheet": "Banjir",
+          "row": 35,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.75,
+          "readyCount": 8,
+          "partialCount": 2,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Kalimantan Utara",
+        "sheet": "Sarpas All",
+        "row": 24,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "3 jam",
+          "AO": "700 KVA",
+          "AQ": "7000",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-36": {
+      "id": "KPW-36",
+      "name": "Sulawesi Selatan",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sulawesi Selatan",
+          "sheet": "Banjir",
+          "row": 39,
+          "values": {
+            "C": 0,
+            "D": 0.5,
+            "E": null,
+            "F": 0.5,
+            "G": null,
+            "H": 0.5,
+            "I": 1,
+            "J": 0,
+            "K": 1,
+            "L": 0.5,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 5,
+          "partialCount": 5,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sulawesi Selatan",
+        "sheet": "Sarpas All",
+        "row": 21,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;Inmarsat;",
+          "AN": "72 jam",
+          "AO": "1000 Kva, 500 Kva, 250Kva",
+          "AQ": "7000 L",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-37": {
+      "id": "KPW-37",
+      "name": "Sulawesi Utara",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sulawesi Utara",
+          "sheet": "Banjir",
+          "row": 41,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0,
+            "J": 0,
+            "K": 1,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.4583333333333333,
+          "readyCount": 5,
+          "partialCount": 1,
+          "unavailableCount": 6,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sulawesi Utara",
+        "sheet": "Sarpas All",
+        "row": 26,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Inmarsat;",
+          "AN": "48 Jam",
+          "AO": "1.150 KVA",
+          "AQ": "2400",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-38": {
+      "id": "KPW-38",
+      "name": "Sulawesi Tengah",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sulawesi Tengah",
+          "sheet": "Banjir",
+          "row": 40,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0.5,
+            "J": 0,
+            "K": 1,
+            "L": 1,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.5,
+          "readyCount": 5,
+          "partialCount": 2,
+          "unavailableCount": 5,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sulawesi Tengah",
+        "sheet": "Sarpas All",
+        "row": 4,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "1",
+          "AO": "200 & 400",
+          "AQ": "2200",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-39": {
+      "id": "KPW-39",
+      "name": "Sulawesi Tenggara",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sulawesi Tenggara",
+          "sheet": "Banjir",
+          "row": 43,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 0,
+            "G": null,
+            "H": 0,
+            "I": 0,
+            "J": 1,
+            "K": 1,
+            "L": 0.5,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 7,
+          "partialCount": 1,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sulawesi Tenggara",
+        "sheet": "Sarpas All",
+        "row": 16,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "satu jam",
+          "AO": "2 unit genset 800 KVa 1 unit genset 250 KVa",
+          "AQ": "6290 liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-40": {
+      "id": "KPW-40",
+      "name": "Gorontalo",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Gorontalo",
+          "sheet": "Banjir",
+          "row": 44,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 0.5,
+            "J": 0.5,
+            "K": 1,
+            "L": 1,
+            "M": 0,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.6666666666666666,
+          "readyCount": 7,
+          "partialCount": 2,
+          "unavailableCount": 3,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Gorontalo",
+        "sheet": "Sarpas All",
+        "row": 40,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "8",
+          "AO": "600 KVA 600 KVA 200 KVA",
+          "AQ": "9550",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-41": {
+      "id": "KPW-41",
+      "name": "Sulawesi Barat",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Sulawesi Barat",
+          "sheet": "Banjir",
+          "row": 42,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 0,
+            "M": 0,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0,
+            "U": 1
+          },
+          "score": 0.5833333333333334,
+          "readyCount": 6,
+          "partialCount": 2,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Sulawesi Barat",
+        "sheet": "Sarpas All",
+        "row": 35,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "1 Jam",
+          "AO": "165 KVA",
+          "AQ": "50 Liter",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-42": {
+      "id": "KPW-42",
+      "name": "Maluku",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Maluku",
+          "sheet": "Banjir",
+          "row": 45,
+          "values": {
+            "C": 1,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0.5,
+            "K": 0,
+            "L": 0,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.7083333333333334,
+          "readyCount": 7,
+          "partialCount": 3,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Maluku",
+        "sheet": "Sarpas All",
+        "row": 27,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Thuraya;",
+          "AN": "10 jam",
+          "AO": "330 Kva",
+          "AQ": "1800",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-43": {
+      "id": "KPW-43",
+      "name": "Maluku Utara",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Maluku Utara",
+          "sheet": "Banjir",
+          "row": 46,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 0,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 0,
+            "U": 1
+          },
+          "score": 0.6666666666666666,
+          "readyCount": 8,
+          "partialCount": 0,
+          "unavailableCount": 4,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Maluku Utara",
+        "sheet": "Sarpas All",
+        "row": 47,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 1,
+          "AL": "Inmarsat;",
+          "AN": "8 Jam",
+          "AO": "400 KVA",
+          "AQ": "5000lt",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-44": {
+      "id": "KPW-44",
+      "name": "Papua",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Papua",
+          "sheet": "Banjir",
+          "row": 47,
+          "values": {
+            "C": 0,
+            "D": 0,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 1,
+            "U": 1
+          },
+          "score": 0.7916666666666666,
+          "readyCount": 9,
+          "partialCount": 1,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Papua",
+        "sheet": "Sarpas All",
+        "row": 7,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 3,
+          "AL": "Thuraya;",
+          "AN": "336",
+          "AO": "3 unit Genset dengan kapasitas masing - masing (350, 500, 500 KVA)",
+          "AQ": "11000",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-45": {
+      "id": "KPW-45",
+      "name": "Papua Barat",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Prov Papua Barat",
+          "sheet": "Banjir",
+          "row": 48,
+          "values": {
+            "C": 1,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 1,
+            "K": 1,
+            "L": 1,
+            "M": 1,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 1,
+            "T": 1,
+            "U": 1
+          },
+          "score": 1,
+          "readyCount": 12,
+          "partialCount": 0,
+          "unavailableCount": 0,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Prov Papua Barat",
+        "sheet": "Sarpas All",
+        "row": 19,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Globalstar;",
+          "AN": "Jika pln mati",
+          "AO": "Tidak ingat",
+          "AQ": "8000",
+          "AX": 1
+        }
+      }
+    },
+    "KPW-46": {
+      "id": "KPW-46",
+      "name": "Lhokseumawe",
+      "hazards": {
+        "Banjir": {
+          "sourceOfficeName": "KPw Lhokseumawe",
+          "sheet": "Banjir",
+          "row": 4,
+          "values": {
+            "C": 0,
+            "D": 1,
+            "E": null,
+            "F": 1,
+            "G": null,
+            "H": 1,
+            "I": 1,
+            "J": 0.5,
+            "K": 0.5,
+            "L": 0.5,
+            "M": 0.5,
+            "N": null,
+            "O": null,
+            "P": null,
+            "Q": null,
+            "R": null,
+            "S": 0.5,
+            "T": 0,
+            "U": 1
+          },
+          "score": 0.625,
+          "readyCount": 5,
+          "partialCount": 5,
+          "unavailableCount": 2,
+          "missingCount": 7,
+          "denominator": 12,
+          "total": 19
+        }
+      },
+      "inventory": {
+        "sourceOfficeName": "KPw Lhokseumawe",
+        "sheet": "Sarpas All",
+        "row": 33,
+        "values": {
+          "AJ": "tersedia",
+          "AK": 2,
+          "AL": "Inmarsat;",
+          "AN": "tidak menentu",
+          "AO": "650kva",
+          "AQ": "600lt",
+          "AX": 1
+        }
+      }
+    }
+  },
+  "inventoryColumns": [
+    {
+      "id": "AJ",
+      "label": "Telepon Satelit",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    },
+    {
+      "id": "AK",
+      "label": "Jumlah Telepon Satelit",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    },
+    {
+      "id": "AL",
+      "label": "Merk Telepon Satelit",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    },
+    {
+      "id": "AN",
+      "label": "Durasi Genser",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    },
+    {
+      "id": "AO",
+      "label": "Kapasitas Genset",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    },
+    {
+      "id": "AQ",
+      "label": "Stok BBM",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    },
+    {
+      "id": "AX",
+      "label": "Telepon Satelit",
+      "group": "Peralatan  Darurat (Sumber Daya Lokasi Kerja - SDLK dan Sumber Daya Teknologi Digital - SDTD)"
+    }
+  ],
+  "scope": "Sarpras banjir; infografik pengguna adalah acuan. Sheet bencana lain tidak dipublikasikan."
+}

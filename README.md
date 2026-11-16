@@ -62,7 +62,9 @@ Aset: [idn-finlogos 2.5.0](https://github.com/hafidznoor/idn-finlogos), koleksi 
 - Tema studio memakai gradasi ringan, permukaan transparan, font Manrope dan DM Sans lokal, serta pointer glow hanya untuk pointer halus dan tanpa preferensi reduced motion. Tidak ada library animasi tambahan. Tidak ada permintaan API berbayar.
 - Uji matematika: `npm test` (5 pengujian, termasuk referensi WGS84, pasangan hampir antipodal, simetri, titik sama, dan status akurasi).
 
-## Kesiapan sarpras banjir
+## Kesiapan sarpras banjir — versi checklist lokal lama
+
+Bagian ini mendokumentasikan versi sebelum impor Excel. Tampilan aktif kini memakai data file dan acuan banjir yang dijelaskan pada bagian terakhir.
 
 Menu **Kesiapan sarpras** (`#sarpras`) mencakup 46 KPw dari daftar aplikasi. Checklist ditranskripsi dari infografik yang diberikan pengguna: perlindungan gedung (5), evakuasi (9), kesehatan/kebutuhan dasar (5), komunikasi/operasional (5), dan langkah preventif (4). Sumber ini tidak diklaim sebagai dokumen petunjuk teknis resmi yang sudah diverifikasi.
 
@@ -90,3 +92,13 @@ Popup KPw di peta menampilkan ringkasan kondisi dan empat kategori sarpras dari 
 - Katalog dicari pada `https://inarisk.bnpb.go.id/arcgis/rest/services` dan folder yang dikembalikannya. Tidak ada service ID atau legenda yang ditebak sebagai data resmi. Nama layer membedakan bahaya dan risiko; legenda, periode jika tersedia, dan atribusi mengikuti metadata sumber. Raster transparan memakai ArcGIS export/exportImage dalam EPSG:3857, opacity bisa diubah, dan marker tetap berada di atas raster.
 - **Konektivitas live belum terverifikasi.** Permintaan situs/katalog InaRISK dari cloud ditolak 403, dan fetch proxy mengembalikan `fetch failed`. Domain InaRISK/BNPB disimpan pada draft jaringan untuk ditinjau, disimpan, dan dipublish melalui pengaturan environment. Penyimpanan draft tidak menerapkan koneksi runtime. Jika katalog aktual berpindah/ditutup, adapter perlu disesuaikan setelah sumber resmi bisa diperiksa. UI menyatakan InaRISK belum terhubung; tidak menghasilkan warna atau kelas risiko pengganti.
 - Uji browser memakai respons terkontrol untuk memeriksa raster pane, legenda, opacity, toggle, dan kondisi kegagalan; ini tidak membuktikan layanan InaRISK live berfungsi. Uji pemulihan mencakup jaringan tile putus, perubahan desktop ke HP, pindah menu, dan kembali ke tampilan nasional. `npm test` mencakup pembatasan proxy dan pembedaan bahaya/risiko.
+
+## Data sarpras aktif: Excel + acuan infografik banjir
+
+File `Kesiapan_Sarpras_4_Final.xlsx` menjadi bukti per KPw; infografik pengguna menjadi acuan kebutuhan. Hanya banjir ditampilkan. Pengimpor `scripts/import_readiness.py` memeriksa 46 nama kantor pada setiap sheet (tanpa bergantung urutan baris), memvalidasi semua skor sumber, lalu mempublikasikan **sheet Banjir saja** beserta tujuh kolom inventaris pendukung telepon satelit/genset/BBM yang relevan di `public/readiness-import.json`. Sel kosong tetap null.
+
+`src/flood-readiness.js` mencocokkan bukti ke 24 kebutuhan sarpras + 4 langkah preventif. Kebutuhan majemuk yang hanya didukung satu komponen diberi status Data sebagian kebutuhan, meskipun komponen sumber bernilai 1. Contoh: pompa tidak otomatis membuktikan selang tersedia; sepatu karet tidak membuktikan jas hujan/sarung tangan. Bukti medis tidak diduplikasi untuk menyimpulkan P3K evakuasi. Butir yang tidak punya bukti tetap Data belum tersedia; nilainya tidak diubah menjadi nol. Rujukan sheet/kolom/baris ditampilkan untuk tiap pencocokan.
+
+**Tidak memakai skor keseluruhan sheet 19 butir sebagai skor kesiapan penuh acuan 28 butir.** Progres di layar adalah cakupan bukti, bukan persentase kesiapan. Nilai mentah sumber tetap disimpan untuk keterlacakan. Tidak ada label kesiapan penuh yang disimpulkan dari data tidak lengkap.
+
+Menu Kesiapan Sarpras, detail KPw, popup peta, dan unduhan JSON semuanya khusus banjir. Tidak ada tab bencana lain atau tampilan inventaris umum. Semua pengguna membaca dataset file yang sama; cache isian checklist lama tetap dipertahankan di localStorage tetapi tidak menimpa data sumber yang baru. Belum ada penyuntingan dataset bersama melalui backend.
