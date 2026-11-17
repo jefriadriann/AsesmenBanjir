@@ -15,9 +15,9 @@ export function createMapMeasure({map, icon, refreshIcons, onToggle}) {
     const result = measurePath(points);
     if (points.length > 1) {
       L.polyline(result.line, {...options, color: '#ffffff', weight: 7, opacity: .9}).addTo(layer);
-      L.polyline(result.line, {...options, color: '#1761ed', weight: 3.5}).addTo(layer);
+      L.polyline(result.line, {...options, color: '#466f99', weight: 3.5}).addTo(layer);
     }
-    points.forEach((point, index) => L.circleMarker(point, {...options, radius: index === 0 || index === points.length - 1 ? 6 : 4, color: '#092b6b', weight: 2, fillColor: '#ffcf3e', fillOpacity: 1}).addTo(layer));
+    points.forEach((point, index) => L.circleMarker(point, {...options, radius: index === 0 || index === points.length - 1 ? 6 : 4, color: '#233d58', weight: 2, fillColor: '#d1bb8c', fillOpacity: 1}).addTo(layer));
     host.innerHTML = `<div class="distance-head"><span class="distance-tool-icon">${icon('ruler')}</span><div><span class="section-kicker">GAMBAR DI PETA</span><h2>Ukur jarak</h2></div><button id="distance-close" aria-label="Tutup pengukuran">${icon('x')}</button></div>
       <p class="distance-intro">${finished ? 'Garis selesai. Mulai garis baru untuk mengukur lagi.' : 'Klik atau ketuk peta untuk menggambar garis. Tambahkan belokan, lalu tekan Selesai.'}</p>
       <div id="distance-result" class="distance-result" role="status" data-point-count="${points.length}" data-meters="${result.meters}"><span class="distance-result-label">${points.length ? `${points.length} TITIK · ${Math.max(0, points.length - 1)} RUAS` : 'MULAI DENGAN KLIK PETA'}</span><div class="distance-number">${format(result.meters)}</div></div>
@@ -54,7 +54,7 @@ export function createMapMeasure({map, icon, refreshIcons, onToggle}) {
     preview.clearLayers();
     if (!active || finished || !points.length) return;
     const result = measurePath([points.at(-1), [event.latlng.lat, event.latlng.lng]]);
-    L.polyline(result.line, {...options, color: '#1761ed', weight: 2, dashArray: '5 6', opacity: .7}).addTo(preview);
+    L.polyline(result.line, {...options, color: '#466f99', weight: 2, dashArray: '5 6', opacity: .7}).addTo(preview);
   });
   map.on('mouseout', () => preview.clearLayers());
   const mapNode = map.getContainer(); mapNode.tabIndex = 0;
