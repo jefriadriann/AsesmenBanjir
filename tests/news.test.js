@@ -1,0 +1,6 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {parseNews,safeUrl} from '../api/news.js';
+const article=(title,link='https://www.antaranews.com/berita/1/test')=>`<item><title>${title}</title><link>${link}</link><pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate><description><![CDATA[<img src="https://cdn.antaranews.com/foto.jpg">Laporan peristiwa Indonesia]]></description></item>`;
+test('news preserves source metadata and images and filters unrelated stories',()=>{const items=parseNews(`<rss><channel>${article('Banjir melanda kota')}${article('Harga emas hari ini')}</channel></rss>`);assert.equal(items.length,1);assert.equal(items[0].source,'ANTARA News');assert.equal(items[0].publishedAt,'2026-11-17T05:00:00.000Z');assert.equal(items[0].image,'https://cdn.antaranews.com/foto.jpg');});
+test('news rejects unsafe links, malformed XML and external entities',()=>{assert.deepEqual(parseNews(`<rss><channel>${article('Gempa','javascript:alert(1)')}</channel></rss>`),[]);assert.equal(safeUrl('https://antaranews.com.evil.test/a',['antaranews.com']),null);assert.equal(safeUrl('https://user:pass@www.antaranews.com/a',['antaranews.com']),null);assert.throws(()=>parseNews('<rss>'));assert.throws(()=>parseNews('<!DOCTYPE rss [<!ENTITY a SYSTEM "file:///etc/passwd">]><rss/>'));});

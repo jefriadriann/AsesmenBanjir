@@ -1,0 +1,23 @@
+/* Loaded after the existing styles to keep operational information readable. */
+:root[data-theme=light] .sidebar,:root[data-theme=light] .topbar,:root[data-theme=light] .directory,:root[data-theme=light] .readiness-summary,:root[data-theme=light] .inarisk-panel,:root[data-theme=light] .slope-panel{background:#102b49!important;color:#edf5ff!important;border-color:#35516c!important}
+:root[data-theme=light] .sidebar :is(.wordmark,.brand-name,.nav-item,.theme-toggle,.insight-total,.sidebar-signature,.source-mini,.sidebar-review,.insight-legend,.nav-label,.insight-kicker,.insight-note,.coverage-key,.coverage-regions,.coverage-value,.section-kicker),:root[data-theme=light] .topbar :is(h1,button,a),:root[data-theme=light] .directory :is(h2,h3,strong,button,.family-copy>span,.family-child-copy>span,.family-coordinate,.family-section-label,.detail-nav,.popup-parent),:root[data-theme=light] .readiness-summary :is(p,span,b,button,.readiness-eyebrow,.source-detail-score){color:#e2efff!important}
+:root[data-theme=light] .sidebar :is(small,.insight-note,.source-mini small,.sidebar-review small){color:#bad0e4!important}
+:root[data-theme=light] .sidebar .nav-item.active{background:#254d6c!important;color:#fff!important;border-color:#487e99!important}
+:root[data-theme=light] .topbar :is(.title-tag,.export-button){background:#244660!important;border-color:#476b85!important;color:#e8f4ff!important}
+:root[data-theme=light] .directory :is(.family-card,.family-child,.family-overview,.family-readiness){background:#163652!important;border-color:#355571!important;color:#e6f1ff!important}
+:root[data-theme=light] .directory :is(.search-box,input,select){background:#eaf2f8!important;color:#17344d!important}
+.readiness-workspace .readiness-page-head p,.readiness-workspace .readiness-office-card p,.readiness-workspace .readiness-directory-head>div>span{font-size:15px!important;line-height:1.7;color:#294960}
+.readiness-workspace .source-item-row{display:flex;gap:18px;align-items:center;padding:20px 22px}
+.readiness-workspace .sarpras-image{width:86px;height:76px;object-fit:contain;flex-shrink:0;border-radius:12px}
+.readiness-workspace .source-item-title{flex:1;font-size:16px!important;line-height:1.6;color:#173951!important;font-weight:650;min-width:0}
+.readiness-workspace .source-item-title>small{font-size:12px;color:#42647c}
+.readiness-workspace .source-item-state{font-size:13px!important;line-height:1.55;min-width:130px;max-width:170px;color:#2d485e}
+.readiness-workspace .checklist-category summary strong{font-size:17px;color:#183e59}
+.readiness-workspace .checklist-category summary small{font-size:13px;color:#36566e;line-height:1.6}
+.readiness-workspace .readiness-about,.readiness-workspace .source-score-caption,.readiness-workspace .source-office-counts,.readiness-workspace .office-card-meta{font-size:13px!important;line-height:1.7}
+.readiness-workspace .flood-evidence-detail summary,.readiness-workspace .flood-evidence-detail>span{font-size:13px!important;color:#36536c;line-height:1.7}
+.readiness-workspace .readiness-summary{background:#102b49!important;color:#e9f4ff!important;border-color:#355571!important}
+.readiness-workspace .readiness-summary :is(p,span,b,button,.source-detail-score){color:#e2efff!important}
+[data-theme=dark] .readiness-workspace :is(.source-item-title,.source-item-title>small,.source-item-state,.checklist-category summary strong,.checklist-category summary small,.readiness-page-head p,.readiness-office-card p,.readiness-directory-head>div>span,.flood-evidence-detail summary){color:#e0edf9!important}
+@media(max-width:640px){.readiness-workspace .source-item-row{gap:12px;padding:18px 14px;flex-wrap:wrap}.readiness-workspace .sarpras-image{width:66px;height:62px}.readiness-workspace .source-item-title{font-size:15px!important}.readiness-workspace .source-item-state{margin-left:78px;max-width:none;min-width:0}.readiness-workspace .checklist-category summary strong{font-size:15px}.readiness-workspace .checklist-category summary small{font-size:12px}.readiness-workspace .checklist-category summary>b{font-size:12px}}
+@media(max-width:640px){.readiness-workspace .source-item-row{display:grid;grid-template-columns:66px minmax(0,1fr);column-gap:12px;row-gap:10px}.readiness-workspace .sarpras-image{grid-column:1;grid-row:1 / span 2}.readiness-workspace .source-item-title{grid-column:2;width:100%}.readiness-workspace .source-item-state{grid-column:2;margin-left:0;justify-content:flex-start;max-width:100%}}

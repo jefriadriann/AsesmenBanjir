@@ -134,3 +134,20 @@ Proxy membatasi HTTPS ke host Earth Engine yang diizinkan, memvalidasi XYZ, tida
 Logo aplikasi memakai opsi tetes air/topografi yang dipilih pengguna, dalam PNG transparan lokal `public/brand/ruang-risiko-drop.png`; digunakan di navigasi dan favicon. Aset diisolasi/dirapikan dengan image generation dari opsi kedua. Logo BI dan bank pada marker tidak berubah.
 
 Endpoint config kemiringan membedakan `missing_variable` (SLOPE_TILE_URL tidak diisi), `invalid_template` (bukan URL XYZ Earth Engine yang didukung), dan `configured`. Nilai asli/URL/token tidak ditampilkan. Whitespace, tanda kutip pembungkus, serta placeholder ter-encode `%7Bz%7D`/`%7Bx%7D`/`%7By%7D` dinormalisasi. Untuk website production, isi variabel server pada environment Production lalu redeploy; konfigurasi lokal/cloud tidak otomatis mengubah Vercel. Pesan pada screenshot pengguna menunjukkan config belum valid, bukan hasil kegagalan kalkulasi NASADEM.
+
+
+## Berita kebencanaan dan keterbacaan sarpras
+
+Menu **Berita kebencanaan** (`#berita`) mengambil RSS ANTARA News melalui endpoint server `/api/news`, memfilter topik bencana, mengurutkan waktu terbit, dan menampilkan headline, gambar sumber, nama portal, serta waktu dalam WIB. Klik headline atau Baca berita untuk membuka artikel sumber. Gambar cadangan diberi label saat foto sumber tidak tersedia. Tidak ada artikel contoh yang dipublikasikan sebagai berita nyata. Cache server 5 menit; kegagalan refresh mempertahankan data sebelumnya dengan keterangan. Berita bukan peringatan darurat resmi.
+
+Jaringan server memerlukan `www.antaranews.com`; browser memerlukan host gambar ANTARA (`cdn.antaranews.com` dan subdomain foto ANTARA yang dipakai feed). Tidak membutuhkan API key. Pada cloud onboarding, akses feed live masih ditolak proxy; parser, alur UI berhasil/gagal, dan fallback diuji dengan fixture terkontrol. Verifikasi feed production secara terpisah. InaRISK ditunda dan tidak dikembangkan dalam perubahan ini.
+
+Sarpras memakai teks lebih besar dan berkontras tinggi serta 28 ilustrasi SVG lokal berbasis ikon Lucide (ISC); ilustrasi menunjukkan jenis kebutuhan, bukan foto bukti inventaris. Status bukti dan nilai sumber tetap mengikuti dataset. Header, navigasi, panel lokasi, dan ringkasan sarpras tetap navy pada mode terang.
+
+Pengujian: `npm test`, `npm run build`. Regresi browser desktop/mobile (memerlukan Playwright dan Chromium):
+
+```sh
+BASE_URL=http://localhost:3001 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/news-sarpras.mjs
+```
+
+Jalankan preview terlebih dahulu dengan `npm run preview -- --port 3001 --strictPort`. Suite memakai fixture berita dan tidak membuktikan koneksi ANTARA live. Vercel mendeteksi handler `api/news.js` bersama build Vite; deploy production mengikuti integrasi Git proyek yang tersambung ke `main`.
