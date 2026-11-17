@@ -151,3 +151,16 @@ BASE_URL=http://localhost:3001 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs n
 ```
 
 Jalankan preview terlebih dahulu dengan `npm run preview -- --port 3001 --strictPort`. Suite memakai fixture berita dan tidak membuktikan koneksi ANTARA live. Vercel mendeteksi handler `api/news.js` bersama build Vite; deploy production mengikuti integrasi Git proyek yang tersambung ke `main`.
+
+
+## Berita lintas portal dan pembaruan empat jam
+
+Menu `#berita` mencakup ANTARA News, CNN Indonesia, Metro TV, Reuters, Associated Press, Kompas, detik, dan BBC. ANTARA/CNN/detik dicoba melalui RSS penerbit; feed yang gagal atau tidak berisi berita terkait dilengkapi lewat indeks RSS Google News per domain penerbit. Metro TV/Reuters/AP/Kompas/BBC memakai indeks tersebut. Identitas penerbit pada elemen RSS `source` diperiksa, bukan ditentukan dari penyebutan nama media pada judul. Ini bukan integrasi resmi atau jaminan semua artikel penerbit tercakup. Tautan indeks membuka Google News lalu sumber asli; atribusi `via Google News` terlihat. Gambar yang tidak disediakan sumber menggunakan ilustrasi berlabel, tanpa menebak foto.
+
+Filter topik mencakup banjir, cuaca/peringatan, longsor, gempa/tsunami, erupsi, kebakaran, iklim/lingkungan, dan kebencanaan lain. Pilihan awal semua isu terkait; pencarian dan filter penerbit dapat digabung. Tiga headline dipilih dari hasil filter dengan prioritas banjir dan variasi sumber jika tersedia. Bila hasilnya kurang dari tiga, hanya berita yang tersedia ditampilkan; tidak ada duplikasi untuk memenuhi jumlah.
+
+Snapshot API dan CDN berlaku maksimal **4 jam**. Browser menjadwalkan refresh dari `nextRefreshAt`; saat tab kembali aktif atau menu dibuka setelah kedaluwarsa, berita dimuat lagi. Tombol Perbarui berita memaksa pengambilan sumber baru lewat `?refresh=1`. Kegagalan tidak menghapus berita terakhir; sumber yang gagal dan salinan lama diberi label. Semua sumber gagal pada awal pemuatan menghasilkan HTTP 502. Browser mencoba ulang kegagalan setelah lima menit saat halaman aktif.
+
+Pembaruan menggunakan permintaan website: tidak ada cron server yang berjalan ketika tidak ada pengunjung, tidak ada GitHub Actions terjadwal, dan tidak ada pengiriman email, push notification, atau langganan notifikasi. Email deploy bawaan GitHub/Vercel mengikuti pengaturan akun masing-masing dan tidak diubah oleh fitur berita.
+
+Backend memerlukan HTTPS ke `www.antaranews.com`, `www.cnnindonesia.com`, `news.detik.com`, dan `news.google.com`. Gambar langsung dapat memakai CDN penerbit. Cloud onboarding masih menolak koneksi sumber dan production hingga perubahan network diterapkan; tes fixture membuktikan parser, filter, jadwal, dan UI, bukan keberhasilan feed live. Uji: `npm test`, `npm run build`, lalu `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/news-sarpras.mjs` terhadap preview. Suite browser memajukan jam empat jam, memeriksa tiga headline/filter, kegagalan muat, dan regresi sarpras pada desktop/HP.
