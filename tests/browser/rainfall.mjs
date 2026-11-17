@@ -58,10 +58,16 @@ try {
     assert.equal(await image.count(),1);
     assert.ok(await image.locator('canvas').count()>0);
     await page.locator('#rainfall-toggle').click();
+    assert.equal(await image.count(), 0);
+    await page.locator('#rainfall-toggle').click();
+    await page.waitForFunction(() => document.querySelector('#rainfall-status')?.textContent.includes('Pekan 2 aktif'));
     await page.screenshot({path: `/tmp/rainfall-${width}.png`});
     await page.locator('#rainfall-close').click();
     assert.equal(await image.count(), 1);
     await page.locator('#rainfall-toggle').click();
+    assert.equal(await image.count(), 0);
+    await page.locator('#rainfall-toggle').click();
+    await page.waitForFunction(() => document.querySelector('#rainfall-status')?.textContent.includes('Pekan 2 aktif'));
     assert.ok(await page.locator('.rainfall-panel').isVisible());
     await page.locator('#rainfall-off').click();
     assert.equal(await image.count(), 0);

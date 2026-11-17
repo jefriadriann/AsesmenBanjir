@@ -18,8 +18,8 @@ await page.route('**/api/inarisk?*',async route=>{
 const ready=()=>page.waitForFunction(()=>document.querySelector('#inarisk-retry')?.disabled===false);
 const layers=()=>page.locator('.leaflet-floodOverlay-pane .leaflet-layer');
 try{
- await page.goto(process.env.BASE_URL||'http://localhost:3040');await ready();
- await page.locator('#inarisk-toggle').click();
+ await page.goto(process.env.BASE_URL||'http://localhost:3040');
+ await page.locator('#inarisk-toggle').click();await ready();
  assert.equal(await layers().count(),1);
  await page.locator('#inarisk-opacity').fill('35');
  await layers().evaluate(el=>el.dataset.regressionOriginal='yes');
@@ -42,14 +42,14 @@ try{
  await page.locator('#inarisk-visible').uncheck();assert.equal(await layers().count(),0);
  await page.locator('#inarisk-visible').check();await page.waitForTimeout(300);assert.equal(await layers().count(),1);
  // A returning visitor can recover the last successful public source configuration, labelled as cached.
- fail='catalog';await page.reload();await ready();assert.equal(await layers().count(),1);
+ fail='catalog';await page.reload();await page.locator('#inarisk-toggle').click();await ready();assert.equal(await layers().count(),1);
  assert.match(await page.locator('#inarisk-status').innerText(),/sumber tersimpan/);
  // Cold-start failure must remain honest, without inventing an overlay.
  await page.evaluate(()=>localStorage.removeItem('ruang-inarisk-last-good-v1'));
- fail='catalog';await page.reload();await ready();assert.equal(await layers().count(),0);
+ fail='catalog';await page.reload();await page.locator('#inarisk-toggle').click();await ready();assert.equal(await layers().count(),0);
  assert.match(await page.locator('#inarisk-status').innerText(),/belum terhubung/);
  assert.match(await page.locator('#inarisk-connection-error').textContent(),/Katalog layanan InaRISK \(HTTP 502\): Controlled source failure/);
- fail='deployment';await page.reload();await ready();assert.equal(await layers().count(),0);
+ fail='deployment';await page.reload();await page.locator('#inarisk-toggle').click();await ready();assert.equal(await layers().count(),0);
  assert.match(await page.locator('#inarisk-connection-error').textContent(),/HTTP 404.*deployment/);
  assert.deepEqual(errors,[]);
  console.log('PASS: refresh catalog, metadata and image failures retain raster, legend, selection and opacity; successful replacement, visibility and cold failure. Controlled fixtures, not live BNPB verification.');

@@ -115,7 +115,7 @@ Gradasi header/permukaan diseragamkan ke biru-kehijauan yang halus, dengan palet
 
 ## Layer Kemiringan lahan (Earth Engine)
 
-Tombol **Kemiringan lahan** menyalakan/mematikan raster di pane tersendiri (di atas peta dasar, di bawah marker), menampilkan legenda, opacity, dan atribusi. Layer banjir dimatikan saat layer kemiringan diaktifkan agar palet tidak bercampur. Layer tidak dianggap aktif sebelum ada gambar tile yang berhasil dimuat.
+Tombol **Kemiringan lahan** menyalakan/mematikan raster di pane tersendiri (di atas peta dasar, di bawah marker), menampilkan legenda, opacity, dan atribusi. Layer banjir, kemiringan, dan hujan kini dapat ditumpuk; tiap layer memiliki sakelar serta opasitas sendiri. Layer tidak dianggap aktif sebelum ada gambar tile yang berhasil dimuat.
 
 Perhitungan mengikuti script pengguna: `NASA/NASADEM_HGT/001`, band elevation, `ee.Terrain.slope`, konversi `tan(deg × π/180) × 100`, mask `num != 0`, kemudian clip ke Indonesia dari `USDOS/LSIB_SIMPLE/2017`. Ambang kelas persen: 8, 15, 25, 40; palet persis `e4f3cc, add881, f6d567, ec9141, 942f24`. Metadata dan sumber resmi tersedia di `public/slope-source.json`. Ini kelas kemiringan, bukan kelas risiko banjir.
 
@@ -175,7 +175,7 @@ Tombol **Prakiraan hujan** di peta membuka dua periode dari GeoTIFF pengguna `ch
 
 Band 15 (2 Desember) tidak dimasukkan ke kedua rerata pekanan. Sel wajib memiliki tujuh nilai valid non-negatif; nol adalah curah hujan valid. Palet dan simpul warna mengikuti script pengguna: 0, 2, 5, 10, 15, 20, 25, 35, 50, 80+ mm/hari. Prakiraan hujan bukan klasifikasi risiko banjir.
 
-Layer aktif memakai Leaflet GridLayer dengan tile canvas XYZ 256×256. Tiap pixel tile diproyeksikan balik dari Web Mercator ke koordinat grid sumber, lalu nilai curah hujannya diinterpolasi bilinear. Tile baru dihitung pada setiap tingkat zoom dan perpindahan viewport, tanpa membesarkan satu gambar nasional. Batas darat Natural Earth 1:10 juta di-clip sebagai path vektor per tile; batas ini lebih rinci daripada basemap sederhana aplikasi. Bilinear digunakan pada tampilan, sedangkan klik peta/marker membaca rerata sel **grid asli** dari file float32 little-endian. Sel di luar grid atau mask mengembalikan Data tidak tersedia. Penggantian pekan yang gagal mempertahankan gambar sebelumnya. Opasitas dapat diatur; saat layer hujan aktif, raster lereng/InaRISK dimatikan agar palet tidak bercampur. Tanggal yang telah berlalu diberi keterangan arsip.
+Layer aktif memakai Leaflet GridLayer dengan tile canvas XYZ 256×256. Tiap pixel tile diproyeksikan balik dari Web Mercator ke koordinat grid sumber, lalu nilai curah hujannya diinterpolasi bilinear. Tile baru dihitung pada setiap tingkat zoom dan perpindahan viewport, tanpa membesarkan satu gambar nasional. Batas darat Natural Earth 1:10 juta di-clip sebagai path vektor per tile; batas ini lebih rinci daripada basemap sederhana aplikasi. Bilinear digunakan pada tampilan, sedangkan klik peta/marker membaca rerata sel **grid asli** dari file float32 little-endian. Sel di luar grid atau mask mengembalikan Data tidak tersedia. Penggantian pekan yang gagal mempertahankan gambar sebelumnya. Opasitas dapat diatur; ketiga raster hujan/lereng/InaRISK dapat aktif bersamaan dengan opasitas independen. Tanggal yang telah berlalu diberi keterangan arsip.
 
 **Perbedaan batas:** TIFF mencakup persegi panjang regional, sehingga publikasi web dipotong ke batas Indonesia Natural Earth skala 1:10 juta dari `public/rainfall/boundary.geojson`. Script Earth Engine pengguna memakai `USDOS/LSIB_SIMPLE/2017`; bentuk pantai/pulau kecil dapat berbeda. Rerata nilai dan simpul warna mengikuti perhitungan sumber, tetapi mask tidak diklaim identik dengan LSIB.
 
@@ -195,3 +195,12 @@ BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs n
 Tes angka memakai referensi rerata dari TIFF asli, bukan warna render. Seluruh sel valid pada grid negara telah dibandingkan dengan rerata tujuh band; galat pembulatan float32 maksimum <0,000002 mm/hari. Tes browser memuat grid sungguhan dan menguji tile canvas, termasuk setelah zoom/pan; akses peta dasar eksternal dapat dimatikan tanpa memengaruhi raster prakiraan ini.
 
 Renderer tile memakai `week*-render.f32` yang memuat rerata regional sebelum mask garis pantai, agar interpolasi tepi tidak terpotong mengikuti pixel mask resolusi rendah. Pemotongan negara dilakukan ulang pada setiap tile. Pembacaan titik memakai grid native `week*.f32` seperti sebelumnya. Resolusi sumber tetap ±5,6 km; zoom tinggi tidak menambah ketelitian prakiraan. Tes mencakup koordinat XYZ pada zoom 4/8/12/16, sambungan antartile, rerata sel sumber, serta layer tetap tersedia setelah zoom dan pan.
+
+
+## Sakelar layer independen
+
+Kemiringan lahan, Prakiraan hujan, dan Layer banjir adalah tiga sakelar terpisah. Klik pertama meminta layer aktif; klik berikutnya mematikan layer itu saja, termasuk ketika panel pengaturannya sedang tertutup. Semua layer awalnya mati; InaRISK baru dihubungi saat diaktifkan. Indikator aktif mengikuti gambar yang berhasil dimuat, dengan status kegagalan sumber tetap terlihat.
+
+Mengaktifkan raster lain hanya mengganti panel pengaturan yang terlihat; tidak mematikan raster sebelumnya. Tab Hujan/Lereng/Banjir pada panel membuka pengaturan tanpa mengubah status layer. Opasitas dipertahankan masing-masing. Urutan gambar dari bawah ke atas: InaRISK, lereng, hujan, kemudian marker lokasi. Ini perbandingan visual sumber, bukan perhitungan otomatis skor risiko gabungan.
+
+Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/layer-stack.mjs`. Suite memeriksa kedua urutan aktivasi, ketiga raster bersamaan, opasitas terpisah, matikan layer dengan panel tersembunyi, dan zoom pada desktop/HP. Tile InaRISK dan lereng memakai fixture terkontrol; hujan memakai grid asli. Ini menguji perilaku layer, bukan membuktikan akses live ke BNPB/Earth Engine.

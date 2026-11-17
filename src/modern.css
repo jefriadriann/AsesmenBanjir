@@ -48,3 +48,5 @@
 .map-bottom{left:18px;right:auto;justify-content:flex-start}
 .layer-menu{left:18px;right:auto;max-width:calc(100% - 36px)}
 @media(max-width:640px){.map-bottom,.layer-menu{left:10px;right:auto}.layer-menu{max-width:calc(100% - 20px)}#layers{gap:7px}#layers>span{display:inline}}
+#inarisk-toggle.active{background:#304c67;color:#f0f5fa;border:1px solid #6885a0}
+.layer-panel-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #40566c}.layer-panel-tabs button{padding:6px 8px;font-size:11px;background:#ffffff08;color:#c7d8e9;border:1px solid #49617a;border-radius:6px}.layer-panel-tabs button[aria-current=true]{background:#385570;border-color:#7592ac;color:#fff}

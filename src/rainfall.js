@@ -3,7 +3,7 @@ import L from 'leaflet';
 import {RAINFALL_SOURCE, rainfallPeriods, rainfallValue} from './rainfall-data.js';
 import './rainfall.css';
 const labelDate = value => new Intl.DateTimeFormat('id-ID', {day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'}).format(new Date(value + 'T00:00:00Z'));
-export function mountRainfall({map, refreshIcons, onOpen, onCommit}) {
+export function mountRainfall({map, refreshIcons, onOpen}) {
   const button = document.createElement('button');
   button.id = 'rainfall-toggle'; button.title = 'Prakiraan curah hujan'; button.setAttribute('aria-label', 'Prakiraan curah hujan'); button.setAttribute('aria-pressed', 'false');
   button.innerHTML = '<i data-lucide="cloud-rain"></i><span>Prakiraan hujan</span>';
@@ -85,8 +85,6 @@ export function mountRainfall({map, refreshIcons, onOpen, onCommit}) {
         if (token !== generation) { image.remove(); image.off(); return; }
         clearTimeout(pending?.timer); pending = null;
         layer?.remove(); layer?.off(); layer = image; activeWeek = week;
-        onCommit?.();
-        const flood = document.querySelector('#inarisk-visible'); if (flood?.checked) { flood.checked = false; flood.dispatchEvent(new Event('change')); }
         image.setOpacity(Number(panel.querySelector('#rainfall-opacity').value) / 100); active(true);
         write(`${period.label} aktif · rerata mm/hari`);
         if (lastPoint) sample(lastPoint); else point.textContent = 'Klik lokasi di peta untuk membaca nilai dari sel sumber.';
@@ -100,7 +98,7 @@ export function mountRainfall({map, refreshIcons, onOpen, onCommit}) {
     }
   }
   button.onclick = () => {
-    if (requested && !panel.classList.contains('hidden')) disable();
+    if (requested) disable();
     else if (layer) { panel.classList.remove('hidden'); onOpen?.(); }
     else enable();
   };
