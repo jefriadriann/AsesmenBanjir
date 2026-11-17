@@ -1,0 +1,102 @@
+{
+  "source": "CHIRPS3-GEFS",
+  "runDate": "2026-11-17",
+  "resolution": "\u00b15,6 km",
+  "unit": "mm/hari",
+  "sourceFile": "chirps3_gefs_indonesia_20261117.tif",
+  "sourceSha256": "b46e2c6d39bc712a465ab923b86eeeb601957c46b95184e723b600152d5e27c9",
+  "grid": {
+    "crs": "EPSG:4326",
+    "width": 1001,
+    "height": 401,
+    "transform": [
+      0.05000000074505806,
+      0.0,
+      92.95000406727195,
+      0.0,
+      -0.05000000074505806,
+      8.049999225884676
+    ],
+    "format": "float32-le",
+    "nodata": "NaN"
+  },
+  "imageBounds": [
+    [
+      -12.041355712181296,
+      92.95000406727195
+    ],
+    [
+      8.049999225884678,
+      142.99964012199106
+    ]
+  ],
+  "imageProjection": "EPSG:3857",
+  "thresholds": [
+    0,
+    2,
+    5,
+    10,
+    15,
+    20,
+    25,
+    35,
+    50,
+    80
+  ],
+  "palette": [
+    "f4f1e8",
+    "ffe5a0",
+    "ffcb45",
+    "ee8a24",
+    "a3d64f",
+    "00a487",
+    "2587df",
+    "2445a2",
+    "6e369a",
+    "2c114b"
+  ],
+  "boundary": "Natural Earth Indonesia (local basemap); differs from LSIB_SIMPLE/2017 in the Earth Engine script.",
+  "boundarySha256": "73bbbb38cfa86056eeca7cbcbdbece2fd269a495ddb0fe53338a0b394e965303",
+  "periods": [
+    {
+      "id": "week1",
+      "label": "Pekan 1",
+      "start": "2026-11-18",
+      "end": "2026-11-24",
+      "bands": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "image": "/rainfall/week1.png",
+      "grid": "/rainfall/week1.f32",
+      "validCells": 61135,
+      "min": 0.0,
+      "max": 43.120663506644114
+    },
+    {
+      "id": "week2",
+      "label": "Pekan 2",
+      "start": "2026-11-25",
+      "end": "2026-12-01",
+      "bands": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "image": "/rainfall/week2.png",
+      "grid": "/rainfall/week2.f32",
+      "validCells": 61135,
+      "min": 0.0,
+      "max": 32.58792577471052
+    }
+  ]
+}

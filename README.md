@@ -164,3 +164,32 @@ Snapshot API dan CDN berlaku maksimal **4 jam**. Browser menjadwalkan refresh da
 Pembaruan menggunakan permintaan website: tidak ada cron server yang berjalan ketika tidak ada pengunjung, tidak ada GitHub Actions terjadwal, dan tidak ada pengiriman email, push notification, atau langganan notifikasi. Email deploy bawaan GitHub/Vercel mengikuti pengaturan akun masing-masing dan tidak diubah oleh fitur berita.
 
 Backend memerlukan HTTPS ke `www.antaranews.com`, `www.cnnindonesia.com`, `news.detik.com`, dan `news.google.com`. Gambar langsung dapat memakai CDN penerbit. Cloud onboarding masih menolak koneksi sumber dan production hingga perubahan network diterapkan; tes fixture membuktikan parser, filter, jadwal, dan UI, bukan keberhasilan feed live. Uji: `npm test`, `npm run build`, lalu `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/news-sarpras.mjs` terhadap preview. Suite browser memajukan jam empat jam, memeriksa tiga headline/filter, kegagalan muat, dan regresi sarpras pada desktop/HP.
+
+
+## Layer prakiraan curah hujan CHIRPS3-GEFS
+
+Tombol **Prakiraan hujan** di peta membuka dua periode dari GeoTIFF pengguna `chirps3_gefs_indonesia_20261117.tif` (15 band, EPSG:4326, grid 0,05°, sekitar 5,6 km). Run **17 November 2026**, tanggal sumber **UTC**:
+
+- Pekan 1: **18–24 November 2026**, rerata band 1–7.
+- Pekan 2: **25 November–1 Desember 2026**, rerata band 8–14.
+
+Band 15 (2 Desember) tidak dimasukkan ke kedua rerata pekanan. Sel wajib memiliki tujuh nilai valid non-negatif; nol adalah curah hujan valid. Palet dan simpul warna mengikuti script pengguna: 0, 2, 5, 10, 15, 20, 25, 35, 50, 80+ mm/hari. Prakiraan hujan bukan klasifikasi risiko banjir.
+
+Dua gambar overlay diproyeksikan ke Web Mercator dan ditampilkan dengan bounds geografi yang sesuai. Bilinear digunakan pada tampilan, sedangkan klik peta/marker membaca rerata sel **grid asli** dari file float32 little-endian. Sel di luar grid atau mask mengembalikan Data tidak tersedia. Penggantian pekan yang gagal mempertahankan gambar sebelumnya. Opasitas dapat diatur; saat layer hujan aktif, raster lereng/InaRISK dimatikan agar palet tidak bercampur. Tanggal yang telah berlalu diberi keterangan arsip.
+
+**Perbedaan batas:** TIFF mencakup persegi panjang regional, sehingga publikasi web dipotong ke batas Indonesia Natural Earth dari `public/basemap.geojson`. Script Earth Engine pengguna memakai `USDOS/LSIB_SIMPLE/2017`; bentuk pantai/pulau kecil dapat berbeda. Rerata nilai dan simpul warna mengikuti perhitungan sumber, tetapi mask tidak diklaim identik dengan LSIB.
+
+`public/rainfall/manifest.json` mencatat tanggal tiap pekan, band, grid, bounds, metode batas, dan SHA-256 TIFF sumber. PNG dan grid hasil olahan disimpan bersama aplikasi; tidak memerlukan API key atau URL Earth Engine sementara. Tautan script rujukan pengguna: https://code.earthengine.google.com/edbe2223fde4d3e7b5e30cc83793539a . Script tersebut bukan sumber data yang dapat otomatis dieksekusi oleh browser aplikasi.
+
+**Ini snapshot run 17 November 2026, bukan feed otomatis.** Untuk run berikutnya, gunakan TIFF baru dan jalankan kembali preparasi; perbarui metadata `src/rainfall-data.js` dan uji label periode sebelum deploy. File TIFF asli dipertahankan sebagai lampiran workspace, tidak dimasukkan ke bundle publik. Reproduksi (Python 3.12, numpy 2.3.5, rasterio 1.5.2, Pillow):
+
+```sh
+python -m venv --system-site-packages /workspace/.onboarding-tools/raster-venv
+/workspace/.onboarding-tools/raster-venv/bin/pip install rasterio==1.5.2
+/workspace/.onboarding-tools/raster-venv/bin/python scripts/prepare_rainfall.py /path/to/chirps3_gefs_indonesia_20261117.tif
+npm test
+npm run build
+BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/rainfall.mjs
+```
+
+Tes angka memakai referensi rerata dari TIFF asli, bukan warna render. Seluruh 61.135 sel valid per pekan telah dibandingkan dengan rerata tujuh band; galat pembulatan float32 maksimum <0,000002 mm/hari. Tes browser memuat PNG dan grid sungguhan; akses peta dasar eksternal dapat dimatikan tanpa memengaruhi raster prakiraan ini.
