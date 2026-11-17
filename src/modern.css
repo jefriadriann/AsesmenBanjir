@@ -44,3 +44,7 @@
 @media(max-width:640px){.map-measure-button{right:11px;top:62px;padding:9px 11px;font-size:11px}:root[data-theme] .distance-panel{left:10px;right:10px;bottom:65px;width:auto;max-width:310px;padding:14px;max-height:calc(100% - 135px)}.distance-panel .distance-intro{font-size:12px;margin:9px 0}.distance-panel .distance-number{font-size:25px;margin-bottom:10px}.distance-panel .distance-method{font-size:10px}.measure-actions button{padding:8px}.distance-head h2{font-size:19px}.distance-panel .distance-result{padding-top:9px}}
 @media(max-width:640px){:root[data-theme] .sidebar .nav-placeholder{display:none!important}}
 @media(max-width:640px){.map-measure-button{top:112px}}
+/* Basemap selection occupies the cleared lower-left corner. */
+.map-bottom{left:18px;right:auto;justify-content:flex-start}
+.layer-menu{left:18px;right:auto;max-width:calc(100% - 36px)}
+@media(max-width:640px){.map-bottom,.layer-menu{left:10px;right:auto}.layer-menu{max-width:calc(100% - 20px)}#layers{gap:7px}#layers>span{display:inline}}
