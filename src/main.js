@@ -9,14 +9,14 @@ import {bankLogo,bankBrand} from './banks.js';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './fonts.css';
-import {createIcons,Map,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,Sun,Moon,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard} from 'lucide';
+import {createIcons,Map,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard} from 'lucide';
 import './style.css';
 import './studio.css';
 import './aurora.css';
 import './clean.css';
 import './accessibility.css';
 import './modern.css';
-const icons={Map,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,Sun,Moon,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard};
+const icons={Map,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard};
 const i=(name,cls='')=>`<i data-lucide="${name}" class="${cls}"></i>`;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>n==null?'Belum tersedia':new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
@@ -29,12 +29,12 @@ const sumatera=['Aceh','Sumatera Utara','Pematangsiantar','Sibolga','Sumatera Ba
 const jawa=['DKI Jakarta','Banten','Jawa Barat','Cirebon','Tasikmalaya','Tegal','Purwokerto','Jawa Tengah','Solo','DI Yogyakarta','Jawa Timur','Malang','Kediri','Jember'];
 data.forEach(d=>{if(d.type==='kpw')d.region=sumatera.includes(d.name)?'Sumatera':jawa.includes(d.name)?'Jawa':['Bali','Nusa Tenggara Barat','Nusa Tenggara Timur'].includes(d.name)?'Balinusra':['Kalimantan Barat','Kalimantan Selatan','Kalimantan Tengah','Kalimantan Timur','Balikpapan','Kalimantan Utara'].includes(d.name)?'Kalimantan':'Sulampua';});
 let coordinateFilter='all',directoryParentId=null;
-let type='all',region='all',query='',selected=null,theme=localStorage.getItem('ruang-theme-v4')==='dark'?'dark':'light',panelOpen=false,mapStyle='street';
+let type='all',region='all',query='',selected=null,panelOpen=false,mapStyle='street';
 let lastFocus=null,toastTimer,resizeTimer,distanceOpen=false;
 const locatedCount=data.filter(hasCoords).length;const confirmationCount=data.filter(d=>d.status==='needs_confirmation').length;const missingCount=data.length-locatedCount;
 const counts={kpw:data.filter(d=>d.type==='kpw').length,kas:data.filter(d=>d.type==='kas').length};
 const regions=['Sumatera','Jawa','Kalimantan','Balinusra','Sulampua'];
-document.documentElement.dataset.theme=theme;
+document.documentElement.dataset.theme='dark';
 document.querySelector('#app').innerHTML=`
 <aside class="sidebar" aria-label="Navigasi utama">
  <a class="wordmark" href="/" aria-label="Ruang Risiko beranda"><span class="brand-symbol brand-drop"><img src="/brand/ruang-risiko-drop.png" alt="" width="44" height="44" decoding="async" fetchpriority="high"></span><span>Ruang Risiko<small>ASESMEN BANJIR</small></span></a>
@@ -43,7 +43,7 @@ document.querySelector('#app').innerHTML=`
  <a id="map-nav" class="nav-item active" href="#peta" aria-current="page">${i('map')}<span>Peta risiko banjir</span><span class="nav-number">01</span></a>
  <a class="nav-item" id="news-nav" href="#berita">${i('file-spreadsheet')}<span>Berita kebencanaan</span></a><a class="nav-item" id="readiness-nav" href="#sarpras">${i('shield-check')}<span>Kesiapan sarpras</span></a>
  <div class="nav-label tools-caption">ANALISIS</div><div class="nav-item nav-placeholder" aria-disabled="true"><b>X</b><small>Segera hadir</small></div><div class="sidebar-insight"><div class="insight-kicker">JARINGAN INDONESIA</div><div class="insight-total">133 <span>lokasi</span></div><div class="insight-bar"><b></b><b></b></div><div class="insight-legend"><span><b></b>46 KPw</span><span><b></b>87 Kas titipan</span></div><div class="insight-note">${i('globe')} 5 wilayah operasional</div></div><div class="sidebar-review"><span class="review-dot"></span><div>Verifikasi koordinat<small>${locatedCount}/133 tersedia · belum diverifikasi</small></div><button id="review-info" aria-label="Status verifikasi">${i('arrow-up-right')}</button></div><div class="sidebar-coverage"><span class="section-kicker">CAKUPAN NASIONAL</span><div class="coverage-value">133<span>titik jaringan</span></div><div class="coverage-bar"><span></span><span></span></div><div class="coverage-key"><span><b class="dot cyan"></b>46 KPw BI</span><span><b class="dot amber"></b>87 Kas titipan</span></div><div class="coverage-regions"><span>5</span> wilayah operasional ${i('arrow-up-right')}</div></div>
- <div class="sidebar-bottom"><div class="source-mini">${i('file-spreadsheet')}<span>Data bersumber dari Excel<small>Rekap Kas Titipan (1).xlsx</small></span></div><button id="theme" class="theme-toggle">${i(theme==='dark'?'sun':'moon')}<span>${theme==='dark'?'Mode terang':'Mode gelap'}</span><span class="toggle-track"><b></b></span></button><div class="sidebar-signature"><span class="profile-avatar">JA</span><div>Asesmen Banjir<small>Peta jaringan kas</small></div><span class="version">v0.2</span></div></div>
+ <div class="sidebar-bottom"><div class="source-mini">${i('file-spreadsheet')}<span>Data bersumber dari Excel<small>Rekap Kas Titipan (1).xlsx</small></span></div><div class="sidebar-signature"><span class="profile-avatar">JA</span><div>Asesmen Banjir<small>Peta jaringan kas</small></div><span class="version">v0.2</span></div></div>
 </aside>
 <div class="app-main"><header class="topbar"><div class="map-title"><h1>Peta Risiko Banjir</h1><span class="title-tag">${i('globe')} Indonesia</span></div><div class="topbar-actions"><a class="news-mobile" href="#berita">Berita</a><button id="readiness-header" class="readiness-header" aria-label="Buka kesiapan sarpras">${i('shield-check')}</button><button class="export-button" id="export">${i('download')}<span>Unduh data</span></button><button id="help" class="header-icon" aria-label="Tentang data">${i('info')}</button></div></header>
 <main id="peta">
@@ -62,10 +62,10 @@ const map=L.map('map',{zoomControl:false,attributionControl:true,minZoom:3,maxZo
 map.attributionControl.setPrefix(false);
 map.attributionControl.addAttribution('Natural Earth');
 const land=L.geoJSON(geo,{style:landStyle,interactive:false}).addTo(map);
-function landStyle(f){return {color:theme==='dark'?'#335568':'#b8c9cc',weight:f.properties.name==='Indonesia'?1.15:.65,fillColor:theme==='dark'?(f.properties.name==='Indonesia'?'#153b4b':'#102a39'):(f.properties.name==='Indonesia'?'#f3f6ef':'#e0e8e3'),fillOpacity:1};}
+function landStyle(f){return {color:'#335568',weight:f.properties.name==='Indonesia'?1.15:.65,fillColor:f.properties.name==='Indonesia'?'#153b4b':'#102a39',fillOpacity:1};}
 const grids=L.layerGroup().addTo(map);
-for(let lat=-15;lat<=10;lat+=5)L.polyline([[lat,88],[lat,150]],{color:theme==='dark'?'#426376':'#9ab5bb',weight:.5,opacity:.15,interactive:false}).addTo(grids);
-for(let lng=90;lng<=145;lng+=5)L.polyline([[-20,lng],[15,lng]],{color:theme==='dark'?'#426376':'#9ab5bb',weight:.5,opacity:.15,interactive:false}).addTo(grids);
+for(let lat=-15;lat<=10;lat+=5)L.polyline([[lat,88],[lat,150]],{color:'#426376',weight:.5,opacity:.15,interactive:false}).addTo(grids);
+for(let lng=90;lng<=145;lng+=5)L.polyline([[-20,lng],[15,lng]],{color:'#426376',weight:.5,opacity:.15,interactive:false}).addTo(grids);
 const labels=L.layerGroup().addTo(map);
 [['SUMATERA',-1,100],['JAWA',-8.9,109.5],['KALIMANTAN',2.4,113.5],['SULAWESI',-4.5,122],['PAPUA',-5.2,137],['MALUKU',-4.4,129],['NUSA TENGGARA',-11.5,120.5]].forEach(([name,lat,lng])=>L.marker([lat,lng],{interactive:false,icon:L.divIcon({className:'island-label',html:name,iconSize:[150,16],iconAnchor:[75,8]})}).addTo(labels));
 [['SAMUDRA HINDIA',-9.5,99],['LAUT JAWA',-4.7,110],['LAUT BANDA',-7.2,129],['SAMUDRA PASIFIK',5,135]].forEach(([name,lat,lng])=>L.marker([lat,lng],{interactive:false,icon:L.divIcon({className:'ocean-label',html:name,iconSize:[180,16],iconAnchor:[90,8]})}).addTo(labels));
@@ -153,7 +153,6 @@ document.querySelector('#zoom-in').onclick=()=>map.zoomIn();document.querySelect
 const layersButton=document.querySelector('#layers');layersButton.onclick=()=>{const open=document.querySelector('#layer-menu').classList.toggle('hidden')===false;layersButton.setAttribute('aria-expanded',String(open));};
 document.addEventListener('click',e=>{if(!e.target.closest('#layer-menu')&&!e.target.closest('#layers')){document.querySelector('#layer-menu').classList.add('hidden');layersButton.setAttribute('aria-expanded','false');}});
 document.querySelectorAll('[data-basemap]').forEach(b=>b.onclick=()=>setMapStyle(b.dataset.basemap,true));
-document.querySelector('#theme').onclick=()=>{theme=theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;localStorage.setItem('ruang-theme-v4',theme);document.querySelector('#theme').innerHTML=`${i(theme==='dark'?'sun':'moon')}<span>${theme==='dark'?'Mode terang':'Mode gelap'}</span><span class="toggle-track"><b></b></span>`;land.setStyle(landStyle);grids.eachLayer(l=>l.setStyle({color:theme==='dark'?'#426376':'#9ab5bb'}));refreshIcons();};
 ['help','validation','data-note','missing-data','review-info'].forEach(id=>document.getElementById(id).onclick=openAudit);document.querySelector('#audit-close').onclick=closeAudit;document.querySelector('#audit-done').onclick=closeAudit;document.querySelector('#audit-modal').onclick=e=>{if(e.target.id==='audit-modal')closeAudit();};
 document.querySelector('#export').onclick=()=>{const blob=new Blob([JSON.stringify(currentRows(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='jaringan-kas-indonesia.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast(`${currentRows().length} lokasi berhasil diunduh dalam format JSON.`);};
 document.addEventListener('keydown',e=>{const modalOpen=!document.querySelector('#audit-modal').classList.contains('hidden');if(modalOpen&&e.key==='Tab'){const elements=[...document.querySelectorAll('#audit-modal button')];if(e.shiftKey&&document.activeElement===elements[0]){e.preventDefault();elements.at(-1).focus();}else if(!e.shiftKey&&document.activeElement===elements.at(-1)){e.preventDefault();elements[0].focus();}}if(e.key==='Escape'){if(modalOpen)closeAudit();else if(distanceOpen)toggleDistance(false);else if(selected){closeDetail();render();}else if(panelOpen){if(directoryParentId)showFamily(null);else setPanel(false);}document.querySelector('#layer-menu').classList.add('hidden');layersButton.setAttribute('aria-expanded','false');}if(e.key==='/'&&!['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName)&&!modalOpen){e.preventDefault();if(selected)closeDetail();if(!panelOpen)setPanel(true);document.querySelector('#search').focus();}});

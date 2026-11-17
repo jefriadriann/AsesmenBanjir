@@ -23,7 +23,7 @@ Vercel: preset **Vite**, build `npm run build`, direktori output `dist`. Tidak a
 - Kelompok marker diberi jumlah dan cincin komposisi KPw (cyan) / kas titipan (amber). Klik untuk memperbesar kelompok. Marker tunggal KPw berbentuk persegi, kas berbentuk lingkaran.
 - Filter jenis, filter wilayah, pencarian kota/KPw/bank, reset filter, dan ekspor JSON mengikuti data yang sedang difilter.
 - Klik titik untuk membuka popup berisi nama KPw atau kas titipan, bank pengelola, dan wilayah. Tombol Lihat detail membuka informasi lengkap di panel desktop atau panel bawah pada HP. Escape menutup detail/dialog. `/` membuka pencarian.
-- Mode terang/gelap disimpan di localStorage. Daftar lokasi tertutup saat halaman dibuka dan dapat ditampilkan lewat tombol Daftar lokasi. Panel ini mengambang di atas peta agar tidak mengurangi ukuran peta.
+- Tampilan menggunakan mode gelap saja; preferensi tema lama di localStorage diabaikan. Daftar lokasi tertutup saat halaman dibuka dan dapat ditampilkan lewat tombol Daftar lokasi. Panel ini mengambang di atas peta agar tidak mengurangi ukuran peta.
 - OpenStreetMap menjadi peta utama dengan zoom hingga level 19 untuk melihat jalan, bangunan, dan nama tempat yang tercatat. Tombol Lihat area sekitar memperbesar area kota hingga level 17. Peta sederhana Natural Earth tersedia lewat menu Jenis peta. Gangguan koneksi ditampilkan dengan opsi mencoba kembali; peta sederhana tetap ada di bawah lapisan jalan.
 - Kualitas data membuka keterangan sumber, kelengkapan, dan batas penggunaan.
 
@@ -47,7 +47,7 @@ Judul Peta Risiko Banjir menyatakan tujuan workspace; lapisan bahaya banjir belu
 
 ## Logo dan tema
 
-Tema terang menjadi bawaan, termasuk untuk pengguna yang sebelumnya menyimpan mode gelap. Preferensi baru disimpan melalui `nusa-theme-v3`.
+Mode gelap navy menjadi satu-satunya tema. Tombol pergantian tema dihapus, dan HTML memulai mode gelap sebelum JavaScript dimuat. Preferensi tema lama tidak lagi dibaca.
 
 Logo KPw memakai monogram Bank Indonesia (44 px); kas titipan memakai logo bank pengelola (31 px). Kelompok titik menampilkan logo perwakilan dan jumlah lokasi, bukan satu kantor tunggal. 67 dari 87 bank pengelola dapat dikenali dari nama dalam sumber; 20 data kosong/ambigu memakai ikon netral. Tidak ada bank yang ditebak dari wilayahnya.
 
@@ -111,7 +111,7 @@ Panel mempunyai tombol kembali dan tutup yang terlihat. Kembali dari detail anak
 
 Catatan interpretasi dipusatkan di Sumber & cara baca; rincian sel sarpras dapat ditampilkan atas permintaan. Status data dan kategori sebagian/tidak tersedia tetap terlihat. Layer InaRISK tidak otomatis membuka panel pada awal halaman. Panel layer, daftar lokasi, dan pengukuran saling menutup agar peta tidak tertutup beberapa panel sekaligus.
 
-Gradasi header/permukaan diseragamkan ke biru-kehijauan yang halus, dengan palet gelap tersendiri. Preferensi tema baru memakai `ruang-theme-v4`, bawaan terang; preferensi lama tidak memaksakan palet campuran. Validasi UI mencakup alur pergi-pulang peta/daftar/detail/sarpras, filter, kantor tanpa anak, koordinat kosong, sumber on demand, pengukuran, dan ukuran desktop/HP.
+Gradasi header/permukaan diseragamkan ke biru-kehijauan yang halus, dengan palet gelap tersendiri. Mode gelap kini berlaku untuk semua pengguna; preferensi tema lama diabaikan. Validasi UI mencakup alur pergi-pulang peta/daftar/detail/sarpras, filter, kantor tanpa anak, koordinat kosong, sumber on demand, pengukuran, dan ukuran desktop/HP.
 
 ## Layer Kemiringan lahan (Earth Engine)
 
