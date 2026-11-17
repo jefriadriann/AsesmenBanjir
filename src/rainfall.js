@@ -1,3 +1,4 @@
+import {createRainfallTiles} from './rainfall-tiles.js';
 import L from 'leaflet';
 import {RAINFALL_SOURCE, rainfallPeriods, rainfallValue} from './rainfall-data.js';
 import './rainfall.css';
@@ -18,19 +19,19 @@ export function mountRainfall({map, refreshIcons, onOpen, onCommit}) {
     <div id="rainfall-point" role="status">Klik lokasi di peta untuk membaca nilai dari sel sumber.</div>
     <label class="rainfall-opacity">Opasitas layer <span id="rainfall-opacity-value">85%</span><input id="rainfall-opacity" aria-label="Opasitas curah hujan" type="range" min="0" max="100" value="85"></label>
     <div class="rainfall-actions"><button id="rainfall-retry">Muat ulang layer</button><button id="rainfall-off">Matikan layer</button></div>
-    <details><summary>Sumber & cara baca</summary><p>CHIRPS3-GEFS, run 17 November 2026, dari GeoTIFF pengguna. Rerata 7 hari; nilai negatif dan sel tanpa 7 hari lengkap di-mask. Angka titik dibaca pada grid sumber, bukan ditebak dari warna gambar.</p><p>Tampilan memakai interpolasi bilinear dalam proyeksi Web Mercator. Batas Indonesia menggunakan Natural Earth lokal, berbeda dari LSIB 2017 pada script Earth Engine. Prakiraan curah hujan bukan kelas risiko banjir.</p></details>`;
+    <details><summary>Sumber & cara baca</summary><p>CHIRPS3-GEFS, run 17 November 2026, dari GeoTIFF pengguna. Rerata 7 hari; nilai negatif dan sel tanpa 7 hari lengkap di-mask. Angka titik dibaca pada grid sumber, bukan ditebak dari warna gambar.</p><p>Tile dirender ulang pada setiap tingkat zoom dari grid sumber, dengan interpolasi bilinear dalam proyeksi Web Mercator. Resolusi prakiraan tetap ±5,6 km; zoom tidak menambah ketelitian data. Batas Indonesia menggunakan Natural Earth skala 1:10 juta, berbeda dari LSIB 2017 pada script Earth Engine. Prakiraan curah hujan bukan kelas risiko banjir.</p></details>`;
   panel.querySelector('.rainfall-gradient').style.background = `linear-gradient(90deg,${RAINFALL_SOURCE.palette.map(color => '#' + color).join(',')})`;
   document.querySelector('.map-frame').append(panel);
   map.createPane('rainfallOverlay'); map.getPane('rainfallOverlay').style.zIndex = 485; map.getPane('rainfallOverlay').style.pointerEvents = 'none';
-  let layer = null, manifest = null, activeWeek = null, requested = false, generation = 0, pending = null, sampleRequest = 0, lastPoint = null;
+  let layer = null, manifest = null, activeWeek = null, requested = false, generation = 0, pending = null, sampleRequest = 0, lastPoint = null, boundary = null;
   const grids = new Map();
   const select = panel.querySelector('#rainfall-week'), status = panel.querySelector('#rainfall-status'), point = panel.querySelector('#rainfall-point');
   const write = (message, error = false) => { status.textContent = message; status.classList.toggle('error', error); };
   const active = value => { button.classList.toggle('active', value); button.setAttribute('aria-pressed', String(value)); };
   const updatePeriod = () => { const period = periods.find(item => item.id === select.value); panel.querySelector('#rainfall-expired').classList.toggle('hidden', Date.now() < Date.parse(period.end + 'T00:00:00Z') + 86400000); };
-  function cancelPending() { if (pending) { clearTimeout(pending.timer); pending.image.off(); pending.image.remove(); pending = null; } }
+  function cancelPending() { if (pending) { clearTimeout(pending.timer); pending.image.remove(); pending.image.off(); pending = null; } }
   function disable() {
-    requested = false; generation++; sampleRequest++; cancelPending(); layer?.off(); layer?.remove(); layer = null; activeWeek = null; active(false); panel.classList.add('hidden');
+    requested = false; generation++; sampleRequest++; cancelPending(); layer?.remove(); layer?.off(); layer = null; activeWeek = null; active(false); panel.classList.add('hidden');
   }
   async function sample(latlng) {
     if (!activeWeek || !manifest) return;
@@ -63,8 +64,15 @@ export function mountRainfall({map, refreshIcons, onOpen, onCommit}) {
       }
       if (token !== generation) return;
       const period = manifest.periods.find(item => item.id === week);
-      if (!period || !/^\/rainfall\/week[12]\.png$/.test(period.image) || !/^\/rainfall\/week[12]\.f32$/.test(period.grid)) throw Error();
-      const image = L.imageOverlay(period.image + (force ? '?refresh=' + Date.now() : ''), manifest.imageBounds, {pane: 'rainfallOverlay', opacity: 0, interactive: false, attribution: 'CHIRPS3-GEFS · GeoTIFF pengguna'});
+      if (!period || !/^\/rainfall\/week[12]-render\.f32$/.test(period.renderGrid)) throw Error();
+      const [raster, coastline] = await Promise.all([
+        fetch(period.renderGrid, {signal: AbortSignal.timeout(15000), cache: force ? 'reload' : 'default'}).then(async response => { if (!response.ok) throw Error(); return response.arrayBuffer(); }),
+        boundary ? Promise.resolve(boundary) : fetch('/rainfall/boundary.geojson').then(response => { if (!response.ok) throw Error(); return response.json(); }),
+      ]);
+      if (token !== generation) return;
+      if (raster.byteLength !== manifest.grid.width * manifest.grid.height * 4) throw Error();
+      boundary = coastline;
+      const image = createRainfallTiles({buffer: raster, grid: manifest.grid, boundary, week, bounds: [[-12, 93], [8.1, 143.1]]});
       const fail = () => {
         if (token !== generation) return;
         cancelPending(); write('Gambar prakiraan gagal dimuat.' + (layer ? ' Layer sebelumnya tetap ditampilkan.' : ' Coba muat ulang layer.'), true);
@@ -72,11 +80,11 @@ export function mountRainfall({map, refreshIcons, onOpen, onCommit}) {
         updatePeriod();
       };
       pending = {image, timer: setTimeout(fail, 18000)};
-      image.on('error', fail);
-      image.on('load', () => {
-        if (token !== generation) { image.off(); image.remove(); return; }
+      image.on('tileerror', fail);
+      image.once('load', () => {
+        if (token !== generation) { image.remove(); image.off(); return; }
         clearTimeout(pending?.timer); pending = null;
-        layer?.off(); layer?.remove(); layer = image; activeWeek = week;
+        layer?.remove(); layer?.off(); layer = image; activeWeek = week;
         onCommit?.();
         const flood = document.querySelector('#inarisk-visible'); if (flood?.checked) { flood.checked = false; flood.dispatchEvent(new Event('change')); }
         image.setOpacity(Number(panel.querySelector('#rainfall-opacity').value) / 100); active(true);

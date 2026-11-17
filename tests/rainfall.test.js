@@ -47,3 +47,25 @@ test('out-of-bounds, ocean, malformed buffer and invalid coordinates never retur
     assert.equal(readFileSync(new URL(period.id + '.png', root)).subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
   }
 });
+
+import {interpolateRainfall, rainfallColor, rainfallTileCoordinate} from '../src/rainfall-data.js';
+test('tile interpolation uses pixel centres and does not turn nodata into zero', () => {
+ const grid = {width: 2, height: 2, transform: [1, 0, 100, 0, -1, 2]};
+ assert.equal(interpolateRainfall(new Float32Array([0, 10, 20, 30]), grid, 1.5, 100.5), 0);
+ assert.equal(interpolateRainfall(new Float32Array([0, 10, 20, 30]), grid, 1, 101), 15);
+ assert.equal(interpolateRainfall(new Float32Array([0, NaN, 20, 30]), grid, 1, 101), null);
+ assert.equal(interpolateRainfall(new Float32Array(4), grid, 20, 101), null);
+ for(let n=0;n<RAINFALL_SOURCE.thresholds.length;n++)assert.deepEqual(rainfallColor(RAINFALL_SOURCE.thresholds[n]).slice(0,3),[0,2,4].map(k=>parseInt(RAINFALL_SOURCE.palette[n].slice(k,k+2),16)));
+});
+test('XYZ pixel positions stay geographically registered at national, provincial and street zooms', () => {
+ for(const z of [4,8,12,16]){
+  const scale=256*2**z, lat=-0.5,lng=117.15;
+  const x=(lng+180)/360*scale,y=(.5-Math.log(Math.tan(Math.PI/4+lat*Math.PI/360))/(2*Math.PI))*scale;
+  const tx=Math.floor(x/256),ty=Math.floor(y/256);
+  const p=rainfallTileCoordinate(z,tx,ty,x-tx*256-.5,y-ty*256-.5);
+  assert.ok(Math.abs(p.lat-lat)<1e-9);assert.ok(Math.abs(p.lng-lng)<1e-9);
+  const last=rainfallTileCoordinate(z,tx,ty,255,100),next=rainfallTileCoordinate(z,tx+1,ty,0,100);
+  assert.ok(Math.abs(next.lng-last.lng-360/scale)<1e-10);assert.equal(last.lat,next.lat);
+ }
+ for(const period of manifest.periods){const b=readFileSync(new URL(period.renderGrid.split('/').at(-1),root));assert.equal(b.length,manifest.grid.width*manifest.grid.height*4);}
+});

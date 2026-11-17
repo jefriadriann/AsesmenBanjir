@@ -1,0 +1,4 @@
+Indonesia boundary: Natural Earth 1:10m, public domain.
+Extracted from https://raw.githubusercontent.com/datasets/geo-countries/main/data/countries.geojson
+Natural Earth license: https://www.naturalearthdata.com/about/terms-of-use/
+Boundary is cartographic and does not certify operational or legal boundaries.

@@ -55,8 +55,8 @@
     "6e369a",
     "2c114b"
   ],
-  "boundary": "Natural Earth Indonesia (local basemap); differs from LSIB_SIMPLE/2017 in the Earth Engine script.",
-  "boundarySha256": "73bbbb38cfa86056eeca7cbcbdbece2fd269a495ddb0fe53338a0b394e965303",
+  "boundary": "Natural Earth 1:10m Indonesia (datasets/geo-countries); differs from LSIB_SIMPLE/2017 in the Earth Engine script.",
+  "boundarySha256": "9c75f624f9a8025dcc277386e497ddd563cacd5b71d3b6f17a9556b4266286f7",
   "periods": [
     {
       "id": "week1",
@@ -74,7 +74,8 @@
       ],
       "image": "/rainfall/week1.png",
       "grid": "/rainfall/week1.f32",
-      "validCells": 61135,
+      "renderGrid": "/rainfall/week1-render.f32",
+      "validCells": 61191,
       "min": 0.0,
       "max": 43.120663506644114
     },
@@ -94,7 +95,8 @@
       ],
       "image": "/rainfall/week2.png",
       "grid": "/rainfall/week2.f32",
-      "validCells": 61135,
+      "renderGrid": "/rainfall/week2-render.f32",
+      "validCells": 61191,
       "min": 0.0,
       "max": 32.58792577471052
     }

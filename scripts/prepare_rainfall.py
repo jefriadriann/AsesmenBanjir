@@ -23,7 +23,7 @@ def main():
     opts = args.parse_args()
     run = date.fromisoformat(opts.run_date)
     opts.output.mkdir(parents=True, exist_ok=True)
-    boundary_path = ROOT / 'public/basemap.geojson'
+    boundary_path = ROOT / 'public/rainfall/boundary.geojson'
     geometries = [feature['geometry'] for feature in json.loads(boundary_path.read_text())['features']]
     with rasterio.open(opts.tif) as src:
         if src.count != 15 or src.crs.to_epsg() != 4326:
@@ -44,7 +44,7 @@ def main():
             'grid': {'crs': 'EPSG:4326', 'width': src.width, 'height': src.height, 'transform': list(src.transform)[:6], 'format': 'float32-le', 'nodata': 'NaN'},
             'imageBounds': [[south, west], [north, east]], 'imageProjection': 'EPSG:3857',
             'thresholds': THRESHOLDS, 'palette': PALETTE,
-            'boundary': 'Natural Earth Indonesia (local basemap); differs from LSIB_SIMPLE/2017 in the Earth Engine script.',
+            'boundary': 'Natural Earth 1:10m Indonesia (datasets/geo-countries); differs from LSIB_SIMPLE/2017 in the Earth Engine script.',
             'boundarySha256': hashlib.sha256(boundary_path.read_bytes()).hexdigest(), 'periods': [],
         }
         for index, offset in enumerate([0, 7]):
@@ -63,10 +63,11 @@ def main():
             rgba[~finite, :3] = 0
             week = f'week{index + 1}'
             Image.fromarray(rgba).save(opts.output / f'{week}.png', optimize=True)
+            mean.astype('<f4').tofile(opts.output / f'{week}-render.f32')
             mean[~native_land] = np.nan
             mean.astype('<f4').tofile(opts.output / f'{week}.f32')
             values = mean[np.isfinite(mean)]
-            manifest['periods'].append({'id': week, 'label': f'Pekan {index + 1}', 'start': dates[offset].isoformat(), 'end': dates[offset + 6].isoformat(), 'bands': list(range(offset + 1, offset + 8)), 'image': f'/rainfall/{week}.png', 'grid': f'/rainfall/{week}.f32', 'validCells': int(values.size), 'min': float(values.min()), 'max': float(values.max())})
+            manifest['periods'].append({'id': week, 'label': f'Pekan {index + 1}', 'start': dates[offset].isoformat(), 'end': dates[offset + 6].isoformat(), 'bands': list(range(offset + 1, offset + 8)), 'image': f'/rainfall/{week}.png', 'grid': f'/rainfall/{week}.f32', 'renderGrid': f'/rainfall/{week}-render.f32', 'validCells': int(values.size), 'min': float(values.min()), 'max': float(values.max())})
         (opts.output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
         print(json.dumps({'output': str(opts.output), 'imageSize': [width, height], 'periods': manifest['periods']}, indent=2))
 

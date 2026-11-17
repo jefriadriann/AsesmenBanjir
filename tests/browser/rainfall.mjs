@@ -14,21 +14,23 @@ try {
     assert.equal(await page.locator('#rainfall-week option').count(), 2);
     assert.equal(await page.locator('.rainfall-scale span').count(), 10);
     assert.match(await page.locator('.rainfall-source').innerText(), /CHIRPS3-GEFS/);
-    const image = page.locator('.leaflet-rainfallOverlay-pane .leaflet-image-layer');
+    const image = page.locator('.leaflet-rainfallOverlay-pane > .leaflet-layer');
     assert.equal(await image.count(), 1);
-    assert.ok(await image.evaluate(element => element.complete && element.naturalWidth === 1013));
+    assert.ok(await image.locator('canvas').count() > 1);
+    assert.ok(await image.locator('canvas').evaluateAll(tiles => tiles.every(tile => tile.width === 256 && tile.height === 256)));
+    assert.equal(await page.locator('.leaflet-rainfallOverlay-pane img').count(), 0);
     await page.locator('#rainfall-opacity').fill('40');
     assert.equal(await image.evaluate(element => element.style.opacity), '0.4');
     // A first-time image request failure must preserve the current week.
-    await page.route('**/rainfall/week2.png*', route => route.fulfill({status: 503, body: 'Unavailable'}));
+    await page.route('**/rainfall/week2-render.f32*', route => route.fulfill({status: 503, body: 'Unavailable'}));
     await page.locator('#rainfall-week').selectOption('week2');
     await page.waitForFunction(() => document.querySelector('#rainfall-status')?.textContent.includes('Layer sebelumnya'));
     assert.equal(await page.locator('#rainfall-week').inputValue(), 'week1');
-    assert.match(await image.getAttribute('src'), /week1\.png/);
-    await page.unroute('**/rainfall/week2.png*');
+    assert.equal(await image.locator('canvas').first().getAttribute('data-week'), 'week1');
+    await page.unroute('**/rainfall/week2-render.f32*');
     await page.locator('#rainfall-week').selectOption('week2');
     await page.waitForFunction(() => document.querySelector('#rainfall-status')?.textContent.includes('Pekan 2 aktif'));
-    assert.match(await image.getAttribute('src'), /week2\.png/);
+    assert.equal(await image.locator('canvas').first().getAttribute('data-week'), 'week2');
     assert.equal(await image.count(), 1);
     assert.equal(await image.evaluate(element => element.style.opacity), '0.4');
     if (width > 1000) {
@@ -42,6 +44,20 @@ try {
       await page.waitForFunction(() => document.querySelector('#rainfall-point')?.textContent.includes('mm/hari'));
       assert.match(await page.locator('#rainfall-point').innerText(), /Pekan 2/);
     }
+    const originalZoom = Number((await image.locator('canvas').first().getAttribute('data-tile')).split('/')[0]);
+    await page.locator('#rainfall-close').click();
+    for(let i=0;i<4;i++){await page.locator('#zoom-in').click();await page.waitForTimeout(350);}
+    await page.waitForFunction(z => [...document.querySelectorAll('.leaflet-rainfallOverlay-pane canvas')].some(c => Number(c.dataset.tile.split('/')[0]) > z), originalZoom);
+    assert.equal(await image.count(),1);
+    const painted = await image.locator('canvas').evaluateAll(tiles=>tiles.some(tile=>{const data=tile.getContext('2d').getImageData(0,0,256,256).data;for(let n=3;n<data.length;n+=4)if(data[n])return true;return false;}));
+    assert.ok(painted, 'rainfall still renders after zoom');
+    const beforePan = await image.locator('canvas').evaluateAll(tiles=>tiles.map(tile=>tile.dataset.tile).join(','));
+    const box = await page.locator('#map').boundingBox();
+    await page.mouse.move(box.x+box.width*.5,box.y+box.height*.4);await page.mouse.down();await page.mouse.move(box.x+box.width*.5+80,box.y+box.height*.4+20,{steps:8});await page.mouse.up();
+    await page.waitForTimeout(500);
+    assert.equal(await image.count(),1);
+    assert.ok(await image.locator('canvas').count()>0);
+    await page.locator('#rainfall-toggle').click();
     await page.screenshot({path: `/tmp/rainfall-${width}.png`});
     await page.locator('#rainfall-close').click();
     assert.equal(await image.count(), 1);
@@ -53,6 +69,6 @@ try {
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     assert.deepEqual(errors, []);
     await page.close();
-    console.log('PASS: real raster images, week switch, opacity, failed replacement preserves image, panel close/reopen/off', width);
+    console.log('PASS: native-grid XYZ tiles, zoom/pan, week switch, opacity, retained layer on failure, close/reopen/off', width);
   }
 } finally { await browser.close(); }
