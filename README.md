@@ -55,7 +55,7 @@ Aset: [idn-finlogos 2.5.0](https://github.com/hafidznoor/idn-finlogos), koleksi 
 
 ## Pengukuran jarak dan tampilan interaktif
 
-- Buka **Ukur jarak** dari navigasi atau header. Pilih A/B dari daftar, atau klik Ukur jarak dari sini pada popup lalu pilih titik tujuan di peta. Saat alat aktif, klik marker memilih titik A/B. Tombol tutup/Escape menyembunyikan alat dan garis; pilihan dipertahankan sampai Hapus pilihan.
+- Buka **Ukur jarak** melalui tombol di dalam peta. Klik/ketuk peta untuk menggambar garis beberapa ruas; klik marker dapat menambahkan koordinatnya. Gunakan Urungkan, Selesai, dan Garis baru. Escape menutup alat dan menyembunyikan garis. Alat memakai jarak geodesik WGS84 sepanjang ruas yang digambar, bukan rute jalan. Navigasi Kualitas data dihapus; informasi sumber tetap dapat dibuka melalui tombol informasi. Bagian Analisis sementara berisi X (Segera hadir).
 - `src/distance.js` memakai GeographicLib Geodesic pada elipsoid WGS84 (algoritma Karney). Jarak adalah geodesik permukaan bumi, bukan rute jalan atau durasi perjalanan. Garis dibuat dari 65 titik geodesik.
 - Jika kedua endpoint punya `status: verified` dan `verifiedOfficeCoords: [lat,lng]`, jarak tampil dengan 2 desimal km. Jika salah satu masih perkiraan, hasil diberi tanda ≈, dibulatkan ke km, dan dijelaskan sebagai perkiraan antarpusat kota. Ketelitian algoritma tidak memperbaiki ketepatan koordinat sumber.
 - Logo KPw menyesuaikan zoom: 27/34/42 px; kas titipan 19/25/30 px. Kelompok 32/40/46 px. Tidak ada perpindahan koordinat untuk merapikan marker.

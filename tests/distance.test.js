@@ -28,3 +28,14 @@ test('invalid coordinates do not produce a plausible distance',()=>{
  assert.throws(()=>measureLocations(point([91,100]),point([0,0])),/tidak valid/);
  assert.throws(()=>measureLocations(point([NaN,100]),point([0,0])),/tidak valid/);
 });
+
+test('drawn polyline sums WGS84 segments and preserves its endpoints', async () => {
+ const {measurePath}=await import('../src/distance.js');
+ const result=measurePath([[0,0],[0,1],[1,1]]);
+ assert.ok(Math.abs(result.meters-(111319.49079327357+110574.38855779878))<0.001);
+ assert.ok(Math.abs(result.line[0][0])<1e-9);
+ assert.ok(Math.abs(result.line.at(-1)[0]-1)<1e-9);
+ assert.equal(measurePath([]).meters,0);
+ assert.equal(measurePath([[0,0]]).meters,0);
+ assert.throws(()=>measurePath([[91,0]]));
+});

@@ -1,0 +1,46 @@
+/* Royal blue, deep navy and a restrained warm accent. */
+:root{--risk-navy:#061b46;--risk-blue:#1558e8;--risk-gold:#ffd147}
+:root[data-theme] .sidebar{background:radial-gradient(ellipse at 0 0,#154ab0 0,transparent 56%),linear-gradient(165deg,#0a2e72,#061735 80%)!important;border-right:1px solid #2851a0!important;box-shadow:none}
+:root[data-theme] .topbar{background:linear-gradient(105deg,#071e4d 5%,#103d98 74%,#1859cf)!important;border-bottom:1px solid #386bd2!important;box-shadow:0 4px 20px #06225112}
+:root[data-theme] .sidebar .nav-item{border-radius:11px;padding-top:13px;padding-bottom:13px;font-size:13px;color:#dae8ff!important;transition:background .15s ease}
+:root[data-theme] .sidebar .nav-item.active{background:linear-gradient(100deg,#1753d1,#216af0)!important;border-color:#4384ff!important;box-shadow:inset 3px 0 0 #ffd147,0 7px 18px #001a4d22!important;color:#fff!important}
+:root[data-theme] .nav-placeholder{opacity:.55;display:flex;align-items:center;justify-content:space-between;cursor:default}
+.nav-placeholder small{font-size:10px;font-weight:500}
+:root[data-theme] .sidebar .nav-label{letter-spacing:2px;color:#abc7fb!important}
+:root[data-theme] .theme-toggle{border-color:#4b6ca2!important}
+:root[data-theme] .topbar h1{color:#fff!important;font-weight:750;letter-spacing:-.5px}
+:root[data-theme] .topbar .title-tag{background:#ffffff12!important;border-color:#6f99e4!important;color:#e8f2ff!important}
+:root[data-theme=light] .app-main{background:linear-gradient(140deg,#edf3ff,#f7faff 65%,#e9f1ff)}
+:root[data-theme=light] .readiness-workspace,:root[data-theme=light] .news-workspace{background:radial-gradient(ellipse at 100% 0,#dce9ff 0,transparent 50%),#f4f7fd!important}
+:root[data-theme=dark] .app-main,:root[data-theme=dark] .readiness-workspace,:root[data-theme=dark] .news-workspace{background:radial-gradient(ellipse at 100% 0,#10357a 0,transparent 60%),#07162f!important}
+:root[data-theme] .readiness-summary,:root[data-theme] .directory,:root[data-theme] .news-tools{background:linear-gradient(145deg,#123b88,#08204d 80%)!important;border-color:#315b9c!important}
+:root[data-theme] .readiness-summary{box-shadow:0 12px 30px #061e5114!important}
+:root[data-theme] .sidebar-insight .insight-total{color:#fff!important}
+:root[data-theme] .sidebar-insight .insight-bar{background:#ffffff12}
+:root[data-theme] .sidebar-insight .insight-bar b:first-child{background:#5595ff}
+:root[data-theme] .sidebar-insight .insight-bar b:last-child{background:#ffd147}
+:root[data-theme=light] .readiness-office-card{background:#fff!important;border-color:#d3e1f6!important;box-shadow:0 4px 16px #173c7007;border-radius:14px!important}
+:root[data-theme=light] .readiness-office-card:hover{border-color:#5089ed!important;box-shadow:0 8px 24px #174fbd14}
+:root[data-theme=light] .checklist-category>summary{background:linear-gradient(105deg,#e6efff,#f5f8ff)!important}
+:root[data-theme=dark] .readiness-office-card,:root[data-theme=dark] .checklist-category,:root[data-theme=dark] .source-items-table,:root[data-theme=dark] .news-card,:root[data-theme=dark] #news-grid{background:#0c2450!important;border-color:#2a4f87!important}
+:root[data-theme=dark] .checklist-category>summary{background:linear-gradient(100deg,#123c83,#102c5d)!important}
+:root[data-theme=dark] .source-item-row{border-color:#284775!important}
+:root[data-theme] .news-heading button,:root[data-theme] .readiness-export{background:linear-gradient(110deg,#1249c6,#2370f3)!important;color:#fff!important;border:1px solid #4b89f3!important;border-radius:10px;box-shadow:0 5px 14px #1559cf1c}
+:root[data-theme] .news-headline-number{background:#082759ef;border-color:#4b7ac0;color:#fff;border-left:3px solid #ffd147}
+:root[data-theme] .news-live-dot{background:#1558e8;box-shadow:0 0 0 4px #1558e816}
+:root[data-theme=light] .news-eyebrow,:root[data-theme=light] .readiness-eyebrow{color:#184fc2}
+:root[data-theme] .map-filters button.active{background:linear-gradient(110deg,#1451d4,#2575ef)!important;border-color:#4d8bfd!important;color:#fff!important}
+:root[data-theme] .map-filters button.active span{color:#e5efff!important}
+.map-measure-button{position:absolute;right:18px;top:70px;z-index:690;display:flex;align-items:center;gap:8px;padding:11px 14px;background:linear-gradient(120deg,#1045b6,#236ff0);border:1px solid #70a0ff;color:#fff;box-shadow:0 5px 18px #0b32842a;border-radius:11px;font-size:12px;font-weight:750}
+.map-measure-button svg{width:17px;height:17px}.map-measure-button.active{background:#ffd147;color:#10244b;border-color:#ffe89c}
+.map-frame.measuring #map,.map-frame.measuring .leaflet-interactive{cursor:crosshair!important}
+:root[data-theme] .distance-panel{left:18px;bottom:76px;width:310px;padding:18px;background:linear-gradient(135deg,#103681,#071f4c)!important;color:#edf4ff;border:1px solid #4a76bc;border-radius:16px;box-shadow:0 14px 36px #041b4d38;max-height:calc(100% - 150px)}
+.distance-head h2{font-size:21px;color:#fff}.distance-head .section-kicker{color:#9dc0ff;font-size:9px}.distance-head #distance-close{color:#fff;padding:6px}.distance-head .distance-tool-icon{background:#ffffff14;border-color:#5480c2;color:#c9dfff}
+.distance-panel .distance-intro{font-size:13px;line-height:1.65;color:#d3e3ff;margin:14px 0}
+.distance-panel .distance-result{margin:0;padding-top:12px;border-color:#436498}.distance-panel .distance-result-label{color:#b7d0ff;font-size:10px}.distance-panel .distance-number{font-size:30px;color:#ffd147;letter-spacing:-1px;margin:6px 0 14px}
+.measure-actions{display:flex;flex-wrap:wrap;gap:7px}.measure-actions button{display:flex;align-items:center;gap:5px;font-size:11px;color:#fff;padding:9px 10px;border:1px solid #6386bf;border-radius:8px;background:#ffffff0d}.measure-actions button svg{width:13px;height:13px}.measure-actions button:disabled{opacity:.4;cursor:default}.measure-actions #distance-finish:not(:disabled){background:#1b61e5;border-color:#75a6ff}.distance-panel .distance-method{font-size:11px;line-height:1.6;color:#c5d9fb;border-color:#436498;margin-bottom:0}
+.map-measure-button:focus-visible,.measure-actions button:focus-visible{outline:3px solid #ffd147;outline-offset:3px}
+@media(max-width:1050px) and (min-width:641px){:root[data-theme] .sidebar .nav-item{font-size:11px}.nav-placeholder small{display:none}}
+@media(max-width:640px){.map-measure-button{right:11px;top:62px;padding:9px 11px;font-size:11px}:root[data-theme] .distance-panel{left:10px;right:10px;bottom:65px;width:auto;max-width:310px;padding:14px;max-height:calc(100% - 135px)}.distance-panel .distance-intro{font-size:12px;margin:9px 0}.distance-panel .distance-number{font-size:25px;margin-bottom:10px}.distance-panel .distance-method{font-size:10px}.measure-actions button{padding:8px}.distance-head h2{font-size:19px}.distance-panel .distance-result{padding-top:9px}}
+@media(max-width:640px){:root[data-theme] .sidebar .nav-placeholder{display:none!important}}
+@media(max-width:640px){.map-measure-button{top:112px}}

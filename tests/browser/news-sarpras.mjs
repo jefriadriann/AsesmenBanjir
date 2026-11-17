@@ -69,7 +69,7 @@ try {
     await page.locator('.sarpras-image').evaluateAll(images => images.forEach(image => image.loading = 'eager'));
     await page.waitForFunction(() => [...document.querySelectorAll('.sarpras-image')].every(image => image.complete && image.naturalWidth > 0));
     assert.ok(await page.locator('.source-item-title').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize) >= 15));
-    assert.equal(await page.locator('.topbar').evaluate(element => getComputedStyle(element).backgroundColor), 'rgb(16, 43, 73)');
+    assert.match(await page.locator('.topbar').evaluate(element => getComputedStyle(element).backgroundImage), /linear-gradient/);
     assert.deepEqual(errors, []);
     await page.close();
     console.log('PASS: 3 headlines, source/topic/search/reset filters, 4-hour automatic refresh, manual/cold failure, sarpras regression; viewport', width);

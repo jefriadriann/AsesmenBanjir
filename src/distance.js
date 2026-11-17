@@ -9,3 +9,13 @@ export function measureLocations(a,b){
  for(let step=0;step<=64;step++){const point=geodesic.Direct(...from,result.azi1,result.s12*step/64);line.push([point.lat2,point.lon2]);}
  return {meters:result.s12,kilometers:result.s12/1000,verified:isVerified(a)&&isVerified(b),line};
 }
+
+export function measurePath(points) {
+ for (const coords of points) if (!Array.isArray(coords) || coords.length !== 2 || !coords.every(Number.isFinite) || Math.abs(coords[0]) > 90 || Math.abs(coords[1]) > 180) throw Error('Koordinat tidak valid.');
+ let meters = 0; const line = [];
+ for (let index = 1; index < points.length; index++) {
+  const result = measureLocations({coords: points[index - 1]}, {coords: points[index]});
+  meters += result.meters; line.push(...(index === 1 ? result.line : result.line.slice(1)));
+ }
+ return {meters, line};
+}
