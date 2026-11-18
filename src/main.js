@@ -12,14 +12,14 @@ import {bankLogo,bankBrand} from './banks.js';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './fonts.css';
-import {createIcons,CloudRain,Map,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard} from 'lucide';
+import {createIcons,CloudRain,Map as MapIcon,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard} from 'lucide';
 import './style.css';
 import './studio.css';
 import './aurora.css';
 import './clean.css';
 import './accessibility.css';
 import './modern.css';
-const icons={CloudRain,Map,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard};
+const icons={CloudRain,Map:MapIcon,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard};
 const i=(name,cls='')=>`<i data-lucide="${name}" class="${cls}"></i>`;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>n==null?'Belum tersedia':new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
@@ -65,7 +65,7 @@ document.querySelector('#app').innerHTML=`
 <small id="news-map-status" role="status"></small>
 <dialog id="watch-dialog" aria-labelledby="watch-heading">
 <div class="watch-heading"><h2 id="watch-heading">Prioritas Pantauan</h2><button id="watch-close" type="button" aria-label="Tutup Prioritas Pantauan">Tutup</button></div>
-<p>Daftar ini mengelompokkan penyebutan wilayah di judul berita banjir. Titik di peta memerlukan koordinat dari penerbit. Urutan mendahulukan wilayah dengan lebih banyak kekurangan sarpras KPw yang tercatat, lalu berita terbaru. Gunakan daftar ini sebagai bahan tindak lanjut.</p>
+<p>Daftar ini mengelompokkan penyebutan wilayah di judul berita banjir dan tanah longsor. Titik di peta memerlukan koordinat dari penerbit. Urutan mendahulukan wilayah dengan lebih banyak kekurangan sarpras banjir KPw yang tercatat, lalu berita terbaru. Gunakan daftar ini sebagai bahan tindak lanjut.</p>
 <button id="watch-refresh" type="button">Perbarui berita</button><p id="watch-status" role="status"></p><div id="watch-results"></div>
 </dialog>
 </div>
@@ -88,6 +88,10 @@ for(let lng=90;lng<=145;lng+=5)L.polyline([[-20,lng],[15,lng]],{color:'#426376',
 const labels=L.layerGroup().addTo(map);
 [['SUMATERA',-1,100],['JAWA',-8.9,109.5],['KALIMANTAN',2.4,113.5],['SULAWESI',-4.5,122],['PAPUA',-5.2,137],['MALUKU',-4.4,129],['NUSA TENGGARA',-11.5,120.5]].forEach(([name,lat,lng])=>L.marker([lat,lng],{interactive:false,icon:L.divIcon({className:'island-label',html:name,iconSize:[150,16],iconAnchor:[75,8]})}).addTo(labels));
 [['SAMUDRA HINDIA',-9.5,99],['LAUT JAWA',-4.7,110],['LAUT BANDA',-7.2,129],['SAMUDRA PASIFIK',5,135]].forEach(([name,lat,lng])=>L.marker([lat,lng],{interactive:false,icon:L.divIcon({className:'ocean-label',html:name,iconSize:[180,16],iconAnchor:[90,8]})}).addTo(labels));
+const networkPane = map.createPane('officeConnections');
+networkPane.style.zIndex = '510';
+networkPane.style.pointerEvents = 'none';
+const connections = L.layerGroup().addTo(map);
 const markers=L.layerGroup().addTo(map);
 map.createPane('streetMap');map.getPane('streetMap').style.zIndex=450;
 const streetTiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{pane:'streetMap',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>',maxZoom:19,bounds:bounds,noWrap:true,keepBuffer:0,updateWhenIdle:true,errorTileUrl:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'});
@@ -131,6 +135,16 @@ function render(){
  document.querySelector('#map-region-label').textContent=region==='all'?'Seluruh Indonesia':region;document.querySelector('#scope-label').textContent=region==='all'?'Cakupan nasional':region;
  document.querySelectorAll('[data-type]').forEach(b=>{b.classList.toggle('active',b.dataset.type===type);b.setAttribute('aria-pressed',String(b.dataset.type===type));});document.querySelectorAll('[data-metric]').forEach(b=>b.classList.toggle('selected',b.dataset.metric===type&&type!=='all'));
  const family=data.find(d=>d.id===directoryParentId);const familyChip=document.querySelector('#family-map-context');familyChip.classList.toggle('hidden',!family);familyChip.innerHTML=family?`<span>KPw ${esc(family.name)}<small>${childrenOf(data,family.id).length} kas titipan</small></span><button id="clear-family" aria-label="Kembali ke seluruh KPw">${i('x')}</button>`:'';document.querySelector('#clear-family')?.addEventListener('click',()=>showFamily(null));
+ connections.clearLayers();
+ const parents = new Map(rows.filter(d => d.type === 'kpw' && hasCoords(d)).map(d => [d.name, d]));
+ for (const child of rows.filter(d => d.type === 'kas' && hasCoords(d))) {
+   const parent = parents.get(child.kpw);
+   if (!parent) continue;
+   L.polyline([locationCoords(parent), locationCoords(child)], {
+     pane: 'officeConnections', className: 'kpw-kas-link', color: '#8bb9d4',
+     weight: 1.25, opacity: .65, interactive: false,
+   }).addTo(connections);
+ }
  directory.render(rows);renderMarkers();refreshIcons();
 }
 function setType(next){type=next;closeDetail();render();updateViewForRows();}

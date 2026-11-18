@@ -24,36 +24,37 @@ test('indexed news verifies original publisher and preserves attribution in Engl
   assert.deepEqual(parseNews(rss(indexedItem(NEWS_SOURCES[0])), NEWS_SOURCES[3], true), []);
 });
 
-test('filters allow broader issues as well as flood, publisher and keyword combinations', () => {
-  assert.ok(classifyNews('BMKG memantau cuaca ekstrem').includes('weather'));
-  assert.ok(classifyNews('Climate mitigation and drought').includes('climate'));
+test('filters only flood and landslide with publisher and keyword combinations', () => {
+  assert.deepEqual(classifyNews('BMKG memantau cuaca ekstrem'), []);
+  assert.deepEqual(classifyNews('Toko banjir diskon'), []);
+  assert.deepEqual(classifyNews('Banjir rob dan tanah longsor di Jawa'), ['flood', 'landslide']);
   assert.deepEqual(classifyNews('Hasil pertandingan sepak bola'), []);
   const items = [
     {title: 'Banjir Jakarta', summary: '', source: 'CNN Indonesia', sourceId: 'cnn', topics: ['flood']},
-    {title: 'Gempa Jepang', summary: '', source: 'Reuters', sourceId: 'reuters', topics: ['earthquake']},
+    {title: 'Longsor Bogor', summary: '', source: 'Reuters', sourceId: 'reuters', topics: ['landslide']},
     {title: 'Hujan lebat', summary: '', source: 'CNN Indonesia', sourceId: 'cnn', topics: ['weather']},
   ];
-  assert.equal(filterNews(items).length, 3);
+  assert.equal(filterNews(items).length, 2);
   assert.equal(filterNews(items, {topic: 'flood', source: 'cnn', query: 'jakarta'}).length, 1);
   assert.equal(filterNews(items, {topic: 'flood', source: 'reuters'}).length, 0);
-  assert.equal(filterNews(items, {topic: 'weather'}).length, 1);
+  assert.equal(filterNews(items, {topic: 'landslide'}).length, 1);
 });
 
-test('three headlines prioritize floods, diversify publishers and handle fewer than three results', () => {
+test('three headlines cover floods and landslides, diversify publishers and handle fewer than three results', () => {
   const item = (title, sourceId, hour, topics = ['flood']) => ({title, sourceId, topics, publishedAt: `2026-11-17T0${hour}:00:00Z`});
-  const items = [item('Other disaster', 'ap', 7, ['earthquake']), item('Flood A', 'cnn', 6), item('Flood B', 'cnn', 5), item('Flood C', 'metro', 4), item('Flood D', 'antara', 3)];
-  assert.deepEqual(selectHeadlines(items).map(item => item.title), ['Flood A', 'Flood C', 'Flood D']);
+  const items = [item('Longsor A', 'ap', 7, ['landslide']), item('Flood A', 'cnn', 6), item('Flood B', 'cnn', 5), item('Flood C', 'metro', 4), item('Flood D', 'antara', 3)];
+  assert.deepEqual(selectHeadlines(items).map(item => item.title), ['Flood A', 'Longsor A', 'Flood C']);
   assert.equal(selectHeadlines(items.slice(0, 2)).length, 2);
   assert.deepEqual(selectHeadlines([]), []);
   assert.equal(selectHeadlines(items.filter(item => item.sourceId === 'cnn')).length, 2);
 });
 
-test('loader caches for four hours, refreshes at expiry and supports manual refresh', async () => {
+test('loader caches for thirty minutes, refreshes at expiry and supports manual refresh', async () => {
   let time = Date.parse('2026-11-17T05:00:00Z'), requests = 0;
   const fetcher = async url => { requests++; const source = NEWS_SOURCES.find(source => new URL(url).searchParams.get('q')?.includes(`site:${source.domain}`)) || NEWS_SOURCES[0]; return new Response(rss(indexedItem(source))); };
   const load = createNewsLoader({fetcher, now: () => time});
   const first = await load();
-  assert.equal(first.sources.length, 8);
+  assert.equal(first.sources.length, NEWS_SOURCES.length);
   assert.equal(first.partial, false);
   assert.equal(Date.parse(first.nextRefreshAt) - Date.parse(first.fetchedAt), NEWS_REFRESH_MS);
   const count = requests;
@@ -76,7 +77,7 @@ test('failed publishers retain labeled previous stories while other feeds update
     return new Response(rss(indexedItem(source)));
   };
   const load = createNewsLoader({fetcher, now: () => time});
-  assert.equal((await load()).items.length, 8);
+  assert.equal((await load()).items.length, NEWS_SOURCES.length);
   time += NEWS_REFRESH_MS; broken = true;
   const partial = await load();
   assert.equal(partial.partial, true);
@@ -97,10 +98,10 @@ test('simultaneous refresh requests reuse one feed load and duplicate story URLs
     if (!source) return new Response(rss(''));
     return new Response(rss(indexedItem(source) + indexedItem(source)));
   };
-  const load = createNewsLoader({fetcher});
+  const load = createNewsLoader({fetcher, now: () => Date.parse('2026-11-18T05:00:00Z')});
   const [a, b] = await Promise.all([load(), load({force: true})]);
-  assert.equal(requests, 11); // Three direct feeds, then eight indexed feeds.
-  assert.equal(a.items.length, 8);
+  assert.equal(requests, NEWS_SOURCES.length + 3);
+  assert.equal(a.items.length, NEWS_SOURCES.length);
   assert.deepEqual(a, b);
 });
 
@@ -111,4 +112,23 @@ test('parses item-level GeoRSS only from the direct publisher', () => {
   assert.deepEqual(parseNews(wrap(tagged(article('Banjir Jakarta'))))[0].coords, [-6.2, 106.8]);
   assert.equal(parseNews(wrap(article('Banjir Jakarta')))[0].coords, undefined);
   assert.equal(parseNews(wrap(tagged(indexedItem(NEWS_SOURCES[0]))), NEWS_SOURCES[0], true)[0].coords, undefined);
+});
+
+test('merges direct and indexed feeds and keeps publisher coordinates on duplicate headlines', async () => {
+  const fetcher = async url => {
+    if (url.includes('antaranews.com/rss/')) {
+      return new Response(rss(article('Banjir Jakarta').replace('</item>', '<georss:point>-6.2 106.8</georss:point></item>')));
+    }
+    if (url.includes('site%3Aantaranews.com')) {
+      const source = NEWS_SOURCES.find(item => item.id === 'antara');
+      return new Response(rss(indexedItem(source, 'Banjir Jakarta')
+        + indexedItem(source, 'Longsor lama').replace('/antara', '/lama').replace('17 Nov', '01 Nov')
+        + indexedItem(source, 'Longsor Bogor').replace('/antara', '/bogor')));
+    }
+    return new Response(rss(''));
+  };
+  const data = await createNewsLoader({fetcher, now: () => Date.parse('2026-11-18T05:00:00Z')})();
+  assert.deepEqual(data.items.map(item => [item.title, item.coords]), [
+    ['Banjir Jakarta', [-6.2, 106.8]], ['Longsor Bogor', undefined],
+  ]);
 });

@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {groupPublisherPoints, matchNewsCities, rankFloodWatch} from './news-watch-data.js';
+import {groupPublisherPoints, matchNewsCities, rankNewsWatch} from './news-watch-data.js';
 import './news-watch.css';
 
 const formatDate = new Intl.DateTimeFormat('id-ID', {
@@ -71,10 +71,10 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
 
   function renderPriority() {
     renderStatus();
-    const ranked = rankFloodWatch(cities, readiness);
+    const ranked = rankNewsWatch(cities, readiness);
     results.replaceChildren();
     if (!ranked.length) {
-      if (snapshot.data) results.append(element('p', 'Belum ada berita banjir dengan nama wilayah yang cocok.'));
+      if (snapshot.data) results.append(element('p', 'Belum ada berita banjir atau tanah longsor dengan nama wilayah yang cocok.'));
       return;
     }
     for (const city of ranked) {

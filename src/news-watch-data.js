@@ -53,9 +53,9 @@ export function matchNewsCities(locations, articles) {
   }));
 }
 
-export function rankFloodWatch(cities, readiness) {
+export function rankNewsWatch(cities, readiness) {
   return cities.flatMap(city => {
-    const articles = city.articles.filter(article => article.topics?.includes('flood'));
+    const articles = city.articles.filter(article => article.topics?.some(topic => topic === 'flood' || topic === 'landslide'));
     if (!articles.length) return [];
     const offices = city.offices.map(office => ({office, summary: floodSummary(readiness, office.id)}));
     const gaps = offices.reduce((total, {summary}) => total + summary.gaps, 0);

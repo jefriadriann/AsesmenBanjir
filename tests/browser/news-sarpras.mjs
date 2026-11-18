@@ -1,12 +1,14 @@
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 import assert from 'node:assert/strict';
 const browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox']});
-const FOUR_HOURS = 4 * 60 * 60 * 1000;
+const REFRESH_MS = 30 * 60 * 1000;
 const base = process.env.BASE_URL || 'http://localhost:3000';
 const stories = [
   ['Banjir melanda Jakarta', 'cnn', 'CNN Indonesia', 'flood'],
   ['Banjir di Aceh', 'antara', 'ANTARA News', 'flood'],
   ['Banjir pesisir Semarang', 'metro', 'Metro TV', 'flood'],
+  ['Longsor di Bogor', 'folkative', 'Folkative', 'landslide'],
+  ...Array.from({length: 38}, (_, index) => [`Longsor di lokasi ${index}`, 'ussfeed', 'USS Feed', 'landslide']),
   ['Earthquake hits Japan', 'reuters', 'Reuters', 'earthquake'],
   ['Climate and drought response', 'ap', 'Associated Press', 'climate'],
   ['BMKG: hujan lebat', 'bbc', 'BBC', 'weather'],
@@ -23,15 +25,21 @@ try {
     await page.route('https://**', route => route.abort());
     await page.route('**/api/news*', route => {
       calls++;
-      return route.fulfill({status: fail ? 502 : 200, json: fail ? {error: 'Sumber belum tersedia'} : {items: stories, sources: [], fetchedAt: new Date(time).toISOString(), nextRefreshAt: new Date(time + FOUR_HOURS).toISOString()}});
+      return route.fulfill({status: fail ? 502 : 200, json: fail ? {error: 'Sumber belum tersedia'} : {items: stories, sources: [], fetchedAt: new Date(time).toISOString(), nextRefreshAt: new Date(time + REFRESH_MS).toISOString()}});
     });
     await page.goto(base + '/#berita');
     await page.waitForSelector('.news-headline');
     assert.equal(await page.locator('.news-headline').count(), 3);
-    assert.equal(await page.locator('.news-card').count(), 6);
+    assert.equal(await page.locator('.news-card').count(), 39);
     assert.match(await page.locator('.news-headline').first().innerText(), /12.00 WIB/);
     assert.match(await page.locator('.news-schedule').innerText(), /Tanpa email/);
-    assert.match(await page.locator('.news-headline').nth(2).innerText(), /Metro TV/);
+    assert.match(await page.locator('.news-headline').nth(1).innerText(), /Folkative/);
+    assert.match(await page.locator('.news-headline').nth(1).innerText(), /situs editorial/);
+    assert.match(await page.locator('.news-schedule').innerText(), /30 menit/);
+    assert.equal(await page.getByText('Earthquake hits Japan', {exact: true}).count(), 0);
+    await page.locator('#news-more').click();
+    assert.equal(await page.locator('.news-card').count(), 42);
+    assert.equal(await page.locator('#news-more').isVisible(), false);
     await page.locator('#news-topic').selectOption('flood');
     assert.equal(await page.locator('.news-card').count(), 3);
     await page.locator('#news-source').selectOption('cnn');
@@ -40,12 +48,12 @@ try {
     assert.equal(await page.locator('.news-card').count(), 0);
     assert.ok(await page.locator('#news-empty').isVisible());
     await page.locator('#news-reset').click();
-    assert.equal(await page.locator('.news-card').count(), 6);
-    assert.equal(await page.locator('#news-source option').count(), 9);
+    assert.equal(await page.locator('.news-card').count(), 39);
+    assert.equal(await page.locator('#news-source option').count(), 17);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     const beforeTimer = calls;
-    time += FOUR_HOURS - 1000;
-    await page.clock.fastForward(FOUR_HOURS - 1000);
+    time += REFRESH_MS - 1000;
+    await page.clock.fastForward(REFRESH_MS - 1000);
     assert.equal(calls, beforeTimer);
     time += 1000;
     await page.clock.fastForward(1000);
@@ -56,7 +64,7 @@ try {
     fail = true;
     await page.locator('#news-refresh').click();
     await page.waitForSelector('.news-error');
-    assert.equal(await page.locator('.news-card').count(), 6);
+    assert.equal(await page.locator('.news-card').count(), 39);
     assert.equal(await page.locator('#news-refresh').innerText(), 'Perbarui berita');
     await page.reload();
     await page.waitForSelector('.news-error');
@@ -72,6 +80,6 @@ try {
     assert.match(await page.locator('.topbar').evaluate(element => getComputedStyle(element).backgroundImage), /linear-gradient/);
     assert.deepEqual(errors, []);
     await page.close();
-    console.log('PASS: 3 headlines, source/topic/search/reset filters, 4-hour automatic refresh, manual/cold failure, sarpras regression; viewport', width);
+    console.log('PASS: 3 headlines, source/topic/search/reset filters, 30-minute automatic refresh, manual/cold failure, sarpras regression; viewport', width);
   }
 } finally { await browser.close(); }

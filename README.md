@@ -153,18 +153,15 @@ BASE_URL=http://localhost:3001 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs n
 Jalankan preview terlebih dahulu dengan `npm run preview -- --port 3001 --strictPort`. Suite memakai fixture berita dan tidak membuktikan koneksi ANTARA live. Vercel mendeteksi handler `api/news.js` bersama build Vite; deploy production mengikuti integrasi Git proyek yang tersambung ke `main`.
 
 
-## Berita lintas portal dan pembaruan empat jam
+## Berita banjir dan tanah longsor
 
-Menu `#berita` mencakup ANTARA News, CNN Indonesia, Metro TV, Reuters, Associated Press, Kompas, detik, dan BBC. ANTARA/CNN/detik dicoba melalui RSS penerbit; feed yang gagal atau tidak berisi berita terkait dilengkapi lewat indeks RSS Google News per domain penerbit. Metro TV/Reuters/AP/Kompas/BBC memakai indeks tersebut. Identitas penerbit pada elemen RSS `source` diperiksa, bukan ditentukan dari penyebutan nama media pada judul. Ini bukan integrasi resmi atau jaminan semua artikel penerbit tercakup. Tautan indeks membuka Google News lalu sumber asli; atribusi `via Google News` terlihat. Gambar yang tidak disediakan sumber menggunakan ilustrasi berlabel, tanpa menebak foto.
+Feed mencakup 16 sumber, termasuk BNPB, media nasional dan daerah, serta artikel situs editorial Folkative dan USS Feed yang ditemukan di indeks Google News. Nama akun, unggahan, dan metrik engagement dari Instagram, TikTok, atau X tidak diambil. Judul disaring untuk topik banjir dan tanah longsor, termasuk banjir rob, dan istilah kiasan umum seperti “banjir diskon” dikeluarkan.
 
-Filter topik mencakup banjir, cuaca/peringatan, longsor, gempa/tsunami, erupsi, kebakaran, iklim/lingkungan, dan kebencanaan lain. Pilihan awal semua isu terkait; pencarian dan filter penerbit dapat digabung. Tiga headline dipilih dari hasil filter dengan prioritas banjir dan variasi sumber jika tersedia. Bila hasilnya kurang dari tiga, hanya berita yang tersedia ditampilkan; tidak ada duplikasi untuk memenuhi jumlah.
+ANTARA, CNN Indonesia, dan detik mengambil RSS langsung serta hasil indeks. Sumber lain memakai indeks RSS per domain dengan pemeriksaan penerbit. URL dan judul yang sama dari penerbit yang sama digabung, dengan RSS langsung didahulukan agar metadata titik penerbit tetap tersedia. Artikel berumur lebih dari 14 hari disaring ketika snapshot baru dibuat. Hasil dibatasi hingga 300 artikel per snapshot berdasarkan ketersediaan indeks. Halaman menampilkan tiga headline lintas topik dan sumber, lalu memungkinkan pemuatan bertahap untuk daftar lainnya.
 
-Snapshot API dan CDN berlaku maksimal **4 jam**. Browser menjadwalkan refresh dari `nextRefreshAt`; saat tab kembali aktif atau menu dibuka setelah kedaluwarsa, berita dimuat lagi. Tombol Perbarui berita memaksa pengambilan sumber baru lewat `?refresh=1`. Kegagalan tidak menghapus berita terakhir; sumber yang gagal dan salinan lama diberi label. Semua sumber gagal pada awal pemuatan menghasilkan HTTP 502. Browser mencoba ulang kegagalan setelah lima menit saat halaman aktif.
+Snapshot API berlaku **30 menit**. Browser menyegarkan berita sesuai `nextRefreshAt` saat halaman berita atau fitur berita di peta aktif. Saat tab kembali aktif, data yang sudah kedaluwarsa dimuat lagi. Tombol Perbarui meminta snapshot baru. Bila pengambilan gagal, salinan terakhir tetap ditandai dan percobaan ulang dijadwalkan lima menit kemudian. Refresh membutuhkan halaman aktif atau permintaan baru dan tidak menggunakan cron.
 
-Pembaruan menggunakan permintaan website: tidak ada cron server yang berjalan ketika tidak ada pengunjung, tidak ada GitHub Actions terjadwal, dan tidak ada pengiriman email, push notification, atau langganan notifikasi. Email deploy bawaan GitHub/Vercel mengikuti pengaturan akun masing-masing dan tidak diubah oleh fitur berita.
-
-Backend memerlukan HTTPS ke `www.antaranews.com`, `www.cnnindonesia.com`, `news.detik.com`, dan `news.google.com`. Gambar langsung dapat memakai CDN penerbit. Cloud onboarding masih menolak koneksi sumber dan production hingga perubahan network diterapkan; tes fixture membuktikan parser, filter, jadwal, dan UI, bukan keberhasilan feed live. Uji: `npm test`, `npm run build`, lalu `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/news-sarpras.mjs` terhadap preview. Suite browser memajukan jam empat jam, memeriksa tiga headline/filter, kegagalan muat, dan regresi sarpras pada desktop/HP.
-
+Backend perlu HTTPS ke `www.antaranews.com`, `www.cnnindonesia.com`, `news.detik.com`, dan `news.google.com`. Pengujian lokal menggunakan fixture untuk parser, filter, refresh, dan UI. Cakupan artikel langsung mengikuti hasil feed dan indeks saat situs dijalankan.
 
 ## Layer prakiraan curah hujan CHIRPS3-GEFS
 
@@ -209,8 +206,10 @@ Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/play
 
 Aktifkan **Penanda berita** untuk menampilkan pin kuning dari titik GeoRSS yang dicantumkan langsung oleh penerbit. Popup memuat judul, penerbit, waktu terbit dalam WIB, dan tautan artikel. Artikel tanpa titik penerbit tetap tersedia di menu **Berita kebencanaan**. Sistem tidak mengubah nama wilayah menjadi koordinat kejadian.
 
-**Prioritas Pantauan** merangkum wilayah dengan berita bertopik banjir. Urutan mendahulukan jumlah butir sarpras KPw setempat yang tercatat kurang atau tidak tersedia, kemudian waktu berita banjir terbaru. Data kosong tetap ditampilkan sebagai belum tersedia. Daftar ini membantu tindak lanjut dan tidak menetapkan lokasi kejadian atau tingkat risiko banjir.
+**Prioritas Pantauan** merangkum wilayah yang disebut dalam berita banjir dan tanah longsor. Urutan mendahulukan jumlah butir sarpras KPw setempat yang tercatat kurang atau tidak tersedia, kemudian waktu berita terbaru. Data kosong tetap ditampilkan sebagai belum tersedia. Daftar ini membantu tindak lanjut dan tidak menetapkan lokasi kejadian atau tingkat risiko banjir.
 
 Peta dan menu berita berbagi cache dan jadwal refresh. Jika sumber gagal saat diperbarui, salinan terakhir tetap tersedia dan diberi keterangan.
 
 Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI Jakarta. Keduanya punya tautan pencarian berdasarkan alamat. Pin kantor memerlukan koordinat gedung; entri yang belum mempunyai koordinat tetap dapat dibuka dari direktori. Pemeriksaan rentang peta tidak menyatakan bahwa koordinat dari Excel sudah cocok dengan gedung.
+
+Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk dari sumber. Garis muncul saat kedua ujung punya koordinat dan masuk dalam filter peta. Hubungan memakai garis lurus antartitik, tanpa mengikuti rute jalan.

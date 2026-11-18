@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {groupPublisherPoints, matchNewsCities, rankFloodWatch} from '../src/news-watch-data.js';
+import {groupPublisherPoints, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
 
 const locations = [
   {id: 'kpw-a', type: 'kpw', city: 'Jakarta', legacyCityCoords: [-6.18, 106.83]},
@@ -28,17 +28,17 @@ test('groups headlines for the reading list and validates article links', () => 
   assert.deepEqual(distinct.map(city => city.name), ['Jakarta', 'Jakarta Selatan']);
 });
 
-test('ranks flood coverage by known equipment gaps and then newest flood article', () => {
+test('ranks flood and landslide coverage by known equipment gaps and then newest flood article', () => {
   const cities = matchNewsCities(locations, [
     story('Hujan di Jakarta Selatan', 'a', '2026-11-19T05:00:00Z', ['weather']),
     story('Jakarta banjir', 'b'),
     story('Semarang banjir', 'c', '2026-11-18T05:00:00Z'),
-    story('Banjir di Batang', 'd'),
+    story('Longsor di Batang', 'd', undefined, ['landslide']),
   ]);
   const readiness = {offices: {
     'kpw-a': {hazards: {Banjir: {values: {C: 0, D: 0.5, O: 1}}}},
   }};
-  const ranked = rankFloodWatch(cities, readiness);
+  const ranked = rankNewsWatch(cities, readiness);
   assert.deepEqual(ranked.map(city => [city.name, city.gaps]), [
     ['Jakarta', 2], ['Semarang', 0], ['Batang', 0],
   ]);

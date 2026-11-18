@@ -1,13 +1,13 @@
 import {publisherPoint} from '../src/news-location.js';
 import {XMLParser, XMLValidator} from 'fast-xml-parser';
-import {NEWS_SOURCES, NEWS_REFRESH_MS, classifyNews} from '../src/news-data.js';
+import {NEWS_SOURCES, NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, classifyNews} from '../src/news-data.js';
 
 const DIRECT_FEEDS = {
   antara: 'https://www.antaranews.com/rss/terkini.xml',
   cnn: 'https://www.cnnindonesia.com/nasional/rss',
   detik: 'https://news.detik.com/berita/rss',
 };
-const IMAGE_HOSTS = ['antaranews.com', 'cnnindonesia.com', 'detik.com', 'detik.net.id', 'metrotvnews.com', 'reuters.com', 'reutersmedia.net', 'apnews.com', 'ap.org', 'kompas.com', 'kompas.id', 'kompas.tv', 'kompascloud.net', 'kompas.cloud', 'bbci.co.uk', 'bbc.com', 'bbc.co.uk'];
+const IMAGE_HOSTS = ['antaranews.com', 'cnnindonesia.com', 'detik.com', 'detik.net.id', 'metrotvnews.com', 'reuters.com', 'reutersmedia.net', 'apnews.com', 'ap.org', 'kompas.com', 'kompas.id', 'kompas.tv', 'kompascloud.net', 'kompas.cloud', 'bbci.co.uk', 'bbc.com', 'bbc.co.uk', ...NEWS_SOURCES.map(source => source.domain)];
 const parser = new XMLParser({ignoreAttributes: false, processEntities: false});
 const text = value => typeof value === 'string' ? value : typeof value === 'number' ? String(value) : value?.['#text'] || '';
 const clean = value => text(value).replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
@@ -18,7 +18,7 @@ export function safeUrl(value, hosts) {
   } catch { return null; }
 }
 export function indexedFeed(source) {
-  const terms = '(banjir OR flood OR bencana OR disaster OR cuaca OR storm OR gempa OR earthquake OR longsor OR landslide OR erupsi OR wildfire OR climate)';
+  const terms = '(banjir OR "banjir rob" OR "tanah longsor" OR longsor)';
   return 'https://news.google.com/rss/search?' + new URLSearchParams({q: `${terms} site:${source.domain} when:14d`, hl: 'id', gl: 'ID', ceid: 'ID:id'});
 }
 export function parseNews(xml, source = NEWS_SOURCES[0], indexed = false) {
@@ -38,7 +38,7 @@ export function parseNews(xml, source = NEWS_SOURCES[0], indexed = false) {
     const url = safeUrl(text(item.link), indexed ? ['news.google.com', source.domain] : [source.domain]);
     const description = text(item.description);
     const published = Date.parse(text(item.pubDate));
-    const topics = classifyNews(title + ' ' + clean(description));
+    const topics = classifyNews(title);
     if (!url || !title || !topics.length || !Number.isFinite(published)) return [];
     const media = item['media:group'] || item;
     const image = item.enclosure?.['@_url'] || media['media:content']?.['@_url'] || media['media:thumbnail']?.['@_url'] || description.match(/<img[^>]+src=["']([^"']+)/i)?.[1];
@@ -59,13 +59,12 @@ export function createNewsLoader({fetcher = fetch, now = Date.now} = {}) {
     if (pending) return pending;
     pending = (async () => {
       const results = await Promise.allSettled(NEWS_SOURCES.map(async source => {
-        if (DIRECT_FEEDS[source.id]) {
-          try {
-            const items = await readFeed(fetcher, DIRECT_FEEDS[source.id], source, false);
-            if (items.length) return {source, items};
-          } catch { /* Try the publisher's indexed RSS below. */ }
-        }
-        return {source, items: await readFeed(fetcher, indexedFeed(source), source, true)};
+        const indexed = readFeed(fetcher, indexedFeed(source), source, true);
+        if (!DIRECT_FEEDS[source.id]) return {source, items: await indexed};
+        const direct = readFeed(fetcher, DIRECT_FEEDS[source.id], source, false);
+        const feeds = await Promise.allSettled([direct, indexed]);
+        if (feeds.every(feed => feed.status === 'rejected')) throw Error('Feed unavailable');
+        return {source, items: feeds.flatMap(feed => feed.status === 'fulfilled' ? feed.value : [])};
       }));
       const successful = results.filter(result => result.status === 'fulfilled');
       if (!successful.length) {
@@ -78,10 +77,22 @@ export function createNewsLoader({fetcher = fetch, now = Date.now} = {}) {
       });
       const retained = (cached?.items || []).filter(item => sources.some(source => source.id === item.sourceId && source.status === 'unavailable')).map(item => ({...item, stale: true}));
       const fresh = successful.flatMap(result => result.value.items);
-      const items = [...new Map([...fresh, ...retained].map(item => [item.url, item])).values()]
-        .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)).slice(0, 120);
       const time = now();
-      cached = {items, sources, fetchedAt: new Date(time).toISOString(), nextRefreshAt: new Date(time + NEWS_REFRESH_MS).toISOString(), refreshIntervalHours: 4, partial: successful.length < NEWS_SOURCES.length, stale: false};
+      const urls = new Set(), headlines = new Set(), items = [];
+      for (const item of [...fresh, ...retained]) {
+        const title = item.title.normalize('NFC').toLocaleLowerCase('id').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+        const key = `${item.sourceId}:${title}`;
+        const age = time - Date.parse(item.publishedAt);
+        if (age > 14 * 86400000 || age < -3600000 || urls.has(item.url) || headlines.has(key)) continue;
+        urls.add(item.url);
+        headlines.add(key);
+        items.push(item);
+      }
+      items.sort((a, b) => Number(Boolean(a.stale)) - Number(Boolean(b.stale))
+        || Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+      cached = {items: items.slice(0, 300), sources, fetchedAt: new Date(time).toISOString(),
+        nextRefreshAt: new Date(time + NEWS_REFRESH_MS).toISOString(), refreshIntervalMinutes: NEWS_REFRESH_MINUTES,
+        partial: successful.length < NEWS_SOURCES.length, stale: false};
       return cached;
     })();
     try { return await pending; } finally { pending = null; }

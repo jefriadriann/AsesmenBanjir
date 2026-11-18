@@ -1,5 +1,9 @@
 const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const locations = JSON.parse(readFileSync(new URL('../../public/locations.json', import.meta.url)));
+const parents = new Set(locations.filter(location => location.type === 'kpw' && location.coords).map(location => location.name));
+const linkCount = locations.filter(location => location.type === 'kas' && location.coords && parents.has(location.kpw)).length;
 const browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox']});
 try {
  for (const width of [1440, 390]) {
@@ -9,6 +13,12 @@ try {
   await page.route('**/api/inarisk?*', route => route.fulfill({json: {services: []}}));
   await page.goto((process.env.BASE_URL || 'http://localhost:3002') + '/#peta');
   await page.waitForSelector('#map-measure');
+  assert.ok(linkCount > 0);
+  assert.equal(await page.locator('.kpw-kas-link').count(), linkCount);
+  await page.locator('.map-filters [data-type="kpw"]').click();
+  assert.equal(await page.locator('.kpw-kas-link').count(), 0);
+  await page.locator('.map-filters [data-type="all"]').click();
+  assert.equal(await page.locator('.kpw-kas-link').count(), linkCount);
   assert.equal(await page.locator('#data-nav, #distance-nav, #mobile-distance-nav').count(), 0);
   assert.match(await page.locator('.nav-placeholder').textContent(), /X/);
   await page.locator('#map-measure').click();
