@@ -12,3 +12,8 @@
 #inarisk-summary th{text-align:left;font-weight:500}
 #inarisk-summary td{text-align:right;font-variant-numeric:tabular-nums}
 #inarisk-summary th,#inarisk-summary td{padding:4px 0;border-bottom:1px solid #dce6f4}
+
+/* Keep the context rasters visible without competing with the InaRISK classes. */
+.map-frame.flood-in-focus :is(.leaflet-rainfallOverlay-pane,.leaflet-slopeOverlay-pane){
+ opacity:.1;
+}
