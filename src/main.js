@@ -66,7 +66,7 @@ document.querySelector('#app').innerHTML=`
 <small id="news-map-status" role="status"></small>
 <dialog id="watch-dialog" aria-labelledby="watch-heading">
 <div class="watch-heading"><h2 id="watch-heading">Prioritas Pantauan</h2><button id="watch-close" type="button" aria-label="Tutup Prioritas Pantauan">Tutup</button></div>
-<p>Hingga delapan lokasi banjir atau longsor dalam 72 jam terakhir, dengan dampak yang dilaporkan atau liputan dari beberapa penerbit. Perbesar peta untuk memusatkan pantauan pada area yang terlihat.</p>
+<p>Hingga delapan lokasi banjir atau longsor dalam 72 jam terakhir, dengan dampak yang dilaporkan atau liputan dari beberapa penerbit. Tampilan nasional memberi ruang bagi tiap Korwil yang memiliki laporan. Perbesar peta untuk memusatkan pantauan pada area yang terlihat.</p>
 <button id="watch-refresh" type="button">Perbarui berita</button><p id="watch-status" role="status"></p><div id="watch-results"></div>
 </dialog>
 </div>
@@ -241,7 +241,7 @@ document.querySelector('#directory-filter-toggle').onclick=()=>{const hidden=doc
 const readiness=createReadiness({data,sourceReadiness,icons,refreshIcons,onAbout:openAudit,onMap:id=>{location.hash=id?'peta/'+id:'peta';}});
 const news = createNews({onUpdate: snapshot => watch.update(snapshot)});
 const watch = mountNewsWatch({
-  map, locations: data, readiness: sourceReadiness,
+  map, locations: data, readiness: sourceReadiness, officeCoords: mapCoords,
   onActive: (active, refresh) => news.setMapActive(active, refresh),
 });
 function applyWorkspace(){const [view,id]=location.hash.slice(1).split('/');const isReadiness=view==='sarpras',isNews=view==='berita';document.querySelector('#news-nav').classList.toggle('active',isNews);document.querySelector('#news-nav').setAttribute('aria-current',isNews?'page':'false');watch.setVisible(!isReadiness&&!isNews);if(isNews)news.show();else news.hide();document.querySelector('#peta').classList.toggle('hidden',isReadiness||isNews);document.querySelector('.app-main').classList.toggle('readiness-active',isReadiness);document.querySelector('#map-nav').classList.toggle('active',!isReadiness&&!isNews);document.querySelector('#readiness-nav').classList.toggle('active',isReadiness);document.querySelector('#map-nav').setAttribute('aria-current',isReadiness||isNews?'false':'page');document.querySelector('#readiness-nav').setAttribute('aria-current',isReadiness?'page':'false');document.querySelector('.map-title h1').textContent=isNews?'Berita kebencanaan':isReadiness?'Kesiapan Sarpras':'Peta Risiko Banjir';document.querySelector('.title-tag').innerHTML=i('globe')+(isReadiness?'46 KPw':'Indonesia');

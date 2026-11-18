@@ -50,6 +50,7 @@ try {
     const areaPopup = page.locator('.watch-popup');
     await areaPopup.getByRole('heading', {name: 'Meulaboh', exact: true}).waitFor();
     assert.equal(await areaPopup.getByText('Penanda wilayah', {exact: true}).count(), 0);
+    assert.match(await areaPopup.innerText(), /Pin acuan di dekat KPw.*Koordinat kejadian belum tersedia/s);
     assert.equal(await areaPopup.getByRole('link', {name: 'Banjir di Meulaboh, ratusan warga mengungsi', exact: true}).getAttribute('href'), items[2].url);
     assert.ok(await areaPopup.evaluate(panel => {
       const frame = panel.closest('.map-frame').getBoundingClientRect();
@@ -89,6 +90,7 @@ try {
     assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang, 35 rumah terendam'}).getAttribute('target'), '_blank');
     assert.equal(await popup.getByRole('link', {name: 'Hujan di Semarang'}).count(), 0);
     assert.match(await popup.innerText(), /ANTARA News.*WIB/);
+    assert.match(await popup.innerText(), /Koordinat dicantumkan oleh penerbit/);
 
     await page.getByRole('button', {name: 'Prioritas Pantauan', exact: true}).click();
     const dialog = page.getByRole('dialog', {name: 'Prioritas Pantauan'});

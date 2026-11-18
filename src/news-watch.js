@@ -32,7 +32,7 @@ function articleList(articles) {
   return list;
 }
 
-export function mountNewsWatch({map, locations, readiness, onActive}) {
+export function mountNewsWatch({map, locations, readiness, officeCoords, onActive}) {
   const toolbar = document.querySelector('.news-watch-tools');
   const markerButton = toolbar.querySelector('#news-map-toggle');
   const priorityButton = toolbar.querySelector('#watch-priority');
@@ -46,6 +46,12 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   let enabled = true, visible = null;
   let snapshot = {data: null, loading: false, error: ''};
   const references = newsRegionReferences(locations);
+  const offices = locations.filter(location => location.type === 'kpw' || location.type === 'pusat')
+    .flatMap(location => {
+      const coords = officeCoords(location);
+      return coords ? [{id: location.id, name: location.type === 'kpw' ? `KPw ${location.name}` : location.name,
+        region: location.region, coords}] : [];
+    });
   let cities = [], points = [], region = 'all';
   const inRegion = item => region === 'all' || item.region === region;
   let alerts = [], viewportScope = false;
@@ -87,6 +93,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     heading.textContent = areas.length ? areas.map(area => area.name).join(' / ') : 'Berita di titik ini';
     const scrollTop = refresh ? articles.scrollTop : 0;
     articles.replaceChildren();
+    if (point.office) articles.append(element('p', `Pin acuan di dekat ${point.office.name}. Koordinat kejadian belum tersedia dari sumber.`));
     if (areas.length > 1) {
       const urls = new Set(point.articles.map(article => article.url));
       for (const area of areas) {
@@ -166,7 +173,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
           : ' · Data sarpras banjir belum tersedia'));
         card.append(row);
       }
-      const show = element('button', point.areas ? 'Lihat di peta' : 'Lihat titik dari penerbit');
+      const show = element('button', point.office ? 'Lihat acuan dekat BI' : point.areas ? 'Lihat di peta' : 'Lihat titik dari penerbit');
       show.type = 'button';
       show.onclick = () => {
         setEnabled(true);
@@ -191,7 +198,8 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   dialog.addEventListener('close', syncInterest);
 
   function renderMarkers() {
-    const nextAlerts = selectMapAlerts(scopedPoints());
+    const scoped = scopedPoints();
+    const nextAlerts = selectMapAlerts(scoped, region === 'all' && !viewportScope);
     const unchanged = nextAlerts.length === alerts.length && nextAlerts.every((point, i) =>
       point.key === alerts[i].key && point.articles.length === alerts[i].articles.length
         && point.articles.every((article, j) => article === alerts[i].articles[j]));
@@ -206,7 +214,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
         title: label,
         icon: L.divIcon({
           className: 'news-city-marker', html: '<span aria-hidden="true">▤</span>',
-          iconSize: [28, 28], iconAnchor: [14, 28],
+          iconSize: [28, 28], iconAnchor: point.office ? [-12, 42] : [14, 28],
         }),
       });
       marker.on('add', () => {
@@ -258,7 +266,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
         const now = Date.now();
         const recent = (snapshot.data?.items ?? []).filter(article => isRecentIncident(article, now));
         cities = matchNewsCities(locations, recent);
-        points = groupNewsPoints(recent, cities, references);
+        points = groupNewsPoints(recent, cities, references, offices);
         renderMarkers();
       }
       dialog.querySelector('#watch-refresh').disabled = next.loading;

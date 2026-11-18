@@ -126,7 +126,20 @@ export function groupPublisherPoints(articles) {
   return [...points.values()];
 }
 
-export function groupNewsPoints(articles, areas, references = []) {
+function nearestOffice(area, offices) {
+  const [lat, lng] = area.coords;
+  const scale = Math.cos(lat * Math.PI / 180);
+  let nearest, distance = Infinity;
+  for (const office of offices) {
+    if (!area.region || office.region !== area.region) continue;
+    const [officeLat, officeLng] = office.coords;
+    const candidate = Math.hypot(officeLat - lat, (officeLng - lng) * scale);
+    if (candidate < distance) { nearest = office; distance = candidate; }
+  }
+  return nearest;
+}
+
+export function groupNewsPoints(articles, areas, references = [], offices = []) {
   const direct = groupPublisherPoints(articles.filter(isWatchArticle));
   for (const point of direct) point.region = nearbyNewsRegion(point.coords, references);
   const located = new Set(direct.flatMap(point => point.articles.map(article => article.url)));
@@ -135,7 +148,10 @@ export function groupNewsPoints(articles, areas, references = []) {
     const matches = area.articles.filter(article => isWatchArticle(article) && !located.has(article.url));
     if (!area.coords || !matches.length) continue;
     const key = `wilayah:${area.region ?? ''}:${area.coords.join(',')}`;
-    if (!fallback.has(key)) fallback.set(key, {key, coords: area.coords, region: area.region, areas: [], articles: []});
+    if (!fallback.has(key)) {
+      const office = nearestOffice(area, offices);
+      fallback.set(key, {key, coords: office?.coords ?? area.coords, office, region: area.region, areas: [], articles: []});
+    }
     const point = fallback.get(key);
     point.areas.push(area);
     for (const article of matches) {
@@ -156,7 +172,7 @@ export function isRecentIncident(article, now = Date.now()) {
   return isWatchArticle(article) && age >= -3600000 && age <= ALERT_WINDOW_MS;
 }
 
-export function selectMapAlerts(points) {
+export function selectMapAlerts(points, balanceRegions = false) {
   const ranked = points.flatMap(point => {
     const unique = new Map();
     for (const article of [...point.articles].sort(compareNewsArticles)) {
@@ -170,8 +186,22 @@ export function selectMapAlerts(points) {
     || (b.articles[0].impact ?? 0) - (a.articles[0].impact ?? 0)
     || b.coverage - a.coverage || compareNewsArticles(a.articles[0], b.articles[0]));
 
-  const shown = new Set(), alerts = [];
+  // Merge qualified areas only after checking each area on its own. Separate
+  // minor reports cannot corroborate each other just by sharing a BI office.
+  const grouped = new Map();
   for (const point of ranked) {
+    const key = point.office ? `bi:${point.office.id}` : point.key;
+    const existing = grouped.get(key);
+    if (!existing) grouped.set(key, {...point, key});
+    else {
+      existing.areas = [...existing.areas, ...point.areas];
+      existing.articles = [...existing.articles, ...point.articles].sort(compareNewsArticles);
+    }
+  }
+  const candidates = [...grouped.values()];
+  const shown = new Set(), alerts = [], used = new Set(), regions = new Set();
+  function add(point) {
+    if (alerts.length >= MAX_ALERTS || used.has(point.key)) return;
     const articles = [];
     for (const article of point.articles) {
       const key = alertKey(article);
@@ -180,8 +210,17 @@ export function selectMapAlerts(points) {
       articles.push(article);
       if (articles.length === 2) break;
     }
-    if (articles.length) alerts.push({...point, articles});
-    if (alerts.length === MAX_ALERTS) break;
+    if (!articles.length) return;
+    used.add(point.key);
+    if (point.region) regions.add(point.region);
+    alerts.push({...point, articles});
   }
+
+  if (balanceRegions) {
+    for (const point of candidates) {
+      if (point.region && !regions.has(point.region)) add(point);
+    }
+  }
+  for (const point of candidates) add(point);
   return alerts;
 }
