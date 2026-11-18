@@ -70,7 +70,10 @@ document.querySelector('#app').innerHTML=`
 <button id="watch-refresh" type="button">Perbarui berita</button><p id="watch-status" role="status"></p><div id="watch-results"></div>
 </dialog>
 </div>
-<div class="map-actions"><button id="reset" title="Kembali ke seluruh Indonesia" aria-label="Tampilkan Indonesia">${i('maximize')}<span> Seluruh Indonesia</span></button><span class="control-separator"></span><button id="panel-toggle" aria-label="Tampilkan daftar lokasi" aria-expanded="false">${i('panel-right-open')}<span>Daftar lokasi</span></button></div></div>
+<div class="map-actions">
+<div class="map-layer-group" role="group" aria-labelledby="risk-layer-title"><span id="risk-layer-title">Risiko</span><div class="map-layer-buttons" id="risk-layer-buttons"><button id="risk-settings" type="button" title="Pengaturan Risiko" aria-label="Pengaturan Risiko">${i('sliders-horizontal')}</button></div></div>
+<div class="map-layer-group" role="group" aria-labelledby="assessment-layer-title"><span id="assessment-layer-title">Asesmen Risiko</span><div class="map-layer-buttons" id="assessment-layer-buttons"><button id="layer-settings" type="button" title="Pengaturan Asesmen Risiko" aria-label="Pengaturan Asesmen Risiko">${i('sliders-horizontal')}</button></div></div>
+<button id="reset" title="Kembali ke seluruh Indonesia" aria-label="Tampilkan Indonesia">${i('maximize')}<span> Seluruh Indonesia</span></button><span class="control-separator"></span><button id="panel-toggle" aria-label="Tampilkan daftar lokasi" aria-expanded="false">${i('panel-right-open')}<span>Daftar lokasi</span></button></div></div>
 <div class="explorer-body"><div class="map-column"><div class="map-frame"><button id="map-measure" class="map-measure-button" aria-pressed="false">${i('ruler')}<span>Ukur jarak</span></button><div id="map" aria-label="Peta Indonesia interaktif"></div><div class="map-vignette"></div><div id="family-map-context" class="family-map-context hidden"></div><div class="map-watermark">RUANG RISIKO<span>INDONESIA NETWORK EXPLORER</span></div><div class="map-filters" aria-label="Filter jenis jaringan"><button data-type="all" class="active" aria-pressed="true">Semua <span>133</span></button><button data-type="kpw" aria-pressed="false"><b class="dot cyan"></b>KPw BI <span>46</span></button><button data-type="kas" aria-pressed="false"><b class="dot amber"></b>Kas titipan <span>87</span></button></div>
 <div class="map-stamp"><span class="stamp-rule"></span><span>KEPULAUAN INDONESIA<small>05° N — 11° S &nbsp; / &nbsp; 95° E — 141° E</small></span></div><div class="compass" title="Utara"><span>N</span>${i('compass')}</div><div class="zoom-controls"><button id="zoom-in" aria-label="Perbesar">${i('plus')}</button><button id="zoom-out" aria-label="Perkecil">${i('minus')}</button></div>
 <div class="map-bottom"><button id="layers" class="basemap-button" aria-expanded="false">${i('layers')}<span>Jenis peta</span>${i('chevron-down')}</button></div><div id="layer-menu" class="layer-menu hidden"><span class="menu-caption">JENIS PETA</span><button data-basemap="atlas"><span class="basemap-swatch atlas"></span><span>Peta sederhana<small>Gambaran wilayah · tersedia tanpa internet</small></span>${i('check')}</button><button data-basemap="street" class="active"><span class="basemap-swatch street"></span><span>Peta jalan<small>OpenStreetMap · jalan dan nama tempat</small></span>${i('check')}</button><div id="tile-status" role="status"></div></div>
@@ -251,26 +254,27 @@ window.addEventListener('hashchange',applyWorkspace);document.querySelector('#re
 if(matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){let frame;document.addEventListener('pointermove',e=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px');});},{passive:true});}
 map.on('zoomend moveend',()=>{const node=document.querySelector('#map');node.dataset.viewZoom=String(map.getZoom());node.dataset.viewCenter=map.getCenter().lat.toFixed(6)+','+map.getCenter().lng.toFixed(6);renderMarkers();document.querySelector('#map-zoom-hint').classList.toggle('hidden',mapStyle!=='street'||map.getZoom()>=13||!!selected);});
 new ResizeObserver(()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{map.invalidateSize({pan:false});if(document.querySelector('#peta').classList.contains('hidden'))return;if(!selected&&!query&&region==='all')nationalView();renderMarkers();},120);}).observe(document.querySelector('.map-frame'));
-map.invalidateSize();nationalView();setMapStyle('street');render();mountInarisk({map,bounds,refreshIcons,onAbout:openAudit,onOpen:()=>{document.querySelector('.rainfall-panel')?.classList.add('hidden');document.querySelector('.slope-panel')?.classList.add('hidden');setPanel(false);toggleDistance(false);document.querySelector('#layer-menu').classList.add('hidden');}});const rainfall=mountRainfall({map,bounds,refreshIcons,onOpen:()=>{setPanel(false);toggleDistance(false);document.querySelector('.slope-panel')?.classList.add('hidden');document.querySelector('.inarisk-panel')?.classList.add('hidden');document.querySelector('#inarisk-toggle')?.setAttribute('aria-expanded','false');document.querySelector('#layer-menu').classList.add('hidden');}});const slope=mountSlope({map,bounds,refreshIcons,onOpen:()=>{document.querySelector('.rainfall-panel')?.classList.add('hidden');setPanel(false);toggleDistance(false);document.querySelector('.inarisk-panel')?.classList.add('hidden');document.querySelector('#inarisk-toggle')?.setAttribute('aria-expanded','false');document.querySelector('#layer-menu').classList.add('hidden');}});
+map.invalidateSize();nationalView();setMapStyle('street');render();
+function openLayerSettings(target){
+ setPanel(false);
+ toggleDistance(false);
+ document.querySelector('#layer-menu').classList.add('hidden');
+ showLayerPanel(target);
+}
+mountInarisk({map,bounds,refreshIcons,onAbout:openAudit,onOpen:()=>openLayerSettings('inarisk')});
+const rainfall=mountRainfall({map,bounds,refreshIcons,onOpen:()=>openLayerSettings('rainfall')});
+const slope=mountSlope({map,bounds,refreshIcons,onOpen:()=>openLayerSettings('slope')});
 const layerPanels=[['rainfall','Hujan'],['slope','Lereng'],['inarisk','Banjir']];
 for(const [id] of layerPanels){const panel=document.querySelector('.'+id+'-panel');const tabs=document.createElement('nav');tabs.className='layer-panel-tabs';tabs.setAttribute('aria-label','Pengaturan layer');tabs.innerHTML=layerPanels.map(([target,label])=>`<button data-layer-panel="${target}" aria-current="${target===id}">${label}</button>`).join('');panel.prepend(tabs);}
 function showLayerPanel(target){
+ document.querySelector('.map-frame').dataset.layerFocus=target==='inarisk'?'risk':'assessment';
+ document.querySelector('.'+target+'-panel').scrollTop=0;
  for(const [id] of layerPanels)document.querySelector('.'+id+'-panel').classList.toggle('hidden',id!==target);
  document.querySelector('#inarisk-toggle').setAttribute('aria-expanded',String(target==='inarisk'));
 }
 document.addEventListener('click',event=>{const tab=event.target.closest('[data-layer-panel]');if(tab)showLayerPanel(tab.dataset.layerPanel);});
-const settings=document.createElement('button');
-settings.id='layer-settings';
-settings.type='button';
-settings.title='Pengaturan layer';
-settings.setAttribute('aria-label','Pengaturan layer');
-settings.innerHTML=i('sliders-horizontal');
-settings.onclick=()=>{
- setPanel(false);
- toggleDistance(false);
- showLayerPanel('rainfall');
-};
-document.querySelector('#slope-toggle').before(settings);
+document.querySelector('#risk-settings').onclick=()=>openLayerSettings('inarisk');
+document.querySelector('#layer-settings').onclick=()=>openLayerSettings('rainfall');
 let defaultLayersStarted=false;
 function startDefaultLayers(){
  if(defaultLayersStarted)return;

@@ -7,7 +7,7 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
   const button = document.createElement('button');
   button.id = 'rainfall-toggle'; button.title = 'Prakiraan curah hujan'; button.setAttribute('aria-label', 'Prakiraan curah hujan'); button.setAttribute('aria-pressed', 'false');
   button.innerHTML = '<i data-lucide="cloud-rain"></i><span>Prakiraan hujan</span>';
-  document.querySelector('.map-actions').prepend(button);
+  document.querySelector('#assessment-layer-buttons').append(button);
   const periods = rainfallPeriods();
   const panel = document.createElement('section'); panel.className = 'rainfall-panel hidden'; panel.setAttribute('aria-label', 'Prakiraan curah hujan Indonesia');
   panel.innerHTML = `<div class="rainfall-head"><div><span class="rainfall-kicker">PRAKIRAAN / INDONESIA</span><h2>Curah hujan</h2></div><button id="rainfall-close" aria-label="Tutup panel curah hujan"><i data-lucide="x"></i></button></div>

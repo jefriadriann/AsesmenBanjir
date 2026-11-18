@@ -14,6 +14,10 @@
 #inarisk-summary th,#inarisk-summary td{padding:4px 0;border-bottom:1px solid #dce6f4}
 
 /* Keep the context rasters visible without competing with the InaRISK classes. */
-.map-frame.flood-in-focus :is(.leaflet-rainfallOverlay-pane,.leaflet-slopeOverlay-pane){
+.map-frame.flood-in-focus:not([data-layer-focus=assessment]) :is(.leaflet-rainfallOverlay-pane,.leaflet-slopeOverlay-pane){
+ opacity:.1;
+}
+
+.explorer:has(:is(#rainfall-toggle,#slope-toggle)[aria-pressed=true]) .map-frame[data-layer-focus=assessment] .leaflet-floodOverlay-pane{
  opacity:.1;
 }

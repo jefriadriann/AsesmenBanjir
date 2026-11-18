@@ -14,6 +14,11 @@ try{for(const width of [1440,390]){
  const pane={rainfall:'rainfallOverlay',slope:'slopeOverlay',inarisk:'floodOverlay'};
  const contextOpacity=()=>page.evaluate(()=>['rainfallOverlay','slopeOverlay'].map(name=>
    getComputedStyle(document.querySelector('.leaflet-'+name+'-pane')).opacity));
+ const floodOpacity=()=>page.locator('.leaflet-floodOverlay-pane').evaluate(node=>getComputedStyle(node).opacity);
+ await page.locator('#slope-toggle').waitFor();
+ assert.equal(await page.getByRole('group',{name:'Risiko',exact:true}).locator('#inarisk-toggle').count(),1);
+ const assessment=page.getByRole('group',{name:'Asesmen Risiko',exact:true});
+ assert.equal(await assessment.locator('#rainfall-toggle, #slope-toggle').count(),2);
  const count=key=>page.locator('.leaflet-'+pane[key]+'-pane>.leaflet-layer').count();
  for(const key of ['rainfall','slope']){
    await page.waitForFunction(id=>document.querySelector('#'+id+'-toggle')?.getAttribute('aria-pressed')==='true',key);
@@ -32,7 +37,10 @@ try{for(const width of [1440,390]){
  const news = await page.locator('#news-map-toggle').boundingBox();
  const slope = await page.locator('#slope-toggle').boundingBox();
  assert.ok(news.y >= toolbar.y && slope.y + slope.height <= toolbar.y + toolbar.height);
- if (width > 1000) assert.ok(Math.abs((news.y + news.height / 2) - (slope.y + slope.height / 2)) <= 2);
+ if (width > 1000) {
+   const group = await assessment.boundingBox();
+   assert.ok(Math.abs((news.y + news.height / 2) - (group.y + group.height / 2)) <= 2);
+ }
  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
  await page.locator('#layer-settings').click();
  await page.locator('#rainfall-opacity').waitFor();
@@ -46,7 +54,11 @@ try{for(const width of [1440,390]){
  await page.locator('#inarisk-close').click();
  assert.deepEqual(await contextOpacity(),['0.1','0.1']);
  await page.locator('#layer-settings').click();
- await page.locator('.rainfall-panel [data-layer-panel="inarisk"]').click();
+ assert.deepEqual(await contextOpacity(),['1','1']);
+ assert.equal(await floodOpacity(),'0.1');
+ for(const key of keys)assert.equal(await count(key),1);
+ await page.locator('#risk-settings').click();
+ assert.equal(await floodOpacity(),'1');
  await page.locator('#inarisk-opacity').fill('0');
  assert.deepEqual(await contextOpacity(),['1','1']);
  await page.locator('#inarisk-opacity').fill('100');
@@ -54,6 +66,8 @@ try{for(const width of [1440,390]){
  // Settings tabs open a panel without changing raster visibility.
  await page.locator('.inarisk-panel [data-layer-panel="rainfall"]').click();
  await page.locator('#rainfall-opacity').fill('35');
+ assert.deepEqual(await contextOpacity(),['1','1']);
+ assert.equal(await floodOpacity(),'0.1');
  await page.locator('.rainfall-panel [data-layer-panel="slope"]').click();
  await page.locator('#slope-opacity').fill('45');
  await page.locator('.slope-panel [data-layer-panel="inarisk"]').click();
