@@ -12,6 +12,7 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
   const panel = document.createElement('section'); panel.className = 'rainfall-panel hidden'; panel.setAttribute('aria-label', 'Prakiraan curah hujan Indonesia');
   panel.innerHTML = `<div class="rainfall-head"><div><span class="rainfall-kicker">PRAKIRAAN / INDONESIA</span><h2>Curah hujan</h2></div><button id="rainfall-close" aria-label="Tutup panel curah hujan"><i data-lucide="x"></i></button></div>
     <p class="rainfall-source">${RAINFALL_SOURCE.name} · ${RAINFALL_SOURCE.resolution}<br>Run ${labelDate(RAINFALL_SOURCE.runDate)} · tanggal sumber UTC</p>
+    <p class="rainfall-source">CHIRPS3: inframerah satelit geostasioner dan data stasiun hujan. Prakiraan: model ensemble GEFS dari NOAA.</p>
     <label class="rainfall-period">Periode prakiraan<select id="rainfall-week" aria-label="Pekan prakiraan">${periods.map(period => `<option value="${period.id}">${period.label} · ${labelDate(period.start)} – ${labelDate(period.end)}</option>`).join('')}</select></label>
     <div id="rainfall-status" role="status">Menyiapkan prakiraan…</div>
     <p id="rainfall-expired" class="hidden">Periode prakiraan ini sudah berakhir. Data ditampilkan sebagai arsip run sumber.</p>

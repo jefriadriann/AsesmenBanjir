@@ -23,8 +23,17 @@ try{for(const width of [1440,390]){
  assert.equal(await page.locator('#slope-opacity').inputValue(),'100');
  assert.ok(await page.evaluate(()=>Number(document.querySelector('.leaflet-slopeOverlay-pane').style.zIndex) <
    Number(document.querySelector('.leaflet-rainfallOverlay-pane').style.zIndex)));
+ const toolbar = await page.locator('.explorer-top').boundingBox();
+ const news = await page.locator('#news-map-toggle').boundingBox();
+ const slope = await page.locator('#slope-toggle').boundingBox();
+ assert.ok(news.y >= toolbar.y && slope.y + slope.height <= toolbar.y + toolbar.height);
+ if (width > 1000) assert.ok(Math.abs((news.y + news.height / 2) - (slope.y + slope.height / 2)) <= 2);
+ assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
  await page.locator('#layer-settings').click();
  await page.locator('#rainfall-opacity').waitFor();
+ assert.match(await page.locator('.rainfall-panel').innerText(), /inframerah satelit geostasioner/);
+ await page.locator('.rainfall-panel [data-layer-panel="slope"]').click();
+ assert.match(await page.locator('#slope-source').innerText(), /Radar pita C SRTM.*Endeavour/);
  await page.locator('#inarisk-toggle').click();
  await page.waitForFunction(()=>document.querySelector('#inarisk-toggle')?.getAttribute('aria-pressed')==='true');
  // Settings tabs open a panel without changing raster visibility.

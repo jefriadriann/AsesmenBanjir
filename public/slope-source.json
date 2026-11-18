@@ -3,6 +3,7 @@
   "unit":"persen",
   "asset":"NASA/NASADEM_HGT/001",
   "sourceName":"NASADEM · NASA/USGS",
+  "sensor":"Radar pita C SRTM · wahana antariksa Endeavour",
   "resolution":"±30 m",
   "catalogUrl":"https://developers.google.com/earth-engine/datasets/catalog/NASA_NASADEM_HGT_001",
   "scriptUrl":"https://code.earthengine.google.com/5741b5ce7d77ea228a71201783d7ba25",

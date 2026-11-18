@@ -90,3 +90,36 @@
 @media (max-width: 640px) {
   .leaflet-bottom .map-region-controls { margin-left: 14px; }
 }
+
+
+.explorer .explorer-top {
+  position: relative;
+  inset: auto;
+  min-height: 0;
+  height: auto;
+  padding: 6px 12px;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.explorer-top .news-watch-tools {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.explorer .explorer-top .map-actions {
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin-left: auto;
+}
+.explorer-top .news-watch-tools > button,
+.explorer-top .map-actions > button {
+  min-height: 30px;
+}
+@media (max-width: 640px) {
+  .explorer .explorer-top { padding: 5px 8px; }
+  .explorer .explorer-top .map-actions { margin-left: 0; }
+}
