@@ -21,8 +21,10 @@ try{for(const width of [1440,390]){
  assert.equal(await count('inarisk'),0);
  assert.equal(await page.locator('.leaflet-rainfallOverlay-pane>.leaflet-layer').evaluate(e=>e.style.opacity),'0.7');
  assert.equal(await page.locator('#slope-opacity').inputValue(),'100');
- assert.ok(await page.evaluate(()=>Number(document.querySelector('.leaflet-slopeOverlay-pane').style.zIndex) <
-   Number(document.querySelector('.leaflet-rainfallOverlay-pane').style.zIndex)));
+ const layerOrder = await page.evaluate(() => [
+   'slopeOverlay', 'rainfallOverlay', 'floodOverlay', 'officeConnections', 'marker'
+ ].map(name => Number(getComputedStyle(document.querySelector('.leaflet-'+name+'-pane')).zIndex)));
+ assert.ok(layerOrder.every((level,index) => index===0 || level>layerOrder[index-1]), layerOrder.join(' < '));
  const toolbar = await page.locator('.explorer-top').boundingBox();
  const news = await page.locator('#news-map-toggle').boundingBox();
  const slope = await page.locator('#slope-toggle').boundingBox();
