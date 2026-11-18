@@ -34,6 +34,8 @@ try {
     await page.waitForSelector('.news-headline');
     assert.equal(await page.locator('.news-headline').count(), 3);
     assert.equal(await page.locator('.news-card').count(), 39);
+    assert.equal(await page.locator('.news-row img').count(), 0);
+    assert.equal(await page.locator('.news-headline img').count(), 3);
     assert.match(await page.locator('.news-headline').first().innerText(), /12.00 WIB/);
     assert.match(await page.locator('.news-schedule').innerText(), /Tanpa email/);
     assert.match(await page.locator('.news-headline').nth(1).innerText(), /Folkative/);

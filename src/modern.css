@@ -234,3 +234,11 @@
   .map-frame .leaflet-control-scale { margin-left: 10px !important; }
   .map-frame .leaflet-container .leaflet-control-attribution { max-width: 100%; }
 }
+
+@media (max-width: 360px) {
+  .topbar .map-title h1 {
+    font-size: 15px;
+    line-height: 1.2;
+    white-space: normal;
+  }
+}

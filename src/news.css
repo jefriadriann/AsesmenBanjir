@@ -26,18 +26,18 @@
 .news-headline .news-source small,.news-row .news-source small{display:inline;margin:0 0 0 7px;font-size:10px}
 #news-grid{display:flex;flex-direction:column;gap:0;border:1px solid #d3dfea;border-radius:12px;background:#fff;overflow:hidden}
 #news-grid:empty{display:none}
-.news-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:center;padding:15px 18px;border:0;border-bottom:1px solid #dce6ee;border-radius:0;box-shadow:none}
+.news-row{padding:10px 16px;border:0;border-bottom:1px solid #dce6ee;border-radius:0;box-shadow:none}
 .news-row:last-child{border-bottom:0}
-.news-row .news-picture{width:96px;height:72px;aspect-ratio:auto;border-radius:7px}
+
 .news-row .news-copy{padding:0;min-width:0}
-.news-row h2{font-size:16px;line-height:1.5;margin:5px 0}
-.news-row .news-copy>p,.news-row .news-tags{display:none}
+.news-row h2{font-size:15px;line-height:1.35;margin:3px 0}
+
 .news-row .news-copy footer{border:0;padding:0;margin:5px 0 0;justify-content:flex-start;gap:8px 18px;font-size:11px}
 .news-latest-heading{font-size:20px;margin:12px 0 15px}
 [data-theme=dark] #news-grid{background:#17324b;border-color:#34516a}
 [data-theme=dark] .news-row{border-bottom-color:#34516a}
 @media(max-width:800px){.news-headlines{gap:10px}.news-headline{display:grid;grid-template-columns:96px minmax(0,1fr)}.news-headline .news-picture{height:100%;min-height:126px;width:96px}.news-headline .news-copy{padding:12px}.news-headline h2{font-size:16px;margin:6px 0}.news-headline-number{left:5px;top:7px;font-size:8px;padding:4px;letter-spacing:0}.news-headline .news-copy footer{margin-top:7px;padding-top:7px}}
-@media(max-width:640px){.news-row{grid-template-columns:64px minmax(0,1fr);gap:12px;padding:14px 12px;align-items:start}.news-row .news-picture{width:64px;height:64px}.news-row h2{font-size:15px}.news-row .news-source{font-size:10px;letter-spacing:.2px}.news-row .news-copy footer{font-size:11px;gap:6px 12px}.news-headline .news-source{font-size:10px;letter-spacing:.2px}}
+@media(max-width:640px){.news-row{padding:9px 11px}.news-row h2{font-size:15px}.news-row .news-source{font-size:10px;letter-spacing:.2px}.news-row .news-copy footer{font-size:11px;gap:6px 12px}.news-headline .news-source{font-size:10px;letter-spacing:.2px}}
 .news-stale{color:#8b5b13;font-weight:650}[data-theme=dark] .news-stale{color:#ffe3aa}
 
 #news-more {

@@ -20,14 +20,14 @@ export function createNews({onUpdate = () => {}} = {}) {
     const tags = article.topics || [];
     const tag = NEWS_TOPICS.find(value => value.id === tags[0]);
     return `<article class="news-card ${headline ? 'news-headline' : 'news-row'}">
-      <a href="${esc(article.url)}" target="_blank" rel="noopener noreferrer" class="news-picture" tabindex="-1" aria-hidden="true">
-        <img src="${esc(article.image || '/news-fallback.svg')}" alt="" loading="${headline ? 'eager' : 'lazy'}" referrerpolicy="no-referrer">
-        ${headline ? `<span class="news-headline-number">HEADLINE / 0${index + 1}</span>` : ''}
-      </a>
+      ${headline ? `<a href="${esc(article.url)}" target="_blank" rel="noopener noreferrer" class="news-picture" tabindex="-1" aria-hidden="true">
+        <img src="${esc(article.image || '/news-fallback.svg')}" alt="" loading="eager" referrerpolicy="no-referrer">
+        <span class="news-headline-number">HEADLINE / 0${index + 1}</span>
+      </a>` : ''}
       <div class="news-copy"><div class="news-source">${esc(article.source)}${sourceKinds.get(article.sourceId) ? `<small>${esc(sourceKinds.get(article.sourceId))}</small>` : ''}${article.via === 'Google News' ? '<small>via Google News</small>' : ''}</div>
         <h2><a href="${esc(article.url)}" target="_blank" rel="noopener noreferrer">${esc(article.title)}</a></h2>
-        ${article.summary ? `<p>${esc(article.summary)}</p>` : ''}
-        <div class="news-tags">${tag ? `<span>${esc(tag.label)}</span>` : ''}</div>
+        ${headline && article.summary ? `<p>${esc(article.summary)}</p>` : ''}
+        ${headline && tag ? `<div class="news-tags"><span>${esc(tag.label)}</span></div>` : ''}
         <footer>${article.stale ? '<span class="news-stale">Salinan terakhir</span>' : ''}<time datetime="${esc(article.publishedAt)}">${esc(date(article.publishedAt))}</time><a href="${esc(article.url)}" target="_blank" rel="noopener noreferrer" aria-label="Baca ${esc(article.title)} di ${esc(article.source)}">Baca berita ↗</a></footer>
       </div></article>`;
   }
