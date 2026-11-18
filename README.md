@@ -204,3 +204,11 @@ Kemiringan lahan, Prakiraan hujan, dan Layer banjir adalah tiga sakelar terpisah
 Mengaktifkan raster lain hanya mengganti panel pengaturan yang terlihat; tidak mematikan raster sebelumnya. Tab Hujan/Lereng/Banjir pada panel membuka pengaturan tanpa mengubah status layer. Opasitas dipertahankan masing-masing. Urutan gambar dari bawah ke atas: InaRISK, lereng, hujan, kemudian marker lokasi. Ini perbandingan visual sumber, bukan perhitungan otomatis skor risiko gabungan.
 
 Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/layer-stack.mjs`. Suite memeriksa kedua urutan aktivasi, ketiga raster bersamaan, opasitas terpisah, matikan layer dengan panel tersembunyi, dan zoom pada desktop/HP. Tile InaRISK dan lereng memakai fixture terkontrol; hujan memakai grid asli. Ini menguji perilaku layer, bukan membuktikan akses live ke BNPB/Earth Engine.
+
+## Penanda berita dan Prioritas Pantauan
+
+Aktifkan **Penanda berita** di peta untuk menampilkan pin kuning per wilayah. Popup memuat judul, penerbit, waktu terbit dalam WIB, dan tautan artikel. Nama kota KPw atau nama wilayah kas titipan dicocokkan sebagai kata utuh di judul berita. Titik memakai perkiraan pusat wilayah dari data jaringan. Judul yang tidak cocok tetap tersedia di menu **Berita kebencanaan**.
+
+**Prioritas Pantauan** merangkum wilayah dengan berita bertopik banjir. Urutan mendahulukan jumlah butir sarpras KPw setempat yang tercatat kurang atau tidak tersedia, kemudian waktu berita banjir terbaru. Data kosong tetap ditampilkan sebagai belum tersedia. Daftar ini membantu tindak lanjut dan tidak menetapkan lokasi kejadian atau tingkat risiko banjir.
+
+Peta dan menu berita berbagi cache dan jadwal refresh. Jika sumber gagal saat diperbarui, salinan terakhir tetap tersedia dan diberi keterangan.

@@ -3,14 +3,15 @@ import {NEWS_REFRESH_MS, NEWS_SOURCES, NEWS_TOPICS, filterNews, selectHeadlines}
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char]));
 const date = value => new Intl.DateTimeFormat('id-ID', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Jakarta'}).format(new Date(value)) + ' WIB';
-export function createNews() {
+export function createNews({onUpdate = () => {}} = {}) {
   const host = document.createElement('section');
   host.id = 'news-workspace'; host.className = 'news-workspace hidden';
   host.setAttribute('aria-label', 'Berita kebencanaan');
   document.querySelector('.app-main').append(host);
   let data = null, loading = false, query = '', topic = 'all', source = 'all', timer, error = '';
+  let mapActive = false;
   const deadline = () => data ? Date.parse(data.nextRefreshAt) || Date.parse(data.fetchedAt) + NEWS_REFRESH_MS : 0;
-  const visible = () => !document.hidden && !host.classList.contains('hidden');
+  const visible = () => !document.hidden && (mapActive || !host.classList.contains('hidden'));
 
   function articleCard(article, headline = false, index = 0) {
     const tags = article.topics || [];
@@ -41,6 +42,7 @@ export function createNews() {
     host.querySelectorAll('img').forEach(image => { image.onerror = () => { image.onerror = null; image.src = '/news-fallback.svg'; }; });
   }
   function render() {
+    onUpdate({data, loading, error});
     const failedSources = data?.sources?.filter(item => item.status === 'unavailable') || [];
     host.innerHTML = `<div class="news-heading"><div><span class="news-eyebrow">RUANG RISIKO / NEWSROOM</span><h1>Berita kebencanaan</h1><p>Kabar banjir, cuaca, dan kebencanaan dari media Indonesia dan dunia.</p></div><button id="news-refresh" ${loading ? 'disabled' : ''}>${loading ? 'Memuat…' : 'Perbarui berita'}</button></div>
       <div class="news-schedule"><span class="news-live-dot"></span><strong>Otomatis setiap 4 jam</strong><span>Tanpa email atau notifikasi.</span><small>Berjalan saat halaman terbuka; data kedaluwarsa diperbarui saat dibuka kembali.</small></div>
@@ -65,7 +67,7 @@ export function createNews() {
   function schedule(retry = false) {
     clearTimeout(timer);
     const wait = retry ? 5 * 60 * 1000 : Math.max(1000, deadline() - Date.now());
-    timer = setTimeout(() => { if (visible()) load(); }, wait);
+    if (visible()) timer = setTimeout(() => { if (visible()) load(); }, wait);
   }
   async function load(force = false) {
     if (loading) return;
@@ -80,10 +82,21 @@ export function createNews() {
     } catch (failure) { error = failure.message + ' Coba perbarui lagi.'; failed = true; }
     finally { loading = false; render(); schedule(failed); }
   }
-  document.addEventListener('visibilitychange', () => { if (visible() && Date.now() >= deadline()) load(); });
+  document.addEventListener('visibilitychange', () => {
+    if (!visible()) return;
+    if (Date.now() >= deadline()) load();
+    else schedule(Boolean(error || data?.stale));
+  });
   window.addEventListener('online', () => { if (visible() && (error || Date.now() >= deadline())) load(); });
   return {
     show() { host.classList.remove('hidden'); render(); if (!data || Date.now() >= deadline()) load(); else schedule(); },
-    hide() { host.classList.add('hidden'); clearTimeout(timer); },
+    hide() { host.classList.add('hidden'); if (!mapActive) clearTimeout(timer); },
+    setMapActive(active, refresh = false) {
+      mapActive = active;
+      if (refresh) load(true);
+      else if (!visible()) clearTimeout(timer);
+      else if (!data || Date.now() >= deadline()) load();
+      else schedule(Boolean(error || data.stale));
+    },
   };
 }
