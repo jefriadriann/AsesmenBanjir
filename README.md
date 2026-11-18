@@ -86,8 +86,8 @@ Popup KPw di peta menampilkan ringkasan kondisi dan empat kategori sarpras dari 
 
 ## Pemulihan peta dan overlay InaRISK
 
-- Tampilan nasional menghitung ulang batas zoom dari ukuran peta yang terlihat, mereset minZoom sebelum perhitungan, dan mengabaikan ukuran nol saat halaman peta disembunyikan. Ini mencegah batas zoom hanya naik ketika layar/menu berubah.
-- Jika seluruh tile jalan gagal atau pemuatan timeout, atlas Indonesia lokal otomatis tampil. Penggantian layer dijadwalkan setelah event Leaflet selesai agar tidak mengakses `_map` yang sudah dilepas. Tombol Seluruh Indonesia selalu mengembalikan pusat dan zoom nasional.
+- Tampilan nasional menghitung ulang batas zoom dari ukuran peta yang terlihat, mereset minZoom sebelum perhitungan, dan mengabaikan ukuran nol saat halaman peta disembunyikan. Perubahan ukuran peta menyesuaikan batas zoom sambil mempertahankan pusat dan tingkat zoom yang sedang dipakai.
+- Jika seluruh tile jalan gagal atau pemuatan timeout, atlas Indonesia lokal otomatis tampil pada lokasi dan tingkat zoom yang sama. Penggantian layer dijadwalkan setelah event Leaflet selesai agar tidak mengakses `_map` yang sudah dilepas. Tombol Seluruh Indonesia selalu mengembalikan pusat dan zoom nasional.
 - **Layer banjir** memakai daftar layanan yang diverifikasi terhadap [konfigurasi InaRISK v4](https://inarisk.bnpb.go.id/v4/config/arcgis-layers.json). Proxy mengambil gambar dari katalog WMS GeoServer BNPB. Proxy mengambil ringkasan nasional dari `inarisk.bnpb.go.id/apiv4/kajian-summary`. Vite dan Vercel memakai handler yang sama.
 - Pilih kajian bahaya, risiko, atau kerentanan untuk banjir dan banjir bandang, atau kapasitas daerah. Ringkasan menampilkan luas dalam hektare dan persentase dari jumlah luas kelas. Untuk kapasitas, distribusi memakai jumlah kabupaten/kota. Estimasi kerugian ditampilkan untuk kajian bahaya dalam rupiah.
 - Raster transparan memakai WMS `GetMap` dalam EPSG:3857. Marker berada di atas raster dan opasitas bisa diubah. Jika ringkasan nasional tidak tersedia, pengguna masih bisa melihat raster dan legenda.

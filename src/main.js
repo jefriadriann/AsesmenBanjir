@@ -146,10 +146,25 @@ function setMapStyle(next,notify=false){
  document.querySelector('#map-zoom-hint').classList.toggle('hidden',!street||map.getZoom()>=13);
  if(notify)showToast(street?'Peta jalan OpenStreetMap ditampilkan.':'Peta sederhana ditampilkan.');
 }
-function fallbackMap(){setMapStyle('atlas');document.querySelector('#map-service-text').textContent='Peta sederhana aktif.';document.querySelector('#map-service-note').classList.remove('hidden');if(!selected)nationalView();}
+function fallbackMap(){setMapStyle('atlas');document.querySelector('#map-service-text').textContent='Peta sederhana aktif.';document.querySelector('#map-service-note').classList.remove('hidden');}
 document.querySelector('#retry-map').onclick=()=>{mapNotice('');setMapStyle('street');streetTiles.redraw();};
 
-function nationalView(animate=false){const frame=document.querySelector('.map-frame');if(frame.clientWidth<80||frame.clientHeight<80||document.querySelector('#peta').classList.contains('hidden'))return;map.stop();map.invalidateSize({pan:false});map.setMinZoom(3);const zoom=Math.max(3,Math.min(7,map.getBoundsZoom(bounds,false,L.point(32,32))));map.setMinZoom(zoom);map.setView(bounds.getCenter(),zoom,{animate});}
+function mapHasSize(){
+ const frame=document.querySelector('.map-frame');
+ return frame.clientWidth>=80&&frame.clientHeight>=80&&!document.querySelector('#peta').classList.contains('hidden');
+}
+function nationalZoom(){
+ map.setMinZoom(3);
+ return Math.max(3,Math.min(7,map.getBoundsZoom(bounds,false,L.point(32,32))));
+}
+function nationalView(animate=false){
+ if(!mapHasSize())return;
+ map.stop();
+ map.invalidateSize({pan:false});
+ const zoom=nationalZoom();
+ map.setMinZoom(zoom);
+ map.setView(bounds.getCenter(),zoom,{animate});
+}
 function currentRows(){return data.filter(d=>(!directoryParentId||d.id===directoryParentId||d.kpw===data.find(p=>p.id===directoryParentId)?.name)&&(coordinateFilter==='all'||d.status===coordinateFilter)&&(type==='all'||d.type===type)&&(region==='all'||d.region===region)&&`${d.name} ${d.bank} ${d.kpw} ${d.city||''}`.toLocaleLowerCase('id').includes(query.toLocaleLowerCase('id')));}
 function updateViewForRows(animate=true){const rows=currentRows().filter(hasCoords);if(region==='all'&&!query&&!directoryParentId){nationalView(animate);}else if(rows.length){map.stop();map.fitBounds(L.latLngBounds(rows.map(d=>mapCoords(d))),{padding:[60,80],maxZoom:8,animate});}}
 function renderMarkers(){
@@ -195,7 +210,7 @@ function render(){
 }
 function setType(next){type=next;closeDetail();render();updateViewForRows();}
 function clearFilters(nextRegion='all',animate=true){directoryParentId=null;directory.setParent(null);coordinateFilter='all';document.querySelector('#coordinate-filter').value='all';type='all';region=nextRegion;query='';document.querySelector('#search').value='';document.querySelector('#region').value=region;closeDetail();render();updateViewForRows(animate);}
-function setPanel(open){if(open){document.querySelector('.rainfall-panel')?.classList.add('hidden');document.querySelector('.slope-panel')?.classList.add('hidden');document.querySelector('.inarisk-panel')?.classList.add('hidden');document.querySelector('#inarisk-toggle')?.setAttribute('aria-expanded','false');document.querySelector('#layer-menu').classList.add('hidden');}panelOpen=open;document.querySelector('.explorer').classList.toggle('panel-hidden',!open);const button=document.querySelector('#panel-toggle');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Sembunyikan daftar lokasi':'Tampilkan daftar lokasi');button.innerHTML=i(open?'panel-right-close':'panel-right-open')+'<span>Daftar lokasi</span>';refreshIcons();requestAnimationFrame(()=>{const target=open?document.querySelector(document.querySelector('.explorer').classList.contains('detail-open')?'#detail-back':'#directory-back'):document.querySelector('#panel-toggle');target?.focus({preventScroll:true});});setTimeout(()=>{map.invalidateSize({pan:false});renderMarkers();},260);}
+function setPanel(open){if(open){document.querySelector('.rainfall-panel')?.classList.add('hidden');document.querySelector('.slope-panel')?.classList.add('hidden');document.querySelector('.inarisk-panel')?.classList.add('hidden');document.querySelector('#inarisk-toggle')?.setAttribute('aria-expanded','false');document.querySelector('#layer-menu').classList.add('hidden');}panelOpen=open;document.querySelector('.explorer').classList.toggle('panel-hidden',!open);const button=document.querySelector('#panel-toggle');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Sembunyikan daftar lokasi':'Tampilkan daftar lokasi');button.innerHTML=i(open?'panel-right-close':'panel-right-open')+'<span>Daftar lokasi</span>';refreshIcons();requestAnimationFrame(()=>{const target=open?document.querySelector(document.querySelector('.explorer').classList.contains('detail-open')?'#detail-back':'#directory-back'):document.querySelector('#panel-toggle');target?.focus({preventScroll:true});});}
 function closeDetail(){selected=null;map.closePopup();document.querySelector('.explorer').classList.remove('detail-open');document.querySelector('#directory-list').classList.remove('hidden');document.querySelector('#location-detail').classList.add('hidden');document.querySelector('#map-context').classList.add('hidden');renderMarkers();}
 function openLocation(id){
  if(distanceOpen){const d=data.find(d=>d.id===id);if(d&&hasOfficeCoords(d))measure.add(locationCoords(d));else if(d&&isApproximate(d))showToast('Titik perkiraan wilayah tidak dipakai sebagai koordinat kantor untuk pengukuran.');return;}
@@ -253,7 +268,17 @@ window.addEventListener('hashchange',applyWorkspace);document.querySelector('#re
 // A restrained pointer glow on application chrome; map controls keep normal interactions.
 if(matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){let frame;document.addEventListener('pointermove',e=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px');});},{passive:true});}
 map.on('zoomend moveend',()=>{const node=document.querySelector('#map');node.dataset.viewZoom=String(map.getZoom());node.dataset.viewCenter=map.getCenter().lat.toFixed(6)+','+map.getCenter().lng.toFixed(6);renderMarkers();document.querySelector('#map-zoom-hint').classList.toggle('hidden',mapStyle!=='street'||map.getZoom()>=13||!!selected);});
-new ResizeObserver(()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{map.invalidateSize({pan:false});if(document.querySelector('#peta').classList.contains('hidden'))return;if(!selected&&!query&&region==='all')nationalView();renderMarkers();},120);}).observe(document.querySelector('.map-frame'));
+new ResizeObserver(()=>{
+ clearTimeout(resizeTimer);
+ resizeTimer=setTimeout(()=>{
+  if(!mapHasSize())return;
+  map.invalidateSize({animate:false});
+  // A resize may change the zoom floor, but should never move the current view.
+  const zoom=map.getZoom();
+  map.setMinZoom(Math.min(zoom,nationalZoom()));
+  renderMarkers();
+ },120);
+}).observe(document.querySelector('#map'));
 map.invalidateSize();nationalView();setMapStyle('street');render();
 function openLayerSettings(target){
  setPanel(false);
