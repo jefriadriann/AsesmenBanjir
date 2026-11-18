@@ -36,7 +36,6 @@ export function mountNewsWatch({map, locations, readiness, officeCoords, onActiv
   const toolbar = document.querySelector('.news-watch-tools');
   const markerButton = toolbar.querySelector('#news-map-toggle');
   const priorityButton = toolbar.querySelector('#watch-priority');
-  const mapStatus = toolbar.querySelector('#news-map-status');
   const dialog = toolbar.querySelector('#watch-dialog');
   const results = dialog.querySelector('#watch-results');
   const status = dialog.querySelector('#watch-status');
@@ -136,10 +135,6 @@ export function mountNewsWatch({map, locations, readiness, officeCoords, onActiv
   function renderStatus() {
     const {data, loading, error} = snapshot;
     const stale = data && (data.stale || error || data.items.some(article => article.stale));
-    const count = alerts.length;
-    mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
-      : error && !data ? 'Feed belum tersedia · coba Perbarui di Prioritas Pantauan'
-        : `${count ? count + ' lokasi pantauan' : 'Belum ada kejadian yang memenuhi kriteria'}${viewportScope ? ' · area peta' : ''}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
   }

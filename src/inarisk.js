@@ -23,11 +23,9 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
  function finish(token){if(token===requestId)setBusy(false);}
  function failure(token,message,error){if(token!==requestId)return;cancelPending();if(activeService)select.value=activeService.service;setStatus(overlay?'Pembaruan gagal. Layer sebelumnya tetap tersedia.':message,true);connection.classList.remove('hidden');connectionError.textContent=error?.message||message;finish(token);}
  panel.querySelector('#inarisk-about').onclick=()=>onAbout?.();
- const setFloodFocus=active=>frame.classList.toggle('flood-in-focus',active&&Number(opacity.value)>0);
  const setActive=value=>{
   button.classList.toggle('active',value);
   button.setAttribute('aria-pressed',String(value));
-  setFloodFocus(value);
  };
  button.onclick=()=>{if(visible.checked){visible.checked=false;visible.onchange({target:visible});panel.classList.add('hidden');button.setAttribute('aria-expanded','false');}else{panel.classList.remove('hidden');button.setAttribute('aria-expanded','true');onOpen?.();visible.checked=true;visible.onchange({target:visible});}};panel.querySelector('#inarisk-close').onclick=()=>{panel.classList.add('hidden');button.setAttribute('aria-expanded','false');};
  async function api(mode,service,refresh=false){
@@ -92,5 +90,5 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
   }catch(error){failure(token,'InaRISK belum terhubung. Buka detail koneksi untuk melihat penyebabnya.',error);}}
  select.onchange=()=>{const service=services.find(s=>s.service===select.value);const token=begin();choose(service,token);};retry.onclick=()=>load(true);
  visible.onchange=e=>{if(!e.target.checked){requestId++;controller?.abort();cancelPending();setBusy(false);overlay?.remove();setActive(false);setStatus('Layer disembunyikan.');}else if(overlay&&activeService?.service===select.value){overlay.addTo(map);setActive(true);setStatus('Menampilkan layer yang terakhir berhasil dimuat.');}else if(!services.length){load();}else{const token=begin();choose(services.find(s=>s.service===select.value),token);}};
- opacity.oninput=e=>{panel.querySelector('#inarisk-opacity-value').textContent=e.target.value+'%';overlay?.setOpacity(Number(e.target.value)/100);setFloodFocus(button.classList.contains('active'));};refreshIcons();
+ opacity.oninput=e=>{panel.querySelector('#inarisk-opacity-value').textContent=e.target.value+'%';overlay?.setOpacity(Number(e.target.value)/100);};refreshIcons();
 }

@@ -53,11 +53,11 @@ try{for(const width of [1440,390]){
  assert.match(await page.locator('#slope-source').innerText(), /Radar pita C SRTM.*Endeavour/);
  await page.locator('#inarisk-toggle').click();
  await page.waitForFunction(()=>document.querySelector('#inarisk-toggle')?.getAttribute('aria-pressed')==='true');
- assert.deepEqual(await contextOpacity(),['0.1','0.1']);
+ assert.deepEqual(await contextOpacity(),['1','1']);
  await expectButtonColor('inarisk','rgb(221, 226, 231)');
  assert.equal(await page.locator('#inarisk-opacity').inputValue(),'100');
  await page.locator('#inarisk-close').click();
- assert.deepEqual(await contextOpacity(),['0.1','0.1']);
+ assert.deepEqual(await contextOpacity(),['1','1']);
  await page.locator('#layer-settings').click();
  assert.deepEqual(await contextOpacity(),['1','1']);
  assert.equal(await floodOpacity(),'1');
@@ -67,7 +67,7 @@ try{for(const width of [1440,390]){
  await page.locator('#inarisk-opacity').fill('0');
  assert.deepEqual(await contextOpacity(),['1','1']);
  await page.locator('#inarisk-opacity').fill('100');
- assert.deepEqual(await contextOpacity(),['0.1','0.1']);
+ assert.deepEqual(await contextOpacity(),['1','1']);
  // Settings tabs open a panel without changing raster visibility.
  await page.locator('.inarisk-panel [data-layer-panel="rainfall"]').click();
  await page.locator('#rainfall-opacity').fill('35');

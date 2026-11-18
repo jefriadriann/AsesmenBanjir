@@ -103,13 +103,12 @@ try {
     await dialog.getByRole('button', {name: 'Perbarui berita'}).click();
     await dialog.getByText(/Sumber berita belum dapat dihubungi/).waitFor();
     assert.equal(await dialog.locator('.watch-city').count(), 2);
-    assert.match(await page.locator('#news-map-status').textContent(), /salinan terakhir/);
+    assert.equal(await page.locator('#news-map-status').count(), 0);
 
     await dialog.getByRole('button', {name: 'Lihat titik dari penerbit'}).first().click();
     await popup.waitFor();
     assert.equal(await dialog.isVisible(), false);
     assert.equal(await meulaboh.count(), 0);
-    assert.match(await page.locator('#news-map-status').textContent(), /area peta/);
     // Open the panel without displacing the selected point.
     const center = (await page.locator('#map').getAttribute('data-view-center')).split(',').map(Number);
     assert.ok(center.every((value, index) => Math.abs(value - items[0].coords[index]) < .1));
@@ -138,10 +137,10 @@ try {
     assert.deepEqual(errors, []);
     await page.goto(base + '/#peta');
     await page.reload();
-    await page.locator('#news-map-status').getByText(/Feed belum tersedia/).waitFor();
+    await page.getByRole('button', {name: 'Prioritas Pantauan'}).click();
+    await page.locator('#watch-status').getByText(/Sumber berita belum dapat dihubungi/).waitFor();
     assert.equal(await page.locator('.news-city-marker').count(), 0);
     fail = false;
-    await page.getByRole('button', {name: 'Prioritas Pantauan'}).click();
     await page.locator('#watch-refresh').click();
     await page.locator('#watch-close').click();
     await page.getByRole('button', {name: 'Berita: Meulaboh'}).waitFor();

@@ -63,7 +63,6 @@ document.querySelector('#app').innerHTML=`
 <div class="news-watch-tools" aria-label="Berita dan pantauan peta">
 <button id="news-map-toggle" type="button" aria-pressed="true"><span class="watch-dot" aria-hidden="true"></span>Penanda berita</button>
 <button id="watch-priority" type="button" aria-haspopup="dialog" aria-controls="watch-dialog">Prioritas Pantauan</button>
-<small id="news-map-status" role="status"></small>
 <dialog id="watch-dialog" aria-labelledby="watch-heading">
 <div class="watch-heading"><h2 id="watch-heading">Prioritas Pantauan</h2><button id="watch-close" type="button" aria-label="Tutup Prioritas Pantauan">Tutup</button></div>
 <p>Hingga delapan lokasi banjir atau longsor dalam 72 jam terakhir, dengan dampak yang dilaporkan atau liputan dari beberapa penerbit. Tampilan nasional memberi ruang bagi tiap Korwil yang memiliki laporan. Perbesar peta untuk memusatkan pantauan pada area yang terlihat.</p>
@@ -292,7 +291,6 @@ const slope=mountSlope({map,bounds,refreshIcons,onOpen:()=>openLayerSettings('sl
 const layerPanels=[['rainfall','Hujan'],['slope','Lereng'],['inarisk','Banjir']];
 for(const [id] of layerPanels){const panel=document.querySelector('.'+id+'-panel');const tabs=document.createElement('nav');tabs.className='layer-panel-tabs';tabs.setAttribute('aria-label','Pengaturan layer');tabs.innerHTML=layerPanels.map(([target,label])=>`<button data-layer-panel="${target}" aria-current="${target===id}">${label}</button>`).join('');panel.prepend(tabs);}
 function showLayerPanel(target){
- document.querySelector('.map-frame').dataset.layerFocus=target==='inarisk'?'risk':'assessment';
  document.querySelector('.'+target+'-panel').scrollTop=0;
  for(const [id] of layerPanels)document.querySelector('.'+id+'-panel').classList.toggle('hidden',id!==target);
  document.querySelector('#inarisk-toggle').setAttribute('aria-expanded',String(target==='inarisk'));

@@ -19,7 +19,6 @@
 .news-watch-tools button:hover { background: #2b4866; }
 .news-watch-tools button:disabled { opacity: .6; cursor: wait; }
 .news-watch-tools button[aria-pressed="true"] { border-color: #facc15; color: #fde68a; }
-.news-watch-tools small { color: #c3d0df; }
 .watch-dot {
   display: inline-block;
   width: 9px;
@@ -113,5 +112,4 @@
 @media (max-width: 640px) {
   .news-watch-tools { padding: 5px 8px; }
   .watch-popup { right: 10px; bottom: 34px; width: calc(100% - 20px); max-height: min(340px, calc(100% - 104px)); }
-  .news-watch-tools small { font-size: .7rem; }
 }
