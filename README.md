@@ -215,3 +215,5 @@ Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI J
 Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk dari sumber. Garis muncul saat kedua ujung punya koordinat dan masuk dalam filter peta. Garis jaringan berwarna biru memakai setidaknya satu titik perkiraan. Garis hijau kebiruan memakai koordinat dari data di kedua ujung. Garis ini menunjukkan hubungan jaringan antartitik.
 
 Tombol **Korwil** di atas skala peta bisa diciutkan tanpa menghapus pilihan. Lingkup Korwil berlaku pada titik dan garis jaringan, pin berita, serta Prioritas Pantauan. Pin dengan koordinat penerbit yang terlalu jauh dari referensi wilayah atau dekat batas antarkorwil tetap tersedia dalam tampilan **Semua**.
+
+Penanda berita dan Prioritas Pantauan menampilkan hingga lima titik laporan kejadian berdampak besar per cakupan peta, berdasarkan artikel yang terbit dalam 48 jam terakhir. Korban, pengungsian, akses putus, dan dampak skala besar dipakai untuk menyeleksi laporan. Laporan kejadian lainnya tetap dapat dicari di menu berita.

@@ -66,7 +66,7 @@ document.querySelector('#app').innerHTML=`
 <small id="news-map-status" role="status"></small>
 <dialog id="watch-dialog" aria-labelledby="watch-heading">
 <div class="watch-heading"><h2 id="watch-heading">Prioritas Pantauan</h2><button id="watch-close" type="button" aria-label="Tutup Prioritas Pantauan">Tutup</button></div>
-<p>Daftar ini mengelompokkan penyebutan wilayah di judul berita banjir dan tanah longsor. Jika penerbit belum memberi koordinat, peta memakai pusat kota atau ibu kota provinsi sebagai titik acuan. Urutan mendahulukan wilayah dengan lebih banyak kekurangan sarpras banjir KPw yang tercatat, lalu berita terbaru. Gunakan daftar ini sebagai bahan tindak lanjut.</p>
+<p>Maksimal lima laporan banjir atau tanah longsor berdampak besar yang terbit dalam 48 jam terakhir. Klik judul untuk membaca sumber, atau buka Berita kebencanaan untuk laporan lainnya.</p>
 <button id="watch-refresh" type="button">Perbarui berita</button><p id="watch-status" role="status"></p><div id="watch-results"></div>
 </dialog>
 </div>

@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {groupNewsPoints, groupPublisherPoints, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
+import {groupNewsPoints, groupPublisherPoints, isRecentMajorIncident, selectMapAlerts, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
 
 const locations = [
   {id: 'kpw-a', type: 'kpw', city: 'Jakarta', legacyCityCoords: [-6.18, 106.83]},
@@ -83,4 +83,25 @@ test('maps city and provincial coverage to reference centres when RSS has no coo
 test('more specific names do not create a separate pin for a province substring', () => {
   const articles = [story('Banjir di Banda Aceh dan Papua Barat Daya', 'specific')];
   assert.deepEqual(matchNewsCities(locations, articles).map(area => area.name), ['Banda Aceh', 'Papua Barat Daya']);
+});
+
+test('map alerts require significant current impact, while the digest caps and deduplicates reports', () => {
+  const now = Date.parse('2026-11-18T00:00:00Z');
+  const major = {
+    ...story('Longsor di Bogor, dua warga tertimbun', 'major', '2026-11-17T05:00:00Z'),
+    topics: ['landslide'], impact: 2,
+  };
+  assert.equal(isRecentMajorIncident(major, now), true);
+  assert.equal(isRecentMajorIncident({...major, impact: 1}, now), false);
+  assert.equal(isRecentMajorIncident({...major, topics: ['weather']}, now), false);
+  assert.equal(isRecentMajorIncident({...major, publishedAt: '2026-11-15T05:00:00Z'}, now), false);
+  const points = [
+    {key: 'one', articles: [major, ...Array.from({length: 4}, (_, i) => ({...major, title: `Longsor Bogor ${i}`}))]},
+    {key: 'duplicate', articles: [{...major, url: 'https://example.com/duplicate'}]},
+    ...Array.from({length: 7}, (_, i) => ({key: `other${i}`, articles: [{...major, title: `Banjir di lokasi ${i}`}]})),
+  ];
+  const alerts = selectMapAlerts(points);
+  assert.equal(alerts.length, 5);
+  assert.equal(alerts[0].articles.length, 2);
+  assert.equal(alerts.some(point => point.key === 'duplicate'), false);
 });

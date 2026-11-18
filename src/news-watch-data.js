@@ -144,3 +144,33 @@ export function groupNewsPoints(articles, areas, references = []) {
   }
   return [...direct, ...fallback.values()];
 }
+
+const MAX_ALERTS = 5;
+const ALERT_WINDOW_MS = 48 * 60 * 60 * 1000;
+const alertKey = article => normalize(article.title);
+
+export function isRecentMajorIncident(article, now = Date.now()) {
+  const age = now - Date.parse(article.publishedAt);
+  return isWatchArticle(article) && article.impact === 2 && age >= -3600000 && age <= ALERT_WINDOW_MS;
+}
+
+export function selectMapAlerts(points) {
+  const ranked = points.filter(point => point.articles.length).map(point => ({
+    ...point, articles: [...point.articles].sort(compareNewsArticles),
+  })).sort((a, b) => compareNewsArticles(a.articles[0], b.articles[0]));
+
+  const shown = new Set(), alerts = [];
+  for (const point of ranked) {
+    const articles = [];
+    for (const article of point.articles) {
+      const key = alertKey(article);
+      if (shown.has(key)) continue;
+      shown.add(key);
+      articles.push(article);
+      if (articles.length === 2) break;
+    }
+    if (articles.length) alerts.push({...point, articles});
+    if (alerts.length === MAX_ALERTS) break;
+  }
+  return alerts;
+}

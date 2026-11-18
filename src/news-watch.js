@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {groupNewsPoints, matchNewsCities, rankNewsWatch} from './news-watch-data.js';
+import {groupNewsPoints, isRecentMajorIncident, matchNewsCities, rankNewsWatch, selectMapAlerts} from './news-watch-data.js';
 import {newsRegionReferences} from './news-areas.js';
 import './news-watch.css';
 
@@ -48,7 +48,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   const references = newsRegionReferences(locations);
   let cities = [], points = [], region = 'all';
   const inRegion = item => region === 'all' || item.region === region;
-  const visiblePoints = () => points.filter(inRegion);
+  let alerts = [];
 
   let selectedPoint = null, returnFocus = null;
   const info = element('section');
@@ -85,7 +85,8 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     if (areas.length > 1) {
       const urls = new Set(point.articles.map(article => article.url));
       for (const area of areas) {
-        articles.append(element('h4', area.name), articleList(area.articles.filter(article => urls.has(article.url))));
+        const matches = area.articles.filter(article => urls.has(article.url));
+        if (matches.length) articles.append(element('h4', area.name), articleList(matches));
       }
     } else {
       if (!areas.length) articles.append(element('p', 'Koordinat dicantumkan oleh penerbit.'));
@@ -123,10 +124,10 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   function renderStatus() {
     const {data, loading, error} = snapshot;
     const stale = data && (data.stale || error || data.items.some(article => article.stale));
-    const count = visiblePoints().length;
+    const count = alerts.length;
     mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
       : error && !data ? 'Feed belum tersedia · coba Perbarui di Prioritas Pantauan'
-        : `${count ? count + ' penanda berita' : 'Belum ada lokasi berita yang cocok'}${stale ? ' · salinan terakhir tersedia' : ''}`;
+        : `${count ? count + ' kejadian prioritas' : 'Belum ada kejadian berdampak besar yang terpetakan'}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
   }
@@ -135,15 +136,20 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     renderStatus();
     const ranked = rankNewsWatch(cities.filter(inRegion), readiness);
     results.replaceChildren();
-    if (!ranked.length) {
-      if (snapshot.data) results.append(element('p', 'Belum ada berita banjir atau tanah longsor dengan nama wilayah yang cocok.'));
+    if (!alerts.length) {
+      if (snapshot.data) results.append(element('p', 'Belum ada laporan berdampak besar yang terpetakan dalam 48 jam terakhir.'));
       return;
     }
-    for (const city of ranked) {
+    for (const point of alerts) {
+      const urls = new Set(point.articles.map(article => article.url));
+      const related = ranked.filter(city => (!point.areas || point.areas.some(area => area.key === city.key))
+        && city.articles.some(article => urls.has(article.url)));
       const card = element('section');
       card.className = 'watch-city';
-      card.append(element('h3', city.name));
-      for (const {office, summary} of city.offices) {
+      const names = point.areas?.map(area => area.name) ?? related.map(city => city.name);
+      card.append(element('h3', names.join(' / ') || 'Titik laporan penerbit'), articleList(point.articles));
+      const offices = new Map(related.flatMap(city => city.offices).map(item => [item.office.id, item]));
+      for (const {office, summary} of offices.values()) {
         const readinessLink = element('a', `KPw ${office.name}`);
         readinessLink.href = `#sarpras/${encodeURIComponent(office.id)}`;
         readinessLink.onclick = () => dialog.close();
@@ -153,21 +159,15 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
           : ' · Data sarpras banjir belum tersedia'));
         card.append(row);
       }
-      if (!city.offices.length) card.append(element('p', 'Tidak ada KPw yang tercatat di wilayah ini.'));
-      card.append(articleList(city.articles));
-      const urls = new Set(city.articles.map(article => article.url));
-      for (const point of visiblePoints().filter(point => (!point.areas || point.areas.some(area => area.key === city.key))
-        && point.articles.some(article => urls.has(article.url)))) {
-        const show = element('button', point.areas ? 'Lihat di peta' : 'Lihat titik dari penerbit');
-        show.type = 'button';
-        show.onclick = () => {
-          setEnabled(true);
-          dialog.close();
-          map.setView(point.coords, Math.max(9, map.getZoom()), {animate: false});
-          showPoint(point, markers.get(point.key)?.getElement());
-        };
-        card.append(show);
-      }
+      const show = element('button', point.areas ? 'Lihat di peta' : 'Lihat titik dari penerbit');
+      show.type = 'button';
+      show.onclick = () => {
+        setEnabled(true);
+        dialog.close();
+        map.setView(point.coords, Math.max(9, map.getZoom()), {animate: false});
+        showPoint(point, markers.get(point.key)?.getElement());
+      };
+      card.append(show);
       results.append(card);
     }
   }
@@ -184,9 +184,10 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   dialog.addEventListener('close', syncInterest);
 
   function renderMarkers() {
+    alerts = selectMapAlerts(points.filter(inRegion));
     layer.clearLayers();
     markers.clear();
-    for (const point of visiblePoints()) {
+    for (const point of alerts) {
       const label = `Berita: ${point.areas?.map(area => area.name).join(' / ') ?? point.articles[0].title}`;
       const marker = L.marker(point.coords, {
         pane: 'newsCities',
@@ -211,7 +212,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       markers.set(point.key, marker);
     }
     if (selectedPoint) {
-      const point = visiblePoints().find(item => item.key === selectedPoint);
+      const point = alerts.find(item => item.key === selectedPoint);
       if (point) showPoint(point, null, true);
       else closePoint();
     }
@@ -232,11 +233,13 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       syncInterest();
     },
     update(next) {
-      const changed = next.data !== snapshot.data;
+      const changed = next.data !== snapshot.data || (snapshot.loading && !next.loading);
       snapshot = next;
       if (changed) {
-        cities = matchNewsCities(locations, snapshot.data?.items ?? []);
-        points = groupNewsPoints(snapshot.data?.items ?? [], cities, references);
+        const now = Date.now();
+        const major = (snapshot.data?.items ?? []).filter(article => isRecentMajorIncident(article, now));
+        cities = matchNewsCities(locations, major);
+        points = groupNewsPoints(major, cities, references);
         renderMarkers();
       }
       dialog.querySelector('#watch-refresh').disabled = next.loading;
