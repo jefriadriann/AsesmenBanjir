@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import {groupNewsPoints, matchNewsCities, rankNewsWatch} from './news-watch-data.js';
+import {newsRegionReferences} from './news-areas.js';
 import './news-watch.css';
 
 const formatDate = new Intl.DateTimeFormat('id-ID', {
@@ -44,7 +45,10 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   map.createPane('newsCities').style.zIndex = '620';
   let enabled = true, visible = null;
   let snapshot = {data: null, loading: false, error: ''};
-  let cities = [], points = [];
+  const references = newsRegionReferences(locations);
+  let cities = [], points = [], region = 'all';
+  const inRegion = item => region === 'all' || item.region === region;
+  const visiblePoints = () => points.filter(inRegion);
 
   let selectedPoint = null, returnFocus = null;
   const info = element('section');
@@ -119,16 +123,17 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   function renderStatus() {
     const {data, loading, error} = snapshot;
     const stale = data && (data.stale || error || data.items.some(article => article.stale));
+    const count = visiblePoints().length;
     mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
       : error && !data ? 'Feed belum tersedia · coba Perbarui di Prioritas Pantauan'
-        : `${points.length ? points.length + ' penanda berita' : 'Belum ada lokasi berita yang cocok'}${stale ? ' · salinan terakhir tersedia' : ''}`;
+        : `${count ? count + ' penanda berita' : 'Belum ada lokasi berita yang cocok'}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
   }
 
   function renderPriority() {
     renderStatus();
-    const ranked = rankNewsWatch(cities, readiness);
+    const ranked = rankNewsWatch(cities.filter(inRegion), readiness);
     results.replaceChildren();
     if (!ranked.length) {
       if (snapshot.data) results.append(element('p', 'Belum ada berita banjir atau tanah longsor dengan nama wilayah yang cocok.'));
@@ -151,7 +156,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       if (!city.offices.length) card.append(element('p', 'Tidak ada KPw yang tercatat di wilayah ini.'));
       card.append(articleList(city.articles));
       const urls = new Set(city.articles.map(article => article.url));
-      for (const point of points.filter(point => (!point.areas || point.areas.some(area => area.key === city.key))
+      for (const point of visiblePoints().filter(point => (!point.areas || point.areas.some(area => area.key === city.key))
         && point.articles.some(article => urls.has(article.url)))) {
         const show = element('button', point.areas ? 'Lihat di peta' : 'Lihat titik dari penerbit');
         show.type = 'button';
@@ -178,7 +183,48 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   dialog.querySelector('#watch-refresh').onclick = () => onActive(true, true);
   dialog.addEventListener('close', syncInterest);
 
+  function renderMarkers() {
+    layer.clearLayers();
+    markers.clear();
+    for (const point of visiblePoints()) {
+      const label = `Berita: ${point.areas?.map(area => area.name).join(' / ') ?? point.articles[0].title}`;
+      const marker = L.marker(point.coords, {
+        pane: 'newsCities',
+        title: label,
+        icon: L.divIcon({
+          className: 'news-city-marker', html: '<span aria-hidden="true">▤</span>',
+          iconSize: [28, 28], iconAnchor: [14, 28],
+        }),
+      });
+      marker.on('add', () => {
+        const node = marker.getElement();
+        node.setAttribute('aria-label', label);
+        node.addEventListener('keydown', event => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          event.stopPropagation();
+          showPoint(point, node);
+        });
+      });
+      marker.on('click', () => showPoint(point, marker.getElement()));
+      layer.addLayer(marker);
+      markers.set(point.key, marker);
+    }
+    if (selectedPoint) {
+      const point = visiblePoints().find(item => item.key === selectedPoint);
+      if (point) showPoint(point, null, true);
+      else closePoint();
+    }
+  }
+
   return {
+    setRegion(value) {
+      if (value === region) return;
+      region = value;
+      renderMarkers();
+      if (dialog.open) renderPriority();
+      else renderStatus();
+    },
     setVisible(value) {
       if (visible === value) return;
       visible = value;
@@ -190,38 +236,8 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       snapshot = next;
       if (changed) {
         cities = matchNewsCities(locations, snapshot.data?.items ?? []);
-        points = groupNewsPoints(snapshot.data?.items ?? [], cities);
-        layer.clearLayers();
-        markers.clear();
-        for (const point of points) {
-          const label = `Berita: ${point.areas?.map(area => area.name).join(' / ') ?? point.articles[0].title}`;
-          const marker = L.marker(point.coords, {
-            pane: 'newsCities',
-            title: label,
-            icon: L.divIcon({
-              className: 'news-city-marker', html: '<span aria-hidden="true">▤</span>',
-              iconSize: [28, 28], iconAnchor: [14, 28],
-            }),
-          });
-          marker.on('add', () => {
-            const node = marker.getElement();
-            node.setAttribute('aria-label', label);
-            node.addEventListener('keydown', event => {
-              if (event.key !== 'Enter' && event.key !== ' ') return;
-              event.preventDefault();
-              event.stopPropagation();
-              showPoint(point, node);
-            });
-          });
-          marker.on('click', () => showPoint(point, marker.getElement()));
-          layer.addLayer(marker);
-          markers.set(point.key, marker);
-        }
-        if (selectedPoint) {
-          const point = points.find(item => item.key === selectedPoint);
-          if (point) showPoint(point, null, true);
-          else closePoint();
-        }
+        points = groupNewsPoints(snapshot.data?.items ?? [], cities, references);
+        renderMarkers();
       }
       dialog.querySelector('#watch-refresh').disabled = next.loading;
       if (changed && dialog.open) renderPriority();

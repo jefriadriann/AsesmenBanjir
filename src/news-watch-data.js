@@ -1,6 +1,6 @@
 import {compareNewsArticles} from './news-data.js';
 import {newsPoint} from './news-location.js';
-import {extraCities, provinceCapitals} from './news-areas.js';
+import {extraCities, extraCityRegion, provinceCapitals, nearbyNewsRegion} from './news-areas.js';
 import {floodSummary} from './flood-readiness.js';
 
 const isWatchArticle = article => article.topics?.some(topic => topic === 'flood' || topic === 'landslide');
@@ -19,10 +19,10 @@ function safeArticleUrl(value) {
 
 export function matchNewsCities(locations, articles) {
   const cities = new Map(), aliases = new Map();
-  function add(names, coords, kind = 'area', capital) {
+  function add(names, coords, region, kind = 'area', capital) {
     const [name, ...alternates] = names.split('|');
     const key = normalize(name);
-    const area = cities.get(key) || {key, name, coords, kind, capital, offices: [], articles: []};
+    const area = cities.get(key) || {key, name, coords, region, kind, capital, offices: [], articles: []};
     cities.set(key, area);
     for (const alias of [name, ...alternates]) aliases.set(normalize(alias), area);
     return area;
@@ -33,15 +33,16 @@ export function matchNewsCities(locations, articles) {
     const name = location.city || (location.type === 'kas' ? location.name : '');
     if (!name || (location.type === 'kas' && name === 'Tanjung')) continue;
     const legacy = location.legacyCityCoords;
-    const area = add(name, Array.isArray(legacy) && legacy.length === 2 ? newsPoint(...legacy) : null);
+    const area = add(name, Array.isArray(legacy) && legacy.length === 2 ? newsPoint(...legacy) : null, location.region);
     if (location.type === 'kpw') area.offices.push(location);
   }
-  for (const [names, lat, lng] of extraCities) add(names, [lat, lng]);
-  for (const [names, capital, lat, lng] of provinceCapitals) {
-    const city = add(capital, [lat, lng]);
+  for (const [names, lat, lng] of extraCities) add(names, [lat, lng], extraCityRegion(names));
+  for (const [names, capital, lat, lng, region] of provinceCapitals) {
+    const city = add(capital, [lat, lng], region);
     city.coords = [lat, lng];
+    city.region = region;
     const provinceName = names.split('|')[0];
-    const province = add(names, city.coords, 'province', capital);
+    const province = add(names, city.coords, region, 'province', capital);
     const office = locations.find(location => location.type === 'kpw' && location.name === provinceName);
     if (province !== city && office && !province.offices.includes(office)) province.offices.push(office);
     if (province === city) aliases.set(normalize(`Provinsi ${provinceName}`), {
@@ -125,15 +126,16 @@ export function groupPublisherPoints(articles) {
   return [...points.values()];
 }
 
-export function groupNewsPoints(articles, areas) {
+export function groupNewsPoints(articles, areas, references = []) {
   const direct = groupPublisherPoints(articles.filter(isWatchArticle));
+  for (const point of direct) point.region = nearbyNewsRegion(point.coords, references);
   const located = new Set(direct.flatMap(point => point.articles.map(article => article.url)));
   const fallback = new Map();
   for (const area of areas) {
     const matches = area.articles.filter(article => isWatchArticle(article) && !located.has(article.url));
     if (!area.coords || !matches.length) continue;
-    const key = `wilayah:${area.coords.join(',')}`;
-    if (!fallback.has(key)) fallback.set(key, {key, coords: area.coords, areas: [], articles: []});
+    const key = `wilayah:${area.region ?? ''}:${area.coords.join(',')}`;
+    if (!fallback.has(key)) fallback.set(key, {key, coords: area.coords, region: area.region, areas: [], articles: []});
     const point = fallback.get(key);
     point.areas.push(area);
     for (const article of matches) {

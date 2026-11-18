@@ -31,6 +31,14 @@ try {
   const scale = await page.locator('.leaflet-control-scale').boundingBox();
   const buttons = await korwil.boundingBox();
   assert.ok(buttons.y + buttons.height <= scale.y);
+  const toggle = page.getByRole('button', {name: 'Korwil −'});
+  const first = await korwil.getByRole('button').first().boundingBox();
+  const second = await korwil.getByRole('button').nth(1).boundingBox();
+  assert.ok(second.y > first.y && second.x === first.x);
+  await toggle.click();
+  assert.equal(await korwil.isVisible(), false);
+  await page.getByRole('button', {name: 'Korwil +'}).click();
+  assert.equal(await korwil.isVisible(), true);
   const sumatera = korwil.getByRole('button', {name: 'Sumatera'});
   await sumatera.click();
   assert.equal(await sumatera.getAttribute('aria-pressed'), 'true');

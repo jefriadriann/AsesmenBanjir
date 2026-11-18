@@ -1,44 +1,44 @@
 // Rounded city centres for reading the map at regional scale. These are
 // reference points only, independent of office and incident coordinates.
 export const provinceCapitals = [
-  ['Aceh', 'Banda Aceh', 5.55, 95.32],
-  ['Sumatera Utara|Sumatra Utara|Sumut', 'Medan', 3.59, 98.67],
-  ['Sumatera Barat|Sumatra Barat|Sumbar', 'Padang', -0.95, 100.36],
-  ['Riau', 'Pekanbaru', 0.51, 101.45],
-  ['Kepulauan Riau|Kepri', 'Tanjungpinang', 0.92, 104.45],
-  ['Jambi', 'Jambi', -1.61, 103.61],
-  ['Sumatera Selatan|Sumatra Selatan|Sumsel', 'Palembang', -2.99, 104.76],
-  ['Bengkulu', 'Bengkulu', -3.80, 102.26],
-  ['Lampung', 'Bandar Lampung', -5.43, 105.26],
-  ['Kepulauan Bangka Belitung|Bangka Belitung|Babel', 'Pangkalpinang', -2.13, 106.11],
-  ['DKI Jakarta', 'Jakarta', -6.18, 106.83],
-  ['Banten', 'Serang', -6.12, 106.15],
-  ['Jawa Barat|Jabar', 'Bandung', -6.91, 107.61],
-  ['Jawa Tengah|Jateng', 'Semarang', -6.99, 110.42],
-  ['DI Yogyakarta|Daerah Istimewa Yogyakarta|DIY', 'Yogyakarta', -7.80, 110.37],
-  ['Jawa Timur|Jatim', 'Surabaya', -7.25, 112.75],
-  ['Bali', 'Denpasar', -8.65, 115.22],
-  ['Nusa Tenggara Barat|NTB', 'Mataram', -8.58, 116.11],
-  ['Nusa Tenggara Timur|NTT', 'Kupang', -10.17, 123.61],
-  ['Kalimantan Barat|Kalbar', 'Pontianak', -0.03, 109.34],
-  ['Kalimantan Tengah|Kalteng', 'Palangka Raya', -2.21, 113.92],
-  ['Kalimantan Selatan|Kalsel', 'Banjarbaru', -3.44, 114.83],
-  ['Kalimantan Timur|Kaltim', 'Samarinda', -0.50, 117.15],
-  ['Kalimantan Utara|Kaltara', 'Tanjung Selor', 2.84, 117.37],
-  ['Sulawesi Utara|Sulut', 'Manado', 1.48, 124.84],
-  ['Gorontalo', 'Gorontalo', 0.54, 123.06],
-  ['Sulawesi Tengah|Sulteng', 'Palu', -0.90, 119.87],
-  ['Sulawesi Barat|Sulbar', 'Mamuju', -2.68, 118.89],
-  ['Sulawesi Selatan|Sulsel', 'Makassar', -5.14, 119.41],
-  ['Sulawesi Tenggara|Sultra', 'Kendari', -3.99, 122.52],
-  ['Maluku', 'Ambon', -3.70, 128.18],
-  ['Maluku Utara|Malut', 'Sofifi', 0.74, 127.57],
-  ['Papua', 'Jayapura', -2.54, 140.72],
-  ['Papua Barat', 'Manokwari', -0.86, 134.06],
-  ['Papua Barat Daya', 'Sorong', -0.88, 131.25],
-  ['Papua Tengah', 'Nabire', -3.36, 135.50],
-  ['Papua Selatan', 'Merauke', -8.49, 140.40],
-  ['Papua Pegunungan', 'Wamena', -4.10, 138.95],
+  ['Aceh', 'Banda Aceh', 5.55, 95.32, 'Sumatera'],
+  ['Sumatera Utara|Sumatra Utara|Sumut', 'Medan', 3.59, 98.67, 'Sumatera'],
+  ['Sumatera Barat|Sumatra Barat|Sumbar', 'Padang', -0.95, 100.36, 'Sumatera'],
+  ['Riau', 'Pekanbaru', 0.51, 101.45, 'Sumatera'],
+  ['Kepulauan Riau|Kepri', 'Tanjungpinang', 0.92, 104.45, 'Sumatera'],
+  ['Jambi', 'Jambi', -1.61, 103.61, 'Sumatera'],
+  ['Sumatera Selatan|Sumatra Selatan|Sumsel', 'Palembang', -2.99, 104.76, 'Sumatera'],
+  ['Bengkulu', 'Bengkulu', -3.80, 102.26, 'Sumatera'],
+  ['Lampung', 'Bandar Lampung', -5.43, 105.26, 'Sumatera'],
+  ['Kepulauan Bangka Belitung|Bangka Belitung|Babel', 'Pangkalpinang', -2.13, 106.11, 'Sumatera'],
+  ['DKI Jakarta', 'Jakarta', -6.18, 106.83, 'Jawa'],
+  ['Banten', 'Serang', -6.12, 106.15, 'Jawa'],
+  ['Jawa Barat|Jabar', 'Bandung', -6.91, 107.61, 'Jawa'],
+  ['Jawa Tengah|Jateng', 'Semarang', -6.99, 110.42, 'Jawa'],
+  ['DI Yogyakarta|Daerah Istimewa Yogyakarta|DIY', 'Yogyakarta', -7.80, 110.37, 'Jawa'],
+  ['Jawa Timur|Jatim', 'Surabaya', -7.25, 112.75, 'Jawa'],
+  ['Bali', 'Denpasar', -8.65, 115.22, 'Balinusra'],
+  ['Nusa Tenggara Barat|NTB', 'Mataram', -8.58, 116.11, 'Balinusra'],
+  ['Nusa Tenggara Timur|NTT', 'Kupang', -10.17, 123.61, 'Balinusra'],
+  ['Kalimantan Barat|Kalbar', 'Pontianak', -0.03, 109.34, 'Kalimantan'],
+  ['Kalimantan Tengah|Kalteng', 'Palangka Raya', -2.21, 113.92, 'Kalimantan'],
+  ['Kalimantan Selatan|Kalsel', 'Banjarbaru', -3.44, 114.83, 'Kalimantan'],
+  ['Kalimantan Timur|Kaltim', 'Samarinda', -0.50, 117.15, 'Kalimantan'],
+  ['Kalimantan Utara|Kaltara', 'Tanjung Selor', 2.84, 117.37, 'Kalimantan'],
+  ['Sulawesi Utara|Sulut', 'Manado', 1.48, 124.84, 'Sulampua'],
+  ['Gorontalo', 'Gorontalo', 0.54, 123.06, 'Sulampua'],
+  ['Sulawesi Tengah|Sulteng', 'Palu', -0.90, 119.87, 'Sulampua'],
+  ['Sulawesi Barat|Sulbar', 'Mamuju', -2.68, 118.89, 'Sulampua'],
+  ['Sulawesi Selatan|Sulsel', 'Makassar', -5.14, 119.41, 'Sulampua'],
+  ['Sulawesi Tenggara|Sultra', 'Kendari', -3.99, 122.52, 'Sulampua'],
+  ['Maluku', 'Ambon', -3.70, 128.18, 'Sulampua'],
+  ['Maluku Utara|Malut', 'Sofifi', 0.74, 127.57, 'Sulampua'],
+  ['Papua', 'Jayapura', -2.54, 140.72, 'Sulampua'],
+  ['Papua Barat', 'Manokwari', -0.86, 134.06, 'Sulampua'],
+  ['Papua Barat Daya', 'Sorong', -0.88, 131.25, 'Sulampua'],
+  ['Papua Tengah', 'Nabire', -3.36, 135.50, 'Sulampua'],
+  ['Papua Selatan', 'Merauke', -8.49, 140.40, 'Sulampua'],
+  ['Papua Pegunungan', 'Wamena', -4.10, 138.95, 'Sulampua'],
 ];
 
 export const extraCities = [
@@ -57,3 +57,27 @@ export const extraCities = [
   ['Padang Pariaman', -0.62, 100.12], ['Pariaman', -0.63, 100.12],
   ['Langkat', 3.76, 98.46], ['Deli Serdang', 3.56, 98.88],
 ];
+
+export function newsRegionReferences(locations) {
+  return [
+    ...locations.filter(item => item.region && item.legacyCityCoords).map(item => [item.legacyCityCoords, item.region]),
+    ...provinceCapitals.map(([, , lat, lng, region]) => [[lat, lng], region]),
+    ...extraCities.map(([name, lat, lng]) => [[lat, lng], extraCityRegion(name)]),
+  ];
+}
+
+export function extraCityRegion(name) {
+  return ['Padang Pariaman', 'Pariaman', 'Langkat', 'Deli Serdang'].includes(name) ? 'Sumatera' : 'Jawa';
+}
+
+export function nearbyNewsRegion([lat, lng], references) {
+  const distances = new Map();
+  for (const [[otherLat, otherLng], region] of references) {
+    const distance = 111 * Math.hypot(otherLat - lat, (otherLng - lng) * Math.cos(lat * Math.PI / 180));
+    distances.set(region, Math.min(distance, distances.get(region) ?? Infinity));
+  }
+  const [nearest, next] = [...distances].sort((a, b) => a[1] - b[1]);
+  // During regional filtering, keep uncertain or remote RSS points in the
+  // national view rather than assign them to an unrelated Korwil.
+  return nearest && nearest[1] <= 100 && (!next || next[1] - nearest[1] >= 25) ? nearest[0] : null;
+}

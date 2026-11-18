@@ -99,7 +99,19 @@ const streetTiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 L.control.scale({position:'bottomleft',imperial:false,maxWidth:90}).addTo(map);
 const regionControl = L.control({position:'bottomleft'});
 regionControl.onAdd = () => {
- const group = L.DomUtil.create('div', 'map-region-controls');
+ const control = L.DomUtil.create('div', 'map-region-controls');
+ const toggle = L.DomUtil.create('button', 'map-region-toggle', control);
+ toggle.type = 'button';
+ toggle.setAttribute('aria-expanded', 'true');
+ toggle.setAttribute('aria-controls', 'map-region-options');
+ toggle.textContent = 'Korwil −';
+ const group = L.DomUtil.create('div', 'map-region-options', control);
+ group.id = 'map-region-options';
+ toggle.onclick = () => {
+   group.hidden = !group.hidden;
+   toggle.setAttribute('aria-expanded', String(!group.hidden));
+   toggle.textContent = group.hidden ? 'Korwil +' : 'Korwil −';
+ };
  group.setAttribute('role', 'group');
  group.setAttribute('aria-label', 'Korwil jaringan pada peta');
  for (const area of ['all', ...regions]) {
@@ -110,9 +122,9 @@ regionControl.onAdd = () => {
    button.setAttribute('aria-pressed', String(area === region));
    button.onclick = () => clearFilters(area);
  }
- L.DomEvent.disableClickPropagation(group);
- L.DomEvent.disableScrollPropagation(group);
- return group;
+ L.DomEvent.disableClickPropagation(control);
+ L.DomEvent.disableScrollPropagation(control);
+ return control;
 };
 regionControl.addTo(map);
 const failedTiles=new Set();let tileTimer;
@@ -156,7 +168,8 @@ function render(){
  document.querySelector('#headquarters-count').textContent = headquartersVisible ? ' · +1 Kantor Pusat' : '';
  document.querySelector('#visible-count').textContent=mappedNetwork.length;document.querySelector('#directory-total').textContent=rows.length;document.querySelector('#result-count').textContent=`${rows.length} lokasi ditemukan`;
  document.querySelector('#clear-filters').classList.toggle('hidden',type==='all'&&region==='all'&&!query&&coordinateFilter==='all');document.querySelector('#list-order').classList.toggle('hidden',type!=='all'||region!=='all'||!!query||coordinateFilter!=='all');
- regionControl.getContainer().querySelectorAll('button').forEach(button=>{
+ watch.setRegion(region);
+ regionControl.getContainer().querySelectorAll('[data-map-region]').forEach(button=>{
    button.setAttribute('aria-pressed', String(button.dataset.mapRegion===region));
  });
  document.querySelector('#map-region-label').textContent=region==='all'?'Seluruh Indonesia':region;document.querySelector('#scope-label').textContent=region==='all'?'Cakupan nasional':region;
