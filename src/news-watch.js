@@ -96,7 +96,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       const urls = new Set(city.articles.map(article => article.url));
       for (const point of points.filter(point => (!point.areas || point.areas.some(area => area.key === city.key))
         && point.articles.some(article => urls.has(article.url)))) {
-        const show = element('button', point.areas ? 'Lihat penanda wilayah' : 'Lihat titik dari penerbit');
+        const show = element('button', point.areas ? 'Lihat di peta' : 'Lihat titik dari penerbit');
         show.type = 'button';
         show.onclick = () => {
           setEnabled(true);
@@ -149,11 +149,9 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
           marker.bindPopup(() => {
             const popup = element('div');
             if (point.areas) {
-              popup.append(element('h3', 'Penanda wilayah'), element('p', 'Titik acuan wilayah. Lokasi persis kejadian belum diketahui.'));
               for (const area of point.areas) {
                 const urls = new Set(point.articles.map(article => article.url));
-                popup.append(element('h4', area.kind === 'province'
-                  ? `${area.name} · ibu kota ${area.capital}` : `${area.name} · pusat wilayah`),
+                popup.append(element('h3', area.name),
                 articleList(area.articles.filter(article => urls.has(article.url))));
               }
             } else {

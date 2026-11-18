@@ -42,8 +42,8 @@ try {
     await meulaboh.focus();
     await page.keyboard.press('Enter');
     const areaPopup = page.locator('.watch-popup');
-    await areaPopup.getByText('Meulaboh · pusat wilayah').waitFor();
-    assert.match(await areaPopup.innerText(), /Lokasi persis kejadian belum diketahui/);
+    await areaPopup.getByRole('heading', {name: 'Meulaboh', exact: true}).waitFor();
+    assert.equal(await areaPopup.getByText('Penanda wilayah', {exact: true}).count(), 0);
     assert.equal(await areaPopup.getByRole('link', {name: 'Banjir di Meulaboh'}).getAttribute('href'), items[2].url);
     await areaPopup.locator('.leaflet-popup-close-button').click();
     await areaPopup.waitFor({state: 'hidden'});

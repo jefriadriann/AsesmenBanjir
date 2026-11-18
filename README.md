@@ -204,7 +204,7 @@ Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/play
 
 ## Penanda berita dan Prioritas Pantauan
 
-**Penanda berita** aktif saat peta dibuka. Sakelar ini bisa mematikan atau menampilkan lagi pin kuning. Koordinat dari RSS penerbit diutamakan. Bila kosong, judul dicocokkan dengan nama kota atau provinsi di daftar wilayah. Penanda memakai perkiraan pusat kota atau ibu kota provinsi dan diberi label sebagai titik acuan wilayah. Artikel tanpa lokasi yang cocok tetap tersedia di menu **Berita kebencanaan**. Popup memuat sumber, waktu terbit dalam WIB, dan tautan artikel.
+**Penanda berita** aktif saat peta dibuka. Sakelar ini bisa mematikan atau menampilkan lagi pin kuning. Koordinat dari RSS penerbit diutamakan. Bila kosong, judul dicocokkan dengan nama kota atau provinsi di daftar wilayah. Penanda memakai perkiraan pusat kota atau ibu kota provinsi sebagai titik acuan wilayah. Popup menampilkan nama wilayah. Artikel tanpa lokasi yang cocok tetap tersedia di menu **Berita kebencanaan**. Popup memuat sumber, waktu terbit dalam WIB, dan tautan artikel.
 
 **Prioritas Pantauan** merangkum wilayah yang disebut dalam berita banjir dan tanah longsor. Urutan mendahulukan jumlah butir sarpras KPw setempat yang tercatat kurang atau tidak tersedia, kemudian waktu berita terbaru. Data kosong tetap ditampilkan sebagai belum tersedia. Daftar ini membantu tindak lanjut dan tidak menetapkan lokasi kejadian atau tingkat risiko banjir.
 
