@@ -50,3 +50,36 @@
 @media(max-width:640px){.map-bottom,.layer-menu{left:10px;right:auto}.layer-menu{max-width:calc(100% - 20px)}#layers{gap:7px}#layers>span{display:inline}}
 #inarisk-toggle.active{background:#304c67;color:#f0f5fa;border:1px solid #6885a0}
 .layer-panel-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #40566c}.layer-panel-tabs button{padding:6px 8px;font-size:11px;background:#ffffff08;color:#c7d8e9;border:1px solid #49617a;border-radius:6px}.layer-panel-tabs button[aria-current=true]{background:#385570;border-color:#7592ac;color:#fff}
+
+/* Align the quick filters with the scale in Leaflet's control stack. */
+.leaflet-bottom .map-region-controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  margin: 0 0 6px 23px;
+  padding: 4px;
+  border: 1px solid #56718a;
+  border-radius: 8px;
+  background: #152a3df5;
+}
+.map-region-controls button {
+  padding: 3px 7px;
+  min-height: 25px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #e4edf5;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+.map-region-controls button:hover { background: #28455e; }
+.map-region-controls button[aria-pressed="true"] {
+  border-color: #8babca;
+  background: #2a4964;
+  color: white;
+}
+@media (max-width: 640px) {
+  .leaflet-bottom .map-region-controls { margin-left: 14px; }
+}

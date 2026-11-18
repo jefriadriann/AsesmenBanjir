@@ -97,6 +97,24 @@ const markers=L.layerGroup().addTo(map);
 map.createPane('streetMap');map.getPane('streetMap').style.zIndex=450;
 const streetTiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{pane:'streetMap',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>',maxZoom:19,bounds:bounds,noWrap:true,keepBuffer:0,updateWhenIdle:true,errorTileUrl:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'});
 L.control.scale({position:'bottomleft',imperial:false,maxWidth:90}).addTo(map);
+const regionControl = L.control({position:'bottomleft'});
+regionControl.onAdd = () => {
+ const group = L.DomUtil.create('div', 'map-region-controls');
+ group.setAttribute('role', 'group');
+ group.setAttribute('aria-label', 'Korwil jaringan pada peta');
+ for (const area of ['all', ...regions]) {
+   const button = L.DomUtil.create('button', '', group);
+   button.type = 'button';
+   button.dataset.mapRegion = area;
+   button.textContent = area === 'all' ? 'Semua' : area;
+   button.setAttribute('aria-pressed', String(area === region));
+   button.onclick = () => clearFilters(area);
+ }
+ L.DomEvent.disableClickPropagation(group);
+ L.DomEvent.disableScrollPropagation(group);
+ return group;
+};
+regionControl.addTo(map);
 const failedTiles=new Set();let tileTimer;
 const tileKey=e=>`${e.coords.z}/${e.coords.x}/${e.coords.y}`;
 function mapNotice(message){document.querySelector('#tile-status').textContent=message;document.querySelector('#map-service-text').textContent=message;document.querySelector('#map-service-note').classList.toggle('hidden',!message||mapStyle!=='street');}
@@ -138,6 +156,9 @@ function render(){
  document.querySelector('#headquarters-count').textContent = headquartersVisible ? ' · +1 Kantor Pusat' : '';
  document.querySelector('#visible-count').textContent=mappedNetwork.length;document.querySelector('#directory-total').textContent=rows.length;document.querySelector('#result-count').textContent=`${rows.length} lokasi ditemukan`;
  document.querySelector('#clear-filters').classList.toggle('hidden',type==='all'&&region==='all'&&!query&&coordinateFilter==='all');document.querySelector('#list-order').classList.toggle('hidden',type!=='all'||region!=='all'||!!query||coordinateFilter!=='all');
+ regionControl.getContainer().querySelectorAll('button').forEach(button=>{
+   button.setAttribute('aria-pressed', String(button.dataset.mapRegion===region));
+ });
  document.querySelector('#map-region-label').textContent=region==='all'?'Seluruh Indonesia':region;document.querySelector('#scope-label').textContent=region==='all'?'Cakupan nasional':region;
  document.querySelectorAll('[data-type]').forEach(b=>{b.classList.toggle('active',b.dataset.type===type);b.setAttribute('aria-pressed',String(b.dataset.type===type));});document.querySelectorAll('[data-metric]').forEach(b=>b.classList.toggle('selected',b.dataset.metric===type&&type!=='all'));
  const family=data.find(d=>d.id===directoryParentId);const familyChip=document.querySelector('#family-map-context');familyChip.classList.toggle('hidden',!family);familyChip.innerHTML=family?`<span>KPw ${esc(family.name)}<small>${childrenOf(data,family.id).length} kas titipan</small></span><button id="clear-family" aria-label="Kembali ke seluruh KPw">${i('x')}</button>`:'';document.querySelector('#clear-family')?.addEventListener('click',()=>showFamily(null));
@@ -156,7 +177,7 @@ function render(){
  directory.render(rows);renderMarkers();refreshIcons();
 }
 function setType(next){type=next;closeDetail();render();updateViewForRows();}
-function clearFilters(){directoryParentId=null;directory.setParent(null);coordinateFilter='all';document.querySelector('#coordinate-filter').value='all';type='all';region='all';query='';document.querySelector('#search').value='';document.querySelector('#region').value='all';closeDetail();render();nationalView(true);}
+function clearFilters(nextRegion='all'){directoryParentId=null;directory.setParent(null);coordinateFilter='all';document.querySelector('#coordinate-filter').value='all';type='all';region=nextRegion;query='';document.querySelector('#search').value='';document.querySelector('#region').value=region;closeDetail();render();updateViewForRows();}
 function setPanel(open){if(open){document.querySelector('.rainfall-panel')?.classList.add('hidden');document.querySelector('.slope-panel')?.classList.add('hidden');document.querySelector('.inarisk-panel')?.classList.add('hidden');document.querySelector('#inarisk-toggle')?.setAttribute('aria-expanded','false');document.querySelector('#layer-menu').classList.add('hidden');}panelOpen=open;document.querySelector('.explorer').classList.toggle('panel-hidden',!open);const button=document.querySelector('#panel-toggle');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Sembunyikan daftar lokasi':'Tampilkan daftar lokasi');button.innerHTML=i(open?'panel-right-close':'panel-right-open')+'<span>Daftar lokasi</span>';refreshIcons();requestAnimationFrame(()=>{const target=open?document.querySelector(document.querySelector('.explorer').classList.contains('detail-open')?'#detail-back':'#directory-back'):document.querySelector('#panel-toggle');target?.focus({preventScroll:true});});setTimeout(()=>{map.invalidateSize({pan:false});renderMarkers();},260);}
 function closeDetail(){selected=null;map.closePopup();document.querySelector('.explorer').classList.remove('detail-open');document.querySelector('#directory-list').classList.remove('hidden');document.querySelector('#location-detail').classList.add('hidden');document.querySelector('#map-context').classList.add('hidden');renderMarkers();}
 function openLocation(id){
@@ -190,7 +211,7 @@ function showToast(message){clearTimeout(toastTimer);const toast=document.queryS
 function openAudit(){lastFocus=document.activeElement;document.querySelector('#audit-modal').classList.remove('hidden');document.querySelector('#audit-close').focus();}
 function closeAudit(){document.querySelector('#audit-modal').classList.add('hidden');lastFocus?.focus();}
 document.querySelectorAll('[data-type]').forEach(b=>b.onclick=()=>setType(b.dataset.type));document.querySelectorAll('[data-metric]').forEach(b=>b.onclick=()=>setType(b.dataset.metric));
-document.querySelector('#search').oninput=e=>{query=e.target.value;render();};document.querySelector('#region').onchange=e=>{region=e.target.value;closeDetail();render();updateViewForRows();};document.querySelector('#clear-filters').onclick=clearFilters;document.querySelector('#coordinate-filter').onchange=e=>{coordinateFilter=e.target.value;closeDetail();render();updateViewForRows();};
+document.querySelector('#search').oninput=e=>{query=e.target.value;render();};document.querySelector('#region').onchange=e=>{region=e.target.value;closeDetail();render();updateViewForRows();};document.querySelector('#clear-filters').onclick=()=>clearFilters();document.querySelector('#coordinate-filter').onchange=e=>{coordinateFilter=e.target.value;closeDetail();render();updateViewForRows();};
 document.querySelector('#zoom-in').onclick=()=>map.zoomIn();document.querySelector('#zoom-out').onclick=()=>map.zoomOut();document.querySelector('#reset').onclick=()=>{closeDetail();render();nationalView(true);};document.querySelector('#panel-toggle').onclick=()=>setPanel(!panelOpen);
 const layersButton=document.querySelector('#layers');layersButton.onclick=()=>{const open=document.querySelector('#layer-menu').classList.toggle('hidden')===false;layersButton.setAttribute('aria-expanded',String(open));};
 document.addEventListener('click',e=>{if(!e.target.closest('#layer-menu')&&!e.target.closest('#layers')){document.querySelector('#layer-menu').classList.add('hidden');layersButton.setAttribute('aria-expanded','false');}});

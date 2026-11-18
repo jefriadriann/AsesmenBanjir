@@ -26,6 +26,22 @@ try {
   assert.equal(await page.locator('.kpw-kas-link').count(), 0);
   await page.locator('.map-filters [data-type="all"]').click();
   assert.equal(await page.locator('.kpw-kas-link').count(), linkCount);
+  const korwil = page.getByRole('group', {name: 'Korwil jaringan pada peta'});
+  assert.equal(await korwil.getByRole('button').count(), 6);
+  const scale = await page.locator('.leaflet-control-scale').boundingBox();
+  const buttons = await korwil.boundingBox();
+  assert.ok(buttons.y + buttons.height <= scale.y);
+  const sumatera = korwil.getByRole('button', {name: 'Sumatera'});
+  await sumatera.click();
+  assert.equal(await sumatera.getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('#region').inputValue(), 'Sumatera');
+  const sumateraCount = locations.filter(location => location.type === 'kas' && location.region === 'Sumatera').length + 13;
+  assert.equal(await page.locator('#visible-count').textContent(), String(sumateraCount));
+  const regionalMarkers = await page.locator('.marker-container').evaluateAll(markers =>
+    markers.reduce((total, marker) => total + Number(marker.querySelector('.cluster-count')?.textContent ?? 1), 0));
+  assert.equal(regionalMarkers, sumateraCount);
+  await korwil.getByRole('button', {name: 'Semua'}).click();
+  assert.equal(await page.locator('#visible-count').textContent(), '133');
   assert.equal(await page.locator('#data-nav, #distance-nav, #mobile-distance-nav').count(), 0);
   assert.match(await page.locator('.nav-placeholder').textContent(), /X/);
   await page.locator('#map-measure').click();
