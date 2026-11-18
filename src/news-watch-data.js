@@ -1,3 +1,4 @@
+import {newsPoint} from './news-location.js';
 import {floodSummary} from './flood-readiness.js';
 
 const normalize = value => String(value ?? '').normalize('NFC').toLocaleLowerCase('id')
@@ -16,14 +17,13 @@ function safeArticleUrl(value) {
 export function matchNewsCities(locations, articles) {
   const cities = new Map();
   for (const location of locations) {
+    if (location.type !== 'kpw' && location.type !== 'kas') continue;
     const name = location.city || (location.type === 'kas' ? location.name : '');
     const key = normalize(name);
-    const coords = location.legacyCityCoords;
-    if (!key || !Array.isArray(coords) || coords.length !== 2 || !coords.every(Number.isFinite)) continue;
-    if (!cities.has(key)) cities.set(key, {key, name, coords, offices: [], articles: []});
+    if (!key) continue;
+    if (!cities.has(key)) cities.set(key, {key, name, offices: [], articles: []});
     const city = cities.get(key);
     if (location.type === 'kpw') {
-      if (!city.offices.length) city.coords = coords;
       city.offices.push(location);
     }
   }
@@ -63,4 +63,19 @@ export function rankFloodWatch(cities, readiness) {
   }).sort((a, b) => b.gaps - a.gaps
     || Date.parse(b.articles[0].publishedAt) - Date.parse(a.articles[0].publishedAt)
     || a.name.localeCompare(b.name, 'id'));
+}
+
+export function groupPublisherPoints(articles) {
+  const points = new Map();
+  for (const article of articles) {
+    const url = safeArticleUrl(article.url);
+    const coords = article.via === 'RSS' && Array.isArray(article.coords)
+      && article.coords.length === 2 && newsPoint(...article.coords);
+    if (!coords || !url || !Number.isFinite(Date.parse(article.publishedAt))) continue;
+    const key = coords.join(',');
+    if (!points.has(key)) points.set(key, {key, coords, articles: []});
+    const group = points.get(key);
+    if (!group.articles.some(item => item.url === url)) group.articles.push({...article, url});
+  }
+  return [...points.values()];
 }

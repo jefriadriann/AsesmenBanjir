@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {matchNewsCities, rankFloodWatch} from '../src/news-watch-data.js';
+import {groupPublisherPoints, matchNewsCities, rankFloodWatch} from '../src/news-watch-data.js';
 
 const locations = [
   {id: 'kpw-a', type: 'kpw', city: 'Jakarta', legacyCityCoords: [-6.18, 106.83]},
@@ -13,7 +13,7 @@ function story(title, id, publishedAt = '2026-11-17T05:00:00Z', topics = ['flood
   return {title, url: `https://example.com/${id}`, publishedAt, topics};
 }
 
-test('groups headlines on approximate area centres and validates article links', () => {
+test('groups headlines for the reading list and validates article links', () => {
   const article = story('BANJIR di Jakarta Selatan dan Semarang', 'a');
   const cities = matchNewsCities(locations, [
     article, article,
@@ -23,7 +23,6 @@ test('groups headlines on approximate area centres and validates article links',
     story('Banjir Jakarta', 'e', 'invalid'),
   ]);
   assert.deepEqual(cities.map(city => city.name), ['Jakarta Selatan', 'Semarang']);
-  assert.deepEqual(cities[0].coords, locations[1].legacyCityCoords);
   assert.deepEqual(cities[0].articles.map(item => item.url), [article.url]);
   const distinct = matchNewsCities(locations, [story('Jakarta dan Jakarta Selatan banjir', 'f')]);
   assert.deepEqual(distinct.map(city => city.name), ['Jakarta', 'Jakarta Selatan']);
@@ -45,4 +44,18 @@ test('ranks flood coverage by known equipment gaps and then newest flood article
   ]);
   assert.equal(ranked[1].offices[0].summary.evidence, 0);
   assert.deepEqual(ranked[2].offices, []);
+});
+
+test('only valid coordinates supplied by a publisher produce map points', () => {
+  const direct = {...story('Banjir Jakarta', 'direct'), coords: [-6.2, 106.8], via: 'RSS'};
+  const points = groupPublisherPoints([
+    direct, direct, story('Banjir Jakarta', 'title-only'),
+    {...direct, url: 'https://example.com/indexed', via: 'Google News'},
+    {...direct, url: 'https://example.com/swapped', coords: [106.8, -6.2]},
+    {...direct, url: 'https://example.com/invalid', coords: ['-6.2', 106.8]},
+    {...direct, url: 'https://example.com/overseas', coords: [35, 139]},
+  ]);
+  assert.deepEqual(points.map(point => [point.coords, point.articles.map(item => item.url)]), [
+    [[-6.2, 106.8], [direct.url]],
+  ]);
 });

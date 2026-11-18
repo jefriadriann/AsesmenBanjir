@@ -103,3 +103,12 @@ test('simultaneous refresh requests reuse one feed load and duplicate story URLs
   assert.equal(a.items.length, 8);
   assert.deepEqual(a, b);
 });
+
+test('parses item-level GeoRSS only from the direct publisher', () => {
+  const point = '<georss:point>-6.2 106.8</georss:point>';
+  const tagged = item => item.replace('</item>', point + '</item>');
+  const wrap = item => `<rss xmlns:georss="http://www.georss.org/georss"><channel>${item}</channel></rss>`;
+  assert.deepEqual(parseNews(wrap(tagged(article('Banjir Jakarta'))))[0].coords, [-6.2, 106.8]);
+  assert.equal(parseNews(wrap(article('Banjir Jakarta')))[0].coords, undefined);
+  assert.equal(parseNews(wrap(tagged(indexedItem(NEWS_SOURCES[0]))), NEWS_SOURCES[0], true)[0].coords, undefined);
+});

@@ -1,6 +1,6 @@
 // Match only institutions explicitly identifiable in the source bank name.
 export function bankBrand(location){
- if(location.type==='kpw')return {slug:'bank-indonesia',name:'Bank Indonesia'};
+ if(location.type==='kpw'||location.type==='pusat')return {slug:'bank-indonesia',name:'Bank Indonesia'};
  const bank=(location.bank||'').toLowerCase();
  const tests=[
  [/syariah indonesia|\bbsi\b/,'bsi','Bank Syariah Indonesia'],

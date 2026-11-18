@@ -207,8 +207,10 @@ Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/play
 
 ## Penanda berita dan Prioritas Pantauan
 
-Aktifkan **Penanda berita** di peta untuk menampilkan pin kuning per wilayah. Popup memuat judul, penerbit, waktu terbit dalam WIB, dan tautan artikel. Nama kota KPw atau nama wilayah kas titipan dicocokkan sebagai kata utuh di judul berita. Titik memakai perkiraan pusat wilayah dari data jaringan. Judul yang tidak cocok tetap tersedia di menu **Berita kebencanaan**.
+Aktifkan **Penanda berita** untuk menampilkan pin kuning dari titik GeoRSS yang dicantumkan langsung oleh penerbit. Popup memuat judul, penerbit, waktu terbit dalam WIB, dan tautan artikel. Artikel tanpa titik penerbit tetap tersedia di menu **Berita kebencanaan**. Sistem tidak mengubah nama wilayah menjadi koordinat kejadian.
 
 **Prioritas Pantauan** merangkum wilayah dengan berita bertopik banjir. Urutan mendahulukan jumlah butir sarpras KPw setempat yang tercatat kurang atau tidak tersedia, kemudian waktu berita banjir terbaru. Data kosong tetap ditampilkan sebagai belum tersedia. Daftar ini membantu tindak lanjut dan tidak menetapkan lokasi kejadian atau tingkat risiko banjir.
 
 Peta dan menu berita berbagi cache dan jadwal refresh. Jika sumber gagal saat diperbarui, salinan terakhir tetap tersedia dan diberi keterangan.
+
+Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI Jakarta. Keduanya punya tautan pencarian berdasarkan alamat. Pin kantor memerlukan koordinat gedung; entri yang belum mempunyai koordinat tetap dapat dibuka dari direktori. Pemeriksaan rentang peta tidak menyatakan bahwa koordinat dari Excel sudah cocok dengan gedung.

@@ -1,3 +1,4 @@
+import {publisherPoint} from '../src/news-location.js';
 import {XMLParser, XMLValidator} from 'fast-xml-parser';
 import {NEWS_SOURCES, NEWS_REFRESH_MS, classifyNews} from '../src/news-data.js';
 
@@ -41,7 +42,9 @@ export function parseNews(xml, source = NEWS_SOURCES[0], indexed = false) {
     if (!url || !title || !topics.length || !Number.isFinite(published)) return [];
     const media = item['media:group'] || item;
     const image = item.enclosure?.['@_url'] || media['media:content']?.['@_url'] || media['media:thumbnail']?.['@_url'] || description.match(/<img[^>]+src=["']([^"']+)/i)?.[1];
-    return [{title, url, source: source.name, sourceId: source.id, publishedAt: new Date(published).toISOString(), image: safeUrl(image, IMAGE_HOSTS), summary: indexed ? '' : clean(description).slice(0, 240), topics, via: indexed ? 'Google News' : 'RSS'}];
+    // Only the publisher's item-level GeoRSS point can place an article.
+    const coords = indexed ? null : publisherPoint(text(item['georss:point']));
+    return [{title, url, ...(coords && {coords}), source: source.name, sourceId: source.id, publishedAt: new Date(published).toISOString(), image: safeUrl(image, IMAGE_HOSTS), summary: indexed ? '' : clean(description).slice(0, 240), topics, via: indexed ? 'Google News' : 'RSS'}];
   });
 }
 async function readFeed(fetcher, url, source, indexed) {

@@ -6,7 +6,7 @@ const browser = await chromium.launch({
 const base = process.env.BASE_URL || 'http://localhost:3001';
 const now = Date.now();
 const items = [
-  {title: 'Banjir di Semarang', topics: ['flood']},
+  {title: 'Banjir di Semarang', topics: ['flood'], via: 'RSS', coords: [-7.01, 110.41]},
   {title: 'Hujan di Semarang', topics: ['weather']},
   {title: 'Banjir di Meulaboh', topics: ['flood']},
   {title: 'Gempa di Jepang', topics: ['earthquake']},
@@ -36,16 +36,17 @@ try {
     await markerToggle.waitFor();
     assert.equal(requests, 0);
     await markerToggle.click();
-    const semarang = page.getByRole('button', {name: 'Berita: Semarang'});
+    const semarang = page.getByRole('button', {name: 'Berita: Banjir di Semarang'});
     await semarang.waitFor();
-    assert.equal(await page.locator('.news-city-marker').count(), 2);
+    assert.equal(await page.locator('.news-city-marker').count(), 1);
     assert.equal(await semarang.evaluate(node => getComputedStyle(node).backgroundColor), 'rgb(250, 204, 21)');
     await semarang.focus();
     await page.keyboard.press('Enter');
     const popup = page.locator('.watch-popup');
     await popup.waitFor();
     assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang'}).getAttribute('href'), items[0].url);
-    assert.equal(await popup.getByRole('link', {name: 'Hujan di Semarang'}).getAttribute('target'), '_blank');
+    assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang'}).getAttribute('target'), '_blank');
+    assert.equal(await popup.getByRole('link', {name: 'Hujan di Semarang'}).count(), 0);
     assert.match(await popup.innerText(), /ANTARA News.*WIB/);
 
     await page.getByRole('button', {name: 'Prioritas Pantauan', exact: true}).click();
@@ -61,13 +62,21 @@ try {
     assert.equal(await dialog.locator('.watch-city').count(), 2);
     assert.match(await page.locator('#news-map-status').textContent(), /salinan terakhir/);
 
-    await dialog.getByRole('button', {name: 'Lihat di peta'}).first().click();
+    await dialog.getByRole('button', {name: 'Lihat titik dari penerbit'}).first().click();
     await popup.waitFor();
     assert.equal(await dialog.isVisible(), false);
+    assert.equal(await page.locator('#map').getAttribute('data-view-center'), '-7.010000,110.410000');
     await markerToggle.click();
     assert.equal(await page.locator('.news-city-marker').count(), 0);
     await popup.waitFor({state: 'hidden'});
 
+    await page.locator('#panel-toggle').click();
+    await page.locator('[data-office-view="BI-PUSAT"]').click();
+    assert.match(await page.locator('#location-detail').innerText(), /M\.H\. Thamrin No\. 2/);
+    assert.equal(await page.locator('#view-area').isDisabled(), true);
+    await page.goto(base + '/#peta/KPW-13');
+    await page.locator('#location-detail').getByText(/Prajurit KKO Usman dan Harun/).waitFor();
+    assert.equal(await page.locator('#view-area').isDisabled(), true);
     await page.goto(base + '/#berita');
     await page.locator('.news-card').first().waitFor();
     assert.equal(requests, 2);

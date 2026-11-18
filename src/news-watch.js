@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {matchNewsCities, rankFloodWatch} from './news-watch-data.js';
+import {groupPublisherPoints, matchNewsCities, rankFloodWatch} from './news-watch-data.js';
 import './news-watch.css';
 
 const formatDate = new Intl.DateTimeFormat('id-ID', {
@@ -44,7 +44,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   map.createPane('newsCities').style.zIndex = '620';
   let enabled = false, visible = true;
   let snapshot = {data: null, loading: false, error: ''};
-  let cities = [];
+  let cities = [], points = [];
 
   function setEnabled(value) {
     enabled = value;
@@ -64,7 +64,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     const stale = data && (data.stale || error || data.items.some(article => article.stale));
     mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
       : error && !data ? 'Berita belum tersedia'
-        : `${cities.length} wilayah${stale ? ' · salinan terakhir tersedia' : ''}`;
+        : `${points.length ? points.length + ' titik dari penerbit' : 'Belum ada koordinat berita dari penerbit'}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
   }
@@ -92,15 +92,19 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
         card.append(row);
       }
       if (!city.offices.length) card.append(element('p', 'Tidak ada KPw yang tercatat di wilayah ini.'));
-      const show = element('button', 'Lihat di peta');
-      show.type = 'button';
-      show.onclick = () => {
-        setEnabled(true);
-        dialog.close();
-        map.setView(city.coords, Math.max(9, map.getZoom()), {animate: false});
-        markers.get(city.key)?.openPopup();
-      };
-      card.append(articleList(city.articles), show);
+      card.append(articleList(city.articles));
+      const urls = new Set(city.articles.map(article => article.url));
+      for (const point of points.filter(point => point.articles.some(article => urls.has(article.url)))) {
+        const show = element('button', 'Lihat titik dari penerbit');
+        show.type = 'button';
+        show.onclick = () => {
+          setEnabled(true);
+          dialog.close();
+          map.setView(point.coords, Math.max(9, map.getZoom()), {animate: false});
+          markers.get(point.key)?.openPopup();
+        };
+        card.append(show);
+      }
       results.append(card);
     }
   }
@@ -127,25 +131,27 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       snapshot = next;
       if (changed) {
         cities = matchNewsCities(locations, snapshot.data?.items ?? []);
+        points = groupPublisherPoints(snapshot.data?.items ?? []);
         layer.clearLayers();
         markers.clear();
-        for (const city of cities) {
-          const marker = L.marker(city.coords, {
+        for (const point of points) {
+          const label = `Berita: ${point.articles[0].title}`;
+          const marker = L.marker(point.coords, {
             pane: 'newsCities',
-            title: `Berita: ${city.name}`,
+            title: label,
             icon: L.divIcon({
               className: 'news-city-marker', html: '<span aria-hidden="true">▤</span>',
               iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -28],
             }),
           });
-          marker.on('add', () => marker.getElement().setAttribute('aria-label', `Berita: ${city.name}`));
+          marker.on('add', () => marker.getElement().setAttribute('aria-label', label));
           marker.bindPopup(() => {
             const popup = element('div');
-            popup.append(element('h3', city.name), element('p', 'Titik perkiraan wilayah berdasarkan nama di judul berita; lokasi kejadian belum dikonfirmasi.'), articleList(city.articles));
+            popup.append(element('h3', 'Berita di titik ini'), element('p', 'Koordinat dicantumkan oleh penerbit.'), articleList(point.articles));
             return popup;
           }, {className: 'watch-popup', maxWidth: 290, maxHeight: 260});
           layer.addLayer(marker);
-          markers.set(city.key, marker);
+          markers.set(point.key, marker);
         }
       }
       dialog.querySelector('#watch-refresh').disabled = next.loading;
