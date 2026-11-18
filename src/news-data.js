@@ -29,15 +29,32 @@ export function classifyNews(value) {
 // Keep the scope decision in one place for both RSS and cached UI snapshots.
 const prevention = /\b(?:antisipasi|mengantisipasi|siapkan|menyiapkan|persiapan|kesiapsiagaan|siaga|waspada|mewaspadai|imbauan|himbauan|peringatan|ingatkan|mengingatkan|potensi|berpotensi|ancaman|rawan|risiko|mitigasi|pencegahan|cegah|mencegah|simulasi|prediksi|prakiraan|kesiapan|latihan|edukasi|pencegah|siagakan|siapsiaga|siap siaga|terancam)\b/i;
 const hypothetical = /\b(?:jika|apabila|andai|kemungkinan|diperkirakan|diprediksi|diprakirakan|berpotensi|bisa|dapat|akan|bakal)\s+(?:[\p{L}\d.,]+\s+){0,4}(?:terendam|terdampak|terisolasi|mengungsi|menewaskan|melanda|diterjang|tertimbun|putus|terjadi|longsor)\b/iu;
-const retrospective = /\b(?:kilas balik|napak tilas|setahun silam|simulasi|latihan evakuasi)\b/i;
+const retrospective = /\b(?:kilas balik|napak tilas|setahun silam|setahun lalu|tahun silam|video lama|rekaman lama|arsip|simulasi|latihan evakuasi)\b/i;
 const impact = /\b(?:terendam|kebanjiran|terdampak|tertimbun|terisolasi|mengungsi|diungsikan|dievakuasi|meninggal|tewas|menewaskan|korban jiwa|displaced|displaces|evacuated|killed|flooded|inundated|(?:akses|jalan|jembatan)\s+(?:\w+\s+){0,2}(?:putus|tertutup|ambles|ambruk)|(?:rumah|bangunan)\s+(?:\w+\s+){0,2}(?:rusak|roboh|hanyut)|surut|pascabanjir|pascalongsor|tanggap darurat)\b/i;
 const occurrence = /\b(?:melanda|menerjang|diterjang|menggenangi|menghantam|meluap|ambruk|menimbun|menutup akses|terjadi|strikes|hits|sweeps)\b/i;
 const eventHeadline = /^(?:update\s*[:–-]?\s*|berita\s+terkini\s*[:–-]?\s*)?(?:banjir|(?:tanah\s+)?longsor|floods?|landslides?)\s+\p{L}/iu;
 const largeImpact = /\b(?:tewas|meninggal|menewaskan|korban jiwa|tertimbun|terisolasi|mengungsi|diungsikan|pengungsian|displaces|displaced|killed|(?:akses|jalan|jembatan)\s+(?:\w+\s+){0,2}(?:putus|ambruk)|tanggap darurat|(?:ratusan|ribuan|\d{3,}(?:[.,]\d{3})*)\s+(?:rumah|warga|jiwa|keluarga|kk))\b/i;
 
-export function classifyIncident(title = '') {
+const factCheck = /\b(?:cek fakta|fact[- ]?check|klarifikasi|hoaks|hoax|disinformasi|klaim palsu|video palsu|misleading)\b/i;
+
+function namesOldEvent(title, publishedAt) {
+  const published = new Date(publishedAt);
+  if (!Number.isFinite(published.getTime())) return false;
+  const eventText = title.split(/\b(?:sejak|dibanding(?:kan)?|seperti pada|pada periode yang sama)\b/i)[0];
+  for (const match of eventText.matchAll(/\b(?:pada(?:\s+tahun)?\s+|tahun\s+|(?:jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?)\s+)(20\d{2})\b/gi)) {
+    // Leave room for reports published in January about late December.
+    const latestPossibleDate = Date.UTC(Number(match[1]) + 1, 0, 1);
+    if (published.getTime() - latestPossibleDate >= 14 * 86400000) return true;
+  }
+  const trailingYear = eventHeadline.test(eventText)
+    && eventText.match(/\b(20\d{2})\s*(?=[,;:–—]|$)/);
+  return Boolean(trailingYear && published.getTime() - Date.UTC(Number(trailingYear[1]) + 1, 0, 1) >= 14 * 86400000);
+}
+
+export function classifyIncident(title = '', publishedAt, url = '') {
   const topics = classifyNews(title);
-  if (!topics.length || retrospective.test(title) || hypothetical.test(title)) return null;
+  if (!topics.length || factCheck.test(title) || /\/(?:cek-fakta|fact-check|factcheck|hoaks)(?:[/?#-]|$)/i.test(url) || namesOldEvent(title, publishedAt)
+    || retrospective.test(title) || hypothetical.test(title)) return null;
 
   // A headline about preparations can still describe an actual impact, e.g.
   // “Siapkan bantuan untuk 300 warga terdampak banjir”.

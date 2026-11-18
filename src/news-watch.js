@@ -46,11 +46,68 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   let snapshot = {data: null, loading: false, error: ''};
   let cities = [], points = [];
 
+  let selectedPoint = null, returnFocus = null;
+  const info = element('section');
+  info.className = 'watch-popup hidden';
+  info.setAttribute('aria-labelledby', 'news-point-title');
+  const heading = element('h3');
+  heading.id = 'news-point-title';
+  const close = element('button', '×');
+  close.type = 'button';
+  close.className = 'watch-popup-close';
+  close.setAttribute('aria-label', 'Tutup berita di peta');
+  const header = element('header');
+  header.append(heading, close);
+  const articles = element('div');
+  articles.className = 'watch-popup-articles';
+  info.append(header, articles);
+  document.querySelector('.map-frame').append(info);
+
+  function closePoint(restoreFocus = false) {
+    if (!selectedPoint) return;
+    selectedPoint = null;
+    info.classList.add('hidden');
+    if (restoreFocus) (returnFocus?.isConnected ? returnFocus : markerButton).focus({preventScroll: true});
+    returnFocus = null;
+  }
+
+  function showPoint(point, focusTarget, refresh = false) {
+    map.closePopup();
+    selectedPoint = point.key;
+    const areas = point.areas ?? [];
+    heading.textContent = areas.length ? areas.map(area => area.name).join(' / ') : 'Berita di titik ini';
+    const scrollTop = refresh ? articles.scrollTop : 0;
+    articles.replaceChildren();
+    if (areas.length > 1) {
+      const urls = new Set(point.articles.map(article => article.url));
+      for (const area of areas) {
+        articles.append(element('h4', area.name), articleList(area.articles.filter(article => urls.has(article.url))));
+      }
+    } else {
+      if (!areas.length) articles.append(element('p', 'Koordinat dicantumkan oleh penerbit.'));
+      articles.append(articleList(point.articles));
+    }
+    info.classList.remove('hidden');
+    articles.scrollTop = scrollTop;
+    if (!refresh) {
+      returnFocus = focusTarget;
+      close.focus({preventScroll: true});
+    }
+  }
+
+  close.onclick = () => closePoint(true);
+  info.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    event.stopPropagation();
+    closePoint(true);
+  });
+  map.on('click popupopen', () => closePoint());
+
   function setEnabled(value) {
     enabled = value;
     markerButton.setAttribute('aria-pressed', String(enabled));
     if (enabled) layer.addTo(map);
-    else layer.remove();
+    else { layer.remove(); closePoint(); }
     renderStatus();
     syncInterest();
   }
@@ -102,7 +159,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
           setEnabled(true);
           dialog.close();
           map.setView(point.coords, Math.max(9, map.getZoom()), {animate: false});
-          markers.get(point.key)?.openPopup();
+          showPoint(point, markers.get(point.key)?.getElement());
         };
         card.append(show);
       }
@@ -112,6 +169,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
 
   markerButton.onclick = () => setEnabled(!enabled);
   priorityButton.onclick = () => {
+    closePoint();
     dialog.showModal();
     renderPriority();
     syncInterest();
@@ -124,7 +182,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     setVisible(value) {
       if (visible === value) return;
       visible = value;
-      if (!visible && dialog.open) dialog.close();
+      if (!visible) { closePoint(); if (dialog.open) dialog.close(); }
       syncInterest();
     },
     update(next) {
@@ -142,25 +200,27 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
             title: label,
             icon: L.divIcon({
               className: 'news-city-marker', html: '<span aria-hidden="true">▤</span>',
-              iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -28],
+              iconSize: [28, 28], iconAnchor: [14, 28],
             }),
           });
-          marker.on('add', () => marker.getElement().setAttribute('aria-label', label));
-          marker.bindPopup(() => {
-            const popup = element('div');
-            if (point.areas) {
-              for (const area of point.areas) {
-                const urls = new Set(point.articles.map(article => article.url));
-                popup.append(element('h3', area.name),
-                articleList(area.articles.filter(article => urls.has(article.url))));
-              }
-            } else {
-              popup.append(element('h3', 'Berita di titik ini'), element('p', 'Koordinat dicantumkan oleh penerbit.'), articleList(point.articles));
-            }
-            return popup;
-          }, {className: 'watch-popup', maxWidth: 290, maxHeight: 260});
+          marker.on('add', () => {
+            const node = marker.getElement();
+            node.setAttribute('aria-label', label);
+            node.addEventListener('keydown', event => {
+              if (event.key !== 'Enter' && event.key !== ' ') return;
+              event.preventDefault();
+              event.stopPropagation();
+              showPoint(point, node);
+            });
+          });
+          marker.on('click', () => showPoint(point, marker.getElement()));
           layer.addLayer(marker);
           markers.set(point.key, marker);
+        }
+        if (selectedPoint) {
+          const point = points.find(item => item.key === selectedPoint);
+          if (point) showPoint(point, null, true);
+          else closePoint();
         }
       }
       dialog.querySelector('#watch-refresh').disabled = next.loading;

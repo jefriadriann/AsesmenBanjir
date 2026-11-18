@@ -161,3 +161,20 @@ test('reports of significant impact outrank newer unquantified coverage', () => 
   ].map(item => ({...item, ...classifyIncident(item.title)}));
   assert.deepEqual(stories.sort(compareNewsArticles).map(item => item.impact), [2, 2, 0]);
 });
+
+test('fact checks and old event years are excluded even if published today', () => {
+  const date = '2026-11-18T05:00:00Z';
+  for (const title of [
+    '[KLARIFIKASI] Ini Video Tanah Longsor Sibolga pada 2025, Bukan 2026',
+    'Cek Fakta: Ratusan Rumah Terendam Banjir di Aceh',
+    'Tanah Longsor Sibolga pada 2025, Rumah Tertimbun',
+    'Longsor Sibolga 2025, Rumah Tertimbun',
+    'Banjir Jakarta: Video Lama Rumah Terendam',
+  ]) assert.equal(classifyIncident(title, date), null, title);
+
+  assert.equal(classifyIncident('Ratusan Rumah Terendam Banjir di Aceh', date,
+    'https://www.kompas.com/cek-fakta/read/2026/11/18/berita'), null);
+  assert.ok(classifyIncident('Banjir di Aceh, 300 rumah terendam, terparah sejak 2025', date));
+  assert.ok(classifyIncident('Longsor di Sibolga pada 31 Desember 2025, rumah tertimbun',
+    '2026-01-03T05:00:00Z'));
+});

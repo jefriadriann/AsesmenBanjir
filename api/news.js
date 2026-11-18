@@ -38,7 +38,7 @@ export function parseNews(xml, source = NEWS_SOURCES[0], indexed = false) {
     const url = safeUrl(text(item.link), indexed ? ['news.google.com', source.domain] : [source.domain]);
     const description = text(item.description);
     const published = Date.parse(text(item.pubDate));
-    const incident = classifyIncident(title);
+    const incident = classifyIncident(title, published, url);
     if (!url || !incident || !Number.isFinite(published)) return [];
     const media = item['media:group'] || item;
     const image = item.enclosure?.['@_url'] || media['media:content']?.['@_url'] || media['media:thumbnail']?.['@_url'] || description.match(/<img[^>]+src=["']([^"']+)/i)?.[1];

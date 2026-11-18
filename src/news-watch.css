@@ -53,24 +53,65 @@
 #watch-dialog::backdrop { background: #050b16bb; }
 .watch-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .watch-heading h2 { margin: 0; font-size: 1.25rem; }
-#watch-dialog p, .watch-popup .leaflet-popup-content p { margin: 8px 0; }
+#watch-dialog p, .watch-popup p { margin: 8px 0; }
 .watch-city { padding: 12px 0; border-top: 1px solid #415976; }
 .watch-city h3, .watch-popup h3 { margin: 0; }
 .watch-articles { padding-left: 19px; }
 .watch-articles li + li { margin-top: 8px; }
 .watch-articles small { display: block; font-size: .75rem; }
-#watch-dialog a, .leaflet-container .watch-popup a:not(.leaflet-popup-close-button) {
+#watch-dialog a, .watch-popup a {
   color: #fde68a;
   overflow-wrap: anywhere;
   text-decoration: underline;
 }
-.watch-popup .leaflet-popup-content-wrapper, .watch-popup .leaflet-popup-tip {
+/* A map-frame panel stays usable even when a pin touches the map bounds. */
+.watch-popup {
+  position: absolute;
+  z-index: 755;
+  right: 14px;
+  bottom: 42px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(390px, calc(100% - 28px));
+  max-height: min(420px, calc(100% - 112px));
+  border: 1px solid #536f89;
+  border-radius: 14px;
   background: #122238;
   color: #f1f6fd;
+  box-shadow: 0 12px 28px #0006;
 }
-.watch-popup .leaflet-popup-content { max-width: calc(100vw - 95px); }
-.watch-popup .leaflet-popup-close-button { color: #f1f6fd !important; }
+.watch-popup.hidden { display: none; }
+.watch-popup header {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px 9px 16px;
+  border-bottom: 1px solid #415976;
+}
+.watch-popup h3 { font-size: 1rem; overflow-wrap: anywhere; }
+.watch-popup-close {
+  flex: 0 0 36px;
+  min-height: 36px;
+  font-size: 1.4rem;
+  color: inherit;
+  background: #203650;
+  border: 1px solid #536f89;
+  border-radius: 8px;
+}
+.watch-popup-articles {
+  min-height: 0;
+  padding: 12px 16px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.watch-popup-articles ul { margin: 0; }
+.watch-popup-articles h4 { margin: 0 0 6px; }
+.watch-popup-articles ul + h4 { margin-top: 14px; }
 @media (max-width: 640px) {
   .news-watch-tools { padding: 5px 8px; }
+  .watch-popup { right: 10px; bottom: 34px; width: calc(100% - 20px); max-height: min(340px, calc(100% - 104px)); }
   .news-watch-tools small { font-size: .7rem; }
 }

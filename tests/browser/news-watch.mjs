@@ -11,6 +11,9 @@ const items = [
   {title: 'Banjir di Meulaboh', topics: ['flood']},
   {title: 'Gempa di Jepang', topics: ['earthquake']},
   {title: 'Pemda di Bangka Belitung Diminta Tingkatkan Antisipasi Banjir', topics: ['flood']},
+  {title: '[KLARIFIKASI] Ini Video Tanah Longsor Sibolga pada 2025, Bukan 2026', topics: ['landslide']},
+  {title: 'Longsor Sibolga 2025, rumah tertimbun', topics: ['landslide']},
+  ...Array.from({length: 14}, (_, index) => ({title: `Banjir di Meulaboh: laporan desa ${index + 1}`, topics: ['flood']})),
 ].map((item, index) => ({
   ...item, source: 'ANTARA News', sourceId: 'antara',
   url: `https://www.antaranews.com/berita/${index}`,
@@ -45,8 +48,19 @@ try {
     const areaPopup = page.locator('.watch-popup');
     await areaPopup.getByRole('heading', {name: 'Meulaboh', exact: true}).waitFor();
     assert.equal(await areaPopup.getByText('Penanda wilayah', {exact: true}).count(), 0);
-    assert.equal(await areaPopup.getByRole('link', {name: 'Banjir di Meulaboh'}).getAttribute('href'), items[2].url);
-    await areaPopup.locator('.leaflet-popup-close-button').click();
+    assert.equal(await areaPopup.getByRole('link', {name: 'Banjir di Meulaboh', exact: true}).getAttribute('href'), items[2].url);
+    assert.ok(await areaPopup.evaluate(panel => {
+      const frame = panel.closest('.map-frame').getBoundingClientRect();
+      const bounds = panel.getBoundingClientRect();
+      const h = panel.querySelector('header').getBoundingClientRect();
+      const scroll = panel.querySelector('.watch-popup-articles');
+      const link = scroll.querySelector('a').getBoundingClientRect();
+      return bounds.top >= frame.top && bounds.bottom <= frame.bottom
+        && bounds.left >= frame.left && bounds.right <= frame.right
+        && h.top < link.top && scroll.scrollHeight > scroll.clientHeight
+        && panel.contains(document.elementFromPoint(link.left + 2, link.top + 2));
+    }));
+    await areaPopup.getByRole('button', {name: 'Tutup berita di peta'}).click();
     await areaPopup.waitFor({state: 'hidden'});
     assert.equal(await semarang.evaluate(node => getComputedStyle(node).backgroundColor), 'rgb(250, 204, 21)');
     await semarang.focus();
@@ -74,7 +88,7 @@ try {
     await dialog.getByRole('button', {name: 'Lihat titik dari penerbit'}).first().click();
     await popup.waitFor();
     assert.equal(await dialog.isVisible(), false);
-    // Leaflet can pan slightly to keep the popup entirely within the viewport.
+    // Open the panel without displacing the selected point.
     const center = (await page.locator('#map').getAttribute('data-view-center')).split(',').map(Number);
     assert.ok(center.every((value, index) => Math.abs(value - items[0].coords[index]) < .1));
     await markerToggle.click();

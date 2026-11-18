@@ -90,7 +90,7 @@ export function createNews({onUpdate = () => {}} = {}) {
       const next = await response.json();
       if (!Array.isArray(next.items) || !Number.isFinite(Date.parse(next.fetchedAt))) throw Error('Format sumber belum dapat dibaca.');
       const items = next.items.flatMap(item => {
-        const incident = classifyIncident(item.title);
+        const incident = classifyIncident(item.title, item.publishedAt, item.url);
         return incident ? [{...item, ...incident}] : [];
       }).sort(compareNewsArticles);
       data = {...next, items}; failed = Boolean(next.stale);

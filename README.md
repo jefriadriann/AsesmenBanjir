@@ -155,7 +155,7 @@ Jalankan preview terlebih dahulu dengan `npm run preview -- --port 3001 --strict
 
 ## Berita banjir dan tanah longsor
 
-Feed mencakup 16 sumber, termasuk BNPB, media nasional dan daerah, serta artikel situs editorial Folkative dan USS Feed yang ditemukan di indeks Google News. Nama akun, unggahan, dan metrik engagement dari Instagram, TikTok, atau X tidak diambil. Judul disaring untuk laporan kejadian banjir (termasuk rob) dan longsor. Imbauan, potensi, latihan, dan persiapan tanpa dampak yang sudah terjadi dikeluarkan. Laporan dengan korban, pengungsian, akses terputus, atau dampak skala besar diutamakan. Kurasi berdasarkan teks judul, sehingga rincian dampak yang hanya ada di isi artikel mungkin tidak terbaca.
+Feed mencakup 16 sumber, termasuk BNPB, media nasional dan daerah, serta artikel situs editorial Folkative dan USS Feed yang ditemukan di indeks Google News. Nama akun, unggahan, dan metrik engagement dari Instagram, TikTok, atau X tidak diambil. Judul disaring untuk laporan kejadian banjir (termasuk rob) dan longsor. Imbauan, potensi, latihan, persiapan tanpa dampak yang sudah terjadi, cek fakta, klarifikasi, dan publikasi ulang kejadian tahun lampau dikeluarkan. Laporan dengan korban, pengungsian, akses terputus, atau dampak skala besar diutamakan. Kurasi berdasarkan teks judul, sehingga rincian dampak yang hanya ada di isi artikel mungkin tidak terbaca.
 
 ANTARA, CNN Indonesia, dan detik mengambil RSS langsung serta hasil indeks. Sumber lain memakai indeks RSS per domain dengan pemeriksaan penerbit. URL dan judul yang sama dari penerbit yang sama digabung, dengan RSS langsung didahulukan agar metadata titik penerbit tetap tersedia. Artikel berumur lebih dari 14 hari disaring ketika snapshot baru dibuat. Hasil dibatasi hingga 300 artikel per snapshot berdasarkan ketersediaan indeks. Halaman menampilkan tiga headline lintas topik dan sumber, lalu memungkinkan pemuatan bertahap untuk daftar lainnya.
 
@@ -204,7 +204,7 @@ Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/play
 
 ## Penanda berita dan Prioritas Pantauan
 
-**Penanda berita** aktif saat peta dibuka. Sakelar ini bisa mematikan atau menampilkan lagi pin kuning. Koordinat dari RSS penerbit diutamakan. Bila kosong, judul dicocokkan dengan nama kota atau provinsi di daftar wilayah. Penanda memakai perkiraan pusat kota atau ibu kota provinsi sebagai titik acuan wilayah. Popup menampilkan nama wilayah. Artikel tanpa lokasi yang cocok tetap tersedia di menu **Berita kebencanaan**. Popup memuat sumber, waktu terbit dalam WIB, dan tautan artikel.
+**Penanda berita** aktif saat peta dibuka. Sakelar ini bisa mematikan atau menampilkan lagi pin kuning. Koordinat dari RSS penerbit diutamakan. Bila kosong, judul dicocokkan dengan nama kota atau provinsi di daftar wilayah. Penanda memakai perkiraan pusat kota atau ibu kota provinsi sebagai titik acuan wilayah. Popup menampilkan nama wilayah. Artikel tanpa lokasi yang cocok tetap tersedia di menu **Berita kebencanaan**. Panel berita berada di dalam bingkai peta. Judul dan tombol tutup tetap terlihat saat daftar sumber, waktu terbit (WIB), dan tautan artikel digulir.
 
 **Prioritas Pantauan** merangkum wilayah yang disebut dalam berita banjir dan tanah longsor. Urutan mendahulukan jumlah butir sarpras KPw setempat yang tercatat kurang atau tidak tersedia, kemudian waktu berita terbaru. Data kosong tetap ditampilkan sebagai belum tersedia. Daftar ini membantu tindak lanjut dan tidak menetapkan lokasi kejadian atau tingkat risiko banjir.
 
