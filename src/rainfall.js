@@ -11,8 +11,6 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
   const periods = rainfallPeriods();
   const panel = document.createElement('section'); panel.className = 'rainfall-panel hidden'; panel.setAttribute('aria-label', 'Prakiraan curah hujan Indonesia');
   panel.innerHTML = `<div class="rainfall-head"><div><span class="rainfall-kicker">PRAKIRAAN / INDONESIA</span><h2>Curah hujan</h2></div><button id="rainfall-close" aria-label="Tutup panel curah hujan"><i data-lucide="x"></i></button></div>
-    <p class="rainfall-source">${RAINFALL_SOURCE.name} · ${RAINFALL_SOURCE.resolution}<br>Run ${labelDate(RAINFALL_SOURCE.runDate)} · tanggal sumber UTC</p>
-    <p class="rainfall-source">CHIRPS3: inframerah satelit geostasioner dan data stasiun hujan. Prakiraan: model ensemble GEFS dari NOAA.</p>
     <label class="rainfall-period">Periode prakiraan<select id="rainfall-week" aria-label="Pekan prakiraan">${periods.map(period => `<option value="${period.id}">${period.label} · ${labelDate(period.start)} – ${labelDate(period.end)}</option>`).join('')}</select></label>
     <div id="rainfall-status" role="status">Menyiapkan prakiraan…</div>
     <p id="rainfall-expired" class="hidden">Periode prakiraan ini sudah berakhir. Data ditampilkan sebagai arsip run sumber.</p>
@@ -20,7 +18,8 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
     <div id="rainfall-point" role="status">Klik lokasi di peta untuk membaca nilai dari sel sumber.</div>
     <label class="rainfall-opacity">Opasitas layer <span id="rainfall-opacity-value">70%</span><input id="rainfall-opacity" aria-label="Opasitas curah hujan" type="range" min="0" max="100" value="70"></label>
     <div class="rainfall-actions"><button id="rainfall-retry">Muat ulang layer</button><button id="rainfall-off">Matikan layer</button></div>
-    <details><summary>Sumber & cara baca</summary><p>CHIRPS3-GEFS, run 17 November 2026, dari GeoTIFF pengguna. Rerata 7 hari; nilai negatif dan sel tanpa 7 hari lengkap di-mask. Angka titik dibaca pada grid sumber, bukan ditebak dari warna gambar.</p><p>Tile dirender ulang pada setiap tingkat zoom dari grid sumber, dengan interpolasi bilinear dalam proyeksi Web Mercator. Resolusi prakiraan tetap ±5,6 km; zoom tidak menambah ketelitian data. Batas Indonesia menggunakan Natural Earth skala 1:10 juta, berbeda dari LSIB 2017 pada script Earth Engine. Prakiraan curah hujan bukan kelas risiko banjir.</p></details>`;
+    <p class="rainfall-source">${RAINFALL_SOURCE.name} · ${RAINFALL_SOURCE.resolution}<br>Run ${labelDate(RAINFALL_SOURCE.runDate)} · tanggal sumber UTC</p>
+    <details><summary>Sumber & cara baca</summary><p>CHIRPS3: inframerah satelit geostasioner dan data stasiun hujan. Prakiraan: model ensemble GEFS dari NOAA.</p><p>CHIRPS3-GEFS, run 17 November 2026, dari GeoTIFF pengguna. Rerata 7 hari; nilai negatif dan sel tanpa 7 hari lengkap di-mask. Angka titik dibaca pada grid sumber, bukan ditebak dari warna gambar.</p><p>Tile dirender ulang pada setiap tingkat zoom dari grid sumber, dengan interpolasi bilinear dalam proyeksi Web Mercator. Resolusi prakiraan tetap ±5,6 km; zoom tidak menambah ketelitian data. Batas Indonesia menggunakan Natural Earth skala 1:10 juta, berbeda dari LSIB 2017 pada script Earth Engine. Prakiraan curah hujan bukan kelas risiko banjir.</p></details>`;
   panel.querySelector('.rainfall-gradient').style.background = `linear-gradient(90deg,${RAINFALL_SOURCE.palette.map(color => '#' + color).join(',')})`;
   document.querySelector('.map-frame').append(panel);
   map.createPane('rainfallOverlay'); map.getPane('rainfallOverlay').style.zIndex = 485; map.getPane('rainfallOverlay').style.pointerEvents = 'none';

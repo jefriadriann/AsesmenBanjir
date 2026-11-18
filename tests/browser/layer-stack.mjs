@@ -19,13 +19,17 @@ try{for(const width of [1440,390]){
  assert.equal(await page.getByRole('group',{name:'Risiko',exact:true}).locator('#inarisk-toggle').count(),1);
  const assessment=page.getByRole('group',{name:'Asesmen Risiko',exact:true});
  assert.equal(await assessment.locator('#rainfall-toggle, #slope-toggle').count(),2);
+ const expectButtonColor=(key,color)=>page.waitForFunction(({key,color})=>
+   getComputedStyle(document.querySelector('#'+key+'-toggle')).backgroundColor===color,{key,color},{timeout:4000});
  const count=key=>page.locator('.leaflet-'+pane[key]+'-pane>.leaflet-layer').count();
  for(const key of ['rainfall','slope']){
    await page.waitForFunction(id=>document.querySelector('#'+id+'-toggle')?.getAttribute('aria-pressed')==='true',key);
    assert.equal(await count(key),1);
+   await expectButtonColor(key,'rgb(221, 226, 231)');
    assert.equal(await page.locator('.'+key+'-panel').isHidden(),true);
  }
  assert.equal(await count('inarisk'),0);
+ await expectButtonColor('inarisk','rgb(36, 73, 110)');
  assert.deepEqual(await contextOpacity(),['1','1']);
  assert.equal(await page.locator('.leaflet-rainfallOverlay-pane>.leaflet-layer').evaluate(e=>e.style.opacity),'0.7');
  assert.equal(await page.locator('#slope-opacity').inputValue(),'100');
@@ -44,18 +48,19 @@ try{for(const width of [1440,390]){
  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
  await page.locator('#layer-settings').click();
  await page.locator('#rainfall-opacity').waitFor();
- assert.match(await page.locator('.rainfall-panel').innerText(), /inframerah satelit geostasioner/);
+ assert.match(await page.locator('.rainfall-panel details').textContent(), /inframerah satelit geostasioner/);
  await page.locator('.rainfall-panel [data-layer-panel="slope"]').click();
  assert.match(await page.locator('#slope-source').innerText(), /Radar pita C SRTM.*Endeavour/);
  await page.locator('#inarisk-toggle').click();
  await page.waitForFunction(()=>document.querySelector('#inarisk-toggle')?.getAttribute('aria-pressed')==='true');
  assert.deepEqual(await contextOpacity(),['0.1','0.1']);
+ await expectButtonColor('inarisk','rgb(221, 226, 231)');
  assert.equal(await page.locator('#inarisk-opacity').inputValue(),'100');
  await page.locator('#inarisk-close').click();
  assert.deepEqual(await contextOpacity(),['0.1','0.1']);
  await page.locator('#layer-settings').click();
  assert.deepEqual(await contextOpacity(),['1','1']);
- assert.equal(await floodOpacity(),'0.1');
+ assert.equal(await floodOpacity(),'1');
  for(const key of keys)assert.equal(await count(key),1);
  await page.locator('#risk-settings').click();
  assert.equal(await floodOpacity(),'1');
@@ -67,7 +72,7 @@ try{for(const width of [1440,390]){
  await page.locator('.inarisk-panel [data-layer-panel="rainfall"]').click();
  await page.locator('#rainfall-opacity').fill('35');
  assert.deepEqual(await contextOpacity(),['1','1']);
- assert.equal(await floodOpacity(),'0.1');
+ assert.equal(await floodOpacity(),'1');
  await page.locator('.rainfall-panel [data-layer-panel="slope"]').click();
  await page.locator('#slope-opacity').fill('45');
  await page.locator('.slope-panel [data-layer-panel="inarisk"]').click();
@@ -76,6 +81,7 @@ try{for(const width of [1440,390]){
  // Buttons must turn off their own raster even while its panel is hidden.
  for(const key of ['rainfall','slope','inarisk']){await page.locator('#'+key+'-toggle').click();assert.equal(await count(key),0);assert.equal(await page.locator('#'+key+'-toggle').getAttribute('aria-pressed'),'false');for(const remaining of keys.slice(keys.indexOf(key)+1))assert.equal(await count(remaining),1);}
  assert.deepEqual(await contextOpacity(),['1','1']);
+ for(const key of keys)await expectButtonColor(key,'rgb(36, 73, 110)');
  // Reverse activation order catches cross-layer side effects.
  for(const key of [...keys].reverse()){await page.locator('#'+key+'-toggle').click();await page.waitForFunction(id=>document.querySelector('#'+id+'-toggle')?.getAttribute('aria-pressed')==='true',key);}
  for(const key of keys)assert.equal(await count(key),1);
