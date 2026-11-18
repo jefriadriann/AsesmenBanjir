@@ -126,20 +126,7 @@ export function groupPublisherPoints(articles) {
   return [...points.values()];
 }
 
-function nearestOffice(area, offices) {
-  const [lat, lng] = area.coords;
-  const scale = Math.cos(lat * Math.PI / 180);
-  let nearest, distance = Infinity;
-  for (const office of offices) {
-    if (!area.region || office.region !== area.region) continue;
-    const [officeLat, officeLng] = office.coords;
-    const candidate = Math.hypot(officeLat - lat, (officeLng - lng) * scale);
-    if (candidate < distance) { nearest = office; distance = candidate; }
-  }
-  return nearest;
-}
-
-export function groupNewsPoints(articles, areas, references = [], offices = []) {
+export function groupNewsPoints(articles, areas, references = []) {
   const direct = groupPublisherPoints(articles.filter(isWatchArticle));
   for (const point of direct) point.region = nearbyNewsRegion(point.coords, references);
   const located = new Set(direct.flatMap(point => point.articles.map(article => article.url)));
@@ -149,8 +136,7 @@ export function groupNewsPoints(articles, areas, references = [], offices = []) 
     if (!area.coords || !matches.length) continue;
     const key = `wilayah:${area.region ?? ''}:${area.coords.join(',')}`;
     if (!fallback.has(key)) {
-      const office = nearestOffice(area, offices);
-      fallback.set(key, {key, coords: office?.coords ?? area.coords, office, region: area.region, areas: [], articles: []});
+      fallback.set(key, {key, coords: area.coords, region: area.region, areas: [], articles: []});
     }
     const point = fallback.get(key);
     point.areas.push(area);

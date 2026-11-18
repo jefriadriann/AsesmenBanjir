@@ -135,19 +135,14 @@ test('national alerts reserve places for regions with eligible reports', () => {
   assert.ok(national.some(point => point.key === 'jabar'));
 });
 
-test('source coordinates take precedence; fallback anchors use the nearest BI office in the same region', () => {
+test('publisher coordinates take precedence and Aceh Singkil falls back to its own area', () => {
   const direct = {...story('Longsor di Bogor', 'direct'), via: 'RSS', coords: [-6.6, 106.81], impact: 2};
-  const fallback = {...story('Banjir di Bogor, 200 rumah terendam', 'fallback'), impact: 2};
+  const fallback = {...story('Banjir Aceh Singkil berdampak ke 13.720 jiwa', 'fallback'), impact: 2};
+  const locations = [{id: 'SIB', type: 'kpw', name: 'Sibolga', city: 'Sibolga',
+    region: 'Sumatera', legacyCityCoords: [1.74, 98.78]}];
   const articles = [direct, fallback];
-  const offices = [
-    {id: 'other-region', region: 'Sumatera', coords: [-6.60, 106.80]},
-    {id: 'JKT', region: 'Jawa', coords: [-6.18, 106.83]},
-    {id: 'BDG', region: 'Jawa', coords: [-6.91, 107.61]},
-  ];
-  const points = groupNewsPoints(articles, matchNewsCities([], articles), [], offices);
-  assert.deepEqual(points[0].coords, direct.coords);
-  assert.equal(points[0].office, undefined);
-  assert.equal(points[1].office.id, 'JKT');
-  assert.deepEqual(points[1].coords, offices[1].coords);
-  assert.deepEqual(points[1].areas[0].coords, [-6.60, 106.80]);
+  const [publisher, area] = groupNewsPoints(articles, matchNewsCities(locations, articles));
+  assert.deepEqual(publisher.coords, direct.coords);
+  assert.deepEqual(area.areas.map(item => item.name), ['Aceh Singkil']);
+  assert.deepEqual(area.coords, [2.29, 97.79]);
 });
