@@ -107,13 +107,12 @@ regionControl.onAdd = () => {
  toggle.type = 'button';
  toggle.setAttribute('aria-expanded', 'true');
  toggle.setAttribute('aria-controls', 'map-region-options');
- toggle.textContent = 'Korwil −';
+ toggle.textContent = 'Korwil';
  const group = L.DomUtil.create('div', 'map-region-options', control);
  group.id = 'map-region-options';
  toggle.onclick = () => {
    group.hidden = !group.hidden;
    toggle.setAttribute('aria-expanded', String(!group.hidden));
-   toggle.textContent = group.hidden ? 'Korwil +' : 'Korwil −';
  };
  group.setAttribute('role', 'group');
  group.setAttribute('aria-label', 'Korwil jaringan pada peta');
