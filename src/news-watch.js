@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {groupPublisherPoints, matchNewsCities, rankNewsWatch} from './news-watch-data.js';
+import {groupNewsPoints, matchNewsCities, rankNewsWatch} from './news-watch-data.js';
 import './news-watch.css';
 
 const formatDate = new Intl.DateTimeFormat('id-ID', {
@@ -64,7 +64,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     const stale = data && (data.stale || error || data.items.some(article => article.stale));
     mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
       : error && !data ? 'Berita belum tersedia'
-        : `${points.length ? points.length + ' titik dari penerbit' : 'Belum ada koordinat berita dari penerbit'}${stale ? ' · salinan terakhir tersedia' : ''}`;
+        : `${points.length ? points.length + ' penanda berita' : 'Belum ada lokasi berita yang cocok'}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
   }
@@ -94,8 +94,9 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       if (!city.offices.length) card.append(element('p', 'Tidak ada KPw yang tercatat di wilayah ini.'));
       card.append(articleList(city.articles));
       const urls = new Set(city.articles.map(article => article.url));
-      for (const point of points.filter(point => point.articles.some(article => urls.has(article.url)))) {
-        const show = element('button', 'Lihat titik dari penerbit');
+      for (const point of points.filter(point => (!point.areas || point.areas.some(area => area.key === city.key))
+        && point.articles.some(article => urls.has(article.url)))) {
+        const show = element('button', point.areas ? 'Lihat penanda wilayah' : 'Lihat titik dari penerbit');
         show.type = 'button';
         show.onclick = () => {
           setEnabled(true);
@@ -131,11 +132,11 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       snapshot = next;
       if (changed) {
         cities = matchNewsCities(locations, snapshot.data?.items ?? []);
-        points = groupPublisherPoints(snapshot.data?.items ?? []);
+        points = groupNewsPoints(snapshot.data?.items ?? [], cities);
         layer.clearLayers();
         markers.clear();
         for (const point of points) {
-          const label = `Berita: ${point.articles[0].title}`;
+          const label = `Berita: ${point.areas?.map(area => area.name).join(' / ') ?? point.articles[0].title}`;
           const marker = L.marker(point.coords, {
             pane: 'newsCities',
             title: label,
@@ -147,7 +148,17 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
           marker.on('add', () => marker.getElement().setAttribute('aria-label', label));
           marker.bindPopup(() => {
             const popup = element('div');
-            popup.append(element('h3', 'Berita di titik ini'), element('p', 'Koordinat dicantumkan oleh penerbit.'), articleList(point.articles));
+            if (point.areas) {
+              popup.append(element('h3', 'Penanda wilayah'), element('p', 'Titik acuan wilayah. Lokasi persis kejadian belum diketahui.'));
+              for (const area of point.areas) {
+                const urls = new Set(point.articles.map(article => article.url));
+                popup.append(element('h4', area.kind === 'province'
+                  ? `${area.name} · ibu kota ${area.capital}` : `${area.name} · pusat wilayah`),
+                articleList(area.articles.filter(article => urls.has(article.url))));
+              }
+            } else {
+              popup.append(element('h3', 'Berita di titik ini'), element('p', 'Koordinat dicantumkan oleh penerbit.'), articleList(point.articles));
+            }
             return popup;
           }, {className: 'watch-popup', maxWidth: 290, maxHeight: 260});
           layer.addLayer(marker);

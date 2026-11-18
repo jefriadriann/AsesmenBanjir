@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {groupPublisherPoints, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
+import {groupNewsPoints, groupPublisherPoints, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
 
 const locations = [
   {id: 'kpw-a', type: 'kpw', city: 'Jakarta', legacyCityCoords: [-6.18, 106.83]},
@@ -58,4 +58,29 @@ test('only valid coordinates supplied by a publisher produce map points', () => 
   assert.deepEqual(points.map(point => [point.coords, point.articles.map(item => item.url)]), [
     [[-6.2, 106.8], [direct.url]],
   ]);
+});
+
+test('maps city and provincial coverage to reference centres when RSS has no coordinates', () => {
+  const city = story('Longsor di Bogor, Jawa Barat', 'bogor');
+  const province = story('Banjir melanda Kalimantan Utara', 'kaltara');
+  const sameCapital = story('Banjir di Tanjung Selor', 'selor');
+  const direct = {...story('Banjir Jakarta', 'rss'), via: 'RSS', coords: [-6.3, 106.9]};
+  const articles = [city, province, sameCapital, direct, story('Longsor tanpa nama wilayah', 'unknown')];
+  const areas = matchNewsCities(locations, articles);
+  const points = groupNewsPoints(articles, areas);
+  assert.equal(points.length, 3);
+  assert.deepEqual(points[0].coords, [-6.3, 106.9]);
+  const bogor = points.find(point => point.articles.some(item => item.url === city.url));
+  assert.deepEqual(bogor.coords, [-6.60, 106.80]);
+  assert.deepEqual(bogor.areas.map(area => area.name), ['Bogor']);
+  const kaltara = points.find(point => point.articles.some(item => item.url === province.url));
+  assert.deepEqual(kaltara.coords, [2.84, 117.37]);
+  assert.deepEqual(kaltara.areas.map(area => [area.name, area.capital]), [
+    ['Tanjung Selor', undefined], ['Kalimantan Utara', 'Tanjung Selor'],
+  ]);
+});
+
+test('more specific names do not create a separate pin for a province substring', () => {
+  const articles = [story('Banjir di Banda Aceh dan Papua Barat Daya', 'specific')];
+  assert.deepEqual(matchNewsCities(locations, articles).map(area => area.name), ['Banda Aceh', 'Papua Barat Daya']);
 });

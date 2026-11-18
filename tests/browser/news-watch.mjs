@@ -38,7 +38,16 @@ try {
     await markerToggle.click();
     const semarang = page.getByRole('button', {name: 'Berita: Banjir di Semarang'});
     await semarang.waitFor();
-    assert.equal(await page.locator('.news-city-marker').count(), 1);
+    assert.equal(await page.locator('.news-city-marker').count(), 2);
+    const meulaboh = page.getByRole('button', {name: 'Berita: Meulaboh'});
+    await meulaboh.focus();
+    await page.keyboard.press('Enter');
+    const areaPopup = page.locator('.watch-popup');
+    await areaPopup.getByText('Meulaboh · pusat wilayah').waitFor();
+    assert.match(await areaPopup.innerText(), /Lokasi persis kejadian belum diketahui/);
+    assert.equal(await areaPopup.getByRole('link', {name: 'Banjir di Meulaboh'}).getAttribute('href'), items[2].url);
+    await areaPopup.locator('.leaflet-popup-close-button').click();
+    await areaPopup.waitFor({state: 'hidden'});
     assert.equal(await semarang.evaluate(node => getComputedStyle(node).backgroundColor), 'rgb(250, 204, 21)');
     await semarang.focus();
     await page.keyboard.press('Enter');
@@ -65,7 +74,9 @@ try {
     await dialog.getByRole('button', {name: 'Lihat titik dari penerbit'}).first().click();
     await popup.waitFor();
     assert.equal(await dialog.isVisible(), false);
-    assert.equal(await page.locator('#map').getAttribute('data-view-center'), '-7.010000,110.410000');
+    // Leaflet can pan slightly to keep the popup entirely within the viewport.
+    const center = (await page.locator('#map').getAttribute('data-view-center')).split(',').map(Number);
+    assert.ok(center.every((value, index) => Math.abs(value - items[0].coords[index]) < .1));
     await markerToggle.click();
     assert.equal(await page.locator('.news-city-marker').count(), 0);
     await popup.waitFor({state: 'hidden'});
