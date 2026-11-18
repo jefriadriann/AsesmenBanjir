@@ -51,7 +51,7 @@ try {
   await korwil.getByRole('button', {name: 'Semua'}).click();
   assert.equal(await page.locator('#visible-count').textContent(), '133');
   assert.equal(await page.locator('#data-nav, #distance-nav, #mobile-distance-nav').count(), 0);
-  assert.match(await page.locator('.nav-placeholder').textContent(), /X/);
+  assert.equal(await page.locator('.nav-placeholder').count(), 0);
   await page.locator('#map-measure').click();
   assert.equal(await page.locator('#distance-panel select').count(), 0);
   const map = await page.locator('#map').boundingBox();

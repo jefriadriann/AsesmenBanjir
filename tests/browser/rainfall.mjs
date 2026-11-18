@@ -51,12 +51,17 @@ try {
     assert.equal(await image.count(),1);
     const painted = await image.locator('canvas').evaluateAll(tiles=>tiles.some(tile=>{const data=tile.getContext('2d').getImageData(0,0,256,256).data;for(let n=3;n<data.length;n+=4)if(data[n])return true;return false;}));
     assert.ok(painted, 'rainfall still renders after zoom');
-    const beforePan = await image.locator('canvas').evaluateAll(tiles=>tiles.map(tile=>tile.dataset.tile).join(','));
+    await page.locator('.marker-container').first().evaluate(marker=>{marker.dataset.panTest='retained';});
     const box = await page.locator('#map').boundingBox();
     await page.mouse.move(box.x+box.width*.5,box.y+box.height*.4);await page.mouse.down();await page.mouse.move(box.x+box.width*.5+80,box.y+box.height*.4+20,{steps:8});await page.mouse.up();
     await page.waitForTimeout(500);
     assert.equal(await image.count(),1);
     assert.ok(await image.locator('canvas').count()>0);
+    assert.equal(await page.locator('.marker-container[data-pan-test="retained"]').count(),1);
+    const zoomedIn = Number(await page.locator('#map').getAttribute('data-view-zoom'));
+    await page.locator('#zoom-out').click();
+    await page.waitForFunction(zoom=>Number(document.querySelector('#map').dataset.viewZoom)<zoom,zoomedIn);
+    assert.equal(await image.count(),1);
     await page.locator('#rainfall-toggle').click();
     assert.equal(await image.count(), 0);
     await page.locator('#rainfall-toggle').click();
