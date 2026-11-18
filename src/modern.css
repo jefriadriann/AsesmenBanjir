@@ -4,8 +4,6 @@
 :root[data-theme] .topbar{background:linear-gradient(105deg,#101d2e 5%,#1b3049 74%,#263f5b)!important;border-bottom:1px solid #3a526c!important;box-shadow:0 4px 20px #06225112}
 :root[data-theme] .sidebar .nav-item{border-radius:11px;padding-top:13px;padding-bottom:13px;font-size:13px;color:#dae8ff!important;transition:background .15s ease}
 :root[data-theme] .sidebar .nav-item.active{background:linear-gradient(100deg,#243b55,#304c67)!important;border-color:#526e89!important;box-shadow:inset 3px 0 0 #c8b182,0 7px 18px #000a1822!important;color:#fff!important}
-:root[data-theme] .nav-placeholder{opacity:.55;display:flex;align-items:center;justify-content:space-between;cursor:default}
-.nav-placeholder small{font-size:10px;font-weight:500}
 :root[data-theme] .sidebar .nav-label{letter-spacing:2px;color:#9eb4cb!important}
 :root[data-theme] .theme-toggle{border-color:#4b6ca2!important}
 :root[data-theme] .topbar h1{color:#fff!important;font-weight:750;letter-spacing:-.5px}
@@ -40,9 +38,8 @@
 .distance-panel .distance-result{margin:0;padding-top:12px;border-color:#425b75}.distance-panel .distance-result-label{color:#b8cddd;font-size:10px}.distance-panel .distance-number{font-size:30px;color:#c8b182;letter-spacing:-1px;margin:6px 0 14px}
 .measure-actions{display:flex;flex-wrap:wrap;gap:7px}.measure-actions button{display:flex;align-items:center;gap:5px;font-size:11px;color:#fff;padding:9px 10px;border:1px solid #536f89;border-radius:8px;background:#ffffff0d}.measure-actions button svg{width:13px;height:13px}.measure-actions button:disabled{opacity:.4;cursor:default}.measure-actions #distance-finish:not(:disabled){background:#365776;border-color:#7492ad}.distance-panel .distance-method{font-size:11px;line-height:1.6;color:#bccedf;border-color:#425b75;margin-bottom:0}
 .map-measure-button:focus-visible,.measure-actions button:focus-visible{outline:3px solid #c8b182;outline-offset:3px}
-@media(max-width:1050px) and (min-width:641px){:root[data-theme] .sidebar .nav-item{font-size:11px}.nav-placeholder small{display:none}}
+@media(max-width:1050px) and (min-width:641px){:root[data-theme] .sidebar .nav-item{font-size:11px}}
 @media(max-width:640px){.map-measure-button{right:11px;top:62px;padding:9px 11px;font-size:11px}:root[data-theme] .distance-panel{left:10px;right:10px;bottom:65px;width:auto;max-width:310px;padding:14px;max-height:calc(100% - 135px)}.distance-panel .distance-intro{font-size:12px;margin:9px 0}.distance-panel .distance-number{font-size:25px;margin-bottom:10px}.distance-panel .distance-method{font-size:10px}.measure-actions button{padding:8px}.distance-head h2{font-size:19px}.distance-panel .distance-result{padding-top:9px}}
-@media(max-width:640px){:root[data-theme] .sidebar .nav-placeholder{display:none!important}}
 /* Basemap selection occupies the cleared lower-left corner. */
 .map-bottom{left:18px;right:auto;justify-content:flex-start}
 .layer-menu{left:18px;right:auto;max-width:calc(100% - 36px)}
