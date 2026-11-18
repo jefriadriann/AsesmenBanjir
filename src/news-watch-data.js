@@ -1,3 +1,4 @@
+import {compareNewsArticles} from './news-data.js';
 import {newsPoint} from './news-location.js';
 import {extraCities, provinceCapitals} from './news-areas.js';
 import {floodSummary} from './flood-readiness.js';
@@ -93,7 +94,7 @@ export function matchNewsCities(locations, articles) {
 
   return [...cities.values()].filter(city => city.articles.length).map(city => ({
     ...city,
-    articles: city.articles.sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)),
+    articles: city.articles.sort(compareNewsArticles),
   }));
 }
 
@@ -105,7 +106,7 @@ export function rankNewsWatch(cities, readiness) {
     const gaps = offices.reduce((total, {summary}) => total + summary.gaps, 0);
     return [{...city, articles, offices, gaps}];
   }).sort((a, b) => b.gaps - a.gaps
-    || Date.parse(b.articles[0].publishedAt) - Date.parse(a.articles[0].publishedAt)
+    || compareNewsArticles(a.articles[0], b.articles[0])
     || a.name.localeCompare(b.name, 'id'));
 }
 

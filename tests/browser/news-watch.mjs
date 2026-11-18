@@ -10,6 +10,7 @@ const items = [
   {title: 'Hujan di Semarang', topics: ['weather']},
   {title: 'Banjir di Meulaboh', topics: ['flood']},
   {title: 'Gempa di Jepang', topics: ['earthquake']},
+  {title: 'Pemda di Bangka Belitung Diminta Tingkatkan Antisipasi Banjir', topics: ['flood']},
 ].map((item, index) => ({
   ...item, source: 'ANTARA News', sourceId: 'antara',
   url: `https://www.antaranews.com/berita/${index}`,

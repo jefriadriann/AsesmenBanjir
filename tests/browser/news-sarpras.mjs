@@ -9,6 +9,7 @@ const stories = [
   ['Banjir pesisir Semarang', 'metro', 'Metro TV', 'flood'],
   ['Longsor di Bogor', 'folkative', 'Folkative', 'landslide'],
   ...Array.from({length: 38}, (_, index) => [`Longsor di lokasi ${index}`, 'ussfeed', 'USS Feed', 'landslide']),
+  ['BPBD Ingatkan Ancaman Longsor di Bogor', 'antara', 'ANTARA News', 'landslide'],
   ['Earthquake hits Japan', 'reuters', 'Reuters', 'earthquake'],
   ['Climate and drought response', 'ap', 'Associated Press', 'climate'],
   ['BMKG: hujan lebat', 'bbc', 'BBC', 'weather'],
@@ -37,6 +38,7 @@ try {
     assert.match(await page.locator('.news-headline').nth(1).innerText(), /situs editorial/);
     assert.match(await page.locator('.news-schedule').innerText(), /30 menit/);
     assert.equal(await page.getByText('Earthquake hits Japan', {exact: true}).count(), 0);
+    assert.equal(await page.getByText('BPBD Ingatkan Ancaman Longsor di Bogor', {exact: true}).count(), 0);
     await page.locator('#news-more').click();
     assert.equal(await page.locator('.news-card').count(), 42);
     assert.equal(await page.locator('#news-more').isVisible(), false);

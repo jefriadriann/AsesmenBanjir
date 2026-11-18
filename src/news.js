@@ -1,5 +1,5 @@
 import './news.css';
-import {NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, NEWS_SOURCES, NEWS_TOPICS, filterNews, selectHeadlines} from './news-data.js';
+import {NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, NEWS_SOURCES, NEWS_TOPICS, classifyIncident, compareNewsArticles, filterNews, selectHeadlines} from './news-data.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char]));
 const date = value => new Intl.DateTimeFormat('id-ID', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Jakarta'}).format(new Date(value)) + ' WIB';
@@ -49,7 +49,7 @@ export function createNews({onUpdate = () => {}} = {}) {
   function render() {
     onUpdate({data, loading, error});
     const failedSources = data?.sources?.filter(item => item.status === 'unavailable') || [];
-    host.innerHTML = `<div class="news-heading"><div><span class="news-eyebrow">RUANG RISIKO / NEWSROOM</span><h1>Berita kebencanaan</h1><p>Liputan banjir dan tanah longsor dari media nasional, daerah, dan kanal editorial.</p></div><button id="news-refresh" ${loading ? 'disabled' : ''}>${loading ? 'Memuat…' : 'Perbarui berita'}</button></div>
+    host.innerHTML = `<div class="news-heading"><div><span class="news-eyebrow">RUANG RISIKO / NEWSROOM</span><h1>Berita kebencanaan</h1><p>Laporan kejadian banjir dan tanah longsor dari media nasional, daerah, dan kanal editorial.</p></div><button id="news-refresh" ${loading ? 'disabled' : ''}>${loading ? 'Memuat…' : 'Perbarui berita'}</button></div>
       <div class="news-schedule"><span class="news-live-dot"></span><strong>Otomatis setiap ${NEWS_REFRESH_MINUTES} menit</strong><span>Tanpa email atau notifikasi.</span><small>Berjalan saat halaman terbuka; data kedaluwarsa diperbarui saat dibuka kembali.</small></div>
       <div class="news-tools"><label class="news-search-label">Cari berita<input id="news-search" type="search" placeholder="Banjir, longsor, atau nama wilayah…" value="${esc(query)}"></label>
       <label>Topik<select id="news-topic"><option value="all">Banjir &amp; tanah longsor</option>${NEWS_TOPICS.map(item => `<option value="${item.id}" ${topic === item.id ? 'selected' : ''}>${item.label}</option>`).join('')}</select></label>
@@ -89,7 +89,11 @@ export function createNews({onUpdate = () => {}} = {}) {
       if (!response.ok) throw Error('Sumber berita belum dapat dihubungi.');
       const next = await response.json();
       if (!Array.isArray(next.items) || !Number.isFinite(Date.parse(next.fetchedAt))) throw Error('Format sumber belum dapat dibaca.');
-      data = next; failed = Boolean(next.stale);
+      const items = next.items.flatMap(item => {
+        const incident = classifyIncident(item.title);
+        return incident ? [{...item, ...incident}] : [];
+      }).sort(compareNewsArticles);
+      data = {...next, items}; failed = Boolean(next.stale);
     } catch (failure) { error = failure.message + ' Coba perbarui lagi.'; failed = true; }
     finally { loading = false; render(); schedule(failed); }
   }

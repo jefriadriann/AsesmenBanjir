@@ -155,7 +155,7 @@ Jalankan preview terlebih dahulu dengan `npm run preview -- --port 3001 --strict
 
 ## Berita banjir dan tanah longsor
 
-Feed mencakup 16 sumber, termasuk BNPB, media nasional dan daerah, serta artikel situs editorial Folkative dan USS Feed yang ditemukan di indeks Google News. Nama akun, unggahan, dan metrik engagement dari Instagram, TikTok, atau X tidak diambil. Judul disaring untuk topik banjir dan tanah longsor, termasuk banjir rob, dan istilah kiasan umum seperti “banjir diskon” dikeluarkan.
+Feed mencakup 16 sumber, termasuk BNPB, media nasional dan daerah, serta artikel situs editorial Folkative dan USS Feed yang ditemukan di indeks Google News. Nama akun, unggahan, dan metrik engagement dari Instagram, TikTok, atau X tidak diambil. Judul disaring untuk laporan kejadian banjir (termasuk rob) dan longsor. Imbauan, potensi, latihan, dan persiapan tanpa dampak yang sudah terjadi dikeluarkan. Laporan dengan korban, pengungsian, akses terputus, atau dampak skala besar diutamakan. Kurasi berdasarkan teks judul, sehingga rincian dampak yang hanya ada di isi artikel mungkin tidak terbaca.
 
 ANTARA, CNN Indonesia, dan detik mengambil RSS langsung serta hasil indeks. Sumber lain memakai indeks RSS per domain dengan pemeriksaan penerbit. URL dan judul yang sama dari penerbit yang sama digabung, dengan RSS langsung didahulukan agar metadata titik penerbit tetap tersedia. Artikel berumur lebih dari 14 hari disaring ketika snapshot baru dibuat. Hasil dibatasi hingga 300 artikel per snapshot berdasarkan ketersediaan indeks. Halaman menampilkan tiga headline lintas topik dan sumber, lalu memungkinkan pemuatan bertahap untuk daftar lainnya.
 

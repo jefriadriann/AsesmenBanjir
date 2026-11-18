@@ -6,7 +6,7 @@ test('news preserves source metadata and images and filters unrelated stories',(
 test('news rejects unsafe links, malformed XML and external entities',()=>{assert.deepEqual(parseNews(`<rss><channel>${article('Gempa','javascript:alert(1)')}</channel></rss>`),[]);assert.equal(safeUrl('https://antaranews.com.evil.test/a',['antaranews.com']),null);assert.equal(safeUrl('https://user:pass@www.antaranews.com/a',['antaranews.com']),null);assert.throws(()=>parseNews('<rss>'));assert.throws(()=>parseNews('<!DOCTYPE rss [<!ENTITY a SYSTEM "file:///etc/passwd">]><rss/>'));});
 
 import {createNewsLoader, indexedFeed} from '../api/news.js';
-import {NEWS_REFRESH_MS, NEWS_SOURCES, classifyNews, filterNews, selectHeadlines} from '../src/news-data.js';
+import {NEWS_REFRESH_MS, NEWS_SOURCES, classifyIncident, compareNewsArticles, classifyNews, filterNews, selectHeadlines} from '../src/news-data.js';
 const rss = items => `<rss><channel>${items}</channel></rss>`;
 const indexedItem = (publisher, title = 'Flood displaces residents') => `<item><title>${title} - ${publisher.name}</title><link>https://news.google.com/rss/articles/${publisher.id}</link><source url="https://www.${publisher.domain}">${publisher.name}</source><pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate></item>`;
 
@@ -131,4 +131,33 @@ test('merges direct and indexed feeds and keeps publisher coordinates on duplica
   assert.deepEqual(data.items.map(item => [item.title, item.coords]), [
     ['Banjir Jakarta', [-6.2, 106.8]], ['Longsor Bogor', undefined],
   ]);
+});
+
+test('rejects preparedness and forecasts without discarding reports of confirmed impacts', () => {
+  for (const title of [
+    'Pemda di Bangka Belitung Diminta Tingkatkan Antisipasi Banjir',
+    'Musim Hujan Mulai Tiba, BPBD Babel Ingatkan Ancaman Banjir hingga Pohon Tumbang',
+    'BPBD Bangka Belitung Ingatkan Daerah Segera Tangani Titik Rawan Banjir',
+    'Banjir diprediksi akan melanda Jakarta',
+    'Waspada, ratusan rumah bisa terendam banjir',
+    'Simulasi banjir, warga dievakuasi dengan perahu',
+    'Pemkab siapkan posko jika warga mengungsi akibat longsor',
+  ]) assert.equal(classifyIncident(title), null, title);
+
+  for (const title of [
+    'Siapkan Bantuan untuk 300 Warga Terdampak Banjir di Aceh',
+    'Banjir melanda Semarang, 3 rumah terendam',
+    'Longsor timbun dua rumah di Bogor',
+    'Jembatan Putus akibat Longsor di Cianjur',
+    'Pascabanjir di Aceh, warga mulai membersihkan rumah',
+  ]) assert.ok(classifyIncident(title), title);
+});
+
+test('reports of significant impact outrank newer unquantified coverage', () => {
+  const stories = [
+    {title: 'Banjir di Jakarta', publishedAt: '2026-11-18T08:00:00Z'},
+    {title: 'Longsor di Bogor, 2 warga tertimbun', publishedAt: '2026-11-18T07:00:00Z'},
+    {title: 'Banjir di Aceh, 250 rumah terendam', publishedAt: '2026-11-18T06:00:00Z'},
+  ].map(item => ({...item, ...classifyIncident(item.title)}));
+  assert.deepEqual(stories.sort(compareNewsArticles).map(item => item.impact), [2, 2, 0]);
 });

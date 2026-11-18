@@ -1,6 +1,6 @@
 import {publisherPoint} from '../src/news-location.js';
 import {XMLParser, XMLValidator} from 'fast-xml-parser';
-import {NEWS_SOURCES, NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, classifyNews} from '../src/news-data.js';
+import {NEWS_SOURCES, NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, classifyIncident, compareNewsArticles} from '../src/news-data.js';
 
 const DIRECT_FEEDS = {
   antara: 'https://www.antaranews.com/rss/terkini.xml',
@@ -38,13 +38,13 @@ export function parseNews(xml, source = NEWS_SOURCES[0], indexed = false) {
     const url = safeUrl(text(item.link), indexed ? ['news.google.com', source.domain] : [source.domain]);
     const description = text(item.description);
     const published = Date.parse(text(item.pubDate));
-    const topics = classifyNews(title);
-    if (!url || !title || !topics.length || !Number.isFinite(published)) return [];
+    const incident = classifyIncident(title);
+    if (!url || !incident || !Number.isFinite(published)) return [];
     const media = item['media:group'] || item;
     const image = item.enclosure?.['@_url'] || media['media:content']?.['@_url'] || media['media:thumbnail']?.['@_url'] || description.match(/<img[^>]+src=["']([^"']+)/i)?.[1];
     // Only the publisher's item-level GeoRSS point can place an article.
     const coords = indexed ? null : publisherPoint(text(item['georss:point']));
-    return [{title, url, ...(coords && {coords}), source: source.name, sourceId: source.id, publishedAt: new Date(published).toISOString(), image: safeUrl(image, IMAGE_HOSTS), summary: indexed ? '' : clean(description).slice(0, 240), topics, via: indexed ? 'Google News' : 'RSS'}];
+    return [{title, url, ...(coords && {coords}), source: source.name, sourceId: source.id, publishedAt: new Date(published).toISOString(), image: safeUrl(image, IMAGE_HOSTS), summary: indexed ? '' : clean(description).slice(0, 240), ...incident, via: indexed ? 'Google News' : 'RSS'}];
   });
 }
 async function readFeed(fetcher, url, source, indexed) {
@@ -88,8 +88,7 @@ export function createNewsLoader({fetcher = fetch, now = Date.now} = {}) {
         headlines.add(key);
         items.push(item);
       }
-      items.sort((a, b) => Number(Boolean(a.stale)) - Number(Boolean(b.stale))
-        || Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+      items.sort(compareNewsArticles);
       cached = {items: items.slice(0, 300), sources, fetchedAt: new Date(time).toISOString(),
         nextRefreshAt: new Date(time + NEWS_REFRESH_MS).toISOString(), refreshIntervalMinutes: NEWS_REFRESH_MINUTES,
         partial: successful.length < NEWS_SOURCES.length, stale: false};
