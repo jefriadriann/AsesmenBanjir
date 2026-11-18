@@ -1,6 +1,6 @@
 # Ruang Risiko · Peta Risiko Banjir
 
-**Data koordinat terkini:** impor file pengguna `Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx`. 52 titik tersedia (44 siap ditinjau, 8 perlu konfirmasi); 81 lokasi belum memiliki koordinat. Bagian sejarah di bawah yang menyebut semua titik pusat kota sudah digantikan impor ini. Tidak ada status yang dipromosikan menjadi verified.
+**Data koordinat terkini:** impor file pengguna `Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx`. 52 titik tersedia (44 siap ditinjau, 8 perlu konfirmasi); 81 lokasi belum memiliki koordinat. Peta memakai cadangan pusat wilayah untuk 81 lokasi tersebut dan melabelinya dengan ≈. Tidak ada status yang dipromosikan menjadi verified.
 
 Workspace peta jaringan kas Indonesia. Vite, Leaflet, font lokal DM Sans/Manrope, peta jalan OpenStreetMap, dan peta sederhana Natural Earth. Tidak memerlukan API key berbayar.
 
@@ -80,7 +80,7 @@ Popup KPw di peta menampilkan ringkasan kondisi dan empat kategori sarpras dari 
 
 - `ready_for_review`: 44 titik berstatus Siap ditinjau di Excel; bukan verifikasi independen.
 - `needs_confirmation`: 8 titik kandidat berstatus Perlu diperiksa, diberi tanda ! dan label Perlu konfirmasi.
-- `not_found`: 81 lokasi tanpa koordinat, tetap ada di daftar/filter dan detail tetapi tidak diberi marker palsu atau titik pusat kota pengganti. Endpoint ini dinonaktifkan di pengukuran.
+- `not_found`: 81 lokasi tanpa koordinat, tetap ada di daftar/filter dan detail tetapi memakai penanda pusat wilayah berlabel ≈. Titik cadangan ini tidak dipakai sebagai koordinat gedung dalam pengukuran.
 - `coords` memuat koordinat kiriman atau null. `legacyCityCoords` menyimpan perkiraan lama hanya untuk arsip. `verifiedOfficeCoords` tetap null.
 - Penggaris hanya tersedia di navigasi (sidebar desktop, navigasi atas HP), bukan popup atau toolbar header peta. Popup tetap menyediakan detail dan sarpras.
 
@@ -196,9 +196,9 @@ Renderer tile memakai `week*-render.f32` yang memuat rerata regional sebelum mas
 
 ## Sakelar layer independen
 
-Kemiringan lahan, Prakiraan hujan, dan Layer banjir adalah tiga sakelar terpisah. Klik pertama meminta layer aktif; klik berikutnya mematikan layer itu saja, termasuk ketika panel pengaturannya sedang tertutup. Semua layer awalnya mati; InaRISK baru dihubungi saat diaktifkan. Indikator aktif mengikuti gambar yang berhasil dimuat, dengan status kegagalan sumber tetap terlihat.
+Kemiringan lahan, Prakiraan hujan, dan Layer banjir adalah tiga sakelar terpisah. Klik pertama meminta layer aktif; klik berikutnya mematikan layer itu saja, termasuk ketika panel pengaturannya sedang tertutup. Hujan dan kemiringan diminta otomatis saat peta pertama dibuka, dengan opasitas awal 70% dan 100%. InaRISK baru dihubungi saat diaktifkan. Indikator aktif mengikuti gambar yang berhasil dimuat, dengan status kegagalan sumber tetap terlihat.
 
-Mengaktifkan raster lain hanya mengganti panel pengaturan yang terlihat; tidak mematikan raster sebelumnya. Tab Hujan/Lereng/Banjir pada panel membuka pengaturan tanpa mengubah status layer. Opasitas dipertahankan masing-masing. Urutan gambar dari bawah ke atas: InaRISK, lereng, hujan, kemudian marker lokasi. Ini perbandingan visual sumber, bukan perhitungan otomatis skor risiko gabungan.
+Mengaktifkan raster lain hanya mengganti panel pengaturan yang terlihat; tidak mematikan raster sebelumnya. Tab Hujan/Lereng/Banjir pada panel membuka pengaturan tanpa mengubah status layer. Opasitas dipertahankan masing-masing. Urutan gambar dari bawah ke atas: InaRISK, hujan, lereng, garis jaringan, kemudian marker lokasi. Tombol Pengaturan layer membuka kontrol opasitas tanpa mematikan layer. Ini perbandingan visual sumber, bukan perhitungan otomatis skor risiko gabungan.
 
 Regresi browser: `BASE_URL=http://localhost:3002 PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/browser/layer-stack.mjs`. Suite memeriksa kedua urutan aktivasi, ketiga raster bersamaan, opasitas terpisah, matikan layer dengan panel tersembunyi, dan zoom pada desktop/HP. Tile InaRISK dan lereng memakai fixture terkontrol; hujan memakai grid asli. Ini menguji perilaku layer, bukan membuktikan akses live ke BNPB/Earth Engine.
 
@@ -210,6 +210,6 @@ Aktifkan **Penanda berita** untuk menampilkan pin kuning. Koordinat dari RSS pen
 
 Peta dan menu berita berbagi cache dan jadwal refresh. Jika sumber gagal saat diperbarui, salinan terakhir tetap tersedia dan diberi keterangan.
 
-Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI Jakarta. Keduanya punya tautan pencarian berdasarkan alamat. Pin kantor memerlukan koordinat gedung; entri yang belum mempunyai koordinat tetap dapat dibuka dari direktori. Pemeriksaan rentang peta tidak menyatakan bahwa koordinat dari Excel sudah cocok dengan gedung.
+Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI Jakarta. Keduanya punya tautan pencarian berdasarkan alamat. KPw DKI memakai penanda wilayah selama koordinat gedung belum tersedia. Kantor Pusat tetap di direktori karena belum memiliki titik acuan. Pemeriksaan rentang peta tidak menyatakan bahwa koordinat dari Excel sudah cocok dengan gedung.
 
-Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk dari sumber. Garis muncul saat kedua ujung punya koordinat dan masuk dalam filter peta. Hubungan memakai garis lurus antartitik, tanpa mengikuti rute jalan.
+Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk dari sumber. Garis muncul saat kedua ujung punya koordinat dan masuk dalam filter peta. Garis putus-putus memuat setidaknya satu titik perkiraan wilayah. Garis ini menunjukkan hubungan jaringan antartitik.

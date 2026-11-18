@@ -86,8 +86,10 @@ try {
     assert.match(await page.locator('#location-detail').innerText(), /M\.H\. Thamrin No\. 2/);
     assert.equal(await page.locator('#view-area').isDisabled(), true);
     await page.goto(base + '/#peta/KPW-13');
+    await page.locator('.network-popup').getByText('Perkiraan wilayah · titik gedung belum tersedia').waitFor();
+    await page.locator('.network-popup .popup-detail-button').click();
     await page.locator('#location-detail').getByText(/Prajurit KKO Usman dan Harun/).waitFor();
-    assert.equal(await page.locator('#view-area').isDisabled(), true);
+    assert.equal(await page.locator('#view-area').isDisabled(), false);
     await page.goto(base + '/#berita');
     await page.locator('.news-card').first().waitFor();
     assert.equal(requests, 2);

@@ -13,7 +13,20 @@ try{for(const width of [1440,390]){
  const keys=['rainfall','slope','inarisk'];
  const pane={rainfall:'rainfallOverlay',slope:'slopeOverlay',inarisk:'floodOverlay'};
  const count=key=>page.locator('.leaflet-'+pane[key]+'-pane>.leaflet-layer').count();
- for(const key of keys){assert.equal(await count(key),0);await page.locator('#'+key+'-toggle').click();await page.waitForFunction(id=>document.querySelector('#'+id+'-toggle')?.getAttribute('aria-pressed')==='true',key);for(const previous of keys.slice(0,keys.indexOf(key)+1))assert.equal(await count(previous),1);}
+ for(const key of ['rainfall','slope']){
+   await page.waitForFunction(id=>document.querySelector('#'+id+'-toggle')?.getAttribute('aria-pressed')==='true',key);
+   assert.equal(await count(key),1);
+   assert.equal(await page.locator('.'+key+'-panel').isHidden(),true);
+ }
+ assert.equal(await count('inarisk'),0);
+ assert.equal(await page.locator('.leaflet-rainfallOverlay-pane>.leaflet-layer').evaluate(e=>e.style.opacity),'0.7');
+ assert.equal(await page.locator('#slope-opacity').inputValue(),'100');
+ assert.ok(await page.evaluate(()=>Number(document.querySelector('.leaflet-slopeOverlay-pane').style.zIndex) >
+   Number(document.querySelector('.leaflet-rainfallOverlay-pane').style.zIndex)));
+ await page.locator('#layer-settings').click();
+ await page.locator('#rainfall-opacity').waitFor();
+ await page.locator('#inarisk-toggle').click();
+ await page.waitForFunction(()=>document.querySelector('#inarisk-toggle')?.getAttribute('aria-pressed')==='true');
  // Settings tabs open a panel without changing raster visibility.
  await page.locator('.inarisk-panel [data-layer-panel="rainfall"]').click();
  await page.locator('#rainfall-opacity').fill('35');

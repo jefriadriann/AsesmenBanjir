@@ -17,12 +17,12 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
     <p id="rainfall-expired" class="hidden">Periode prakiraan ini sudah berakhir. Data ditampilkan sebagai arsip run sumber.</p>
     <h3>Rata-rata curah hujan <span>(mm/hari)</span></h3><div class="rainfall-gradient"></div><div class="rainfall-scale">${RAINFALL_SOURCE.thresholds.map((value, index) => `<span style="background:#${RAINFALL_SOURCE.palette[index]};color:${index >= 6 ? '#fff' : '#17242b'}">${index === 9 ? '80+' : value}</span>`).join('')}</div>
     <div id="rainfall-point" role="status">Klik lokasi di peta untuk membaca nilai dari sel sumber.</div>
-    <label class="rainfall-opacity">Opasitas layer <span id="rainfall-opacity-value">85%</span><input id="rainfall-opacity" aria-label="Opasitas curah hujan" type="range" min="0" max="100" value="85"></label>
+    <label class="rainfall-opacity">Opasitas layer <span id="rainfall-opacity-value">70%</span><input id="rainfall-opacity" aria-label="Opasitas curah hujan" type="range" min="0" max="100" value="70"></label>
     <div class="rainfall-actions"><button id="rainfall-retry">Muat ulang layer</button><button id="rainfall-off">Matikan layer</button></div>
     <details><summary>Sumber & cara baca</summary><p>CHIRPS3-GEFS, run 17 November 2026, dari GeoTIFF pengguna. Rerata 7 hari; nilai negatif dan sel tanpa 7 hari lengkap di-mask. Angka titik dibaca pada grid sumber, bukan ditebak dari warna gambar.</p><p>Tile dirender ulang pada setiap tingkat zoom dari grid sumber, dengan interpolasi bilinear dalam proyeksi Web Mercator. Resolusi prakiraan tetap ±5,6 km; zoom tidak menambah ketelitian data. Batas Indonesia menggunakan Natural Earth skala 1:10 juta, berbeda dari LSIB 2017 pada script Earth Engine. Prakiraan curah hujan bukan kelas risiko banjir.</p></details>`;
   panel.querySelector('.rainfall-gradient').style.background = `linear-gradient(90deg,${RAINFALL_SOURCE.palette.map(color => '#' + color).join(',')})`;
   document.querySelector('.map-frame').append(panel);
-  map.createPane('rainfallOverlay'); map.getPane('rainfallOverlay').style.zIndex = 485; map.getPane('rainfallOverlay').style.pointerEvents = 'none';
+  map.createPane('rainfallOverlay'); map.getPane('rainfallOverlay').style.zIndex = 480; map.getPane('rainfallOverlay').style.pointerEvents = 'none';
   let layer = null, manifest = null, activeWeek = null, requested = false, generation = 0, pending = null, sampleRequest = 0, lastPoint = null, boundary = null;
   const grids = new Map();
   const select = panel.querySelector('#rainfall-week'), status = panel.querySelector('#rainfall-status'), point = panel.querySelector('#rainfall-point');
@@ -51,9 +51,11 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
       point.textContent = value === null ? 'Data tidak tersedia di titik ini.' : `${new Intl.NumberFormat('id-ID', {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(value)} mm/hari · ${period.label} · ${latlng.lat.toFixed(3)}°, ${latlng.lng.toFixed(3)}°`;
     } catch { if (token === sampleRequest) point.textContent = 'Nilai sel belum dapat dibaca. Klik lokasi untuk mencoba lagi.'; }
   }
-  async function enable(force = false) {
+  async function enable(force = false, openPanel = true) {
     const token = ++generation, week = select.value;
-    sampleRequest++; cancelPending(); requested = true; panel.classList.remove('hidden'); onOpen?.(); updatePeriod(); write('Memuat prakiraan…');
+    sampleRequest++; cancelPending(); requested = true;
+    if (openPanel) { panel.classList.remove('hidden'); onOpen?.(); }
+    updatePeriod(); write('Memuat prakiraan…');
     try {
       if (!manifest || force) {
         const response = await fetch('/rainfall/manifest.json', {signal: AbortSignal.timeout(15000), cache: force ? 'reload' : 'default'});
@@ -75,7 +77,7 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
       const image = createRainfallTiles({buffer: raster, grid: manifest.grid, boundary, week, bounds: [[-12, 93], [8.1, 143.1]]});
       const fail = () => {
         if (token !== generation) return;
-        cancelPending(); write('Gambar prakiraan gagal dimuat.' + (layer ? ' Layer sebelumnya tetap ditampilkan.' : ' Coba muat ulang layer.'), true);
+        cancelPending(); if (!openPanel && !layer) requested = false; write('Gambar prakiraan gagal dimuat.' + (layer ? ' Layer sebelumnya tetap ditampilkan.' : ' Coba muat ulang layer.'), true);
         if (activeWeek) select.value = activeWeek;
         updatePeriod();
       };
@@ -92,6 +94,7 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
       image.addTo(map);
     } catch {
       if (token !== generation) return;
+      if (!openPanel && !layer) requested = false;
       write('Prakiraan belum dapat dimuat.' + (layer ? ' Layer sebelumnya tetap ditampilkan.' : ' Coba muat ulang layer.'), true);
       if (activeWeek) select.value = activeWeek;
       updatePeriod();
@@ -109,5 +112,5 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
   panel.querySelector('#rainfall-opacity').oninput = event => { panel.querySelector('#rainfall-opacity-value').textContent = event.target.value + '%'; layer?.setOpacity(Number(event.target.value) / 100); };
   map.on('click', event => { if (layer && !panel.classList.contains('hidden') && !document.querySelector('.map-frame').classList.contains('measuring')) sample(event.latlng); });
   refreshIcons();
-  return {disable, sample, closePanel() { panel.classList.add('hidden'); }};
+  return {start() { if (!requested) enable(false, false); }, disable, sample, closePanel() { panel.classList.add('hidden'); }};
 }
