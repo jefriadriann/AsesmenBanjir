@@ -84,9 +84,13 @@ try {
     await page.locator('#panel-toggle').click();
     await page.locator('[data-office-view="BI-PUSAT"]').click();
     assert.match(await page.locator('#location-detail').innerText(), /M\.H\. Thamrin No\. 2/);
-    assert.equal(await page.locator('#view-area').isDisabled(), true);
+    assert.equal(await page.locator('#view-area').isDisabled(), false);
+    assert.match(await page.locator('#location-detail').innerText(), /Perkiraan Thamrin/);
+    await page.goto(base + '/#peta/BI-PUSAT');
+    await page.locator('.network-popup').getByRole('heading', {name: 'Kantor Pusat Bank Indonesia'}).waitFor();
+    assert.equal(await page.locator('.network-popup .popup-network-button').count(), 0);
     await page.goto(base + '/#peta/KPW-13');
-    await page.locator('.network-popup').getByText('Perkiraan wilayah · titik gedung belum tersedia').waitFor();
+    await page.locator('.network-popup').getByText('Perkiraan Senen · titik gedung belum tersedia').waitFor();
     await page.locator('.network-popup .popup-detail-button').click();
     await page.locator('#location-detail').getByText(/Prajurit KKO Usman dan Harun/).waitFor();
     assert.equal(await page.locator('#view-area').isDisabled(), false);

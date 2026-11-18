@@ -12,3 +12,9 @@ export const centralOffice = {
   sourceUrl: 'https://www.bi.go.id/id/tentang-bi/Pages/Kontak.aspx',
   submissionNotes: 'Koordinat gedung belum terverifikasi.',
 };
+
+// Rounded neighbourhood reference points for map display only.
+export const jakartaOfficeReferences = {
+  'BI-PUSAT': {name: 'Thamrin', coords: [-6.182, 106.822]},
+  'KPW-13': {name: 'Senen', coords: [-6.177, 106.839]},
+};

@@ -210,6 +210,6 @@ Aktifkan **Penanda berita** untuk menampilkan pin kuning. Koordinat dari RSS pen
 
 Peta dan menu berita berbagi cache dan jadwal refresh. Jika sumber gagal saat diperbarui, salinan terakhir tetap tersedia dan diberi keterangan.
 
-Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI Jakarta. Keduanya punya tautan pencarian berdasarkan alamat. KPw DKI memakai penanda wilayah selama koordinat gedung belum tersedia. Kantor Pusat tetap di direktori karena belum memiliki titik acuan. Pemeriksaan rentang peta tidak menyatakan bahwa koordinat dari Excel sudah cocok dengan gedung.
+Kantor Pusat BI tercantum di Daftar lokasi sebagai entri terpisah dari KPw DKI Jakarta. Keduanya punya tautan pencarian berdasarkan alamat. KPw DKI dan Kantor Pusat memiliki titik acuan terpisah di Senen dan Thamrin. Keduanya diberi label ≈ sampai titik gedung dapat diverifikasi. Kantor Pusat ditampilkan sebagai tambahan di luar 133 lokasi jaringan. Pemeriksaan rentang peta tidak menyatakan bahwa koordinat dari Excel sudah cocok dengan gedung.
 
-Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk dari sumber. Garis muncul saat kedua ujung punya koordinat dan masuk dalam filter peta. Garis putus-putus memuat setidaknya satu titik perkiraan wilayah. Garis ini menunjukkan hubungan jaringan antartitik.
+Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk dari sumber. Garis muncul saat kedua ujung punya koordinat dan masuk dalam filter peta. Garis jaringan putus-putus berwarna biru dengan jeda lebih panjang memakai setidaknya satu titik perkiraan. Garis hijau kebiruan memakai koordinat dari data di kedua ujung. Garis ini menunjukkan hubungan jaringan antartitik.

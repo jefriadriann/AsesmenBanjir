@@ -15,7 +15,14 @@ try {
   await page.waitForSelector('#map-measure');
   assert.equal(linkCount, 87);
   assert.equal(await page.locator('.kpw-kas-link').count(), linkCount);
-  assert.equal(await page.locator('.kpw-kas-link[stroke-dasharray]').count(), 67);
+  assert.equal(await page.locator('#visible-count').textContent(), '133');
+  assert.match(await page.locator('#headquarters-count').textContent(), /Kantor Pusat/);
+  const mapped = await page.locator('.marker-container').evaluateAll(markers =>
+    markers.reduce((total, marker) => total + Number(marker.querySelector('.cluster-count')?.textContent ?? 1), 0));
+  assert.equal(mapped, 134);
+  assert.equal(await page.locator('.kpw-kas-link[stroke-dasharray="3 6"]').count(), 67);
+  assert.equal(await page.locator('.kpw-kas-link[stroke-dasharray="7 4"]').count(), 20);
+  assert.equal(await page.locator('.kpw-kas-link[stroke-width="2"]').count(), 67);
   await page.locator('.map-filters [data-type="kpw"]').click();
   assert.equal(await page.locator('.kpw-kas-link').count(), 0);
   await page.locator('.map-filters [data-type="all"]').click();
