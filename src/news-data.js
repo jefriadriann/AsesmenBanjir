@@ -12,6 +12,8 @@ export const NEWS_SOURCES = [
   {id: 'bnpb', name: 'BNPB', domain: 'bnpb.go.id', kind: 'Sumber resmi'},
   {id: 'tempo', name: 'Tempo', domain: 'tempo.co'},
   {id: 'tribun', name: 'Tribun Network', domain: 'tribunnews.com'},
+  {id: 'serambi', name: 'Serambi Indonesia', domain: 'aceh.tribunnews.com', publisherGroup: 'tribun'},
+  {id: 'ajnn', name: 'Aceh Journal National Network', domain: 'ajnn.net'},
   {id: 'jawapos', name: 'Jawa Pos', domain: 'jawapos.com'},
   {id: 'rri', name: 'RRI', domain: 'rri.co.id'},
   {id: 'kumparan', name: 'kumparan', domain: 'kumparan.com'},

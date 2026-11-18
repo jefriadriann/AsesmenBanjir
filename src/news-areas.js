@@ -56,6 +56,13 @@ export const extraCities = [
   ['Lumajang', -8.13, 113.22], ['Banyuwangi', -8.22, 114.37],
   ['Padang Pariaman', -0.62, 100.12], ['Pariaman', -0.63, 100.12],
   ['Langkat', 3.76, 98.46], ['Deli Serdang', 3.56, 98.88],
+  ['Aceh Utara|Lhoksukon', 5.05, 97.31], ['Aceh Tamiang|Karang Baru', 4.29, 98.05],
+  ['Aceh Timur|Idi Rayeuk', 4.96, 97.77], ['Aceh Barat', 4.14, 96.13],
+  ['Aceh Besar|Kota Jantho', 5.30, 95.61], ['Aceh Tengah', 4.62, 96.85],
+  ['Aceh Selatan|Tapaktuan', 3.26, 97.18], ['Aceh Jaya|Calang', 4.64, 95.57],
+  ['Aceh Tenggara|Kutacane', 3.49, 97.81], ['Aceh Singkil|Singkil', 2.29, 97.79],
+  ['Gayo Lues|Blangkejeren', 3.99, 97.33], ['Bener Meriah|Redelong', 4.73, 96.87],
+  ['Pidie Jaya|Meureudu', 5.24, 96.24], ['Pidie|Sigli', 5.38, 95.96],
 ];
 
 export function newsRegionReferences(locations) {
@@ -67,7 +74,8 @@ export function newsRegionReferences(locations) {
 }
 
 export function extraCityRegion(name) {
-  return ['Padang Pariaman', 'Pariaman', 'Langkat', 'Deli Serdang'].includes(name) ? 'Sumatera' : 'Jawa';
+  return /^(?:Aceh |Gayo Lues|Bener Meriah|Pidie)/.test(name)
+    || ['Padang Pariaman', 'Pariaman', 'Langkat', 'Deli Serdang'].includes(name) ? 'Sumatera' : 'Jawa';
 }
 
 export function nearbyNewsRegion([lat, lng], references) {

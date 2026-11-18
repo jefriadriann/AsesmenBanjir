@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {groupNewsPoints, isRecentMajorIncident, matchNewsCities, rankNewsWatch, selectMapAlerts} from './news-watch-data.js';
+import {groupNewsPoints, isRecentIncident, matchNewsCities, rankNewsWatch, selectMapAlerts} from './news-watch-data.js';
 import {newsRegionReferences} from './news-areas.js';
 import './news-watch.css';
 
@@ -48,7 +48,12 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   const references = newsRegionReferences(locations);
   let cities = [], points = [], region = 'all';
   const inRegion = item => region === 'all' || item.region === region;
-  let alerts = [];
+  let alerts = [], viewportScope = false;
+  const scopedPoints = () => {
+    viewportScope = map.getZoom() >= 7;
+    const bounds = viewportScope ? map.getBounds() : null;
+    return points.filter(point => inRegion(point) && (!bounds || bounds.contains(point.coords)));
+  };
 
   let selectedPoint = null, returnFocus = null;
   const info = element('section');
@@ -127,7 +132,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     const count = alerts.length;
     mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
       : error && !data ? 'Feed belum tersedia · coba Perbarui di Prioritas Pantauan'
-        : `${count ? count + ' kejadian prioritas' : 'Belum ada kejadian berdampak besar yang terpetakan'}${stale ? ' · salinan terakhir tersedia' : ''}`;
+        : `${count ? count + ' lokasi pantauan' : 'Belum ada kejadian yang memenuhi kriteria'}${viewportScope ? ' · area peta' : ''}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
   }
@@ -137,7 +142,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     const ranked = rankNewsWatch(cities.filter(inRegion), readiness);
     results.replaceChildren();
     if (!alerts.length) {
-      if (snapshot.data) results.append(element('p', 'Belum ada laporan berdampak besar yang terpetakan dalam 48 jam terakhir.'));
+      if (snapshot.data) results.append(element('p', 'Belum ada laporan dengan dampak nyata atau liputan lintas penerbit dalam 72 jam terakhir di cakupan ini.'));
       return;
     }
     for (const point of alerts) {
@@ -147,7 +152,9 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       const card = element('section');
       card.className = 'watch-city';
       const names = point.areas?.map(area => area.name) ?? related.map(city => city.name);
-      card.append(element('h3', names.join(' / ') || 'Titik laporan penerbit'), articleList(point.articles));
+      card.append(element('h3', names.join(' / ') || 'Titik laporan penerbit'));
+      if (point.coverage > 1) card.append(element('p', `Diliput ${point.coverage} penerbit`));
+      card.append(articleList(point.articles));
       const offices = new Map(related.flatMap(city => city.offices).map(item => [item.office.id, item]));
       for (const {office, summary} of offices.values()) {
         const readinessLink = element('a', `KPw ${office.name}`);
@@ -184,7 +191,12 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   dialog.addEventListener('close', syncInterest);
 
   function renderMarkers() {
-    alerts = selectMapAlerts(points.filter(inRegion));
+    const nextAlerts = selectMapAlerts(scopedPoints());
+    const unchanged = nextAlerts.length === alerts.length && nextAlerts.every((point, i) =>
+      point.key === alerts[i].key && point.articles.length === alerts[i].articles.length
+        && point.articles.every((article, j) => article === alerts[i].articles[j]));
+    if (unchanged) return;
+    alerts = nextAlerts;
     layer.clearLayers();
     markers.clear();
     for (const point of alerts) {
@@ -218,6 +230,13 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     }
   }
 
+  map.on('moveend', () => {
+    if (!visible || !snapshot.data) return;
+    renderMarkers();
+    if (dialog.open) renderPriority();
+    else renderStatus();
+  });
+
   return {
     setRegion(value) {
       if (value === region) return;
@@ -237,9 +256,9 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
       snapshot = next;
       if (changed) {
         const now = Date.now();
-        const major = (snapshot.data?.items ?? []).filter(article => isRecentMajorIncident(article, now));
-        cities = matchNewsCities(locations, major);
-        points = groupNewsPoints(major, cities, references);
+        const recent = (snapshot.data?.items ?? []).filter(article => isRecentIncident(article, now));
+        cities = matchNewsCities(locations, recent);
+        points = groupNewsPoints(recent, cities, references);
         renderMarkers();
       }
       dialog.querySelector('#watch-refresh').disabled = next.loading;

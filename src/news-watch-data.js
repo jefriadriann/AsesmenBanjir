@@ -1,4 +1,4 @@
-import {compareNewsArticles} from './news-data.js';
+import {compareNewsArticles, NEWS_SOURCES} from './news-data.js';
 import {newsPoint} from './news-location.js';
 import {extraCities, extraCityRegion, provinceCapitals, nearbyNewsRegion} from './news-areas.js';
 import {floodSummary} from './flood-readiness.js';
@@ -145,19 +145,30 @@ export function groupNewsPoints(articles, areas, references = []) {
   return [...direct, ...fallback.values()];
 }
 
-const MAX_ALERTS = 5;
-const ALERT_WINDOW_MS = 48 * 60 * 60 * 1000;
+const MAX_ALERTS = 8;
+const ALERT_WINDOW_MS = 72 * 60 * 60 * 1000;
 const alertKey = article => normalize(article.title);
 
-export function isRecentMajorIncident(article, now = Date.now()) {
+const sourceGroups = new Map(NEWS_SOURCES.map(source => [source.id, source.publisherGroup ?? source.id]));
+
+export function isRecentIncident(article, now = Date.now()) {
   const age = now - Date.parse(article.publishedAt);
-  return isWatchArticle(article) && article.impact === 2 && age >= -3600000 && age <= ALERT_WINDOW_MS;
+  return isWatchArticle(article) && age >= -3600000 && age <= ALERT_WINDOW_MS;
 }
 
 export function selectMapAlerts(points) {
-  const ranked = points.filter(point => point.articles.length).map(point => ({
-    ...point, articles: [...point.articles].sort(compareNewsArticles),
-  })).sort((a, b) => compareNewsArticles(a.articles[0], b.articles[0]));
+  const ranked = points.flatMap(point => {
+    const unique = new Map();
+    for (const article of [...point.articles].sort(compareNewsArticles)) {
+      if (!unique.has(alertKey(article))) unique.set(alertKey(article), article);
+    }
+    const articles = [...unique.values()];
+    const publishers = new Set(articles.map(article => sourceGroups.get(article.sourceId) ?? article.sourceId ?? article.source).filter(Boolean));
+    if (!articles.length || (!articles.some(article => article.impact >= 1) && publishers.size < 2)) return [];
+    return [{...point, articles, coverage: publishers.size}];
+  }).sort((a, b) => Number(Boolean(a.articles[0].stale)) - Number(Boolean(b.articles[0].stale))
+    || (b.articles[0].impact ?? 0) - (a.articles[0].impact ?? 0)
+    || b.coverage - a.coverage || compareNewsArticles(a.articles[0], b.articles[0]));
 
   const shown = new Set(), alerts = [];
   for (const point of ranked) {

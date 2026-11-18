@@ -53,7 +53,7 @@ try {
     assert.ok(await page.locator('#news-empty').isVisible());
     await page.locator('#news-reset').click();
     assert.equal(await page.locator('.news-card').count(), 39);
-    assert.equal(await page.locator('#news-source option').count(), 17);
+    assert.equal(await page.locator('#news-source option').count(), 19);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     const beforeTimer = calls;
     time += REFRESH_MS - 1000;

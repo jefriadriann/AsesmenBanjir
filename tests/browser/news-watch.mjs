@@ -6,15 +6,15 @@ const browser = await chromium.launch({
 const base = process.env.BASE_URL || 'http://localhost:3001';
 const now = Date.now();
 const items = [
-  {title: 'Banjir di Semarang, 350 rumah terendam', topics: ['flood'], via: 'RSS', coords: [-7.01, 110.41]},
+  {title: 'Banjir di Semarang, 35 rumah terendam', topics: ['flood'], via: 'RSS', coords: [-7.01, 110.41]},
   {title: 'Hujan di Semarang', topics: ['weather']},
   {title: 'Banjir di Meulaboh, ratusan warga mengungsi', topics: ['flood']},
   {title: 'Gempa di Jepang', topics: ['earthquake']},
   {title: 'Pemda di Bangka Belitung Diminta Tingkatkan Antisipasi Banjir', topics: ['flood']},
   {title: '[KLARIFIKASI] Ini Video Tanah Longsor Sibolga pada 2025, Bukan 2026', topics: ['landslide']},
   {title: 'Longsor Sibolga 2025, rumah tertimbun', topics: ['landslide']},
-  {title: 'Banjir di Bogor, dua rumah terendam', topics: ['flood']},
-  {title: 'Longsor di Bogor, dua warga tertimbun', topics: ['landslide'], age: 49 * 60 * 60_000},
+  {title: 'Banjir di Bogor', topics: ['flood']},
+  {title: 'Longsor di Bogor, dua warga tertimbun', topics: ['landslide'], age: 73 * 60 * 60_000},
   ...Array.from({length: 14}, (_, index) => ({title: `Banjir di Meulaboh, 200 warga mengungsi dari desa ${index + 1}`, topics: ['flood']})),
 ].map((item, index) => ({
   ...item, source: 'ANTARA News', sourceId: 'antara',
@@ -41,7 +41,7 @@ try {
     const markerToggle = page.getByRole('button', {name: 'Penanda berita'});
     await markerToggle.waitFor();
     assert.equal(await markerToggle.getAttribute('aria-pressed'), 'true');
-    const semarang = page.getByRole('button', {name: 'Berita: Banjir di Semarang, 350 rumah terendam'});
+    const semarang = page.getByRole('button', {name: 'Berita: Banjir di Semarang, 35 rumah terendam'});
     await semarang.waitFor();
     assert.equal(await page.locator('.news-city-marker').count(), 2);
     const meulaboh = page.getByRole('button', {name: 'Berita: Meulaboh'});
@@ -77,21 +77,23 @@ try {
     assert.equal(await meulaboh.count(), 0);
     assert.equal(await semarang.count(), 1);
     await korwil.getByRole('button', {name: 'Semua'}).click();
+    await meulaboh.waitFor();
+    await semarang.waitFor();
     assert.equal(await page.locator('.news-city-marker').count(), 2);
     assert.equal(await semarang.evaluate(node => getComputedStyle(node).backgroundColor), 'rgb(250, 204, 21)');
     await semarang.focus();
     await page.keyboard.press('Enter');
     const popup = page.locator('.watch-popup');
     await popup.waitFor();
-    assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang, 350 rumah terendam'}).getAttribute('href'), items[0].url);
-    assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang, 350 rumah terendam'}).getAttribute('target'), '_blank');
+    assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang, 35 rumah terendam'}).getAttribute('href'), items[0].url);
+    assert.equal(await popup.getByRole('link', {name: 'Banjir di Semarang, 35 rumah terendam'}).getAttribute('target'), '_blank');
     assert.equal(await popup.getByRole('link', {name: 'Hujan di Semarang'}).count(), 0);
     assert.match(await popup.innerText(), /ANTARA News.*WIB/);
 
     await page.getByRole('button', {name: 'Prioritas Pantauan', exact: true}).click();
     const dialog = page.getByRole('dialog', {name: 'Prioritas Pantauan'});
     await dialog.waitFor();
-    assert.deepEqual(await dialog.getByRole('heading', {level: 3}).allTextContents(), ['Semarang', 'Meulaboh']);
+    assert.deepEqual(await dialog.getByRole('heading', {level: 3}).allTextContents(), ['Meulaboh', 'Semarang']);
     assert.equal(await dialog.getByRole('link', {name: 'KPw Jawa Tengah'}).getAttribute('href'), '#sarpras/KPW-20');
     assert.equal(await dialog.getByRole('link', {name: 'Hujan di Semarang'}).count(), 0);
     assert.equal(requests, 1);
@@ -104,6 +106,8 @@ try {
     await dialog.getByRole('button', {name: 'Lihat titik dari penerbit'}).first().click();
     await popup.waitFor();
     assert.equal(await dialog.isVisible(), false);
+    assert.equal(await meulaboh.count(), 0);
+    assert.match(await page.locator('#news-map-status').textContent(), /area peta/);
     // Open the panel without displacing the selected point.
     const center = (await page.locator('#map').getAttribute('data-view-center')).split(',').map(Number);
     assert.ok(center.every((value, index) => Math.abs(value - items[0].coords[index]) < .1));
@@ -121,13 +125,13 @@ try {
     assert.equal(await page.locator('.network-popup .popup-network-button').count(), 0);
     await page.goto(base + '/#peta/KPW-13');
     await page.locator('.network-popup').getByText('Perkiraan Senen · titik gedung belum tersedia').waitFor();
-    await page.locator('.network-popup').filter({hasText: 'Perkiraan Senen'}).locator('.popup-detail-button').click();
+    await page.locator('.network-popup').filter({hasText: 'Perkiraan Senen'}).locator('.popup-detail-button').press('Enter');
     await page.locator('#location-detail').getByText(/Prajurit KKO Usman dan Harun/).waitFor();
     assert.equal(await page.locator('#view-area').isDisabled(), false);
     await page.goto(base + '/#berita');
     await page.locator('.news-card').first().waitFor();
-    await page.getByRole('searchbox', {name: 'Cari berita'}).fill('dua rumah terendam');
-    assert.equal(await page.getByRole('link', {name: 'Banjir di Bogor, dua rumah terendam', exact: true}).count(), 1);
+    await page.getByRole('searchbox', {name: 'Cari berita'}).fill('Banjir di Bogor');
+    assert.equal(await page.getByRole('link', {name: 'Banjir di Bogor', exact: true}).count(), 1);
     assert.equal(requests, 2);
     assert.deepEqual(errors, []);
     await page.goto(base + '/#peta');

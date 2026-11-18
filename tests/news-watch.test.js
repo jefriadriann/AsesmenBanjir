@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {groupNewsPoints, groupPublisherPoints, isRecentMajorIncident, selectMapAlerts, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
+import {groupNewsPoints, groupPublisherPoints, isRecentIncident, selectMapAlerts, matchNewsCities, rankNewsWatch} from '../src/news-watch-data.js';
 
 const locations = [
   {id: 'kpw-a', type: 'kpw', city: 'Jakarta', legacyCityCoords: [-6.18, 106.83]},
@@ -85,23 +85,41 @@ test('more specific names do not create a separate pin for a province substring'
   assert.deepEqual(matchNewsCities(locations, articles).map(area => area.name), ['Banda Aceh', 'Papua Barat Daya']);
 });
 
-test('map alerts require significant current impact, while the digest caps and deduplicates reports', () => {
+test('alerts accept recent confirmed damage or independent coverage and cap repeated reports', () => {
   const now = Date.parse('2026-11-18T00:00:00Z');
   const major = {
     ...story('Longsor di Bogor, dua warga tertimbun', 'major', '2026-11-17T05:00:00Z'),
     topics: ['landslide'], impact: 2,
   };
-  assert.equal(isRecentMajorIncident(major, now), true);
-  assert.equal(isRecentMajorIncident({...major, impact: 1}, now), false);
-  assert.equal(isRecentMajorIncident({...major, topics: ['weather']}, now), false);
-  assert.equal(isRecentMajorIncident({...major, publishedAt: '2026-11-15T05:00:00Z'}, now), false);
+  assert.equal(isRecentIncident(major, now), true);
+  assert.equal(isRecentIncident({...major, impact: 1}, now), true);
+  assert.equal(isRecentIncident({...major, topics: ['weather']}, now), false);
+  assert.equal(isRecentIncident({...major, publishedAt: '2026-11-14T05:00:00Z'}, now), false);
   const points = [
     {key: 'one', articles: [major, ...Array.from({length: 4}, (_, i) => ({...major, title: `Longsor Bogor ${i}`}))]},
     {key: 'duplicate', articles: [{...major, url: 'https://example.com/duplicate'}]},
     ...Array.from({length: 7}, (_, i) => ({key: `other${i}`, articles: [{...major, title: `Banjir di lokasi ${i}`}]})),
   ];
   const alerts = selectMapAlerts(points);
-  assert.equal(alerts.length, 5);
+  assert.equal(alerts.length, 8);
   assert.equal(alerts[0].articles.length, 2);
   assert.equal(alerts.some(point => point.key === 'duplicate'), false);
+});
+
+test('local reports identify Lhokseumawe and Aceh Utara separately and prioritize coverage', () => {
+  const incident = (title, id, sourceId, impact = 0) => ({...story(title, id), sourceId, impact});
+  const articles = [
+    incident('Banjir melanda Lhokseumawe', 'a', 'serambi'),
+    incident('Banjir di Lhokseumawe meluas', 'b', 'ajnn'),
+    incident('Banjir di Aceh Utara, tiga rumah terendam', 'c', 'rri', 1),
+    incident('Banjir di Aceh Tamiang', 'd', 'serambi'),
+    incident('Banjir melanda Aceh Tamiang', 'e', 'tribun'),
+  ];
+  const areas = matchNewsCities([
+    {id: 'kpw-lhok', type: 'kpw', city: 'Lhokseumawe', region: 'Sumatera', legacyCityCoords: [5.18, 97.15]},
+  ], articles);
+  const alerts = selectMapAlerts(groupNewsPoints(articles, areas));
+  assert.deepEqual(alerts.map(point => [point.areas[0].name, point.coverage]), [
+    ['Aceh Utara', 1], ['Lhokseumawe', 2],
+  ]);
 });

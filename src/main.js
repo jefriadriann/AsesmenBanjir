@@ -66,7 +66,7 @@ document.querySelector('#app').innerHTML=`
 <small id="news-map-status" role="status"></small>
 <dialog id="watch-dialog" aria-labelledby="watch-heading">
 <div class="watch-heading"><h2 id="watch-heading">Prioritas Pantauan</h2><button id="watch-close" type="button" aria-label="Tutup Prioritas Pantauan">Tutup</button></div>
-<p>Maksimal lima laporan banjir atau tanah longsor berdampak besar yang terbit dalam 48 jam terakhir. Klik judul untuk membaca sumber, atau buka Berita kebencanaan untuk laporan lainnya.</p>
+<p>Hingga delapan lokasi banjir atau longsor dalam 72 jam terakhir, dengan dampak yang dilaporkan atau liputan dari beberapa penerbit. Perbesar peta untuk memusatkan pantauan pada area yang terlihat.</p>
 <button id="watch-refresh" type="button">Perbarui berita</button><p id="watch-status" role="status"></p><div id="watch-results"></div>
 </dialog>
 </div>
@@ -121,7 +121,7 @@ regionControl.onAdd = () => {
    button.dataset.mapRegion = area;
    button.textContent = area === 'all' ? 'Semua' : area;
    button.setAttribute('aria-pressed', String(area === region));
-   button.onclick = () => clearFilters(area);
+   button.onclick = () => clearFilters(area, false);
  }
  L.DomEvent.disableClickPropagation(control);
  L.DomEvent.disableScrollPropagation(control);
@@ -148,7 +148,7 @@ document.querySelector('#retry-map').onclick=()=>{mapNotice('');setMapStyle('str
 
 function nationalView(animate=false){const frame=document.querySelector('.map-frame');if(frame.clientWidth<80||frame.clientHeight<80||document.querySelector('#peta').classList.contains('hidden'))return;map.stop();map.invalidateSize({pan:false});map.setMinZoom(3);const zoom=Math.max(3,Math.min(7,map.getBoundsZoom(bounds,false,L.point(32,32))));map.setMinZoom(zoom);map.setView(bounds.getCenter(),zoom,{animate});}
 function currentRows(){return data.filter(d=>(!directoryParentId||d.id===directoryParentId||d.kpw===data.find(p=>p.id===directoryParentId)?.name)&&(coordinateFilter==='all'||d.status===coordinateFilter)&&(type==='all'||d.type===type)&&(region==='all'||d.region===region)&&`${d.name} ${d.bank} ${d.kpw} ${d.city||''}`.toLocaleLowerCase('id').includes(query.toLocaleLowerCase('id')));}
-function updateViewForRows(){const rows=currentRows().filter(hasCoords);if(region==='all'&&!query&&!directoryParentId){nationalView(true);}else if(rows.length){map.fitBounds(L.latLngBounds(rows.map(d=>mapCoords(d))),{padding:[60,80],maxZoom:8,animate:true});}}
+function updateViewForRows(animate=true){const rows=currentRows().filter(hasCoords);if(region==='all'&&!query&&!directoryParentId){nationalView(animate);}else if(rows.length){map.stop();map.fitBounds(L.latLngBounds(rows.map(d=>mapCoords(d))),{padding:[60,80],maxZoom:8,animate});}}
 function renderMarkers(){
  markers.clearLayers();const rows=currentRows().filter(hasCoords);const groups=[];const z=map.getZoom();const biSize=z<6?27:z<9?34:42,bankSize=z<6?19:z<9?25:30,clusterSize=z<6?32:z<9?40:46;document.querySelector('#map').style.setProperty('--bi-marker',biSize+'px');document.querySelector('#map').style.setProperty('--bank-marker',bankSize+'px');document.querySelector('#map').style.setProperty('--cluster-marker',clusterSize+'px');const cellSize=z<6?38:z<8?39:34;
  for(const d of rows){const point=map.latLngToContainerPoint(mapCoords(d));let group=groups.find(g=>Math.hypot(g.point.x-point.x,g.point.y-point.y)<cellSize);if(d.id===selected)group=null;if(group&&!group.items.some(x=>x.id===selected)){group.items.push(d);const n=group.items.length;group.point=L.point((group.point.x*(n-1)+point.x)/n,(group.point.y*(n-1)+point.y)/n);}else groups.push({point,items:[d]});}
@@ -191,7 +191,7 @@ function render(){
  directory.render(rows);renderMarkers();refreshIcons();
 }
 function setType(next){type=next;closeDetail();render();updateViewForRows();}
-function clearFilters(nextRegion='all'){directoryParentId=null;directory.setParent(null);coordinateFilter='all';document.querySelector('#coordinate-filter').value='all';type='all';region=nextRegion;query='';document.querySelector('#search').value='';document.querySelector('#region').value=region;closeDetail();render();updateViewForRows();}
+function clearFilters(nextRegion='all',animate=true){directoryParentId=null;directory.setParent(null);coordinateFilter='all';document.querySelector('#coordinate-filter').value='all';type='all';region=nextRegion;query='';document.querySelector('#search').value='';document.querySelector('#region').value=region;closeDetail();render();updateViewForRows(animate);}
 function setPanel(open){if(open){document.querySelector('.rainfall-panel')?.classList.add('hidden');document.querySelector('.slope-panel')?.classList.add('hidden');document.querySelector('.inarisk-panel')?.classList.add('hidden');document.querySelector('#inarisk-toggle')?.setAttribute('aria-expanded','false');document.querySelector('#layer-menu').classList.add('hidden');}panelOpen=open;document.querySelector('.explorer').classList.toggle('panel-hidden',!open);const button=document.querySelector('#panel-toggle');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Sembunyikan daftar lokasi':'Tampilkan daftar lokasi');button.innerHTML=i(open?'panel-right-close':'panel-right-open')+'<span>Daftar lokasi</span>';refreshIcons();requestAnimationFrame(()=>{const target=open?document.querySelector(document.querySelector('.explorer').classList.contains('detail-open')?'#detail-back':'#directory-back'):document.querySelector('#panel-toggle');target?.focus({preventScroll:true});});setTimeout(()=>{map.invalidateSize({pan:false});renderMarkers();},260);}
 function closeDetail(){selected=null;map.closePopup();document.querySelector('.explorer').classList.remove('detail-open');document.querySelector('#directory-list').classList.remove('hidden');document.querySelector('#location-detail').classList.add('hidden');document.querySelector('#map-context').classList.add('hidden');renderMarkers();}
 function openLocation(id){
