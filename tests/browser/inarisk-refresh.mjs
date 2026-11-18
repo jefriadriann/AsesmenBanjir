@@ -46,7 +46,7 @@ try{
  fail='catalog';await page.reload();await page.locator('#inarisk-toggle').click();await ready();assert.equal(await layers().count(),1);
  assert.match(await page.locator('#inarisk-status').innerText(),/sumber tersimpan/);
  // Cold-start failure must remain honest, without inventing an overlay.
- await page.evaluate(()=>localStorage.removeItem('ruang-inarisk-last-good-v1'));
+ await page.evaluate(()=>localStorage.removeItem('ruang-inarisk-last-good-v2'));
  fail='catalog';await page.reload();await page.locator('#inarisk-toggle').click();await ready();assert.equal(await layers().count(),0);
  assert.match(await page.locator('#inarisk-status').innerText(),/belum terhubung/);
  assert.match(await page.locator('#inarisk-connection-error').textContent(),/Katalog layanan InaRISK \(HTTP 502\): Controlled source failure/);

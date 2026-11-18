@@ -1,20 +1,105 @@
-// Fixed official source proxy: no arbitrary URL forwarding or credentials.
-const ROOT='https://inarisk.bnpb.go.id/arcgis/rest/services';
-const validService=s=>typeof s==='string'&&s.length<220&&/^[a-zA-Z0-9_ /-]+\/(MapServer|ImageServer)$/.test(s)&&/banjir|flood/i.test(s)&&!s.includes('..');
-async function remote(url,binary=false){const response=await fetch(url,{signal:AbortSignal.timeout(10000),headers:{Accept:binary?'image/png':'application/json','User-Agent':'RuangRisiko-Map/1.0'}});if(!response.ok)throw Error(`Sumber InaRISK merespons HTTP ${response.status}`);if(binary){if(!response.headers.get('content-type')?.startsWith('image/'))throw Error('Layanan belum mengembalikan gambar peta.');return Buffer.from(await response.arrayBuffer());}const body=await response.json();if(body.error)throw Error(body.error.message||'Layanan InaRISK tidak tersedia.');return body;}
-export async function handleInarisk(params){
- const mode=params.get('mode')||'catalog';
- if(mode==='catalog'){
-  const root=await remote(ROOT+'?f=pjson');const services=[...(root.services||[])];const folders=(root.folders||[]).filter(f=>/^[\w -]+$/.test(f)).slice(0,12);const groups=await Promise.allSettled(folders.map(f=>remote(ROOT+'/'+encodeURIComponent(f)+'?f=pjson')));for(const g of groups)if(g.status==='fulfilled')services.push(...g.value.services||[]);
-  const selected=services.filter(s=>['MapServer','ImageServer'].includes(s.type)&&/banjir|flood/i.test(s.name)).map(s=>({name:s.name,type:s.type,service:s.name+'/'+s.type,kind:/risiko|risk/i.test(s.name.split('/').at(-1))?'Risiko banjir':/bahaya|hazard/i.test(s.name.split('/').at(-1))?'Bahaya banjir':'Layer banjir',sourceUrl:ROOT+'/'+s.name+'/'+s.type}));return {json:{services:selected,source:'BNPB InaRISK',retrievedAt:new Date().toISOString()}};
+const CATALOG = 'https://inarisk.bnpb.go.id/v4/config/arcgis-layers.json';
+const WMS = 'https://inarisk1.bnpb.go.id/geoserver/raster/wms';
+const capabilities = WMS + '?service=WMS&request=GetCapabilities';
+const wmsLayers = {
+ layer_bahaya_banjir:'INDEKS_BAHAYA_BANJIR1',
+ layer_bahaya_banjir_bandang:'INDEKS_BAHAYA_BANJIRBANDANG1',
+ layer_kerentanan_banjir:'INDEKS_KERENTANAN_BANJIR1',
+ layer_peta_kapasitas:'INDEKS_KAPASITAS',
+ layer_risiko_banjir:'INDEKS_RISIKO_BANJIR1',
+ layer_risiko_banjir_bandang:'INDEKS_RISIKO_BANJIR_BANDANG1',
+ layer_kerentanan_banjir_bandang:'INDEKS_KERENTANAN_BANJIR_BANDANG1'
+};
+const SUMMARY = 'https://inarisk.bnpb.go.id/apiv4/kajian-summary';
+const studyNames = {bahaya:'Bahaya', risiko:'Risiko', kerentanan:'Kerentanan', kapasitas:'Kapasitas'};
+const hazardNames = {banjir:'banjir', banjir_bandang:'banjir bandang'};
+const services = Object.entries(hazardNames).flatMap(([hazard, label]) =>
+ Object.entries(studyNames).filter(([study]) => study !== 'kapasitas').map(([study, name]) => ({
+  hazard, study, kind: name + ' ' + label, service: 'inarisk/layer_' + study + '_' + hazard + '/ImageServer'
+ })));
+services.push({hazard:'banjir', study:'kapasitas', kind:'Kapasitas daerah', service:'inarisk/layer_peta_kapasitas/ImageServer'});
+for (const layer of services) {
+ layer.name = layer.service.split('/')[1];
+ layer.type = 'ImageServer';
+ layer.sourceUrl = capabilities;
+}
+
+async function remote(url, binary = false, timeout = 10000) {
+ const response = await fetch(url, {signal:AbortSignal.timeout(timeout), headers:{Accept:binary?'image/png':'application/json'}, redirect:'error'});
+ if (!response.ok) throw Error('Sumber InaRISK merespons HTTP ' + response.status);
+ if (binary) {
+  if (!response.headers.get('content-type')?.startsWith('image/png')) throw Error('Layanan belum mengembalikan gambar peta.');
+  return Buffer.from(await response.arrayBuffer());
  }
- const service=params.get('service');if(!validService(service))return {status:400,json:{error:'Layanan banjir tidak valid.'}};
- const url=ROOT+'/'+service.split('/').map(encodeURIComponent).join('/');
- if(mode==='metadata'){const meta=await remote(url+'?f=pjson');let legend=null;try{legend=await remote(url+'/legend?f=pjson');}catch{}return {json:{metadata:{name:meta.name||meta.mapName||service,description:meta.serviceDescription||meta.description||'',copyrightText:meta.copyrightText||'',timeInfo:meta.timeInfo||null,sourceUrl:url},legend}};}
- if(mode==='image'){
-  const bbox=params.get('bbox');if(!bbox||bbox.split(',').length!==4||!bbox.split(',').every(n=>n.trim()!==''&&Number.isFinite(Number(n))&&Math.abs(Number(n))<=21000000))return {status:400,json:{error:'Batas peta tidak valid.'}};
-  const endpoint=service.endsWith('ImageServer')?'exportImage':'export';const query=new URLSearchParams({bbox,bboxSR:'3857',imageSR:'3857',size:'256,256',format:'png32',transparent:'true',f:'image'});return {binary:await remote(url+'/'+endpoint+'?'+query,true)};
+ const body = await response.json();
+ if (body.error) throw Error(body.error.message || 'Layanan InaRISK tidak tersedia.');
+ return body;
+}
+
+async function getSummary(layer) {
+ const hazard = layer.hazard.replaceAll('_','');
+ const url = SUMMARY + '/' + hazard + '/ALL?kajian=' + layer.study;
+ const {summary} = await remote(url, false, 4500);
+ const capacity = layer.study === 'kapasitas';
+ const values = capacity ? summary?.kapasitas_kabupaten : summary;
+ const classes = ['tinggi','sedang','rendah'].map(key => ({
+  key,
+  value: values?.[capacity ? key : key + '_luas'],
+  ...(layer.study === 'bahaya' ? {loss: Number.isFinite(values?.[key + '_rp']) ? values[key + '_rp'] * 1000 : null} : {})
+ }));
+ const count = values?.[capacity ? 'total' : 'wilayah_count'];
+ if (![count, ...classes.map(row => row.value)].every(value => Number.isFinite(value) && value >= 0)) {
+  throw Error('Ringkasan nasional tidak lengkap.');
+ }
+ return {count, classes, sourceUrl:url};
+}
+
+export async function handleInarisk(params) {
+ const mode = params.get('mode') || 'catalog';
+ if (mode === 'catalog') return {json:{services, source:'BNPB InaRISK', catalogUrl:CATALOG}};
+
+ const layer = services.find(item => item.service === params.get('service'));
+ if (!layer) return {status:400,json:{error:'Layanan banjir tidak valid.'}};
+ const wmsLayer = wmsLayers[layer.name];
+
+ if (mode === 'metadata') {
+  const summary = await getSummary(layer).catch(() => null);
+  return {json:{
+   metadata:{name:wmsLayer, sourceUrl:capabilities},
+   study:layer.study, summary
+  }};
+ }
+
+ if (mode === 'image') {
+  const parts = (params.get('bbox') || '').split(',');
+  const [west, south, east, north] = parts.map(Number);
+  if (parts.length !== 4 || !parts.every(n => n.trim() && Number.isFinite(Number(n)) && Math.abs(Number(n)) <= 21000000) || west >= east || south >= north) {
+   return {status:400,json:{error:'Batas peta tidak valid.'}};
+  }
+  const query = new URLSearchParams({service:'WMS',version:'1.1.1',request:'GetMap',layers:wmsLayer,styles:'',
+   bbox:parts.join(','),srs:'EPSG:3857',width:'256',height:'256',format:'image/png',transparent:'true'});
+  return {binary:await remote(WMS+'?'+query,true)};
  }
  return {status:400,json:{error:'Mode tidak tersedia.'}};
 }
-export default async function handler(req,res){try{const result=await handleInarisk(new URL(req.url,'http://localhost').searchParams);res.statusCode=result.status||200;if(result.binary){res.setHeader('Content-Type','image/png');res.setHeader('Cache-Control','public, max-age=900');res.end(result.binary);}else{res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','public, max-age=300');res.end(JSON.stringify(result.json));}}catch(error){res.statusCode=502;res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','no-store');res.end(JSON.stringify({error:error.name==='TimeoutError'?'Sumber InaRISK belum merespons.':error.message,source:'BNPB InaRISK'}));}}
+
+export default async function handler(req,res) {
+ try {
+  const result = await handleInarisk(new URL(req.url,'http://localhost').searchParams);
+  res.statusCode = result.status || 200;
+  if (result.binary) {
+   res.setHeader('Content-Type','image/png');
+   res.setHeader('Cache-Control','public, max-age=900');
+   res.end(result.binary);
+  } else {
+   res.setHeader('Content-Type','application/json');
+   res.setHeader('Cache-Control',result.status || result.json.summary === null ? 'no-store' : 'public, max-age=300');
+   res.end(JSON.stringify(result.json));
+  }
+ } catch(error) {
+  res.statusCode = 502;
+  res.setHeader('Content-Type','application/json');
+  res.setHeader('Cache-Control','no-store');
+  res.end(JSON.stringify({error:error.name==='TimeoutError'?'Sumber InaRISK belum merespons.':error.message,source:'BNPB InaRISK'}));
+ }
+}
