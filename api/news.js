@@ -1,6 +1,6 @@
 import {publisherPoint} from '../src/news-location.js';
 import {XMLParser, XMLValidator} from 'fast-xml-parser';
-import {NEWS_SOURCES, NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, classifyIncident, compareNewsArticles} from '../src/news-data.js';
+import {NEWS_SOURCES, NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, classifyIncident, comparePublicationDate} from '../src/news-data.js';
 
 const DIRECT_FEEDS = {
   antara: 'https://www.antaranews.com/rss/terkini.xml',
@@ -88,7 +88,7 @@ export function createNewsLoader({fetcher = fetch, now = Date.now} = {}) {
         headlines.add(key);
         items.push(item);
       }
-      items.sort(compareNewsArticles);
+      items.sort(comparePublicationDate);
       cached = {items: items.slice(0, 300), sources, fetchedAt: new Date(time).toISOString(),
         nextRefreshAt: new Date(time + NEWS_REFRESH_MS).toISOString(), refreshIntervalMinutes: NEWS_REFRESH_MINUTES,
         partial: successful.length < NEWS_SOURCES.length, stale: false};

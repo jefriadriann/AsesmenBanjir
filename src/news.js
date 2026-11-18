@@ -1,5 +1,5 @@
 import './news.css';
-import {NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, NEWS_SOURCES, NEWS_TOPICS, classifyIncident, compareNewsArticles, filterNews, selectHeadlines} from './news-data.js';
+import {NEWS_REFRESH_MS, NEWS_REFRESH_MINUTES, NEWS_SOURCES, NEWS_TOPICS, classifyIncident, comparePublicationDate, filterNews, selectHeadlines} from './news-data.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char]));
 const date = value => new Intl.DateTimeFormat('id-ID', {dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Jakarta'}).format(new Date(value)) + ' WIB';
@@ -11,8 +11,9 @@ export function createNews({onUpdate = () => {}} = {}) {
   host.setAttribute('aria-label', 'Berita kebencanaan');
   document.querySelector('.app-main').append(host);
   let data = null, loading = false, query = '', topic = 'all', source = 'all', timer, error = '';
-  let mapActive = false, limit = PAGE_SIZE;
+  let mapActive = false, limit = PAGE_SIZE, retryAt = 0;
   const deadline = () => data ? Date.parse(data.nextRefreshAt) || Date.parse(data.fetchedAt) + NEWS_REFRESH_MS : 0;
+  const nextCheck = () => retryAt || deadline();
   const visible = () => !document.hidden && (mapActive || !host.classList.contains('hidden'));
 
   function articleCard(article, headline = false, index = 0) {
@@ -31,12 +32,14 @@ export function createNews({onUpdate = () => {}} = {}) {
       </div></article>`;
   }
   function cards() {
-    const items = filterNews(data.items, {query, topic, source});
+    const items = filterNews(data.items, {query, topic, source}).sort(comparePublicationDate);
     const headlines = selectHeadlines(items);
     const selected = new Set(headlines.map(article => article.url));
     const rest = items.filter(article => !selected.has(article.url));
+    host.querySelector('#news-newest-article').textContent = items.length
+      ? `Artikel terbaru terbit ${date(items[0].publishedAt)}` : '';
     host.querySelector('#news-result-count').textContent = `${items.length} berita sesuai filter`;
-    host.querySelector('#news-headline-caption').textContent = `${headlines.length} headline · lintas topik dan sumber`;
+    host.querySelector('#news-headline-caption').textContent = `${headlines.length} headline · dipilih menurut dampak dan variasi sumber`;
     host.querySelector('#news-headlines').innerHTML = headlines.map((article, index) => articleCard(article, true, index)).join('');
     host.querySelector('#news-grid').innerHTML = rest.slice(0, limit).map(article => articleCard(article)).join('');
     const more = host.querySelector('#news-more');
@@ -55,12 +58,12 @@ export function createNews({onUpdate = () => {}} = {}) {
       <label>Topik<select id="news-topic"><option value="all">Banjir &amp; tanah longsor</option>${NEWS_TOPICS.map(item => `<option value="${item.id}" ${topic === item.id ? 'selected' : ''}>${item.label}</option>`).join('')}</select></label>
       <label>Sumber<select id="news-source"><option value="all">Semua portal</option>${NEWS_SOURCES.map(item => `<option value="${item.id}" ${source === item.id ? 'selected' : ''}>${item.name}</option>`).join('')}</select></label>
       <button id="news-reset">Reset filter</button></div>
-      <div id="news-status" role="status">${error ? `<p class="news-error">${esc(error)} ${data ? 'Berita terakhir tetap ditampilkan; belum diperbarui.' : ''}</p>` : data ? `<p>Diperbarui ${esc(date(data.fetchedAt))} · Jadwal berikutnya ${esc(date(new Date(deadline())))}${data.stale ? ' · Sumber belum tersedia, menampilkan salinan terakhir.' : ''}</p>` : '<p>Memuat berita terbaru…</p>'}
+      <div id="news-status" role="status">${error ? `<p class="news-error">${esc(error)} ${data ? 'Berita terakhir tetap ditampilkan; belum diperbarui.' : ''}</p>` : data ? `<p>${data.stale ? 'Sumber belum tersedia, menampilkan salinan terakhir. ' : ''}Jadwal berikutnya ${esc(date(nextCheck()))}</p>` : '<p>Memuat berita terbaru…</p>'}
       ${failedSources.length ? `<p class="news-source-warning">Belum terhubung: ${esc(failedSources.map(item => item.name).join(', '))}. Sumber lain tetap ditampilkan.</p>` : ''}</div>
-      <div class="news-section-heading"><div><span class="news-eyebrow">SOROTAN UTAMA</span><h2>Headline pilihan</h2><p id="news-headline-caption">Menunggu sumber berita</p></div><span id="news-result-count"></span></div>
+      <div class="news-section-heading"><div><span class="news-eyebrow">SOROTAN UTAMA</span><h2>Headline pilihan</h2><p id="news-headline-caption">Menunggu sumber berita</p></div><div class="news-freshness"><span id="news-result-count"></span><span id="news-newest-article"></span>${data ? `<span>Feed terakhir berhasil dicek ${esc(date(data.fetchedAt))}</span>` : ''}</div></div>
       <div id="news-headlines" class="news-headlines"></div>
       <p id="news-empty" class="news-empty hidden">Belum ada berita yang cocok. Coba topik atau sumber lain, reset filter, atau perbarui berita.</p>
-      <h2 id="news-latest-heading" class="news-latest-heading hidden">Berita lainnya</h2><div id="news-grid" class="news-grid"></div><button id="news-more" class="hidden" type="button">Tampilkan lebih banyak</button>
+      <h2 id="news-latest-heading" class="news-latest-heading hidden">Berita terbaru lainnya</h2><div id="news-grid" class="news-grid"></div><button id="news-more" class="hidden" type="button">Tampilkan lebih banyak</button>
       <p class="news-attribution">Sumber yang dicakup: ${NEWS_SOURCES.map(item => esc(item.name)).join(' · ')}. Folkative dan USS Feed mengikuti artikel situs yang terindeks. Angka interaksi unggahan tidak tersedia. Sebagian tautan dibuka melalui Google News; foto yang tidak tersedia memakai ilustrasi berlabel. Waktu dalam WIB.</p>`;
     host.querySelector('#news-more').onclick = () => {
       const firstNew = limit;
@@ -75,9 +78,9 @@ export function createNews({onUpdate = () => {}} = {}) {
     host.querySelector('#news-reset').onclick = () => { query = ''; topic = 'all'; source = 'all'; limit = PAGE_SIZE; render(); };
     if (data) cards(); else if (error) host.querySelector('#news-empty').classList.remove('hidden');
   }
-  function schedule(retry = false) {
+  function schedule() {
     clearTimeout(timer);
-    const wait = retry ? 5 * 60 * 1000 : Math.max(1000, deadline() - Date.now());
+    const wait = Math.max(1000, nextCheck() - Date.now());
     if (visible()) timer = setTimeout(() => { if (visible()) load(); }, wait);
   }
   async function load(force = false) {
@@ -85,33 +88,37 @@ export function createNews({onUpdate = () => {}} = {}) {
     loading = true; error = ''; render();
     let failed = false;
     try {
-      const response = await fetch('/api/news' + (force ? '?refresh=1' : ''), {signal: AbortSignal.timeout(25000), cache: force ? 'no-store' : 'default'});
+      const response = await fetch('/api/news' + (force ? '?refresh=1' : ''), {signal: AbortSignal.timeout(25000), cache: force ? 'no-store' : 'no-cache'});
       if (!response.ok) throw Error('Sumber berita belum dapat dihubungi.');
       const next = await response.json();
       if (!Array.isArray(next.items) || !Number.isFinite(Date.parse(next.fetchedAt))) throw Error('Format sumber belum dapat dibaca.');
       const items = next.items.flatMap(item => {
+        if (!Number.isFinite(Date.parse(item.publishedAt))) return [];
         const incident = classifyIncident(item.title, item.publishedAt, item.url);
         return incident ? [{...item, ...incident}] : [];
-      }).sort(compareNewsArticles);
+      }).sort(comparePublicationDate);
       data = {...next, items}; failed = Boolean(next.stale);
     } catch (failure) { error = failure.message + ' Coba perbarui lagi.'; failed = true; }
-    finally { loading = false; render(); schedule(failed); }
+    finally {
+      retryAt = failed ? Date.now() + 5 * 60 * 1000 : 0;
+      loading = false; render(); schedule();
+    }
   }
   document.addEventListener('visibilitychange', () => {
     if (!visible()) return;
-    if (Date.now() >= deadline()) load();
-    else schedule(Boolean(error || data?.stale));
+    if (Date.now() >= nextCheck()) load();
+    else schedule();
   });
   window.addEventListener('online', () => { if (visible() && (error || Date.now() >= deadline())) load(); });
   return {
-    show() { host.classList.remove('hidden'); render(); if (!data || Date.now() >= deadline()) load(); else schedule(); },
+    show() { host.classList.remove('hidden'); render(); if (Date.now() >= nextCheck()) load(); else schedule(); },
     hide() { host.classList.add('hidden'); if (!mapActive) clearTimeout(timer); },
     setMapActive(active, refresh = false) {
       mapActive = active;
       if (refresh) load(true);
       else if (!visible()) clearTimeout(timer);
-      else if (!data || Date.now() >= deadline()) load();
-      else schedule(Boolean(error || data.stale));
+      else if (Date.now() >= nextCheck()) load();
+      else schedule();
     },
   };
 }

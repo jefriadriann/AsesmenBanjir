@@ -64,10 +64,14 @@ export function classifyIncident(title = '', publishedAt, url = '') {
   return {topics, impact: largeImpact.test(title) ? 2 : hasImpact ? 1 : 0};
 }
 
+export function comparePublicationDate(a, b) {
+  return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
+}
+
 export function compareNewsArticles(a, b) {
   return Number(Boolean(a.stale)) - Number(Boolean(b.stale))
     || (b.impact ?? 0) - (a.impact ?? 0)
-    || Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
+    || comparePublicationDate(a, b);
 }
 
 export function filterNews(items, {query = '', topic = 'all', source = 'all'} = {}) {

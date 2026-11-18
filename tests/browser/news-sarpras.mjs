@@ -7,7 +7,7 @@ const stories = [
   ['Banjir melanda Jakarta', 'cnn', 'CNN Indonesia', 'flood'],
   ['Banjir di Aceh', 'antara', 'ANTARA News', 'flood'],
   ['Banjir pesisir Semarang', 'metro', 'Metro TV', 'flood'],
-  ['Longsor di Bogor', 'folkative', 'Folkative', 'landslide'],
+  ['Longsor di Bogor, dua warga tertimbun', 'folkative', 'Folkative', 'landslide'],
   ...Array.from({length: 38}, (_, index) => [`Longsor di lokasi ${index}`, 'ussfeed', 'USS Feed', 'landslide']),
   ['BPBD Ingatkan Ancaman Longsor di Bogor', 'antara', 'ANTARA News', 'landslide'],
   ['Earthquake hits Japan', 'reuters', 'Reuters', 'earthquake'],
@@ -17,7 +17,7 @@ const stories = [
 try {
   for (const width of [1440, 390]) {
     const page = await browser.newPage({viewport: {width, height: 900}});
-    let time = Date.parse('2026-11-17T05:01:00Z'), calls = 0, fail = false;
+    let time = Date.parse('2026-11-17T05:01:00Z'), calls = 0, fail = false, newPublication = false;
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.clock.install({time: new Date(time)});
@@ -26,7 +26,9 @@ try {
     await page.route('https://**', route => route.abort());
     await page.route('**/api/news*', route => {
       calls++;
-      return route.fulfill({status: fail ? 502 : 200, json: fail ? {error: 'Sumber belum tersedia'} : {items: stories, sources: [], fetchedAt: new Date(time).toISOString(), nextRefreshAt: new Date(time + REFRESH_MS).toISOString()}});
+      return route.fulfill({status: fail ? 502 : 200, json: fail ? {error: 'Sumber belum tersedia'} : {items: stories.map((story, index) => newPublication && index === 4 ? {
+        ...story, sourceId: 'folkative', source: 'Folkative', publishedAt: new Date(time).toISOString(),
+      } : story), sources: [], fetchedAt: new Date(time).toISOString(), nextRefreshAt: new Date(time + REFRESH_MS).toISOString()}});
     });
     await page.goto(base + '/#berita');
     await page.waitForSelector('.news-headline');
@@ -58,9 +60,13 @@ try {
     await page.clock.fastForward(REFRESH_MS - 1000);
     assert.equal(calls, beforeTimer);
     time += 1000;
+    newPublication = true;
     await page.clock.fastForward(1000);
     await page.waitForFunction(() => !document.querySelector('#news-refresh').disabled);
     assert.equal(calls, beforeTimer + 1);
+    assert.match(await page.locator('#news-newest-article').innerText(), /12.31 WIB/);
+    assert.match(await page.locator('#news-grid .news-card').first().innerText(), /12.31 WIB/);
+    assert.match(await page.locator('.news-freshness').innerText(), /Feed terakhir berhasil dicek/);
     assert.equal(await page.locator('#news-refresh').innerText(), 'Perbarui berita');
     await page.screenshot({path: `/tmp/ruang-news-${width}.png`, fullPage: true});
     fail = true;
