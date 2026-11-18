@@ -34,8 +34,7 @@ try {
     await page.goto(base + '/#peta');
     const markerToggle = page.getByRole('button', {name: 'Penanda berita'});
     await markerToggle.waitFor();
-    assert.equal(requests, 0);
-    await markerToggle.click();
+    assert.equal(await markerToggle.getAttribute('aria-pressed'), 'true');
     const semarang = page.getByRole('button', {name: 'Berita: Banjir di Semarang'});
     await semarang.waitFor();
     assert.equal(await page.locator('.news-city-marker').count(), 2);
@@ -91,13 +90,22 @@ try {
     assert.equal(await page.locator('.network-popup .popup-network-button').count(), 0);
     await page.goto(base + '/#peta/KPW-13');
     await page.locator('.network-popup').getByText('Perkiraan Senen · titik gedung belum tersedia').waitFor();
-    await page.locator('.network-popup .popup-detail-button').click();
+    await page.locator('.network-popup').filter({hasText: 'Perkiraan Senen'}).locator('.popup-detail-button').click();
     await page.locator('#location-detail').getByText(/Prajurit KKO Usman dan Harun/).waitFor();
     assert.equal(await page.locator('#view-area').isDisabled(), false);
     await page.goto(base + '/#berita');
     await page.locator('.news-card').first().waitFor();
     assert.equal(requests, 2);
     assert.deepEqual(errors, []);
+    await page.goto(base + '/#peta');
+    await page.reload();
+    await page.locator('#news-map-status').getByText(/Feed belum tersedia/).waitFor();
+    assert.equal(await page.locator('.news-city-marker').count(), 0);
+    fail = false;
+    await page.getByRole('button', {name: 'Prioritas Pantauan'}).click();
+    await page.locator('#watch-refresh').click();
+    await page.locator('#watch-close').click();
+    await page.getByRole('button', {name: 'Berita: Meulaboh'}).waitFor();
     await page.close();
     console.log('PASS: yellow markers, keyboard popup, article URLs, flood priorities and retained data', width);
   }

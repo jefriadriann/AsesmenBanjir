@@ -39,10 +39,10 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   const dialog = toolbar.querySelector('#watch-dialog');
   const results = dialog.querySelector('#watch-results');
   const status = dialog.querySelector('#watch-status');
-  const layer = L.layerGroup();
+  const layer = L.layerGroup().addTo(map);
   const markers = new Map();
   map.createPane('newsCities').style.zIndex = '620';
-  let enabled = false, visible = true;
+  let enabled = true, visible = null;
   let snapshot = {data: null, loading: false, error: ''};
   let cities = [], points = [];
 
@@ -63,7 +63,7 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
     const {data, loading, error} = snapshot;
     const stale = data && (data.stale || error || data.items.some(article => article.stale));
     mapStatus.textContent = !enabled ? '' : loading && !data ? 'Memuat berita…'
-      : error && !data ? 'Berita belum tersedia'
+      : error && !data ? 'Feed belum tersedia · coba Perbarui di Prioritas Pantauan'
         : `${points.length ? points.length + ' penanda berita' : 'Belum ada lokasi berita yang cocok'}${stale ? ' · salinan terakhir tersedia' : ''}`;
     status.textContent = error || (stale ? 'Sebagian atau seluruh berita berasal dari salinan terakhir.'
       : loading ? 'Memuat berita…' : '');
