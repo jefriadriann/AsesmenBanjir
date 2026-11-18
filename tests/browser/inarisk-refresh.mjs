@@ -13,7 +13,7 @@ await page.route('**/api/inarisk?*',async route=>{
  if(fail==='deployment')return route.fulfill({status:404,contentType:'text/html',body:'Not Found'});
  if(mode===fail)return route.fulfill({status:502,json:{error:'Controlled source failure'}});
  if(mode==='image')return route.fulfill({contentType:'image/png',body:png});
- return route.fulfill({json:mode==='catalog'?{services:[service('BAHAYA_BANJIR'),service('BAHAYA_BANJIR_ALTERNATIF')]}:{metadata:{name:'Fixture '+version},legend:{layers:[{layerName:'Fixture',legend:[{label:'Class '+version}]}]}}});
+ return route.fulfill({json:mode==='catalog'?{services:[{...service('RISIKO_BANJIR'),kind:'Risiko banjir'},service('BAHAYA_BANJIR'),service('BAHAYA_BANJIR_ALTERNATIF')]}:{metadata:{name:'Fixture '+version},legend:{layers:[{layerName:'Fixture',legend:[{label:'Class '+version}]}]}}});
 });
 const ready=()=>page.waitForFunction(()=>document.querySelector('#inarisk-retry')?.disabled===false);
 const layers=()=>page.locator('.leaflet-floodOverlay-pane .leaflet-layer');
@@ -21,6 +21,7 @@ try{
  await page.goto(process.env.BASE_URL||'http://localhost:3040');
  await page.locator('#inarisk-toggle').click();await ready();
  assert.equal(await layers().count(),1);
+ assert.equal(await page.locator('#inarisk-service').inputValue(),'inarisk/BAHAYA_BANJIR/MapServer');
  await page.locator('#inarisk-opacity').fill('35');
  await layers().evaluate(el=>el.dataset.regressionOriginal='yes');
  for(const phase of ['catalog','metadata','image']){
