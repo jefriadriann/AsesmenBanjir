@@ -166,29 +166,35 @@
     "city": "Padang",
     "kpw": "Sumatera Barat",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -0.94336,
+      100.3623
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat sesuai direktori BI. Pin Museum BI Padang berada di alamat lain."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Office of Bank Indonesia, Padang: Tabel2, no.19, Muhammad et al.(2017), NHESS17:2245–2270. Koordinat bangunan pada publikasi riset, bukan titik kota/Museum BI dan bukan pin Maps terkini. Sumber lama; cek posisi/keaktifan gedung. Peta: https://www.google.com/maps?q=-0.94336,100.3623. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -0.95,
       100.36
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -0.94336,
+      100.3623
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Sudirman No. 22, Padang 25128",
-    "sourceUrl": "https://www.cybo.com/ID-biz/bank-indonesia-west-sumatra",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat sesuai direktori BI. Pin Museum BI Padang berada di alamat lain.",
+    "sourceUrl": "https://nhess.copernicus.org/articles/17/2245/2017/nhess-17-2245-2017.pdf",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Office of Bank Indonesia, Padang: Tabel2, no.19, Muhammad et al.(2017), NHESS17:2245–2270. Koordinat bangunan pada publikasi riset, bukan titik kota/Museum BI dan bukan pin Maps terkini. Sumber lama; cek posisi/keaktifan gedung. Peta: https://www.google.com/maps?q=-0.94336,100.3623. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Sumatera%20Barat%20Padang%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -320,29 +326,35 @@
     "city": "Palembang",
     "kpw": "Sumatera Selatan",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -2.975422567058176,
+      104.75454726721757
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Nomor 510 mengikuti profil BI."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Contoh koordinat dari pengguna; dipisah ke kolom I/J. Pin perlu ditinjau, belum verifikasi independen."
     },
     "legacyCityCoords": [
       -2.99,
       104.76
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -2.975422567058176,
+      104.75454726721757
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Sudirman No. 510, Ilir Timur I, Palembang 30126",
-    "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-Sumatera-Selatan.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Nomor 510 mengikuti profil BI.",
+    "sourceUrl": "https://www.google.com/maps?q=-2.975422567058176,104.75454726721757",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Contoh koordinat dari pengguna; dipisah ke kolom I/J. Pin perlu ditinjau, belum verifikasi independen.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Sumatera%20Selatan%20Palembang%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -354,29 +366,35 @@
     "city": "Bengkulu",
     "kpw": "Bengkulu",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -3.7901230585927723,
+      102.25331428256683
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -3.8,
       102.26
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -3.7901230585927723,
+      102.25331428256683
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Ahmad Yani No. 1, Bengkulu 38116",
     "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-Provinsi-Bengkulu.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Bengkulu%20Bengkulu%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -388,29 +406,35 @@
     "city": "Bandar Lampung",
     "kpw": "Lampung",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -5.44402164661005,
+      105.26874692490829
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -5.43,
       105.26
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -5.44402164661005,
+      105.26874692490829
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Hasanuddin No. 38, Bandar Lampung 35211",
     "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-Provinsi-Lampung.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Lampung%20Bandar%20Lampung%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -496,29 +520,35 @@
     "city": "Serang",
     "kpw": "Banten",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -6.174815357853397,
+      106.14934771393702
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat sesuai direktori BI 2026."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -6.12,
       106.15
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -6.174815357853397,
+      106.14934771393702
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Raya Serang–Pandeglang Km 7, Sindangsari, Pabuaran, Kab. Serang",
     "sourceUrl": "https://idalamat.com/alamat/654117/bank-indonesia-banten-pandeglang-banten",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat sesuai direktori BI 2026.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Banten%20Serang%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -530,29 +560,35 @@
     "city": "Bandung",
     "kpw": "Jawa Barat",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -6.914433,
+      107.6089
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-barat.html. Ditelusuri 18-11-2026; perlu tinjau posisi gedung/keaktifan kantor."
     },
     "legacyCityCoords": [
       -6.91,
       107.61
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -6.914433,
+      107.6089
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Braga No. 108, Bandung 40111",
-    "sourceUrl": "https://www.waze.com/id/live-map/directions/id/jawa-barat/bank-indonesia-cabang-bandung?to=place.ChIJt7PmcTrmaC4RwUZ8-5FwgXc",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://www.google.com/maps/place/Bank+Indonesia+Bandung/data=!4m5!3m4!1s0x0:0x77817091fb7c46c1!8m2!3d-6.914433!4d107.6089",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-barat.html. Ditelusuri 18-11-2026; perlu tinjau posisi gedung/keaktifan kantor.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Jawa%20Barat%20Bandung%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -604,29 +640,35 @@
     "city": "Tasikmalaya",
     "kpw": "Tasikmalaya",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -7.3265122,
+      108.2258245
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-barat.html. Ditelusuri 18-11-2026; perlu tinjau posisi gedung/keaktifan kantor."
     },
     "legacyCityCoords": [
       -7.33,
       108.22
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -7.3265122,
+      108.2258245
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Sutisna Senjaya No. 19, Tawangsari, Tawang, Tasikmalaya 46112",
-    "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-BI-Tasikmalaya.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://www.google.com/maps/place/Bank+Indonesia+Tasikmalaya/data=!4m5!3m4!1s0x2e6f574561d9a323:0xe05949f07687da1f!8m2!3d-7.3265122!4d108.2258245",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-barat.html. Ditelusuri 18-11-2026; perlu tinjau posisi gedung/keaktifan kantor.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Tasikmalaya%20Tasikmalaya%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -638,29 +680,35 @@
     "city": "Tegal",
     "kpw": "Tegal",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -6.87513441107682,
+      109.12573909423529
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Kantor sementara yang digunakan sejak 23 Juni 2025 dan tercantum di profil BI."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -6.87,
       109.14
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -6.87513441107682,
+      109.12573909423529
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Kompol Suprapto No. 7, Kemandungan, Tegal Barat, Tegal",
     "sourceUrl": "https://tegal.inews.id/read/611884/kantor-perwakilan-kpw-bank-indonesia-tegal-pindah-lokasi/all",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Kantor sementara yang digunakan sejak 23 Juni 2025 dan tercantum di profil BI.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Tegal%20Tegal%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -672,29 +720,35 @@
     "city": "Purwokerto",
     "kpw": "Purwokerto",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -7.413016509390159,
+      109.23080704820833
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat yang dipublikasikan pada profil BI. Perlu konfirmasi lokasi gedung yang sedang beroperasi bila berbeda."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -7.42,
       109.24
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -7.413016509390159,
+      109.23080704820833
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Ahmad Yani No. 30, Sokanegara, Purwokerto Timur, Banyumas",
     "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-BI-Purwokerto.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat yang dipublikasikan pada profil BI. Perlu konfirmasi lokasi gedung yang sedang beroperasi bila berbeda.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Purwokerto%20Purwokerto%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -706,29 +760,35 @@
     "city": "Semarang",
     "kpw": "Jawa Tengah",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -6.9941278,
+      110.4230023
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-tengah.html. Ditelusuri 18-11-2026; tinjau posisi gedung/keaktifan kantor."
     },
     "legacyCityCoords": [
       -6.99,
       110.42
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -6.9941278,
+      110.4230023
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Imam Bardjo SH No. 4, Semarang 50241",
-    "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/pages/kantor-perwakilan-provinsi-jawa-tengah.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://www.google.com/maps/place/Bank+Indonesia/data=!4m5!3m4!1s0x2e708b5e3729fd7d:0xc3a569ae071abe46!8m2!3d-6.9941278!4d110.4230023",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-tengah.html. Ditelusuri 18-11-2026; tinjau posisi gedung/keaktifan kantor.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Jawa%20Tengah%20Semarang%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -740,29 +800,35 @@
     "city": "Surakarta",
     "kpw": "Solo",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -7.5707846,
+      110.8291059
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Titik cagar budaya Gedung Lama BI perlu dibedakan dari pin kantor aktif."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-tengah.html. Ditelusuri 18-11-2026; tinjau posisi gedung/keaktifan kantor."
     },
     "legacyCityCoords": [
       -7.57,
       110.82
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -7.5707846,
+      110.8291059
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Sudirman No. 15, Kampung Baru, Pasar Kliwon, Surakarta 57111",
-    "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-BI-Solo.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Titik cagar budaya Gedung Lama BI perlu dibedakan dari pin kantor aktif.",
+    "sourceUrl": "https://www.google.com/maps/place/Central+Bank+of+Indonesia+Solo+Representative+Office/data=!4m5!3m4!1s0x2e7a1660f73945dd:0xe6b96e637a592287!8m2!3d-7.5707846!4d110.8291059",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-tengah.html. Ditelusuri 18-11-2026; tinjau posisi gedung/keaktifan kantor.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Solo%20Surakarta%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -854,29 +920,35 @@
     "city": "Malang",
     "kpw": "Malang",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -7.9816952,
+      112.6314752
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-timur.html. Ditelusuri 18-11-2026; tinjau posisi gedung/keaktifan kantor."
     },
     "legacyCityCoords": [
       -7.98,
       112.63
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -7.9816952,
+      112.6314752
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Merdeka Utara No. 7, Malang 65119",
-    "sourceUrl": "https://www.waze.com/live-map/directions/id/jawa-timur/bank-indonesia-malang-representative?to=place.ChIJQalF-Rco1i0RmNyK5x2GJYc",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://www.google.com/maps/place/Kantor+Perwakilan+Bank+Indonesia/data=!4m5!3m4!1s0x2dd62822a8a2a141:0xa55150461b00b408!8m2!3d-7.9816952!4d112.6314752",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Pin Google Maps (!3d/!4d), bukan pusat tampilan @. Alamat cocok dengan lokasi tercatat. Sumber tautan: https://alamattempatnya.blogspot.com/2018/09/bank-indonesia-jawa-timur.html. Ditelusuri 18-11-2026; tinjau posisi gedung/keaktifan kantor.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Malang%20Malang%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1048,29 +1120,35 @@
     "city": "Kupang",
     "kpw": "Nusa Tenggara Timur",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -10.1712076,
+      123.6060464
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Pin Google Maps (!3d/!4d) dari tautan GMaps artikel Gedung Bank Indonesia Kupang (4-11-2026), https://setiapgedung.id/2026/11/gedung-bank-indonesia-kupang.html. Alamat El Tari39 cocok; dibedakan dari kantor lama Tompello. Ada referensi OSM pada artikel sekitar ~35 m dari pin Maps. Kandidat perlu tinjau. Ditelusuri 18-11-2026."
     },
     "legacyCityCoords": [
       -10.17,
       123.61
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -10.1712076,
+      123.6060464
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. El Tari No. 39, Oebobo, Kupang 85111",
-    "sourceUrl": "https://www.waze.com/id/live-map/directions/id/nusa-tenggara-tim./bank-indonesia?to=place.ChIJmSVAoH-dViwRe8WEJvlMKJo",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://www.google.com/maps/place/Bank+Indonesia/data=!4m6!3m5!1s0x2c569ca5f1c4d1dd:0x15ee2d61ee6ae37c!8m2!3d-10.1712076!4d123.6060464",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Pin Google Maps (!3d/!4d) dari tautan GMaps artikel Gedung Bank Indonesia Kupang (4-11-2026), https://setiapgedung.id/2026/11/gedung-bank-indonesia-kupang.html. Alamat El Tari39 cocok; dibedakan dari kantor lama Tompello. Ada referensi OSM pada artikel sekitar ~35 m dari pin Maps. Kandidat perlu tinjau. Ditelusuri 18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Nusa%20Tenggara%20Timur%20Kupang%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1122,29 +1200,35 @@
     "city": "Banjarmasin",
     "kpw": "Kalimantan Selatan",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -3.3233333333333333,
+      114.59166666666667
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Koordinat gedung BI Kalsel Jl. Lambung Mangkurat dari publikasi resmi BI hlm. 378: 3°19′24″S, 114°35′30″E. Dikonversi ke desimal; bukan pin Maps, presisi sumber 1 detik busur (~30 m). Tinjau posisi gedung. Peta: https://www.google.com/maps?q=-3.3233333333333333,114.59166666666667. Ditelusuri 18-11-2026."
     },
     "legacyCityCoords": [
       -3.32,
       114.59
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -3.3233333333333333,
+      114.59166666666667
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Lambung Mangkurat No. 15, Banjarmasin 70111",
-    "sourceUrl": "https://www.waze.com/id/live-map/directions/id/kalimantan-selatan/bank-indonesia?to=place.ChIJ3SzUXDYj5C0R9WZkfgReThI",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://www.bi.go.id/id/bi-institute/publikasi/Documents/Dinamika-Perekonomian-Hulu--Hilir-Sungai%2C-Bank-Indonesia-Dalam-Lintasan-Sejarah-Kalimantan-Selatan.pdf",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Koordinat gedung BI Kalsel Jl. Lambung Mangkurat dari publikasi resmi BI hlm. 378: 3°19′24″S, 114°35′30″E. Dikonversi ke desimal; bukan pin Maps, presisi sumber 1 detik busur (~30 m). Tinjau posisi gedung. Peta: https://www.google.com/maps?q=-3.3233333333333333,114.59166666666667. Ditelusuri 18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Kalimantan%20Selatan%20Banjarmasin%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1236,29 +1320,35 @@
     "city": "Balikpapan",
     "kpw": "Balikpapan",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -1.2784288,
+      116.8233043
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Direktori BI 2026 dan listing kantor menunjukkan No. 20. Profil BI mencantumkan No. 319 dengan pin BRI Agro. Perlu konfirmasi alamat aktif."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "[PIN KANDIDAT—ALAMAT BERBEDA] Bank Indonesia Sudirman KlandasanUlu; direktori menulisNo.1, workbookNo.20. Kandidat yang telah dicatat sebelumnya; belum konfirmasi kantor aktif. Pasangan Geo Location digunakan, bukan kolom longitude situs yang salah mengulang latitude. Peta: https://www.google.com/maps?q=-1.2784288,116.8233043. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -1.24,
       116.85
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -1.2784288,
+      116.8233043
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Sudirman No. 20, Klandasan Ulu, Balikpapan 76111",
-    "sourceUrl": "https://www.waze.com/live-map/directions/id/kalimantan-timur/bank-indonesia%2C-kantor-perwakilan-balikpapan?to=place.ChIJtWfLMzhH8S0R0VEPFeQgd_Y",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Direktori BI 2026 dan listing kantor menunjukkan No. 20. Profil BI mencantumkan No. 319 dengan pin BRI Agro. Perlu konfirmasi alamat aktif.",
+    "sourceUrl": "https://opencorpdata.com/place/ChIJk3li0jlH8S0RaIOUnjkQ81E",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "[PIN KANDIDAT—ALAMAT BERBEDA] Bank Indonesia Sudirman KlandasanUlu; direktori menulisNo.1, workbookNo.20. Kandidat yang telah dicatat sebelumnya; belum konfirmasi kantor aktif. Pasangan Geo Location digunakan, bukan kolom longitude situs yang salah mengulang latitude. Peta: https://www.google.com/maps?q=-1.2784288,116.8233043. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Balikpapan%20Balikpapan%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1270,29 +1360,35 @@
     "city": "Tarakan",
     "kpw": "Kalimantan Utara",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      3.3220824100947772,
+      117.57487816721986
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       3.3,
       117.63
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      3.3220824100947772,
+      117.57487816721986
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Mulawarman No. 123, Tarakan 77117",
     "sourceUrl": "https://idalamat.com/alamat/kantor-perwakilan-bank-indonesia-provinsi-kalimantan-utara-1076700",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Kalimantan%20Utara%20Tarakan%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1304,29 +1400,35 @@
     "city": "Makassar",
     "kpw": "Sulawesi Selatan",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -5.133902937459454,
+      119.41389028257771
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -5.14,
       119.42
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -5.133902937459454,
+      119.41389028257771
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Jend. Sudirman No. 3, Makassar",
     "sourceUrl": "https://www.waze.com/id/live-map/directions/id/sulawesi-selatan/bank-indonesia-cabang-sulawesi-selatan?to=place.ChIJ198_k6gCvy0RxZqJpR7E94o",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Sulawesi%20Selatan%20Makassar%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1378,29 +1480,35 @@
     "city": "Palu",
     "kpw": "Sulawesi Tengah",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -0.8891689,
+      119.870193
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Ditemukan dengan nama Inggris Representatives of Bank Indonesia Central Sulawesi. Near-Place menampilkan latitude/longitude dan alamat Sam Ratulangi No.23 yang cocok. Kandidat direktori peta, bukan verifikasi lapangan atau pin Maps terkini. Peta: https://www.google.com/maps?q=-0.8891689,119.870193. Ditelusuri 18-11-2026."
     },
     "legacyCityCoords": [
       -0.9,
       119.87
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -0.8891689,
+      119.870193
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Sam Ratulangi No. 23, Besusu Barat, Palu",
-    "sourceUrl": "https://www.semuabis.com/representatives-of-bank-indonesia-0451-421181",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://id.near-place.com/representatives-of-bank-indonesia-central-sulawesi-jalan-sam-ratulangi-no23",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Ditemukan dengan nama Inggris Representatives of Bank Indonesia Central Sulawesi. Near-Place menampilkan latitude/longitude dan alamat Sam Ratulangi No.23 yang cocok. Kandidat direktori peta, bukan verifikasi lapangan atau pin Maps terkini. Peta: https://www.google.com/maps?q=-0.8891689,119.870193. Ditelusuri 18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Sulawesi%20Tengah%20Palu%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1452,29 +1560,35 @@
     "city": "Gorontalo",
     "kpw": "Gorontalo",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      0.5356983235359496,
+      123.0775014672101
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Gedung di Tamalate menurut peresmian dan direktori BI, sementara profil BI memuat alamat lama."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       0.54,
       123.06
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      0.5356983235359496,
+      123.0775014672101
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. By Pass, Tamalate, Kota Timur, Gorontalo 96113",
     "sourceUrl": "https://berita.gorontaloprov.go.id/2018/07/27/gedung-perwakilan-bi-kantor-termegah-di-gorontalo/",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Gedung di Tamalate menurut peresmian dan direktori BI, sementara profil BI memuat alamat lama.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Gorontalo%20Gorontalo%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1486,29 +1600,35 @@
     "city": "Mamuju",
     "kpw": "Sulawesi Barat",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -2.6775646206257036,
+      118.88968542488846
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -2.68,
       118.89
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -2.6775646206257036,
+      118.88968542488846
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Andi P. Pettarani No. 1, Binanga, Mamuju 91511",
     "sourceUrl": "https://www.bi.go.id/id/tentang-bi/profil/organisasi/Pages/Kantor-Perwakilan-Sulawesi-Barat.aspx",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Sulawesi%20Barat%20Mamuju%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1520,29 +1640,35 @@
     "city": "Ambon",
     "kpw": "Maluku",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -3.6949659,
+      128.1841103
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Direktori peta BANK INDONESIA, Pattimura, Uritetu, Ambon. Pasangan Geo Location dipakai (kolom Longitude terpisah pada situs mengulang latitude). Place ID sama dengan tautan Waze tercatat. Kandidat pin, belum verifikasi lapangan. Peta: https://www.google.com/maps?q=-3.6949659,128.1841103. Ditelusuri 18-11-2026."
     },
     "legacyCityCoords": [
       -3.69,
       128.18
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -3.6949659,
+      128.1841103
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Pattimura No. 7, Uritetu, Sirimau, Ambon 97124",
-    "sourceUrl": "https://www.waze.com/live-map/directions/id/maluku/bank-indonesia?to=place.ChIJG-ZO-1HobC0RtkErECX1rOE",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://opencorpdata.com/place/ChIJG-ZO-1HobC0RtkErECX1rOE",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Direktori peta BANK INDONESIA, Pattimura, Uritetu, Ambon. Pasangan Geo Location dipakai (kolom Longitude terpisah pada situs mengulang latitude). Place ID sama dengan tautan Waze tercatat. Kandidat pin, belum verifikasi lapangan. Peta: https://www.google.com/maps?q=-3.6949659,128.1841103. Ditelusuri 18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Maluku%20Ambon%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1554,29 +1680,35 @@
     "city": "Ternate",
     "kpw": "Maluku Utara",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      0.787424878250693,
+      127.38062603466882
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       0.79,
       127.38
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      0.787424878250693,
+      127.38062603466882
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Yos Sudarso No. 1, Maliaro, Ternate Tengah, Ternate",
     "sourceUrl": "https://www.waze.com/live-map/directions/id/maluku-utara/kantor-perwakilan-bank-indonesia-provinsi-maluku-utara?to=place.ChIJac4wLvyznDIR36R9wf3gYzw",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Maluku%20Utara%20Ternate%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1628,29 +1760,35 @@
     "city": "Manokwari",
     "kpw": "Papua Barat",
     "bank": "Bank Indonesia",
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -0.9233765404540589,
+      134.03481202488274
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Kantor baru diresmikan 18 April 2026. Alamat Jl. Jogjakarta pada profil lama dikeluarkan."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -0.86,
       134.06
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -0.9233765404540589,
+      134.03481202488274
+    ],
     "region": "",
     "plafond": null,
     "address": "Jl. Brigjen Marinir Abraham O. Atururi, Arfai, Manokwari 98315",
     "sourceUrl": "https://rri.co.id/manokwari/regional/2352397/gedung-bank-indonesia-perwakilan-papua-barat-di-resmikan",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Kantor baru diresmikan 18 April 2026. Alamat Jl. Jogjakarta pada profil lama dikeluarkan.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20Indonesia%20Papua%20Barat%20Manokwari%20Indonesia",
     "legacySource": "Daftar awal KPw — perlu validasi direktori BI",
     "legacyCoordinateStatus": "approximate"
@@ -1783,28 +1921,34 @@
     "name": "Alor",
     "bank": "BPD NTT KC KALABAHI",
     "plafond": 100000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -8.2183816,
+      124.5179714
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Sumber BI mencantumkan Bank NTT di Kalabahi. Alamat jalan dan pin KC perlu konfirmasi."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Nama alternatif Bank Pembangunan Daerah Nusa Tenggara Timur PT, Kalabahi. Telepon038621500 cocok KC Kalabahi di laporan Bank NTT2024. Koordinat parameter q pada embed/v1/place Google Maps, bukan hanya center. Titik cabang pengelola, bukan konfirmasi ruang Kas Titipan. Peta: https://www.google.com/maps?q=-8.2183816,124.5179714. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -8.22,
       124.52
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -8.2183816,
+      124.5179714
+    ],
     "city": "",
     "address": "Kalabahi, Kab. Alor",
-    "sourceUrl": "https://www.bi.go.id/id/publikasi/ruang-media/news-release/Documents/Booklet%20Penukaran%20SERAMBI%202023.pdf",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Sumber BI mencantumkan Bank NTT di Kalabahi. Alamat jalan dan pin KC perlu konfirmasi.",
+    "sourceUrl": "https://vymaps.com/ID/Bank-Pembangunan-Daerah-Nusa-Tenggara-Timur-PT-1583472/",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Nama alternatif Bank Pembangunan Daerah Nusa Tenggara Timur PT, Kalabahi. Telepon038621500 cocok KC Kalabahi di laporan Bank NTT2024. Koordinat parameter q pada embed/v1/place Google Maps, bukan hanya center. Titik cabang pengelola, bukan konfirmasi ruang Kas Titipan. Peta: https://www.google.com/maps?q=-8.2183816,124.5179714. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=BPD%20NTT%20KC%20KALABAHI%20Alor%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -2085,28 +2229,34 @@
     "name": "Tana Paser",
     "bank": "PT BPD Kaltim dan Kaltara",
     "plafond": 200000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -1.9124849,
+      116.199363
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "[PIN ATM/CABANG—KANDIDAT] Bank Kaltim Yos Sudarso Tanah Grogot; alamat cocok, tetapi kategori direktori ATM. Perlu cek apakah pin ATM berada di kompleks KC pengelola Kastip. Koordinat q peta place. Peta: https://www.google.com/maps?q=-1.9124849,116.199363. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -1.91,
       116.19
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -1.9124849,
+      116.199363
+    ],
     "city": "",
     "address": "Jl. Yos Sudarso, Tanah Grogot, Kab. Paser",
-    "sourceUrl": "https://alamatpenting.com/bankaltimtara-kc-tana-paser/",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://vymaps.com/ID/Bankaltim-cabang-tana-paser-169975/",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "[PIN ATM/CABANG—KANDIDAT] Bank Kaltim Yos Sudarso Tanah Grogot; alamat cocok, tetapi kategori direktori ATM. Perlu cek apakah pin ATM berada di kompleks KC pengelola Kastip. Koordinat q peta place. Peta: https://www.google.com/maps?q=-1.9124849,116.199363. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=PT%20BPD%20Kaltim%20dan%20Kaltara%20Tana%20Paser%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -2307,28 +2457,34 @@
     "name": "Singkawang",
     "bank": "PT BPD Kalbar KC Singkawang",
     "plafond": 250000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      0.903009,
+      108.983471
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat direktori resmi untuk cabang konvensional. Bank Kalbar Syariah beralamat lain."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "[PIN CABANG/AGEN] Tujuan daddr listing Western Union di Bank Kalbar Diponegoro36, persis alamat KC tercatat. Bukan Bank Kalbar Syariah Bambang Ismoyo. Belum verifikasi posisi ruang Kastip. Peta: https://www.google.com/maps?q=0.903009,108.983471. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       0.91,
       108.99
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      0.903009,
+      108.983471
+    ],
     "city": "",
     "address": "Jl. Diponegoro No. 36, Singkawang",
-    "sourceUrl": "https://mail.bankkalbar.co.id/jaringan_kantor.php",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat direktori resmi untuk cabang konvensional. Bank Kalbar Syariah beralamat lain.",
+    "sourceUrl": "https://id787344-western-union.contact.page/map",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "[PIN CABANG/AGEN] Tujuan daddr listing Western Union di Bank Kalbar Diponegoro36, persis alamat KC tercatat. Bukan Bank Kalbar Syariah Bambang Ismoyo. Belum verifikasi posisi ruang Kastip. Peta: https://www.google.com/maps?q=0.903009,108.983471. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=PT%20BPD%20Kalbar%20KC%20Singkawang%20Singkawang%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -2443,28 +2599,34 @@
     "name": "Nanga Bulik",
     "bank": "BPD Kalteng",
     "plafond": 150000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -2.1906638888888885,
+      111.44533611111112
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat dari direktori resmi Bank Kalteng."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "Kalteng Kantor Cabang Nanga Bulik, Bank, Lamandau; Gazeter RI BIG Edisi1 Tahun2021 hlm106: 02°11′26.39″ S,111°26′43.21″ T. Dikonversi ke desimal. Sumber tidak mencantumkan jalan; belum dipastikan cocok gedung Pangeran Antasari saat ini. Bukan ekstraksi Maps. Peta: https://www.google.com/maps?q=-2.1906638888888885,111.44533611111112. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -2.21,
       111.39
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -2.1906638888888885,
+      111.44533611111112
+    ],
     "city": "",
     "address": "Jl. Pangeran Antasari, Kel. Nanga Bulik, Kec. Bulik, Kab. Lamandau",
-    "sourceUrl": "https://www.bankkalteng.co.id/tentang-bank-kalteng/lokasi-kantor",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat dari direktori resmi Bank Kalteng.",
+    "sourceUrl": "https://sinar.big.go.id/assets/document/gazeter/gazeter_1643095453.pdf",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "Kalteng Kantor Cabang Nanga Bulik, Bank, Lamandau; Gazeter RI BIG Edisi1 Tahun2021 hlm106: 02°11′26.39″ S,111°26′43.21″ T. Dikonversi ke desimal. Sumber tidak mencantumkan jalan; belum dipastikan cocok gedung Pangeran Antasari saat ini. Bukan ekstraksi Maps. Peta: https://www.google.com/maps?q=-2.1906638888888885,111.44533611111112. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=BPD%20Kalteng%20Nanga%20Bulik%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -2477,28 +2639,34 @@
     "name": "Sangatta",
     "bank": "PT BPD Kaltim dan Kaltara KC Sangatta",
     "plafond": 200000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      0.5114063,
+      117.5366548
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Nama Inggris East Kalimantan Regional Development Bank. Alamat Yos SudarsoIII120 RT25 Sangatta cocok daftar BI SERAMBI2024. Koordinat parameter q pada embed/v1/place Maps. Titik cabang pengelola, belum verifikasi ruang Kas Titipan. Peta: https://www.google.com/maps?q=0.5114063,117.5366548. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       0.5,
       117.55
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      0.5114063,
+      117.5366548
+    ],
     "city": "",
-    "address": "Sangatta, Kab. Kutai Timur",
-    "sourceUrl": "https://simbada.bankaltimtara.co.id/id/lokasi",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "address": "Jl. Yos Sudarso III No.120 RT25, Sangatta Utara, Kutai Timur",
+    "sourceUrl": "https://vymaps.com/ID/Bank-Pembangunan-Daerah-Kalimantan-Timur-39668/",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Nama Inggris East Kalimantan Regional Development Bank. Alamat Yos SudarsoIII120 RT25 Sangatta cocok daftar BI SERAMBI2024. Koordinat parameter q pada embed/v1/place Maps. Titik cabang pengelola, belum verifikasi ruang Kas Titipan. Peta: https://www.google.com/maps?q=0.5114063,117.5366548. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=PT%20BPD%20Kaltim%20dan%20Kaltara%20KC%20Sangatta%20Sangatta%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -2551,28 +2719,34 @@
     "name": "Malinau",
     "bank": "BPD Kaltim Kaltara KC Malinau",
     "plafond": 100000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      3.5768072,
+      116.616761
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "[PIN CABANG] Bankaltim Cabang Malinau; Raja Pandita RT XII cocok. Koordinat parameter q pada peta place, bukan hanya center. Listing lama; ruang Kas Titipan belum diverifikasi. Peta: https://www.google.com/maps?q=3.5768072,116.616761. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       3.58,
       116.64
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      3.5768072,
+      116.616761
+    ],
     "city": "",
     "address": "Jl. Raya Pandita RT XII, Malinau",
-    "sourceUrl": "https://alamatpenting.com/bankaltimtara-kc-malinau/",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://vymaps.com/ID/Bankaltim-Cabang-Malinau-3417496/",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "[PIN CABANG] Bankaltim Cabang Malinau; Raja Pandita RT XII cocok. Koordinat parameter q pada peta place, bukan hanya center. Listing lama; ruang Kas Titipan belum diverifikasi. Peta: https://www.google.com/maps?q=3.5768072,116.616761. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=BPD%20Kaltim%20Kaltara%20KC%20Malinau%20Malinau%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -2653,28 +2827,34 @@
     "name": "Muara Teweh",
     "bank": "BPD Kalteng KC Muara Teweh",
     "plafond": 150000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -0.926154,
+      114.884102
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat direktori resmi Bank Kalteng. Direktori lain mencantumkan nomor 75 di jalan yang sama."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "[PIN CABANG] Tujuan daddr tautan petunjuk arah Contact.page Bank Kalteng Cabang Muara Teweh. Alamat Yetro Sinseng73 cocok direktori resmi bank. Belum konfirmasi posisi ruang Kastip. Peta: https://www.google.com/maps?q=-0.926154,114.884102. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -0.95,
       114.89
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -0.926154,
+      114.884102
+    ],
     "city": "",
     "address": "Jl. Yetro Sinseng No. 73, Muara Teweh, Barito Utara",
-    "sourceUrl": "https://www.bankkalteng.co.id/tentang-bank-kalteng/lokasi-kantor",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat direktori resmi Bank Kalteng. Direktori lain mencantumkan nomor 75 di jalan yang sama.",
+    "sourceUrl": "https://id1775324-bank-kalteng-cabang-muara-teweh.contact.page/map",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "[PIN CABANG] Tujuan daddr tautan petunjuk arah Contact.page Bank Kalteng Cabang Muara Teweh. Alamat Yetro Sinseng73 cocok direktori resmi bank. Belum konfirmasi posisi ruang Kastip. Peta: https://www.google.com/maps?q=-0.926154,114.884102. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=BPD%20Kalteng%20KC%20Muara%20Teweh%20Muara%20Teweh%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -3397,28 +3577,34 @@
     "name": "Namlea",
     "bank": "BPD Maluku dan Malut KC Namlea",
     "plafond": 140000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -3.233069890997561,
+      127.08604574203491
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Pin bangunan/cabang belum ditemukan pada sumber publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "[PIN BANK—ALAMAT BERBEDA] BPD Maluku Namlea, Jl.Flamboyan pada direktori; workbook Abd.BinThalib. Tujuan daddr sumber peta. Label provinsi situs salah(Sulawesi Barat), titik berada area Namlea; cek gedung aktif/cabang pengelola sebelum dipakai. Peta: https://www.google.com/maps?q=-3.233069890997561,127.08604574203491. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -3.26,
       127.1
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -3.233069890997561,
+      127.08604574203491
+    ],
     "city": "",
     "address": "Jl. Abd. Bin Thalib, Namlea, Kab. Buru",
-    "sourceUrl": "https://www.semuabis.com/bank-maluku-namlea-0913-21020",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Pin bangunan/cabang belum ditemukan pada sumber publik.",
+    "sourceUrl": "https://id1827861-bank-pembangunan-daerah-maluku.contact.page/map",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "[PIN BANK—ALAMAT BERBEDA] BPD Maluku Namlea, Jl.Flamboyan pada direktori; workbook Abd.BinThalib. Tujuan daddr sumber peta. Label provinsi situs salah(Sulawesi Barat), titik berada area Namlea; cek gedung aktif/cabang pengelola sebelum dipakai. Peta: https://www.google.com/maps?q=-3.233069890997561,127.08604574203491. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=BPD%20Maluku%20dan%20Malut%20KC%20Namlea%20Namlea%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -3471,28 +3657,34 @@
     "name": "Merauke",
     "bank": "",
     "plafond": null,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -8.5138514,
+      140.4061073
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Bank Papua terlibat dalam pembahasan pengelolaan. Cabang pengelola belum dipastikan dari keterangan publik."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": ""
     },
     "legacyCityCoords": [
       -8.49,
       140.4
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -8.5138514,
+      140.4061073
+    ],
     "city": "",
     "address": "Merauke, Papua Selatan",
-    "sourceUrl": "https://bankpapua.co.id/home/index/detail/pertemuan-bi-dan-perbankan-di-wilayah-merauke-membahas-pengelolaan-uang-kas-titipan-bi-di-merauke-1419",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Bank Papua terlibat dalam pembahasan pengelolaan. Cabang pengelola belum dipastikan dari keterangan publik.",
+    "sourceUrl": "https://vymaps.com/ID/Bank-Papua-Cabang-Merauke-3127170/",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20pengelola%20belum%20tersedia%20Merauke%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -4177,28 +4369,34 @@
     "name": "Palopo",
     "bank": "",
     "plafond": null,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -3.0078528,
+      120.200959
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Sumber publik menyebut penukaran di Bank Sulselbar. Pengelola Kas Titipan dan cabang perlu konfirmasi."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "Pengelola Kastip dikonfirmasi berita Maret2025: https://www.inspirasitimur.com/2025/03/penukaran-uang-baru-bank-indonesia.html. Pin q Maps pada VYMaps berjudul KC Palopo, tetapi slugURL masih KantorKasRSUSawerigading dan alamat hanyaTompotika. PERLU KONFIRMASI bahwa pin ini KC pengelola, bukan kantor kas rumah sakit; alamat KC lain terdaftar AndiBasoRachim1. Peta: https://www.google.com/maps?q=-3.0078528,120.200959. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -3,
       120.2
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -3.0078528,
+      120.200959
+    ],
     "city": "",
     "address": "Palopo, Sulawesi Selatan",
-    "sourceUrl": "https://www.inspirasitimur.com/2025/03/penukaran-uang-baru-bank-indonesia.html",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Sumber publik menyebut penukaran di Bank Sulselbar. Pengelola Kas Titipan dan cabang perlu konfirmasi.",
+    "sourceUrl": "https://vymaps.com/ID/Bank-Sulselbar-Kantor-Kas-RSU-Sawerigading-Palopo-3772403/",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "Pengelola Kastip dikonfirmasi berita Maret2025: https://www.inspirasitimur.com/2025/03/penukaran-uang-baru-bank-indonesia.html. Pin q Maps pada VYMaps berjudul KC Palopo, tetapi slugURL masih KantorKasRSUSawerigading dan alamat hanyaTompotika. PERLU KONFIRMASI bahwa pin ini KC pengelola, bukan kantor kas rumah sakit; alamat KC lain terdaftar AndiBasoRachim1. Peta: https://www.google.com/maps?q=-3.0078528,120.200959. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20pengelola%20belum%20tersedia%20Palopo%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -4285,28 +4483,34 @@
     "name": "Bulukumba",
     "bank": "",
     "plafond": null,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -5.5595857,
+      120.1942683
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Sumber BI mengonfirmasi kota Kas Titipan. Pengelola terkini perlu konfirmasi."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "Pengelola Kastip dikonfirmasi pemberitaan2025: https://www.sulselsatu.com/2025/07/11/news/transaksi-tertinggi-agen-laku-pandai-di-agangku-mobile-bank-sulselbar-siapkan-penghargaan.html/amp. Pin q Maps listing bernama BPD Sulselbar diBentengnge. Listing tidak merinci nomorjalan/levelcabang; perlu cocokkan dengan KC JendSudirman48 sebelum dianggap benar. Peta: https://www.google.com/maps?q=-5.5595857,120.1942683. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       -5.55,
       120.19
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -5.5595857,
+      120.1942683
+    ],
     "city": "",
     "address": "Bulukumba, Sulawesi Selatan",
-    "sourceUrl": "https://publication-bi.org/Files/Buku%20Sejarah%20KPwBI%20Makassar.pdf",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Sumber BI mengonfirmasi kota Kas Titipan. Pengelola terkini perlu konfirmasi.",
+    "sourceUrl": "https://vymaps.com/ID/BPD-Sulselbar-3660515/",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "Pengelola Kastip dikonfirmasi pemberitaan2025: https://www.sulselsatu.com/2025/07/11/news/transaksi-tertinggi-agen-laku-pandai-di-agangku-mobile-bank-sulselbar-siapkan-penghargaan.html/amp. Pin q Maps listing bernama BPD Sulselbar diBentengnge. Listing tidak merinci nomorjalan/levelcabang; perlu cocokkan dengan KC JendSudirman48 sebelum dianggap benar. Peta: https://www.google.com/maps?q=-5.5595857,120.1942683. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20pengelola%20belum%20tersedia%20Bulukumba%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -4387,28 +4591,34 @@
     "name": "Luwuk",
     "bank": "BNI KC Luwuk",
     "plafond": null,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      -0.952657,
+      122.789218
+    ],
+    "status": "ready_for_review",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "BNI Luwuk dikonfirmasi sebagai pengelola pada 2024."
+      "status": "ready_for_review",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Siap ditinjau",
+      "notes": "Peta Google Maps pada halaman resmi BNI cabang LUWUK memakai q=-0.952657,122.789218 sebagai titik place. Alamat Jl. A. Yani No.51 cocok. Kandidat titik cabang pengelola Kastip, belum verifikasi ruang/gedung kas. Peta: https://www.google.com/maps?q=-0.952657,122.789218. Ditelusuri 18-11-2026."
     },
     "legacyCityCoords": [
       -0.95,
       122.79
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      -0.952657,
+      122.789218
+    ],
     "city": "",
     "address": "Jl. Ahmad Yani No. 51, Luwuk, Kab. Banggai",
     "sourceUrl": "https://bniexperience.bni.co.id/lokasi/cabang/1107",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "BNI Luwuk dikonfirmasi sebagai pengelola pada 2024.",
+    "submissionStatus": "Siap ditinjau",
+    "submissionNotes": "Peta Google Maps pada halaman resmi BNI cabang LUWUK memakai q=-0.952657,122.789218 sebagai titik place. Alamat Jl. A. Yani No.51 cocok. Kandidat titik cabang pengelola Kastip, belum verifikasi ruang/gedung kas. Peta: https://www.google.com/maps?q=-0.952657,122.789218. Ditelusuri 18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20pengelola%20belum%20tersedia%20Luwuk%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -4631,28 +4841,34 @@
     "name": "Melonguane",
     "bank": "PT BPD Sulutgo KC Melonguane",
     "plafond": 70000000000,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      3.9994170970914555,
+      126.67429241488634
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Alamat dari direktori Bank SulutGo. Koordinat pusat tampilan iframe tidak dipakai sebagai pin."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "[AREA KANTOR—BUKAN PIN GEDUNG] Pusat tampilan iframe peta halaman resmi BSG Cabang Melonguane. Bukan koordinat marker; perkiraan area kantor sesuai izin pengguna. Galat terhadap gedung belum diketahui. Peta: https://www.google.com/maps?q=3.9994170970914555,126.67429241488634. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       4.05,
       126.68
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      3.9994170970914555,
+      126.67429241488634
+    ],
     "city": "",
     "address": "Jl. Dalam Kota, Kel. Melonguane Barat, Lingkungan 1, Kepulauan Talaud",
     "sourceUrl": "https://www.banksulutgo.co.id/network/read/kantor-cabang/17/cabang-melonguane.html",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Alamat dari direktori Bank SulutGo. Koordinat pusat tampilan iframe tidak dipakai sebagai pin.",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "[AREA KANTOR—BUKAN PIN GEDUNG] Pusat tampilan iframe peta halaman resmi BSG Cabang Melonguane. Bukan koordinat marker; perkiraan area kantor sesuai izin pengguna. Galat terhadap gedung belum diketahui. Peta: https://www.google.com/maps?q=3.9994170970914555,126.67429241488634. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=PT%20BPD%20Sulutgo%20KC%20Melonguane%20Melonguane%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"
@@ -4807,28 +5023,34 @@
     "name": "Subulussalam",
     "bank": "Bank Aceh Syariah Cabang Subulussalam",
     "plafond": null,
-    "coords": null,
-    "status": "not_found",
-    "source": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-    "coordinateAccuracy": "missing",
+    "coords": [
+      2.6467198,
+      98.0027277
+    ],
+    "status": "needs_confirmation",
+    "source": "Database-Koordinat-133-Lokasi.xlsx",
+    "coordinateAccuracy": "submitted_office",
     "verifiedOfficeCoords": null,
     "coordinateEvidence": [],
     "coordinateReview": {
-      "status": "not_found",
-      "reviewScope": "Diimpor apa adanya dari file pengguna; sumber belum diverifikasi ulang oleh aplikasi.",
-      "sourceStatus": "Perlu diperiksa",
-      "notes": "Bank Aceh menyebut cabangnya sebagai tempat peresmian Kastip. Laporan BI menyebut pengawasan dialihkan ke KPw Sumatera Utara pada 2023."
+      "status": "needs_confirmation",
+      "reviewScope": "Dikirim melalui lembar koreksi koordinat. Belum diverifikasi ulang oleh aplikasi.",
+      "sourceStatus": "Perlu konfirmasi",
+      "notes": "Kandidat Bank Aceh Cab.Subulussalam, SubulussalamUtara/SimpangKiri. Koordinat parameter q pada embed/v1/place Maps. Listing2016–2017 tidak merinci jalan, jadi kecocokan dengan TeukuUmar/gedung aktif perlu konfirmasi. Peta: https://www.google.com/maps?q=2.6467198,98.0027277. Ditelusuri18-11-2026."
     },
     "legacyCityCoords": [
       2.64,
       98
     ],
-    "submittedOfficeCoords": null,
+    "submittedOfficeCoords": [
+      2.6467198,
+      98.0027277
+    ],
     "city": "",
     "address": "Jl. Teuku Umar, Kota Subulussalam",
-    "sourceUrl": "https://www.bankaceh.co.id/wp-content/uploads/2018/02/Seuramoe-Bank-Aceh-Edisi-211.pdf",
-    "submissionStatus": "Perlu diperiksa",
-    "submissionNotes": "Bank Aceh menyebut cabangnya sebagai tempat peresmian Kastip. Laporan BI menyebut pengawasan dialihkan ke KPw Sumatera Utara pada 2023.",
+    "sourceUrl": "https://vymaps.com/ID/Bank-Aceh-Cab-Subulussalam-3752213/",
+    "submissionStatus": "Perlu konfirmasi",
+    "submissionNotes": "Kandidat Bank Aceh Cab.Subulussalam, SubulussalamUtara/SimpangKiri. Koordinat parameter q pada embed/v1/place Maps. Listing2016–2017 tidak merinci jalan, jadi kecocokan dengan TeukuUmar/gedung aktif perlu konfirmasi. Peta: https://www.google.com/maps?q=2.6467198,98.0027277. Ditelusuri18-11-2026.",
     "searchUrl": "https://www.google.com/maps/search/?api=1&query=Bank%20pengelola%20belum%20tersedia%20Subulussalam%20Indonesia",
     "legacySource": "Rekap Kas Titipan (1).xlsx",
     "legacyCoordinateStatus": "approximate"

@@ -1,13 +1,16 @@
 {
-  "sourceFile": "Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx",
-  "sha256": "e9282445ee8b1dadeea27af2764301a608e4cf8bfae8afeab74ae4c2b81dc943",
+  "sourceFile": "Database-Koordinat-133-Lokasi.xlsx",
+  "sha256": "7530a2dfd8a62968ae72e12d3d2c9c14cadfec2343b3d45def9788fdd1f6d461",
   "total": 133,
-  "withCoordinates": 52,
+  "withCoordinates": 89,
   "statusCounts": {
-    "ready_for_review": 44,
-    "not_found": 81,
-    "needs_confirmation": 8
+    "ready_for_review": 61,
+    "needs_confirmation": 28,
+    "not_found": 44
   },
-  "policy": "No inferred coordinates; submitted review status is not independent verification.",
-  "additionalRowsImported": 0
+  "heldCoordinateIds": [
+    "KPW-13"
+  ],
+  "additionalRowsImported": 0,
+  "policy": "Submitted coordinates are candidates; questionable Jakarta coordinates are held for review."
 }

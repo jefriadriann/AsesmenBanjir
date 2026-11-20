@@ -1,6 +1,6 @@
 # Ruang Risiko · Peta Risiko Banjir
 
-**Data koordinat terkini:** impor file pengguna `Koordinat_KPw_dan_Kas_Titipan_133_Lokasi (1).xlsx`. 52 titik tersedia (44 siap ditinjau, 8 perlu konfirmasi); 81 lokasi belum memiliki koordinat. Peta memakai cadangan pusat wilayah untuk 81 lokasi tersebut dan melabelinya dengan ≈. Tidak ada status yang dipromosikan menjadi verified.
+**Data koordinat terkini:** 89 titik kandidat dari Excel pengguna tersedia (61 siap ditinjau, 28 perlu konfirmasi). 44 lokasi memakai acuan wilayah berlabel ≈. Kandidat KPw DKI Jakarta yang berada di luar Jakarta daratan disimpan di workbook untuk konfirmasi.
 
 Workspace peta jaringan kas Indonesia. Vite, Leaflet, font lokal DM Sans/Manrope, peta jalan OpenStreetMap, dan peta sederhana Natural Earth. Tidak memerlukan API key berbayar.
 
@@ -80,7 +80,7 @@ Popup KPw di peta menampilkan ringkasan kondisi dan empat kategori sarpras dari 
 
 - `ready_for_review`: 44 titik berstatus Siap ditinjau di Excel; bukan verifikasi independen.
 - `needs_confirmation`: 8 titik kandidat berstatus Perlu diperiksa, diberi tanda ! dan label Perlu konfirmasi.
-- `not_found`: 81 lokasi tanpa koordinat, tetap ada di daftar/filter dan detail tetapi memakai penanda pusat wilayah berlabel ≈. Titik cadangan ini tidak dipakai sebagai koordinat gedung dalam pengukuran.
+- `not_found`: 44 lokasi tanpa koordinat, tetap ada di daftar/filter dan detail tetapi memakai penanda pusat wilayah berlabel ≈. Titik cadangan ini tidak dipakai sebagai koordinat gedung dalam pengukuran.
 - `coords` memuat koordinat kiriman atau null. `legacyCityCoords` menyimpan perkiraan lama hanya untuk arsip. `verifiedOfficeCoords` tetap null.
 - Penggaris hanya tersedia di navigasi (sidebar desktop, navigasi atas HP), bukan popup atau toolbar header peta. Popup tetap menyediakan detail dan sarpras.
 
