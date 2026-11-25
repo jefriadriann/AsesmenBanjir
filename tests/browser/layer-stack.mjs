@@ -91,11 +91,36 @@ try{for(const width of [1440,390]){
  assert.deepEqual(errors,[]);
  await page.screenshot({path:`/tmp/layer-stack-${width}.png`});
  await page.locator('#slope-toggle').click();
- await page.route('**/api/slope?mode=config',r=>r.fulfill({json:{available:false,state:'missing_variable'}}));
- await page.locator('#slope-toggle').click();
- await page.waitForSelector('#slope-status.error');
- assert.equal(await count('slope'),0);assert.equal(await count('rainfall'),1);assert.equal(await count('inarisk'),1);
- await page.locator('#slope-toggle').click();assert.ok(await page.locator('.slope-panel').isHidden());
+ const terrainFixture = await page.evaluate(() => {
+   const canvas = document.createElement('canvas');
+   canvas.width = canvas.height = 256;
+   const context = canvas.getContext('2d');
+   const pixels = context.createImageData(256, 256);
+   for (let i = 0; i < pixels.data.length; i += 4) {
+     pixels.data.set([128, (i / 4) % 256, 0, 255], i);
+   }
+   context.putImageData(pixels, 0, 0);
+   return canvas.toDataURL().split(',')[1];
+ });
  assert.deepEqual(errors,[]);
- await page.close();console.log('PASS independent on/off, both activation orders, stacked opacity, settings and zoom',width);
+ await page.close();
+ const fallbackPage = await browser.newPage({viewport:{width,height:950}});
+ const fallbackErrors = [];
+ fallbackPage.on('pageerror', error => fallbackErrors.push(error.message));
+ await fallbackPage.route('https://**', r => r.abort());
+ await fallbackPage.route('**/api/news', r => r.fulfill({json:{items:[],fetchedAt:new Date().toISOString()}}));
+ await fallbackPage.route('**/api/slope?mode=config', r => r.fulfill({json:{available:true,state:'configured'}}));
+ await fallbackPage.route('**/api/slope?mode=tile&*', r => r.fulfill({status:502,json:{error:'Earth Engine unavailable'}}));
+ await fallbackPage.route('**/api/slope?mode=dem&*', r => r.fulfill({contentType:'image/png',body:Buffer.from(terrainFixture,'base64')}));
+ await fallbackPage.goto(process.env.BASE_URL||'http://localhost:3002');
+ await fallbackPage.locator('.leaflet-slopeOverlay-pane canvas[data-terrain="drawn"]').first().waitFor();
+ await fallbackPage.getByText('Layer aktif · perkiraan dari elevasi cadangan').waitFor({state:'attached'});
+ assert.match(await fallbackPage.locator('#slope-source').textContent(), /Mapzen/);
+ await fallbackPage.waitForFunction(() => document.querySelector('#rainfall-toggle')?.getAttribute('aria-pressed') === 'true');
+ assert.equal(await fallbackPage.locator('.leaflet-slopeOverlay-pane > .leaflet-layer').count(),1);
+ await fallbackPage.locator('#slope-toggle').click();
+ assert.equal(await fallbackPage.locator('.leaflet-slopeOverlay-pane > .leaflet-layer').count(),0);
+ assert.deepEqual(fallbackErrors,[]);
+ await fallbackPage.close();
+ console.log('PASS independent on/off, stacked opacity, settings, zoom and slope fallback',width);
 }}finally{await browser.close();}
