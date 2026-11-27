@@ -7,9 +7,9 @@ const params = (mode, extra = {}) => new URLSearchParams({mode,service:hazard,..
 
 test('the catalog exposes the official flood studies and district capacity', async () => {
  const {json:{services}} = await handleInarisk(params('catalog'));
- assert.equal(services.length,7);
+ assert.equal(services.length,21);
  assert.deepEqual(services.filter(layer=>layer.hazard==='banjir').map(layer=>layer.study), ['bahaya','risiko','kerentanan','kapasitas']);
- assert.ok(services.every(layer=>new URL(layer.sourceUrl).hostname==='inarisk1.bnpb.go.id'));
+ assert.ok(services.every(layer=>['inarisk1.bnpb.go.id','nowcasting.bmkg.go.id','geoportal.planologi.kehutanan.go.id'].includes(new URL(layer.sourceUrl).hostname)));
 });
 
 test('the proxy rejects unlisted services and invalid bboxes', async () => {
@@ -60,4 +60,18 @@ test('risk uses the official WMS layer and preserves the tile projection', async
  });
  const result = await handleInarisk(params('image',{service:'inarisk/layer_risiko_banjir/ImageServer',bbox:'0,0,256,256'}));
  assert.equal(result.binary.length,4);
+});
+
+test('discharge keeps model units and omits missing samples', async t => {
+ assert.equal((await handleInarisk(params('discharge',{lat:'',lng:'107.6'}))).status,400);
+ t.mock.method(globalThis,'fetch',async url=>{
+  const request = new URL(url);
+  assert.equal(request.hostname,'flood-api.open-meteo.com');
+  assert.equal(request.searchParams.get('forecast_days'),'7');
+  return Response.json({latitude:-6.925,longitude:107.625,
+   daily:{time:['2026-11-27','2026-11-28'],river_discharge:[8.7,null],river_discharge_max:[55,null]}});
+ });
+ const {json} = await handleInarisk(params('discharge',{lat:'-6.9',lng:'107.6'}));
+ assert.deepEqual(json.days,[{date:'2026-11-27',value:8.7,max:55}]);
+ assert.equal(json.timeZone,'UTC');
 });
