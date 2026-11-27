@@ -19,7 +19,7 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
  monevButton.setAttribute('aria-controls','monev-overlays');
  document.querySelector('#risk-layer-buttons').append(monevButton);
  const monevLayers = new Map();
- const panel=document.createElement('section');panel.className='inarisk-panel hidden';panel.setAttribute('aria-label','Layer banjir BNPB InaRISK');panel.innerHTML=`<div class="inarisk-head"><span>BNPB / INARISK</span><button id="inarisk-close" aria-label="Tutup panel InaRISK"><i data-lucide="x"></i></button></div><h2>Layer InaRISK</h2><details id="monev-overlays"><summary>Overlay Monev</summary><div id="monev-options"></div></details><div id="inarisk-status" role="status">Layer mati. Klik Layer banjir untuk mengaktifkan.</div><details id="inarisk-connection" class="hidden"><summary>Detail koneksi</summary><p id="inarisk-connection-error"></p><a href="/api/inarisk?mode=catalog" target="_blank" rel="noopener noreferrer">Periksa respons katalog ↗</a></details><div id="inarisk-controls" class="hidden"><label class="inarisk-service-label">Kajian InaRISK<select id="inarisk-service"></select></label><label class="inarisk-check"><input type="checkbox" id="inarisk-visible">Tampilkan layer banjir</label><label class="inarisk-opacity-label">Opasitas warna<span id="inarisk-opacity-value">100%</span><input type="range" id="inarisk-opacity" min="0" max="100" value="100" aria-label="Opasitas layer banjir"></label><div id="inarisk-legend"></div><div id="inarisk-summary"></div><div id="inarisk-metadata"></div></div><button id="inarisk-retry">Perbarui layer</button><a href="https://inarisk.bnpb.go.id/" target="_blank" rel="noopener noreferrer" class="inarisk-source-link">Buka InaRISK BNPB <i data-lucide="arrow-up-right"></i></a><details id="inarisk-discharge"><summary>Prakiraan debit sungai · GloFAS</summary><p>Data model dalam m³/detik. Geser peta ke sungai yang ingin dicek, lalu baca nilai sel model terdekat.</p><button id="inarisk-discharge-read" type="button">Baca debit di tengah peta</button><div id="inarisk-discharge-result" role="status"></div></details><p><a href="https://inarisk.bnpb.go.id/dashboard-monev-bencana/" target="_blank" rel="noopener noreferrer">Dashboard dan simulasi resmi BNPB ↗</a></p><button class="inarisk-about" id="inarisk-about">Tentang sumber</button>`;frame.append(panel);
+ const panel=document.createElement('section');panel.className='inarisk-panel hidden';panel.setAttribute('aria-label','Layer banjir BNPB InaRISK');panel.innerHTML=`<div class="inarisk-head"><span>BNPB / INARISK</span><button id="inarisk-close" aria-label="Tutup panel InaRISK"><i data-lucide="x"></i></button></div><h2>Layer InaRISK</h2><details id="monev-overlays"><summary><span>Overlay Monev</span><span id="monev-count"></span></summary><div id="monev-options"></div></details><div id="inarisk-status" role="status">Layer mati. Klik Layer banjir untuk mengaktifkan.</div><details id="inarisk-connection" class="hidden"><summary>Detail koneksi</summary><p id="inarisk-connection-error"></p><a href="/api/inarisk?mode=catalog" target="_blank" rel="noopener noreferrer">Periksa respons katalog ↗</a></details><div id="inarisk-controls" class="hidden"><label class="inarisk-service-label">Kajian InaRISK<select id="inarisk-service"></select></label><label class="inarisk-check"><input type="checkbox" id="inarisk-visible">Tampilkan layer banjir</label><label class="inarisk-opacity-label">Opasitas warna<span id="inarisk-opacity-value">100%</span><input type="range" id="inarisk-opacity" min="0" max="100" value="100" aria-label="Opasitas layer banjir"></label><div id="inarisk-legend"></div><div id="inarisk-summary"></div><div id="inarisk-metadata"></div></div><button id="inarisk-retry">Perbarui layer</button><a href="https://inarisk.bnpb.go.id/" target="_blank" rel="noopener noreferrer" class="inarisk-source-link">Buka InaRISK BNPB <i data-lucide="arrow-up-right"></i></a><details id="inarisk-discharge"><summary>Prakiraan debit sungai · GloFAS</summary><p>Data model dalam m³/detik. Geser peta ke sungai yang ingin dicek, lalu baca nilai sel model terdekat.</p><button id="inarisk-discharge-read" type="button">Baca debit di tengah peta</button><div id="inarisk-discharge-result" role="status"></div></details><p><a href="https://inarisk.bnpb.go.id/dashboard-monev-bencana/" target="_blank" rel="noopener noreferrer">Dashboard dan simulasi resmi BNPB ↗</a></p><button class="inarisk-about" id="inarisk-about">Tentang sumber</button>`;frame.append(panel);
  const status=panel.querySelector('#inarisk-status'),retry=panel.querySelector('#inarisk-retry'),select=panel.querySelector('#inarisk-service'),visible=panel.querySelector('#inarisk-visible'),opacity=panel.querySelector('#inarisk-opacity'),controls=panel.querySelector('#inarisk-controls');
  const connection=panel.querySelector('#inarisk-connection'),connectionError=panel.querySelector('#inarisk-connection-error');
  const setStatus=(text,error=false)=>{if(!error)connection.classList.add('hidden');status.textContent=text;status.classList.toggle('error',error);button.classList.toggle('source-error',error);};
@@ -119,12 +119,37 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
 
  const monev = panel.querySelector('#monev-overlays');
  const monevOptions = panel.querySelector('#monev-options');
+ const monevCount = panel.querySelector('#monev-count');
+ const monevGroups = [
+  ['water', 'Cuaca dan aliran air', ['nowcasting','das']],
+  ['hazard', 'Bahaya dan risiko', ['bahaya_longsor','risiko_longsor','bahaya_gempa','sesar','bahaya_karhutla','bahaya_kekeringan','bahaya_cuaca_ekstrem','risiko_abrasi']],
+  ['land', 'Lahan dan batas wilayah', ['penggunaan_lahan','kawasan_hutan','lahan_kritis','administrasi']],
+  ['other', 'Layer lain', []],
+ ];
+ const updateMonevCount = () => {
+  monevCount.textContent = monevLayers.size ? monevLayers.size+' aktif' : '';
+ };
  function renderMonev() {
   const list = services.filter(service => service.group);
   monevOptions.replaceChildren();
+  updateMonevCount();
   if (!list.length) {
    monevOptions.textContent = busy?'Memuat daftar overlay…':'Overlay Monev belum tersedia.';
    return;
+  }
+  const groupCards = new Map();
+  for (const [key, title, names] of monevGroups) {
+   const group = document.createElement('section');
+   group.className = 'monev-group';
+   group.dataset.category = key;
+   const heading = document.createElement('h3');
+   heading.textContent = title;
+   const cards = document.createElement('div');
+   cards.className = 'monev-cards';
+   group.append(heading,cards);
+   for (const name of names) groupCards.set(name,cards);
+   groupCards.set(key,cards);
+   monevOptions.append(group);
   }
   for (const service of list) {
    const row = document.createElement('div');
@@ -135,7 +160,13 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
    checkbox.checked = monevLayers.has(service.service);
    const feedback = document.createElement('small');
    feedback.setAttribute('role','status');
-   label.append(checkbox,document.createTextNode(service.kind));
+   const swatch = document.createElement('span');
+   swatch.className = 'monev-swatch';
+   swatch.setAttribute('aria-hidden','true');
+   const name = document.createElement('span');
+   name.className = 'monev-name';
+   name.textContent = service.kind;
+   label.append(swatch,name,checkbox);
    const details = document.createElement('details');
    const summary = document.createElement('summary');
    summary.textContent = 'Legenda';
@@ -155,10 +186,11 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
     finally { content.removeAttribute('aria-busy'); }
    };
    row.append(label,feedback,details);
-   monevOptions.append(row);
+   (groupCards.get(service.name) || groupCards.get('other')).append(row);
    const update = () => {
     const state = monevLayers.get(service.service);
-    feedback.textContent = state?.message || '';
+    feedback.textContent = state?.message === 'Aktif' ? '' : state?.message || '';
+    updateMonevCount();
    };
    const current = monevLayers.get(service.service);
    if (current) current.update = update;
@@ -187,6 +219,9 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
     update();
     layer.addTo(map);
    };
+  }
+  for (const group of monevOptions.children) {
+   group.hidden = !group.lastElementChild.childElementCount;
   }
  }
  monevButton.onclick = () => {

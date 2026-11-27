@@ -18,9 +18,80 @@
 #inarisk-discharge-result ul { margin: 8px 0; padding-left: 20px; }
 
 #monev-toggle span { white-space: nowrap; }
-#monev-overlays { margin: 8px 0 14px; }
-#monev-options { display: grid; gap: 4px; margin-top: 8px; }
-.monev-option { padding: 5px 8px; border: 1px solid #ffffff26; border-radius: 6px; }
-.monev-option label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.monev-option small { display: block; margin-left: 23px; opacity: .8; }
+.inarisk-panel:has(#monev-overlays[open]) { width: min(520px, calc(100% - 36px)); }
+#monev-overlays { margin: 10px 0 16px; }
+#monev-overlays > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid currentColor;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#monev-overlays > summary::before { content: '▸'; }
+#monev-overlays[open] > summary::before { content: '▾'; }
+#monev-count { margin-left: auto; font-size: .82em; }
+#monev-options { margin-top: 14px; }
+.monev-group { --monev-accent: #5796c9; margin-bottom: 16px; }
+.monev-group[data-category="hazard"] { --monev-accent: #e2a568; }
+.monev-group[data-category="land"] { --monev-accent: #79ba93; }
+.monev-group h3 {
+  color: inherit;
+  font-size: 13px;
+  margin: 0 0 8px;
+  padding-left: 8px;
+  border-left: 3px solid var(--monev-accent);
+}
+.monev-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; align-items: start; }
+.monev-option {
+  color: #27445d;
+  background: #f7fbff;
+  border: 1px solid #b9cedd;
+  border-radius: 10px;
+  padding: 8px;
+  min-width: 0;
+}
+[data-theme="dark"] .monev-option { color: #eef6fe; background: #162e42; border-color: #456174; }
+.monev-option:has(input:checked) {
+  border-color: var(--monev-accent);
+  background: color-mix(in srgb, var(--monev-accent) 17%, #f7fbff);
+}
+[data-theme="dark"] .monev-option:has(input:checked) {
+  border-color: var(--monev-accent);
+  background: color-mix(in srgb, var(--monev-accent) 19%, #162e42);
+}
+.monev-option label { display: grid; grid-template-columns: 29px minmax(0,1fr) auto; align-items: center; gap: 7px; min-height: 40px; cursor: pointer; }
+.monev-name { font-size: 12px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.monev-swatch {
+  height: 32px;
+  border-radius: 6px;
+  background:
+    repeating-radial-gradient(ellipse at 8% 80%, #fff6 0 1px, transparent 2px 6px),
+    linear-gradient(150deg, #233e55, var(--monev-accent));
+}
+.monev-option input {
+  appearance: none;
+  display: grid;
+  align-items: center;
+  width: 30px;
+  height: 18px;
+  margin: 0;
+  padding: 2px;
+  border: 1px solid #6a869c;
+  border-radius: 99px;
+  background: #375268;
+  cursor: pointer;
+}
+.monev-option input::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: #fff; }
+.monev-option input:checked { background: var(--monev-accent); border-color: var(--monev-accent); justify-items: end; }
+.monev-option input:checked::before { background: #172d42; }
+.monev-option input:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.monev-option small { display: block; margin-top: 4px; font-size: 11px; }
 .monev-option small:empty { display: none; }
+.monev-option summary { width: fit-content; padding: 5px 2px; font-size: 11px; cursor: pointer; }
+@media(max-width:640px){
+  .inarisk-panel:has(#monev-overlays[open]) { width: auto; }
+  .monev-cards { grid-template-columns: 1fr; }
+}

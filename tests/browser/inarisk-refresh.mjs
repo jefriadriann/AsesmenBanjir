@@ -25,9 +25,15 @@ try{
  await ready();
  const das=page.getByRole('checkbox',{name:'Batas DAS'});
  const weather=page.getByRole('checkbox',{name:'Nowcasting aktif BMKG'});
+ assert.equal(await page.getByRole('heading',{name:'Cuaca dan aliran air'}).isVisible(),true);
+ const dasCard=page.locator('.monev-option').filter({has:das});
+ await dasCard.getByText('Legenda',{exact:true}).click();
+ await dasCard.getByText('Class 1',{exact:true}).waitFor();
+ await dasCard.getByText('Legenda',{exact:true}).click();
  await das.check();
  await weather.check();
  assert.equal(await layers().count(),2);
+ assert.equal(await page.locator("#monev-count").innerText(),"2 aktif");
  await das.uncheck();
  assert.equal(await layers().count(),1);
  assert.equal(await weather.isChecked(),true);
