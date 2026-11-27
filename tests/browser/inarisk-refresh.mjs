@@ -13,12 +13,26 @@ await page.route('**/api/inarisk?*',async route=>{
  if(fail==='deployment')return route.fulfill({status:404,contentType:'text/html',body:'Not Found'});
  if(mode===fail)return route.fulfill({status:502,json:{error:'Controlled source failure'}});
  if(mode==='image')return route.fulfill({contentType:'image/png',body:png});
- return route.fulfill({json:mode==='catalog'?{services:[{...service('RISIKO_BANJIR'),kind:'Risiko banjir'},service('BAHAYA_BANJIR'),service('BAHAYA_BANJIR_ALTERNATIF')]}:{metadata:{name:'Fixture '+version},legend:{layers:[{layerName:'Fixture',legend:[{label:'Class '+version}]}]}}});
+ return route.fulfill({json:mode==='catalog'?{services:[{...service('RISIKO_BANJIR'),kind:'Risiko banjir'},service('BAHAYA_BANJIR'),service('BAHAYA_BANJIR_ALTERNATIF'),
+  {name:'das',service:'monev/das/MapServer',kind:'Batas DAS',group:'Dashboard Monev'},
+  {name:'nowcasting',service:'monev/nowcasting/MapServer',kind:'Nowcasting aktif BMKG',group:'Dashboard Monev'}]}:{metadata:{name:'Fixture '+version},legend:{layers:[{layerName:'Fixture',legend:[{label:'Class '+version}]}]}}});
 });
 const ready=()=>page.waitForFunction(()=>document.querySelector('#inarisk-retry')?.disabled===false);
 const layers=()=>page.locator('.leaflet-floodOverlay-pane .leaflet-layer');
 try{
  await page.goto(process.env.BASE_URL||'http://localhost:3040');
+ await page.getByRole('button',{name:'Overlay Monev'}).click();
+ await ready();
+ const das=page.getByRole('checkbox',{name:'Batas DAS'});
+ const weather=page.getByRole('checkbox',{name:'Nowcasting aktif BMKG'});
+ await das.check();
+ await weather.check();
+ assert.equal(await layers().count(),2);
+ await das.uncheck();
+ assert.equal(await layers().count(),1);
+ assert.equal(await weather.isChecked(),true);
+ await weather.uncheck();
+ assert.equal(await layers().count(),0);
  await page.locator('#inarisk-toggle').click();await ready();
  assert.equal(await layers().count(),1);
  assert.equal(await page.locator('#inarisk-service').inputValue(),'inarisk/BAHAYA_BANJIR/MapServer');

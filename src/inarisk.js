@@ -12,11 +12,18 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
  floodPane.style.zIndex='490';
  floodPane.style.pointerEvents='none';
  const button=document.createElement('button');button.id='inarisk-toggle';button.setAttribute('aria-label','Layer banjir');button.innerHTML='<i data-lucide="layers"></i><span>Layer banjir</span>';button.setAttribute('aria-expanded','false');button.setAttribute('aria-pressed','false');document.querySelector('#risk-layer-buttons').append(button);
- const panel=document.createElement('section');panel.className='inarisk-panel hidden';panel.setAttribute('aria-label','Layer banjir BNPB InaRISK');panel.innerHTML=`<div class="inarisk-head"><span>BNPB / INARISK</span><button id="inarisk-close" aria-label="Tutup panel InaRISK"><i data-lucide="x"></i></button></div><h2>Layer InaRISK</h2><div id="inarisk-status" role="status">Layer mati. Klik Layer banjir untuk mengaktifkan.</div><details id="inarisk-connection" class="hidden"><summary>Detail koneksi</summary><p id="inarisk-connection-error"></p><a href="/api/inarisk?mode=catalog" target="_blank" rel="noopener noreferrer">Periksa respons katalog ↗</a></details><div id="inarisk-controls" class="hidden"><label class="inarisk-service-label">Kajian InaRISK<select id="inarisk-service"></select></label><label class="inarisk-check"><input type="checkbox" id="inarisk-visible">Tampilkan layer banjir</label><label class="inarisk-opacity-label">Opasitas warna<span id="inarisk-opacity-value">100%</span><input type="range" id="inarisk-opacity" min="0" max="100" value="100" aria-label="Opasitas layer banjir"></label><div id="inarisk-legend"></div><div id="inarisk-summary"></div><div id="inarisk-metadata"></div></div><button id="inarisk-retry">Perbarui layer</button><a href="https://inarisk.bnpb.go.id/" target="_blank" rel="noopener noreferrer" class="inarisk-source-link">Buka InaRISK BNPB <i data-lucide="arrow-up-right"></i></a><details id="inarisk-discharge"><summary>Prakiraan debit sungai · GloFAS</summary><p>Data model dalam m³/detik. Geser peta ke sungai yang ingin dicek, lalu baca nilai sel model terdekat.</p><button id="inarisk-discharge-read" type="button">Baca debit di tengah peta</button><div id="inarisk-discharge-result" role="status"></div></details><p><a href="https://inarisk.bnpb.go.id/dashboard-monev-bencana/" target="_blank" rel="noopener noreferrer">Dashboard dan simulasi resmi BNPB ↗</a></p><button class="inarisk-about" id="inarisk-about">Tentang sumber</button>`;frame.append(panel);
+ const monevButton = document.createElement('button');
+ monevButton.id = 'monev-toggle';
+ monevButton.type = 'button';
+ monevButton.innerHTML = '<i data-lucide="layers"></i><span>Overlay Monev</span>';
+ monevButton.setAttribute('aria-controls','monev-overlays');
+ document.querySelector('#risk-layer-buttons').append(monevButton);
+ const monevLayers = new Map();
+ const panel=document.createElement('section');panel.className='inarisk-panel hidden';panel.setAttribute('aria-label','Layer banjir BNPB InaRISK');panel.innerHTML=`<div class="inarisk-head"><span>BNPB / INARISK</span><button id="inarisk-close" aria-label="Tutup panel InaRISK"><i data-lucide="x"></i></button></div><h2>Layer InaRISK</h2><details id="monev-overlays"><summary>Overlay Monev</summary><div id="monev-options"></div></details><div id="inarisk-status" role="status">Layer mati. Klik Layer banjir untuk mengaktifkan.</div><details id="inarisk-connection" class="hidden"><summary>Detail koneksi</summary><p id="inarisk-connection-error"></p><a href="/api/inarisk?mode=catalog" target="_blank" rel="noopener noreferrer">Periksa respons katalog ↗</a></details><div id="inarisk-controls" class="hidden"><label class="inarisk-service-label">Kajian InaRISK<select id="inarisk-service"></select></label><label class="inarisk-check"><input type="checkbox" id="inarisk-visible">Tampilkan layer banjir</label><label class="inarisk-opacity-label">Opasitas warna<span id="inarisk-opacity-value">100%</span><input type="range" id="inarisk-opacity" min="0" max="100" value="100" aria-label="Opasitas layer banjir"></label><div id="inarisk-legend"></div><div id="inarisk-summary"></div><div id="inarisk-metadata"></div></div><button id="inarisk-retry">Perbarui layer</button><a href="https://inarisk.bnpb.go.id/" target="_blank" rel="noopener noreferrer" class="inarisk-source-link">Buka InaRISK BNPB <i data-lucide="arrow-up-right"></i></a><details id="inarisk-discharge"><summary>Prakiraan debit sungai · GloFAS</summary><p>Data model dalam m³/detik. Geser peta ke sungai yang ingin dicek, lalu baca nilai sel model terdekat.</p><button id="inarisk-discharge-read" type="button">Baca debit di tengah peta</button><div id="inarisk-discharge-result" role="status"></div></details><p><a href="https://inarisk.bnpb.go.id/dashboard-monev-bencana/" target="_blank" rel="noopener noreferrer">Dashboard dan simulasi resmi BNPB ↗</a></p><button class="inarisk-about" id="inarisk-about">Tentang sumber</button>`;frame.append(panel);
  const status=panel.querySelector('#inarisk-status'),retry=panel.querySelector('#inarisk-retry'),select=panel.querySelector('#inarisk-service'),visible=panel.querySelector('#inarisk-visible'),opacity=panel.querySelector('#inarisk-opacity'),controls=panel.querySelector('#inarisk-controls');
  const connection=panel.querySelector('#inarisk-connection'),connectionError=panel.querySelector('#inarisk-connection-error');
  const setStatus=(text,error=false)=>{if(!error)connection.classList.add('hidden');status.textContent=text;status.classList.toggle('error',error);button.classList.toggle('source-error',error);};
- const setBusy=value=>{busy=value;retry.disabled=value;retry.textContent=value?'Memperbarui…':'Perbarui layer';panel.setAttribute('aria-busy',String(value));};
+ const setBusy=value=>{busy=value;retry.disabled=value;retry.textContent=value?'Memperbarui…':'Perbarui layer';panel.setAttribute('aria-busy',String(value));if(!services.length)renderMonev();};
  const validService=s=>s&&typeof s.name==='string'&&typeof s.service==='string'&&/^[\w /-]+\/(MapServer|ImageServer)$/.test(s.service)&&(/banjir|flood|layer_peta_kapasitas/i.test(s.service)||s.service.startsWith('monev/'))&&!s.service.includes('..');
  function cancelPending(){if(pending){clearTimeout(pending.timer);pending.layer.remove();pending.layer.off();pending=null;}}
  function begin(){requestId++;controller?.abort();controller=new AbortController();cancelPending();setBusy(true);return requestId;}
@@ -87,10 +94,15 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
    ${hasLoss?`<p>Estimasi kerugian fisik dan ekonomi <strong>${currency.format(loss)}</strong></p>`:''}
    <p>Cakupan Indonesia · <a href="${escape(summary.sourceUrl)}" target="_blank" rel="noopener noreferrer">Data ringkasan BNPB ↗</a></p>`;
  }
- function drawMetadata(service,result){const legend=result.legend?.layers||[];panel.querySelector('#inarisk-legend').innerHTML=legend.length?'<h3>Legenda dari sumber</h3>'+legend.map(layer=>`<div class="inarisk-legend-layer"><strong>${escape(layer.layerName||'')}</strong>${(layer.legend||[]).map(item=>`<span>${item.imageData&&/^image\/(png|jpeg|gif)$/.test(item.contentType||'image/png')?`<img alt="" src="data:${item.contentType||'image/png'};base64,${escape(item.imageData)}">`:''}${escape(item.label||'Tanpa label')}</span>`).join('')}</div>`).join(''):'<p class="legend-missing">Legenda sumber belum tersedia.</p>';
+ function sourceLegend(service,result){
   if (/^https:\/\/inarisk1\.bnpb\.go\.id\/geoserver\/(?:raster|basemap)\/wms\?/.test(result.legendUrl||'')) {
-   panel.querySelector('#inarisk-legend').innerHTML = `<h3>Legenda dari sumber</h3><img class="inarisk-source-legend" src="${escape(result.legendUrl)}" alt="Legenda ${escape(service.kind)}">`;
+   return `<img class="inarisk-source-legend" src="${escape(result.legendUrl)}" alt="Legenda ${escape(service.kind)}">`;
   }
+  const legend=result.legend?.layers||[];
+  return legend.length?'<h3>Legenda dari sumber</h3>'+legend.map(layer=>`<div class="inarisk-legend-layer"><strong>${escape(layer.layerName||'')}</strong>${(layer.legend||[]).map(item=>`<span>${item.imageData&&/^image\/(png|jpeg|gif)$/.test(item.contentType||'image/png')?`<img alt="" src="data:${item.contentType||'image/png'};base64,${escape(item.imageData)}">`:''}${escape(item.label||'Tanpa label')}</span>`).join('')}</div>`).join(''):'<p class="legend-missing">Legenda sumber belum tersedia.</p>';
+ }
+ function drawMetadata(service,result){
+  panel.querySelector('#inarisk-legend').innerHTML=sourceLegend(service,result);
   if (studyNotes[result.study]) {
    const keys = Object.keys(classLabels);
    const colors = result.study === 'kapasitas' ? Object.values(classColors).reverse() : Object.values(classColors);
@@ -98,11 +110,96 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
   }
   drawSummary(result);
   const m=result.metadata;panel.querySelector('#inarisk-metadata').innerHTML=`<strong>${escape(service.kind)}</strong><p>${escape(m.name)}</p>${m.copyrightText?`<p>${escape(m.copyrightText)}</p>`:''}<p>Tahun/periode: ${m.timeInfo?.timeExtent?escape(m.timeInfo.timeExtent.map(t=>new Date(t).getUTCFullYear()).join('–')):'belum tercantum'}</p><a href="${escape(m.sourceUrl||service.sourceUrl)}" target="_blank" rel="noopener noreferrer">Metadata layanan ↗</a>`;refreshIcons();}
- function stage(service,result,token,stale,refresh){if(token!==requestId)return;
-  // Request the candidate at zero opacity; keep the current raster until its replacement succeeds.
+ function createRaster(service,{opacity,zIndex=1,refresh=false}) {
   const revision=refresh?String(Date.now()):null;
   const Raster=L.TileLayer.extend({getTileUrl(coords){return '/api/inarisk?'+new URLSearchParams({mode:'image',service:service.service,bbox:tileBbox(coords),...(revision?{refresh:revision}:{})});}});
-  const candidate=new Raster('',{pane:'floodOverlay',opacity:0,bounds,noWrap:true,keepBuffer:2,updateWhenIdle:true,updateWhenZooming:false,maxZoom:19,attribution:escape(service.credit||'BNPB InaRISK')});let errors=0,images=0,committed=false;
+  return new Raster('',{pane:'floodOverlay',opacity,zIndex,bounds,noWrap:true,keepBuffer:2,
+   updateWhenIdle:true,updateWhenZooming:false,maxZoom:19,attribution:escape(service.credit||'BNPB InaRISK')});
+ }
+
+ const monev = panel.querySelector('#monev-overlays');
+ const monevOptions = panel.querySelector('#monev-options');
+ function renderMonev() {
+  const list = services.filter(service => service.group);
+  monevOptions.replaceChildren();
+  if (!list.length) {
+   monevOptions.textContent = busy?'Memuat daftar overlay…':'Overlay Monev belum tersedia.';
+   return;
+  }
+  for (const service of list) {
+   const row = document.createElement('div');
+   row.className = 'monev-option';
+   const label = document.createElement('label');
+   const checkbox = document.createElement('input');
+   checkbox.type = 'checkbox';
+   checkbox.checked = monevLayers.has(service.service);
+   const feedback = document.createElement('small');
+   feedback.setAttribute('role','status');
+   label.append(checkbox,document.createTextNode(service.kind));
+   const details = document.createElement('details');
+   const summary = document.createElement('summary');
+   summary.textContent = 'Legenda';
+   const content = document.createElement('div');
+   details.append(summary,content);
+   details.ontoggle = async () => {
+    if (!details.open || content.dataset.loaded || content.getAttribute('aria-busy')==='true') return;
+    content.setAttribute('aria-busy','true');
+    content.textContent = 'Memuat legenda…';
+    try {
+     const query = new URLSearchParams({mode:'metadata',service:service.service});
+     const response = await fetch('/api/inarisk?'+query,{signal:AbortSignal.timeout(12000)});
+     if (!response.ok) throw Error();
+     content.innerHTML = sourceLegend(service,await response.json());
+     content.dataset.loaded='true';
+    } catch { content.textContent = 'Legenda sumber belum tersedia.'; }
+    finally { content.removeAttribute('aria-busy'); }
+   };
+   row.append(label,feedback,details);
+   monevOptions.append(row);
+   const update = () => {
+    const state = monevLayers.get(service.service);
+    feedback.textContent = state?.message || '';
+   };
+   const current = monevLayers.get(service.service);
+   if (current) current.update = update;
+   update();
+   checkbox.onchange = () => {
+    if (!checkbox.checked) {
+     const state = monevLayers.get(service.service);
+     monevLayers.delete(service.service);
+     state?.layer.remove();
+     state?.layer.off();
+     update();
+     return;
+    }
+    const lines = ['das','administrasi','sesar'].includes(service.name);
+    const layer = createRaster(service,{opacity:lines ? .9 : .65,zIndex:lines?20:10});
+    const state = {layer,update,message:'Memuat…'};
+    monevLayers.set(service.service,state);
+    let images = 0, errors = 0;
+    layer.on('loading',()=>{images=0;errors=0;state.message='Memuat…';state.update();});
+    layer.on('tileload',()=>images++);
+    layer.on('tileerror',()=>errors++);
+    layer.on('load',()=>{
+     state.message = images ? (errors?'Sebagian tile belum tersedia.':'Aktif') : 'Tile belum tersedia. Matikan dan aktifkan lagi.';
+     state.update();
+    });
+    update();
+    layer.addTo(map);
+   };
+  }
+ }
+ monevButton.onclick = () => {
+  onOpen?.();
+  panel.classList.remove('hidden');
+  monev.open = true;
+  monev.scrollIntoView({block:'nearest'});
+  if (!services.length&&!busy) load();
+ };
+
+ function stage(service,result,token,stale,refresh){if(token!==requestId)return;
+  // Request the candidate at zero opacity; keep the current raster until its replacement succeeds.
+  const candidate=createRaster(service,{opacity:0,refresh});let errors=0,images=0,committed=false;
   const commit=()=>{if(token!==requestId)return;clearTimeout(pending?.timer);pending=null;const previous=overlay;overlay=candidate;activeService=service;committed=true;candidate.setOpacity(Number(opacity.value)/100);if(!visible.checked)candidate.remove();setActive(visible.checked&&images>0);previous?.remove();previous?.off();select.value=service.service;drawMetadata(service,result);cache.services=services;cache.metadata[service.service]={...result,cachedAt:Date.now()};remember();setStatus(!visible.checked?'Layer disembunyikan.':stale?'Layer tampil menggunakan sumber tersimpan; pembaruan sumber belum berhasil.':service.kind+' · '+(service.credit||'BNPB InaRISK'),stale);finish(token);};
   candidate.on('loading',()=>{errors=0;images=0;});candidate.on('tileload',()=>{images++;if(committed&&overlay===candidate&&visible.checked)setActive(true);});candidate.on('tileerror',()=>{errors++;});candidate.on('load',()=>{if(committed){if(overlay===candidate&&!busy&&errors)setStatus('Sebagian gambar sumber belum termuat. Layer yang tersedia tetap ditampilkan.',true);return;}queueMicrotask(()=>{if(token!==requestId)return;if(!images||(errors&&activeService?.service===service.service))failure(token,'Gambar InaRISK belum dapat dimuat. Coba lagi.');else{commit();if(errors)setStatus(service.kind+' · Sebagian gambar sumber belum termuat.',true);}});});
   pending={layer:candidate,timer:setTimeout(()=>failure(token,'Sumber belum merespons. Coba lagi.'),22000)};
@@ -111,8 +208,9 @@ export function mountInarisk({map,bounds,refreshIcons,onAbout,onOpen}){
  async function choose(service,token,refresh=false,stale=false){if(!service){failure(token,'Layer banjir belum tersedia.');return;}setStatus(overlay?'Memperbarui sumber… layer sebelumnya tetap tersedia.':'Membaca sumber dan legenda…');try{let result;try{result=await api('metadata',service.service,refresh);stale=stale||!!result.stale;}catch(error){if(token!==requestId)return;const stored=cache.metadata[service.service];if(!overlay&&stored&&Date.now()-stored.cachedAt<CACHE_AGE){result=stored;stale=true;}else throw error;}if(token!==requestId)return;if(!result.metadata)throw Error('Metadata belum tersedia.');stage(service,result,token,stale,refresh);}catch(error){failure(token,'InaRISK belum terhubung. Buka detail koneksi untuk melihat penyebabnya.',error);}}
  async function load(refresh=false){const token=begin(),previous=activeService?.service||select.value;setStatus(overlay?'Memperbarui sumber… layer sebelumnya tetap tersedia.':'Menghubungkan layanan InaRISK…');try{let result,stale=false;try{result=await api('catalog',null,refresh);}catch(error){if(token!==requestId)return;if(overlay)throw error;if(cache.services?.some(validService)){result={services:cache.services};stale=true;}else throw error;}if(token!==requestId)return;
    const available=(result.services||[]).filter(validService);if(!available.length)throw Error('Katalog belum memuat layanan banjir.');stale=stale||!!result.stale;available.sort((a,b)=>{const rank=s=>s.kind==='Bahaya banjir'?0:s.kind==='Risiko banjir'?1:2;return rank(a)-rank(b);});if(activeService&&!available.some(s=>s.service===activeService.service))available.push(activeService);services=available;
-   const options = layers => layers.map(s=>`<option value="${escape(s.service)}">${escape(s.kind)}</option>`).join('');
-   select.innerHTML = options(services.filter(s=>!s.group)) + (services.some(s=>s.group) ? '<optgroup label="Dashboard Monev">'+options(services.filter(s=>s.group))+'</optgroup>' : '');const selected=services.find(s=>s.service===previous)||services[0];select.value=selected.service;controls.classList.remove('hidden');await choose(selected,token,refresh,stale);
+   renderMonev();
+   select.innerHTML=services.filter(s=>!s.group).map(s=>`<option value="${escape(s.service)}">${escape(s.kind)}</option>`).join('');
+   const selected=services.find(s=>!s.group&&s.service===previous)||services.find(s=>!s.group);select.value=selected.service;controls.classList.remove('hidden');await choose(selected,token,refresh,stale);
   }catch(error){failure(token,'InaRISK belum terhubung. Buka detail koneksi untuk melihat penyebabnya.',error);}}
  select.onchange=()=>{const service=services.find(s=>s.service===select.value);const token=begin();choose(service,token);};retry.onclick=()=>load(true);
  visible.onchange=e=>{if(!e.target.checked){requestId++;controller?.abort();cancelPending();setBusy(false);overlay?.remove();setActive(false);setStatus('Layer disembunyikan.');}else if(overlay&&activeService?.service===select.value){overlay.addTo(map);setActive(true);setStatus('Menampilkan layer yang terakhir berhasil dimuat.');}else if(!services.length){load();}else{const token=begin();choose(services.find(s=>s.service===select.value),token);}};
