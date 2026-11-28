@@ -6,7 +6,7 @@ import {mountSlope} from './slope.js';
 import {centralOffice,jakartaOfficeReferences} from './central-office.js';
 import {createDirectory,childrenOf} from './directory.js';
 import {mountInarisk} from './inarisk.js';
-import {mountSibolgaPreview} from './qgis-preview.js';
+import {hasSibolgaExport,mountSibolgaPreview} from './qgis-preview.js';
 import {createReadiness} from './readiness-source.js';
 import {locationCoords,isVerified} from './distance.js';
 import {bankLogo,bankBrand} from './banks.js';
@@ -278,7 +278,7 @@ function openLocation(id){
  const content=document.createElement('div');content.className=`network-popup-card ${d.type}`;
  const name=d.type==='kpw'?`KPw ${d.name}`:d.type==='kas'?`Kas Titipan ${d.name}`:d.name;
  content.innerHTML=`<div class="popup-eyebrow"><span class="popup-type-symbol bank-brand-symbol">${bankLogo(d)}</span><span>${d.type==='kpw'?'KANTOR PERWAKILAN BI':d.type==='pusat'?'KANTOR PUSAT BI':'KAS TITIPAN'}</span></div><h3>${esc(name)}</h3><p class="popup-bank">${esc(d.type==='kpw'?d.city:d.bank||'Bank pengelola belum tersedia')}</p><div class="popup-meta"><span>${i('map-pin')}${esc(d.region)}</span><span>${esc(d.id)}</span></div>${d.type==='kas'?`<div class="popup-parent"><span>KPw induk</span><button class="popup-parent-network">${esc(d.kpw)} ${i('chevron-right')}</button></div>`:d.type==='kpw'?`<button class="popup-network-button">${i('network')}${childrenOf(data,d.id).length} kas titipan${i('chevron-right')}</button>`:''}${d.type==='kpw'?readiness.popupHtml(d.id):''}<div class="popup-accuracy coordinate-state ${d.status}"><b></b>${coordinateLabel(d)}</div><div class="popup-actions"><button class="popup-detail-button">Lihat detail ${i('arrow-right')}</button><button class="popup-area-button" aria-label="Perbesar titik pada peta">${i('zoom-in')}</button></div>`;
- const hasQgisPreview = d.id === 'KPW-04';
+ const hasQgisPreview = d.id === 'KPW-04' && hasSibolgaExport;
  const popupWidth = hasQgisPreview ? Math.min(580,map.getSize().x-36) : 310;
  const popup=L.popup({className:hasQgisPreview?'network-popup qgis-popup':'network-popup',maxHeight:Math.max(220,map.getSize().y-150),maxWidth:popupWidth,minWidth:hasQgisPreview?popupWidth:250,offset:[0,-12],autoPanPaddingTopLeft:[20,75],autoPanPaddingBottomRight:[20,80],closeButton:true,autoClose:true,closeOnClick:true}).setLatLng(mapCoords(d)).setContent(content);
  popup.on('remove',()=>{if(selected===id&&!document.querySelector('.explorer').classList.contains('detail-open')){selected=null;renderMarkers();}});

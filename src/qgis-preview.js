@@ -5,22 +5,16 @@ const exports = import.meta.glob('./qgis-exports/sibolga.{png,webp}', {
   eager: true, query: '?url', import: 'default',
 });
 const sibolgaExport = Object.values(exports)[0];
-const preview = sibolgaExport ? {
-  title: 'Peta QGIS · Sibolga',
-  url: sibolgaExport,
-} : {
-  title: 'Risiko Banjir · Sibolga',
-  url: '/qgis/sibolga-inarisk.png',
-};
+export const hasSibolgaExport = Boolean(sibolgaExport);
+const title = 'Peta QGIS · Sibolga';
 
 export function mountSibolgaPreview(content, popup) {
   const section = document.createElement('section');
   section.className = 'qgis-preview';
   section.innerHTML = `
-    <h4>${preview.title}</h4>
-    ${sibolgaExport ? '' : '<p><a href="https://inarisk.bnpb.go.id/" target="_blank" rel="noopener noreferrer">Sumber: InaRISK BNPB</a> · cuplikan indeks risiko</p>'}
+    <h4>${title}</h4>
     <p role="status"></p>
-    <div class="qgis-viewport" aria-label="${preview.title}" hidden></div>
+    <div class="qgis-viewport" aria-label="${title}" hidden></div>
     <button type="button" class="qgis-reset" hidden>Pas ke bingkai</button>
   `;
   content.querySelector('.popup-meta').after(section);
@@ -34,8 +28,8 @@ export function mountSibolgaPreview(content, popup) {
   popup.on('add', async () => {
     status.textContent = 'Memuat pratinjau peta…';
     const image = new Image();
-    image.alt = preview.title;
-    image.src = preview.url;
+    image.alt = title;
+    image.src = sibolgaExport;
     try {
       await image.decode();
     } catch {
