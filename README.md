@@ -216,3 +216,9 @@ Garis tipis pada peta menghubungkan KPw ke kas titipan berdasarkan kolom induk d
 Tombol **Korwil** di atas skala peta bisa diciutkan tanpa menghapus pilihan. Lingkup Korwil berlaku pada titik dan garis jaringan, pin berita, serta Prioritas Pantauan. Pin dengan koordinat penerbit yang terlalu jauh dari referensi wilayah atau dekat batas antarkorwil tetap tersedia dalam tampilan **Semua**.
 
 Penanda berita dan Prioritas Pantauan memuat hingga delapan lokasi dengan laporan banjir atau longsor yang terbit dalam 72 jam terakhir. Satu laporan dengan dampak nyata bisa masuk, atau beberapa judul berbeda dari penerbit independen. Dampak besar lalu jumlah penerbit membantu menentukan urutan. Tampilan nasional mendahulukan satu titik per Korwil yang memiliki laporan layak sebelum mengisi slot tersisa. Saat zoom mendekat, pemilihan dilakukan di area peta yang terlihat, tetap mengikuti filter Korwil. Berita Aceh juga dicari melalui Serambi Indonesia dan AJNN. Laporan lain tetap tersedia di menu berita.
+
+### Ringkasan kantor BI
+
+Menu **Ringkasan pantauan** membaca lima kartu nasional, daftar kantor yang perlu perhatian, dan indeks iklim dari [WebGIS BI BNPB](https://inarisk.bnpb.go.id/webgis-bi/). WebGIS menyusun matriks kantor setelah prakiraan, riwayat hujan, gelombang, bahaya, dan peringatan BMKG dimuat di peramban. Fungsi `/api/webgis-summary` membaca hasil tersebut dalam satu kunjungan. Jumlah kantor berstatus dapat lebih kecil dari jumlah seluruh kantor. Potensi tinggi adalah indikator tersendiri.
+
+SEKAR memeriksa pembaruan setiap 15 menit selama ringkasan dibuka. Jika pengambilan gagal, halaman menampilkan waktu data terakhir yang tersedia. Cadangan awal adalah ringkasan nasional pada tangkapan layar WebGIS BI tanggal 28 November 2026 pukul 14.54 WIB. Tombol **Peringatan BMKG** membuka dokumen CAP dengan masa berlaku masing-masing.

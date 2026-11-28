@@ -2,7 +2,7 @@ import L from 'leaflet';
 import '@fontsource-variable/plus-jakarta-sans/wght.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
 import './disaster-center.css';
-import {mountMonitoringClimate} from './monitoring-climate.js';
+import {mountWebgisSummary} from './webgis-summary.js';
 
 const bnpb = 'https://inarisk.bnpb.go.id/webgis-bi/';
 const labels = {Extreme:'Ekstrem',Severe:'Berat',Moderate:'Sedang',Minor:'Ringan'};
@@ -63,43 +63,8 @@ export function mountDisasterCenter({map,offices,trigger}) {
  const summary=document.createElement('main');
  summary.id='monitoring-summary';
  summary.hidden=true;
- summary.innerHTML=`
-   <section class="monitoring-hero" aria-label="Ringkasan peringatan BMKG">
-     <span class="monitoring-kicker">Peringatan dini cuaca · BMKG</span>
-     <h2 data-headline>Peringatan cuaca BMKG</h2>
-     <p data-summary-status role="status"></p>
-     <button type="button" data-view-alerts>Lihat semua peringatan</button>
-   </section>
-   <div data-metrics class="monitoring-metrics" aria-label="Filter peringatan aktif menurut tingkat"></div>
-   <div class="monitoring-columns">
-   <section class="monitoring-offices">
-     <h2>Kantor BI dalam wilayah peringatan aktif</h2>
-     <p>Berdasarkan irisan poligon CAP dengan koordinat kantor yang tersedia.</p>
-     <div data-office-list></div>
-   </section>
-   <section class="monitoring-climate" aria-label="Konteks iklim global">
-     <h2>Konteks iklim global</h2>
-     <div class="climate-indices">
-       <div data-index="oni"><span>ENSO · ONI</span><strong>—</strong><span data-period>Memuat…</span>
-         <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php" target="_blank" rel="noopener noreferrer">NOAA CPC ↗</a>
-       </div>
-       <div data-index="dmi"><span>IOD · DMI</span><strong>—</strong><span data-period>Memuat…</span>
-         <a href="https://psl.noaa.gov/gcos_wgsp/Timeseries/DMI/" target="_blank" rel="noopener noreferrer">NOAA PSL ↗</a>
-       </div>
-     </div>
-     <div class="climate-trend" data-oni-series role="img" hidden></div>
-     <p>ONI merangkum tiga bulan. DMI ini memakai seri bulanan HadISST1.1.</p>
-   </section>
-   </div>
-   <nav class="monitoring-links" aria-label="Modul BNPB">
-     <span data-feed-health aria-live="polite">BMKG CAP · memeriksa sumber</span>
-     <a href="${bnpb}simulasi/index.html#banjir" target="_blank" rel="noopener noreferrer">Simulasi Banjir BNPB ↗</a>
-     <a href="${bnpb}simulasi/index.html#kegiatan" target="_blank" rel="noopener noreferrer">Kegiatan PRB BNPB ↗</a>
-   </nav>`;
  document.querySelector('.app-main').append(summary);
- const refreshClimate=mountMonitoringClimate(summary.querySelector('.monitoring-climate'));
- window.addEventListener('hashchange',()=>{if(location.hash==='#ringkasan')refreshClimate();});
- if(location.hash==='#ringkasan')refreshClimate();
+ mountWebgisSummary(summary,offices);
  const notice=document.createElement('aside');
  notice.className='disaster-notice';
  notice.hidden=true;
@@ -119,48 +84,6 @@ export function mountDisasterCenter({map,offices,trigger}) {
  const seen=new Set();
 
  function open() { notice.hidden=true; if(!dialog.open)dialog.showModal(); }
- function renderSummary(active,matches) {
-  summary.querySelector('[data-headline]').textContent=snapshot
-   ? (active.length?`${active.length} peringatan cuaca aktif`:'Tidak ada peringatan cuaca aktif dalam feed')
-   : 'Peringatan cuaca BMKG';
-  summary.querySelector('[data-summary-status]').textContent=status.textContent;
-  const health=summary.querySelector('[data-feed-health]');
-  const polygonCount=active.reduce((total,item)=>total+item.polygons.length,0);
-  health.textContent=failed?'BMKG CAP · pembaruan gagal':!snapshot?'BMKG CAP · memeriksa sumber'
-   : `BMKG CAP · ${polygonCount.toLocaleString('id-ID')} poligon aktif${snapshot.incomplete?' · data sebagian':''}`;
-  health.dataset.state=failed?'error':snapshot&&!snapshot.incomplete?'ready':'pending';
-  const metrics=summary.querySelector('[data-metrics]');
-  metrics.replaceChildren();
-  for(const [level,label] of Object.entries(labels)){
-   const button=node('button','');
-   button.type='button';
-   button.style.setProperty('--metric-accent',colors[level]);
-   button.append(node('span',label),node('strong',snapshot?String(active.filter(item=>item.level===level).length):'—'));
-   button.onclick=()=>{
-    severityFilter.value=level;
-    officeFilter.checked=false;
-    activeFilter.checked=true;
-    dialog.querySelector('[data-tab=alerts]').click();
-    render();
-    open();
-   };
-   metrics.append(button);
-  }
-  const list=summary.querySelector('[data-office-list]');
-  list.replaceChildren();
-  for(const office of offices){
-   const match=active.find(item=>matches.get(item.id).includes(office));
-   if(!match)continue;
-   const link=node('a',office.name+' · '+(labels[match.level]||'Dalam area CAP'));
-   link.href='#peta/'+encodeURIComponent(office.id);
-   link.style.setProperty('--metric-accent',colors[match.level]||'#a9bdcd');
-   list.append(link);
-  }
-  summary.querySelector('.monitoring-offices h2').textContent=list.childElementCount
-   ? `${list.childElementCount} kantor BI dalam wilayah peringatan aktif`
-   : 'Kantor BI dalam wilayah peringatan aktif';
-  if(!list.childElementCount)list.append(node('p',snapshot?'Belum ada titik kantor yang tercakup dalam poligon aktif yang termuat.':status.textContent));
- }
  function render() {
   const now=Date.now();
   const active=(snapshot?.items||[]).filter(item=>item.start<=now&&now<item.end);
@@ -184,8 +107,7 @@ export function mountDisasterCenter({map,offices,trigger}) {
   }
   if (!active.some(item=>item.rank>=3)) notice.hidden=true;
   const current=(snapshot?.items||[]).filter(item=>now<item.end);
-  const officeMatches=new Map(current.map(item=>[item.id,offices.filter(office=>item.polygons.some(polygon=>inPolygon(office.coords,polygon)))]));
-  renderSummary(active,officeMatches);
+  const officeMatches=new Map(current.map(item=>[item.id,offices.filter(office=>Array.isArray(office.coords)&&item.polygons.some(polygon=>inPolygon(office.coords,polygon)))]));
   results.replaceChildren();
   for (const item of current) {
    const matches=officeMatches.get(item.id);

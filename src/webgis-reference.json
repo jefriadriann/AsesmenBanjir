@@ -1,0 +1,98 @@
+{
+  "asOf": "2026-11-28T07:54:00Z",
+  "total": 47,
+  "counts": {
+    "Awas": 2,
+    "Siaga": 0,
+    "Waspada": 7,
+    "Normal": 33,
+    "Potensi Tinggi": 41
+  },
+  "offices": [
+    {
+      "name": "Nusa Tenggara Barat",
+      "status": "Awas"
+    },
+    {
+      "name": "Sulawesi Tengah",
+      "status": "Awas"
+    },
+    {
+      "name": "Bengkulu",
+      "status": "Waspada"
+    },
+    {
+      "name": "Sulawesi Barat",
+      "status": "Waspada"
+    },
+    {
+      "name": "Kalimantan Barat",
+      "status": "Waspada"
+    },
+    {
+      "name": "Sumatera Barat",
+      "status": "Waspada"
+    },
+    {
+      "name": "Sumatera Selatan",
+      "status": "Waspada"
+    },
+    {
+      "name": "Jambi",
+      "status": "Waspada"
+    },
+    {
+      "name": "Riau",
+      "status": "Waspada"
+    }
+  ],
+  "context": "Bahaya yang paling banyak memengaruhi kantor: 🌊 Banjir (8 kantor ≥ Waspada). Prioritas: KPw BI Provinsi Nusa Tenggara Barat (Kota Mataram) — Cuaca ekstrim. Konteks Indonesia: 93 kab/kota Siaga–Awas, 128 Waspada dari 516 kab/kota.",
+  "climate": {
+    "oni": "+2,5",
+    "oniPeriod": "El Niño sangat kuat · ASO 2026 (NOAA)",
+    "iod": "+0,38",
+    "iodPeriod": "Positif · Agt 2026",
+    "points": "0.00,33.10 10.43,34.20 20.87,35.74 31.30,36.07 41.74,33.43 52.17,31.90 62.61,30.80 73.04,31.46 83.48,31.24 93.91,32.23 104.35,33.87 114.78,35.74 125.22,37.28 135.65,37.72 146.09,37.61 156.52,35.30 166.96,33.32 177.39,29.81 187.83,25.97 198.26,20.58 208.70,15.75 219.13,11.25 229.57,7.29 240.00,4.00",
+    "note": "Awal musim hujan 2026/2027 mundur di 61,08% wilayah (529 ZOM); sebagian besar wilayah mulai November–Desember 2026; puncak Desember 2026–Februari 2027.",
+    "citation": "BMKG, 22 September 2026 (diperbarui 13 Oktober 2026)",
+    "link": "https://infopublik.id/kategori/nasional-sosial-budaya/990337/musim-hujan-20262027-di-6108-persen-wilayah-indonesia-datang-lebih-lambat"
+  },
+  "feeds": [
+    {
+      "text": "Bahaya desa InaRISK · 83.518 desa · 516 kab/kota",
+      "state": "ok"
+    },
+    {
+      "text": "Bahaya cuaca ekstrim InaRISK · 515 kab/kota",
+      "state": "ok"
+    },
+    {
+      "text": "Prakiraan global · 515/515 titik",
+      "state": "ok"
+    },
+    {
+      "text": "Riwayat hujan 61 hari · 515/515 titik",
+      "state": "ok"
+    },
+    {
+      "text": "Gelombang laut · 329/329 titik pesisir",
+      "state": "ok"
+    },
+    {
+      "text": "Peringatan BMKG (CAP) · 38 peringatan",
+      "state": "ok"
+    },
+    {
+      "text": "ENSO · NOAA CPC · ASO 2026",
+      "state": "ok"
+    },
+    {
+      "text": "Laporan hari ini InaRISK · 22 laporan",
+      "state": "ok"
+    },
+    {
+      "text": "Poligon CAP BMKG · 1.222 poligon",
+      "state": "ok"
+    }
+  ]
+}

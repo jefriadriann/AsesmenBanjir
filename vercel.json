@@ -11,6 +11,10 @@
     },
     "api/bmkg-alerts.js": {
       "maxDuration": 30
+    },
+    "api/webgis-summary.js": {
+      "maxDuration": 180,
+      "includeFiles": "node_modules/@sparticuz/chromium/bin/**"
     }
   }
 }
