@@ -20,6 +20,7 @@ import './clean.css';
 import './accessibility.css';
 import './modern.css';
 import './map-workspace.css';
+import {mountInteractionEffects} from './interaction-effects.js';
 const icons={CloudRain,Map:MapIcon,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard};
 const i=(name,cls='')=>`<i data-lucide="${name}" class="${cls}"></i>`;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -354,6 +355,7 @@ document.addEventListener('click',event=>{const tab=event.target.closest('[data-
 document.querySelector('#risk-settings').onclick=()=>openLayerSettings('inarisk');
 document.querySelector('#layer-settings').onclick=()=>openLayerSettings('rainfall');
 applyWorkspace();
+mountInteractionEffects(document.querySelector("#app"));
 
 }
 init().catch(error=>{console.error(error);document.querySelector('#app').innerHTML='<div class="load-error"><h1>Peta belum dapat dimuat.</h1><p>Periksa koneksi dan muat ulang halaman.</p><button onclick="location.reload()">Coba lagi</button></div>';});
