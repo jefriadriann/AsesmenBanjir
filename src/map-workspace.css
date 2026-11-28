@@ -1,0 +1,45 @@
+:root[data-theme=dark] .sidebar {
+  background: linear-gradient(165deg,#102438,#0b1727 72%) !important;
+}
+:root[data-theme=dark] .topbar {
+  background: #101f31 !important;
+}
+:root[data-theme=dark] .sidebar .nav-item.active {
+  background: #17354a !important;
+  box-shadow: inset 3px 0 #51cbbd !important;
+  border-color: #315469 !important;
+}
+.sidebar .wordmark { margin-bottom: 24px; }
+.sidebar .sidebar-insight {
+  border: 1px solid #294154;
+  border-radius: 13px;
+  padding: 14px;
+  background: #152b3b;
+}
+.explorer .explorer-top {
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: #101f31;
+}
+.explorer .explorer-top .map-actions {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+.explorer-top .map-layer-group { border-color: #2b4357; }
+.map-layer-group > span { color: #a9becf; }
+.map-frame #map { background: #102c58; }
+.map-frame.is-satellite .leaflet-streetMap-pane { pointer-events: none; }
+.map-frame.is-satellite .map-vignette { display: none; }
+.basemap-swatch.satellite {
+  background: linear-gradient(140deg,#101d41 42%,#375f58 45%,#183d40 63%,#243e70 67%);
+}
+@media (min-width: 1100px) {
+  .sidebar { width: 188px; padding-inline: 14px; }
+  .app-main { margin-left: 188px; }
+}
+@media (max-width: 640px) {
+  .sidebar .wordmark { margin-bottom: 0; }
+  .explorer .explorer-top { gap: 4px; padding: 5px 7px; }
+}

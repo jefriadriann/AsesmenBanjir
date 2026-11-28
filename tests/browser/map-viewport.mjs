@@ -8,6 +8,7 @@ try {
  let stallStreet=false;
  let stalledTiles=0;
  await page.route('https://**',route=>route.abort());
+ await page.route('https://server.arcgisonline.com/**',route=>route.fulfill({contentType:'image/png',body:png}));
  await page.route('https://tile.openstreetmap.org/**',route=>{
   if(stallStreet){stalledTiles++;return;}
   return route.fulfill({contentType:'image/png',body:png});
@@ -15,6 +16,11 @@ try {
  await page.route('**/api/slope?mode=config',route=>route.fulfill({json:{available:false,state:'missing_variable'}}));
  await page.goto(process.env.BASE_URL||'http://localhost:3053');
  const map=page.locator('#map');
+ await page.locator('.map-frame.is-satellite').waitFor();
+ await map.locator('.leaflet-tile-loaded[src*="World_Imagery"]').first().waitFor({state:'attached'});
+ await page.locator('#layers').click();
+ await page.locator('[data-basemap="street"]').click();
+ await page.locator('.map-frame.is-street').waitFor();
  await map.locator('.leaflet-streetMap-pane .leaflet-tile-loaded').first().waitFor({state:'attached'});
  const view=()=>map.evaluate(node=>({
   zoom:Number(node.dataset.viewZoom),

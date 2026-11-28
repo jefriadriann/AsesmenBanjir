@@ -19,6 +19,7 @@ import './aurora.css';
 import './clean.css';
 import './accessibility.css';
 import './modern.css';
+import './map-workspace.css';
 const icons={CloudRain,Map:MapIcon,ShieldCheck,ChevronRight,Download,Mountain,Ruler,Route,MoveRight,Sparkles,ZoomIn,Network,Landmark,Vault,Globe,Plus,Minus,Maximize,Layers,Info,Search,ChevronDown,FileSpreadsheet,SearchX,X,MapPin,ArrowUpRight,ArrowLeft,ArrowRight,PanelRightClose,PanelRightOpen,Check,SlidersHorizontal,LocateFixed,Menu,Compass,ExternalLink,Database,TriangleAlert,Keyboard};
 const i=(name,cls='')=>`<i data-lucide="${name}" class="${cls}"></i>`;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -39,7 +40,7 @@ const sumatera=['Aceh','Sumatera Utara','Pematangsiantar','Sibolga','Sumatera Ba
 const jawa=['DKI Jakarta','Banten','Jawa Barat','Cirebon','Tasikmalaya','Tegal','Purwokerto','Jawa Tengah','Solo','DI Yogyakarta','Jawa Timur','Malang','Kediri','Jember'];
 data.forEach(d=>{if(d.type==='kpw')d.region=sumatera.includes(d.name)?'Sumatera':jawa.includes(d.name)?'Jawa':['Bali','Nusa Tenggara Barat','Nusa Tenggara Timur'].includes(d.name)?'Balinusra':['Kalimantan Barat','Kalimantan Selatan','Kalimantan Tengah','Kalimantan Timur','Balikpapan','Kalimantan Utara'].includes(d.name)?'Kalimantan':'Sulampua';});
 let coordinateFilter='all',directoryParentId=null;
-let type='all',region='all',query='',selected=null,panelOpen=false,mapStyle='street';
+let type='all',region='all',query='',selected=null,panelOpen=false,mapStyle='satellite';
 let lastFocus=null,toastTimer,resizeTimer,distanceOpen=false;
 const network=data.filter(d=>d.type!=='pusat');
 const locatedCount=network.filter(hasOfficeCoords).length;const confirmationCount=network.filter(d=>d.status==='needs_confirmation').length;const reviewCount=network.filter(d=>d.status==='ready_for_review').length;const missingCount=network.length-locatedCount;
@@ -50,8 +51,8 @@ document.querySelector('#app').innerHTML=`
 <aside class="sidebar" aria-label="Navigasi utama">
  <a class="wordmark" href="/" aria-label="Ruang Risiko beranda"><span class="brand-symbol brand-drop"><img src="/brand/ruang-risiko-contour.png" alt="" width="44" height="44" decoding="async" fetchpriority="high"></span><span>Ruang Risiko<small>ASESMEN BANJIR</small></span></a>
  <div class="workspace-switch"><span class="workspace-symbol">BI</span><span>Jaringan kas Indonesia<small>Seluruh Indonesia</small></span><span class="workspace-status" title="Data lokal tersedia"></span></div>
- <div class="nav-label">WORKSPACE</div>
- <a id="map-nav" class="nav-item active" href="#peta" aria-current="page">${i('map')}<span>Asesmen Risiko Banjir</span><span class="nav-number">01</span></a>
+
+ <a id="map-nav" class="nav-item active" href="#peta" aria-current="page">${i('map')}<span>Asesmen Risiko Banjir</span></a>
  <a class="nav-item" id="news-nav" href="#berita">${i('file-spreadsheet')}<span>Berita kebencanaan</span></a><a class="nav-item" id="readiness-nav" href="#sarpras">${i('shield-check')}<span>Kesiapan sarpras</span></a>
  <div class="sidebar-insight"><div class="insight-kicker">JARINGAN INDONESIA</div><div class="insight-total">133 <span>lokasi</span></div><div class="insight-bar"><b></b><b></b></div><div class="insight-legend"><span><b></b>46 KPw</span><span><b></b>87 Kas titipan</span></div><div class="insight-note">${i('globe')} 5 wilayah operasional</div></div><div class="sidebar-review"><span class="review-dot"></span><div>Verifikasi koordinat<small>${locatedCount}/133 tersedia · belum diverifikasi</small></div><button id="review-info" aria-label="Status verifikasi">${i('arrow-up-right')}</button></div><div class="sidebar-coverage"><span class="section-kicker">CAKUPAN NASIONAL</span><div class="coverage-value">133<span>titik jaringan</span></div><div class="coverage-bar"><span></span><span></span></div><div class="coverage-key"><span><b class="dot cyan"></b>46 KPw BI</span><span><b class="dot amber"></b>87 Kas titipan</span></div><div class="coverage-regions"><span>5</span> wilayah operasional ${i('arrow-up-right')}</div></div>
  <div class="sidebar-bottom"><div class="source-mini">${i('file-spreadsheet')}<span>Data bersumber dari Excel<small>Rekap Kas Titipan (1).xlsx</small></span></div><div class="sidebar-signature"><span class="profile-avatar">JA</span><div>Asesmen Banjir<small>Peta jaringan kas</small></div><span class="version">v0.2</span></div></div>
@@ -75,7 +76,7 @@ document.querySelector('#app').innerHTML=`
 <button id="reset" title="Kembali ke seluruh Indonesia" aria-label="Tampilkan Indonesia">${i('maximize')}<span> Seluruh Indonesia</span></button><span class="control-separator"></span><button id="panel-toggle" aria-label="Tampilkan daftar lokasi" aria-expanded="false">${i('panel-right-open')}<span>Daftar lokasi</span></button></div></div>
 <div class="explorer-body"><div class="map-column"><div class="map-frame"><button id="map-measure" class="map-measure-button" aria-pressed="false">${i('ruler')}<span>Ukur jarak</span></button><div id="map" aria-label="Peta Indonesia interaktif"></div><div class="map-vignette"></div><div id="family-map-context" class="family-map-context hidden"></div><div class="map-watermark">RUANG RISIKO<span>INDONESIA NETWORK EXPLORER</span></div><div class="map-filters" aria-label="Filter jenis jaringan"><button data-type="all" class="active" aria-pressed="true">Semua <span>133</span></button><button data-type="kpw" aria-pressed="false"><b class="dot cyan"></b>KPw BI <span>46</span></button><button data-type="kas" aria-pressed="false"><b class="dot amber"></b>Kas titipan <span>87</span></button></div>
 <div class="map-stamp"><span class="stamp-rule"></span><span>KEPULAUAN INDONESIA<small>05° N — 11° S &nbsp; / &nbsp; 95° E — 141° E</small></span></div><div class="compass" title="Utara"><span>N</span>${i('compass')}</div><div class="zoom-controls"><button id="zoom-in" aria-label="Perbesar">${i('plus')}</button><button id="zoom-out" aria-label="Perkecil">${i('minus')}</button></div>
-<div class="map-bottom"><button id="layers" class="basemap-button" aria-expanded="false">${i('layers')}<span>Jenis peta</span>${i('chevron-down')}</button></div><div id="layer-menu" class="layer-menu hidden"><span class="menu-caption">JENIS PETA</span><button data-basemap="atlas"><span class="basemap-swatch atlas"></span><span>Peta sederhana<small>Gambaran wilayah · tersedia tanpa internet</small></span>${i('check')}</button><button data-basemap="street" class="active"><span class="basemap-swatch street"></span><span>Peta jalan<small>OpenStreetMap · jalan dan nama tempat</small></span>${i('check')}</button><div id="tile-status" role="status"></div></div>
+<div class="map-bottom"><button id="layers" class="basemap-button" aria-expanded="false">${i('layers')}<span>Jenis peta</span>${i('chevron-down')}</button></div><div id="layer-menu" class="layer-menu hidden"><span class="menu-caption">JENIS PETA</span><button data-basemap="satellite" class="active"><span class="basemap-swatch satellite"></span><span>Peta satelit<small>Esri · citra dan relief laut</small></span>${i('check')}</button><button data-basemap="atlas"><span class="basemap-swatch atlas"></span><span>Peta sederhana<small>Gambaran wilayah · tersedia tanpa internet</small></span>${i('check')}</button><button data-basemap="street"><span class="basemap-swatch street"></span><span>Peta jalan<small>OpenStreetMap · jalan dan nama tempat</small></span>${i('check')}</button><div id="tile-status" role="status"></div></div>
 <div class="map-service-note hidden" id="map-service-note" role="status"><span id="map-service-text"></span><button id="retry-map">Coba peta jalan</button></div><div class="map-zoom-hint" id="map-zoom-hint">Perbesar untuk melihat jalan dan nama tempat</div><div id="map-context" class="map-context hidden"></div><section id="distance-panel" class="distance-panel hidden" aria-label="Gambar garis untuk mengukur jarak"></section>
 </div><div class="map-status"><span><b class="dot cyan"></b><strong id="visible-count">133</strong> lokasi ditampilkan<span class="status-divider">/</span><span id="scope-label">Cakupan nasional</span><span id="headquarters-count"></span><span id="approximate-count"></span></span><button id="data-note">${i('info')}Status koordinat kantor ${i('arrow-up-right')}</button></div></div>
 <aside class="directory" id="directory" aria-label="Daftar lokasi"><div class="directory-shell-nav"><button id="directory-back">${i('arrow-left')}Kembali ke peta</button><button id="directory-close" aria-label="Tutup daftar lokasi">${i('x')}</button></div><div id="directory-list"><div class="directory-heading"><div><h2><span id="directory-title">Kantor perwakilan</span><span id="directory-total">46</span></h2></div><button class="directory-filter-toggle" id="directory-filter-toggle" aria-label="Buka filter" aria-expanded="false">${i('sliders-horizontal')}</button></div><label class="search-box">${i('search')}<input type="search" id="search" placeholder="Cari kota, KPw, atau bank…" autocomplete="off" aria-label="Cari lokasi"><kbd>/</kbd></label><div id="directory-advanced" class="directory-advanced hidden"><div class="directory-filter"><label for="region">Wilayah</label><div>${i('globe')}<select id="region"><option value="all">Seluruh Indonesia</option>${regions.map(r=>`<option value="${r}">${r==='Balinusra'?'Bali & Nusa Tenggara':r==='Sulampua'?'Sulawesi, Maluku & Papua':r}</option>`).join('')}</select>${i('chevron-down')}</div></div><label class="coordinate-filter-label">Status koordinat<select id="coordinate-filter" aria-label="Filter status koordinat"><option value="all">Semua status koordinat</option><option value="ready_for_review">Siap ditinjau · 44</option><option value="needs_confirmation">Perlu konfirmasi · 8</option><option value="not_found">Perkiraan / belum ditemukan</option></select></label></div><div class="results-heading"><span id="result-count">133 lokasi</span><button id="clear-filters" class="hidden">Hapus filter ${i('x')}</button><span id="list-order">A—Z</span></div><div id="list" aria-live="polite"></div></div><div id="location-detail" class="hidden"></div></aside></div></section>
@@ -98,7 +99,17 @@ networkPane.style.pointerEvents = 'none';
 const connections = L.layerGroup().addTo(map);
 const markers=L.layerGroup().addTo(map);
 map.createPane('streetMap');map.getPane('streetMap').style.zIndex=450;
-const streetTiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{pane:'streetMap',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>',maxZoom:19,bounds:bounds,noWrap:true,keepBuffer:2,updateWhenIdle:true,updateWhenZooming:false,errorTileUrl:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'});
+const basemapOptions={pane:'streetMap',maxZoom:19,bounds:bounds,noWrap:true,keepBuffer:2,updateWhenIdle:true,updateWhenZooming:false,errorTileUrl:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'};
+const esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/';
+const onlineBasemaps = {
+ satellite: L.tileLayer(esri+'World_Imagery/MapServer/tile/{z}/{y}/{x}', {...basemapOptions,bounds:undefined,
+  attribution:'Imagery &copy; <a href="https://www.esri.com/en-us/arcgis/products/arcgis-living-atlas/overview" target="_blank" rel="noopener">Esri</a>, Maxar, Earthstar Geographics, and GIS User Community'}),
+ street: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {...basemapOptions,
+  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>'}),
+};
+const satelliteLabels=L.tileLayer(esri+'Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+ {...basemapOptions,bounds:undefined,maxNativeZoom:16,zIndex:2,attribution:'Label &copy; Esri'});
+
 L.control.scale({position:'bottomleft',imperial:false,maxWidth:90}).addTo(map);
 const regionControl = L.control({position:'bottomleft'});
 regionControl.onAdd = () => {
@@ -129,23 +140,64 @@ regionControl.onAdd = () => {
  return control;
 };
 regionControl.addTo(map);
-const failedTiles=new Set();let tileTimer;
-const tileKey=e=>`${e.coords.z}/${e.coords.x}/${e.coords.y}`;
-function mapNotice(message){document.querySelector('#tile-status').textContent=message;document.querySelector('#map-service-text').textContent=message;document.querySelector('#map-service-note').classList.toggle('hidden',!message||mapStyle!=='street');}
-streetTiles.on('loading',()=>{clearTimeout(tileTimer);tileTimer=setTimeout(()=>{if(mapStyle==='street')fallbackMap();},12000);});
-streetTiles.on('tileerror',e=>{failedTiles.add(tileKey(e));if(mapStyle==='street')mapNotice('Sebagian peta jalan belum termuat.');});
-streetTiles.on('tileload',e=>{if(!e.tile.src.startsWith('data:'))failedTiles.delete(tileKey(e));});
-streetTiles.on('tileunload',e=>{failedTiles.delete(tileKey(e));});
-streetTiles.on('load',()=>{clearTimeout(tileTimer);if(!failedTiles.size)mapNotice('');else if(mapStyle==='street'){mapNotice('Sebagian peta jalan belum termuat.');if(Object.values(streetTiles._tiles).every(t=>t.el.src.startsWith('data:')))queueMicrotask(()=>{if(mapStyle==='street')fallbackMap();});}});
-function setMapStyle(next,notify=false){
- mapStyle=next;const street=next==='street';document.querySelector('.map-frame').classList.toggle('is-street',street);
- if(street){map.removeLayer(labels);map.removeLayer(grids);streetTiles.addTo(map);}else{clearTimeout(tileTimer);streetTiles.remove();labels.addTo(map);grids.addTo(map);mapNotice('');}
- document.querySelectorAll('[data-basemap]').forEach(el=>el.classList.toggle('active',el.dataset.basemap===next));
- document.querySelector('#map-zoom-hint').classList.toggle('hidden',!street||map.getZoom()>=13);
- if(notify)showToast(street?'Peta jalan OpenStreetMap ditampilkan.':'Peta sederhana ditampilkan.');
+let tileTimer, failedBasemap='satellite';
+function mapNotice(message){
+ document.querySelector('#tile-status').textContent=message;
+ document.querySelector('#map-service-text').textContent=message;
+ document.querySelector('#map-service-note').classList.toggle('hidden',!message);
 }
-function fallbackMap(){setMapStyle('atlas');document.querySelector('#map-service-text').textContent='Peta sederhana aktif.';document.querySelector('#map-service-note').classList.remove('hidden');}
-document.querySelector('#retry-map').onclick=()=>{mapNotice('');setMapStyle('street');streetTiles.redraw();};
+for(const [style, tiles] of Object.entries(onlineBasemaps)){
+ tiles.on('loading',()=>{
+  clearTimeout(tileTimer);
+  tileTimer=setTimeout(()=>{if(mapStyle===style)fallbackMap(style);},12000);
+ });
+ tiles.on('load',()=>{
+  if(mapStyle!==style)return;
+  clearTimeout(tileTimer);
+  const images=tiles.getContainer().querySelectorAll('img');
+  const failed=[...images].filter(image=>image.src.startsWith('data:'));
+  if(images.length&&failed.length===images.length){
+   queueMicrotask(()=>{if(mapStyle===style)fallbackMap(style);});
+  }else mapNotice(failed.length?'Sebagian peta dasar belum termuat.':'');
+ });
+}
+function setMapStyle(next,notify=false){
+ clearTimeout(tileTimer);
+ mapNotice('');
+ for(const tiles of Object.values(onlineBasemaps))map.removeLayer(tiles);
+ map.removeLayer(satelliteLabels);
+ mapStyle=next;
+ const online=onlineBasemaps[next];
+ const frame=document.querySelector('.map-frame');
+ frame.classList.toggle('is-street',next==='street');
+ frame.classList.toggle('is-satellite',next==='satellite');
+ if(online){
+  map.removeLayer(labels);
+  map.removeLayer(grids);
+  online.addTo(map);
+  if(next==='satellite')satelliteLabels.addTo(map);
+ }else{
+  labels.addTo(map);
+  grids.addTo(map);
+ }
+ document.querySelectorAll('[data-basemap]').forEach(el=>{
+  el.classList.toggle('active',el.dataset.basemap===next);
+  el.setAttribute('aria-pressed',String(el.dataset.basemap===next));
+ });
+ document.querySelector('#map-zoom-hint').classList.toggle('hidden',next!=='street'||map.getZoom()>=13);
+ if(notify){
+  document.querySelector('#layer-menu').classList.add('hidden');
+  document.querySelector('#layers').setAttribute('aria-expanded','false');
+  showToast({satellite:'Peta satelit ditampilkan.',street:'Peta jalan OpenStreetMap ditampilkan.',atlas:'Peta sederhana ditampilkan.'}[next]);
+ }
+}
+function fallbackMap(style){
+ failedBasemap=style;
+ setMapStyle('atlas');
+ document.querySelector('#retry-map').textContent=style==='satellite'?'Coba peta satelit':'Coba peta jalan';
+ mapNotice('Peta sederhana aktif.');
+}
+document.querySelector('#retry-map').onclick=()=>setMapStyle(failedBasemap);
 
 function mapHasSize(){
  const frame=document.querySelector('.map-frame');
@@ -281,7 +333,7 @@ new ResizeObserver(()=>{
   renderMarkers();
  },120);
 }).observe(document.querySelector('#map'));
-map.invalidateSize();nationalView();setMapStyle('street');render();
+map.invalidateSize();nationalView();setMapStyle('satellite');render();
 function openLayerSettings(target){
  setPanel(false);
  toggleDistance(false);
