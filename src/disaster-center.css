@@ -1,0 +1,37 @@
+.disaster-center {
+ position: fixed; inset: 0; margin: auto; width: min(670px,calc(100% - 24px));
+ max-height: 85dvh; overflow: auto; padding: clamp(14px,3vw,26px);
+ color: #eff6ff; background: #13273c; border: 1px solid #526c85; border-radius: 18px;
+}
+.disaster-center::backdrop { background: #040b16b8; }
+.disaster-center header,.disaster-center nav,.disaster-actions {
+ display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.disaster-center header { justify-content: space-between; margin-bottom: 12px; }
+.disaster-center h2 { font-size: 20px; margin: 0; }
+.disaster-center nav { padding-bottom: 12px; border-bottom: 1px solid #38516a; }
+.disaster-center button,.disaster-notice button {
+ padding: 7px 10px; border: 1px solid #58718b; color: inherit; border-radius: 7px; background: #203b54;
+}
+.disaster-center button[aria-pressed=true] { background: #ffe19a; color: #1a2433; border-color: #ffe19a; }
+.disaster-center p { margin: 8px 0; line-height: 1.5; }
+.disaster-center [data-status] { color: #b4cbe3; font-size: 13px; }
+.disaster-center [data-results] article {
+ margin-top: 12px; padding: 12px; border: 1px solid #49637a;
+ border-left: 4px solid var(--alert-color); background: #172e46; border-radius: 8px;
+}
+.disaster-center article strong { color: var(--alert-color); }
+.disaster-center article h3 { margin: 5px 0; font-size: 16px; }
+.disaster-center summary { cursor: pointer; }
+.disaster-center article button { margin-top: 8px; }
+.disaster-center a { color:#a6e2fa; text-decoration: underline; }
+.disaster-center footer { margin-top: 14px; }
+.disaster-center [hidden],.disaster-notice[hidden] { display: none; }
+.disaster-notice {
+ position: fixed; z-index: 1000; right: 12px; top: 66px; width: min(340px,calc(100% - 24px));
+ padding: 12px; background: #172b41; color: #fff3e1; border: 1px solid #ad8068;
+ border-left: 5px solid #ff935a; border-radius: 10px; box-shadow: 0 10px 24px #02071090;
+}
+.disaster-notice p { margin: 0 0 8px; }
+#disaster-trigger [data-count] { color: #ffe19a; margin-left: 4px; font-weight: 700; }
+@media(max-width:640px){#disaster-trigger .disaster-label{display:none}}

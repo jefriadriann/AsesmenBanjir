@@ -16,11 +16,13 @@ export function mountSibolgaPreview(content, popup) {
     <p role="status"></p>
     <div class="qgis-viewport" aria-label="${title}" hidden></div>
     <button type="button" class="qgis-reset" hidden>Pas ke bingkai</button>
+    <a class="qgis-download" download="Peta-QGIS-Sibolga.webp" hidden>Unduh gambar QGIS</a>
   `;
   content.querySelector('.popup-meta').after(section);
   const status = section.querySelector('[role=status]');
   const viewport = section.querySelector('.qgis-viewport');
   const reset = section.querySelector('.qgis-reset');
+  const download = section.querySelector('.qgis-download');
   L.DomEvent.disableClickPropagation(viewport);
   L.DomEvent.disableScrollPropagation(viewport);
   let viewer;
@@ -39,6 +41,9 @@ export function mountSibolgaPreview(content, popup) {
     if (!viewport.isConnected) return;
     viewport.hidden = false;
     reset.hidden = false;
+    download.href = sibolgaExport;
+    download.download = 'Peta-QGIS-Sibolga.' + (sibolgaExport.split('.').pop()==='png' ? 'png' : 'webp');
+    download.hidden = false;
     status.textContent = 'Gulir untuk zoom, lalu geser gambar untuk melihat detail.';
     popup.update();
     const bounds = L.latLngBounds([[0, 0], [image.naturalHeight, image.naturalWidth]]);

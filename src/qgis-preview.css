@@ -27,3 +27,4 @@
   color: #edf7ff;
 }
 .qgis-preview [hidden] { display: none; }
+.qgis-preview .qgis-download { color: #a6dff4; margin-left: 9px; text-decoration: underline; }

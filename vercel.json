@@ -8,6 +8,9 @@
     },
     "api/news.js": {
       "maxDuration": 30
+    },
+    "api/bmkg-alerts.js": {
+      "maxDuration": 30
     }
   }
 }
