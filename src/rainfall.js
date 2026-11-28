@@ -112,5 +112,5 @@ export function mountRainfall({map, refreshIcons, onOpen}) {
   panel.querySelector('#rainfall-opacity').oninput = event => { panel.querySelector('#rainfall-opacity-value').textContent = event.target.value + '%'; layer?.setOpacity(Number(event.target.value) / 100); };
   map.on('click', event => { if (layer && !panel.classList.contains('hidden') && !document.querySelector('.map-frame').classList.contains('measuring')) sample(event.latlng); });
   refreshIcons();
-  return {start() { if (!requested) enable(false, false); }, disable, sample, closePanel() { panel.classList.add('hidden'); }};
+  return {disable, sample, closePanel() { panel.classList.add('hidden'); }};
 }

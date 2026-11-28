@@ -8,6 +8,7 @@ try {
     await page.route('https://**', route => route.abort());
     await page.route('**/api/inarisk?*', route => route.fulfill({json: {services: []}}));
     await page.goto((process.env.BASE_URL || 'http://localhost:3002') + '/#peta');
+    await page.locator('#rainfall-toggle').click();
     await page.locator('#layer-settings').click();
     await page.waitForFunction(() => document.querySelector('#rainfall-status')?.textContent.includes('Pekan 1 aktif'));
     assert.equal(await page.locator('#rainfall-toggle').getAttribute('aria-pressed'), 'true');

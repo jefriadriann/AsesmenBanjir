@@ -61,7 +61,7 @@ document.querySelector('#app').innerHTML=`
 <div class="overview"><div class="overview-title">${i('globe')}<span>Jaringan nasional</span><small>5 wilayah</small></div><button class="metric" data-metric="all"><span class="metric-symbol total">${i('network')}</span><span class="metric-number">133</span><span class="metric-name">Total lokasi</span></button><button class="metric" data-metric="kpw"><span class="metric-symbol cyan">${i('landmark')}</span><span class="metric-number">46</span><span class="metric-name">KPw Bank Indonesia</span></button><button class="metric" data-metric="kas"><span class="metric-symbol amber">${i('vault')}</span><span class="metric-number">87</span><span class="metric-name">Kas titipan</span></button><button id="validation" class="validation-chip"><span></span>Lokasi belum diverifikasi ${i('arrow-up-right')}</button></div>
 <section class="explorer panel-hidden" aria-label="Peta dan direktori jaringan"><div class="explorer-top"><div class="view-title">${i('map')}<strong>Jaringan kas</strong><span class="view-title-separator"></span><span id="map-region-label">Seluruh Indonesia</span></div>
 <div class="news-watch-tools" aria-label="Berita dan pantauan peta">
-<button id="news-map-toggle" type="button" aria-pressed="true"><span class="watch-dot" aria-hidden="true"></span>Penanda berita</button>
+<button id="news-map-toggle" type="button" aria-pressed="false"><span class="watch-dot" aria-hidden="true"></span>Penanda berita</button>
 <button id="watch-priority" type="button" aria-haspopup="dialog" aria-controls="watch-dialog">Prioritas Pantauan</button>
 <dialog id="watch-dialog" aria-labelledby="watch-heading">
 <div class="watch-heading"><h2 id="watch-heading">Prioritas Pantauan</h2><button id="watch-close" type="button" aria-label="Tutup Prioritas Pantauan">Tutup</button></div>
@@ -265,7 +265,7 @@ const watch = mountNewsWatch({
   onActive: (active, refresh) => news.setMapActive(active, refresh),
 });
 function applyWorkspace(){const [view,id]=location.hash.slice(1).split('/');const isReadiness=view==='sarpras',isNews=view==='berita';document.querySelector('#news-nav').classList.toggle('active',isNews);document.querySelector('#news-nav').setAttribute('aria-current',isNews?'page':'false');watch.setVisible(!isReadiness&&!isNews);if(isNews)news.show();else news.hide();document.querySelector('#peta').classList.toggle('hidden',isReadiness||isNews);document.querySelector('.app-main').classList.toggle('readiness-active',isReadiness);document.querySelector('#map-nav').classList.toggle('active',!isReadiness&&!isNews);document.querySelector('#readiness-nav').classList.toggle('active',isReadiness);document.querySelector('#map-nav').setAttribute('aria-current',isReadiness||isNews?'false':'page');document.querySelector('#readiness-nav').setAttribute('aria-current',isReadiness?'page':'false');document.querySelector('.map-title h1').textContent=isNews?'Berita kebencanaan':isReadiness?'Kesiapan Sarpras':'Asesmen Risiko Banjir';document.querySelector('.title-tag').innerHTML=i('globe')+(isReadiness?'46 KPw':'Indonesia');
- if(isNews){toggleDistance(false);map.closePopup();readiness.hide();}else if(isReadiness){toggleDistance(false);map.closePopup();readiness.show(id);}else{readiness.hide();clearFilters();setPanel(false);requestAnimationFrame(()=>{map.invalidateSize({pan:false});startDefaultLayers();if(id&&data.some(d=>d.id===id)){directoryParentId=null;directory.setParent(null);query='';document.querySelector('#search').value='';render();openLocation(id);}else if(!selected)nationalView();});}refreshIcons();}
+ if(isNews){toggleDistance(false);map.closePopup();readiness.hide();}else if(isReadiness){toggleDistance(false);map.closePopup();readiness.show(id);}else{readiness.hide();clearFilters();setPanel(false);requestAnimationFrame(()=>{map.invalidateSize({pan:false});if(id&&data.some(d=>d.id===id)){directoryParentId=null;directory.setParent(null);query='';document.querySelector('#search').value='';render();openLocation(id);}else if(!selected)nationalView();});}refreshIcons();}
 window.addEventListener('hashchange',applyWorkspace);document.querySelector('#readiness-header').onclick=()=>{location.hash=location.hash.startsWith('#sarpras')?'peta':'sarpras';};
 // A restrained pointer glow on application chrome; map controls keep normal interactions.
 if(matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){let frame;document.addEventListener('pointermove',e=>{if(e.target.closest('.map-frame'))return;cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px');});},{passive:true});}
@@ -290,7 +290,7 @@ function openLayerSettings(target){
 }
 mountInarisk({map,bounds,refreshIcons,onAbout:openAudit,onOpen:()=>openLayerSettings('inarisk')});
 const rainfall=mountRainfall({map,bounds,refreshIcons,onOpen:()=>openLayerSettings('rainfall')});
-const slope=mountSlope({map,bounds,refreshIcons,onOpen:()=>openLayerSettings('slope')});
+mountSlope({map,bounds,refreshIcons,onOpen:()=>openLayerSettings('slope')});
 const layerPanels=[['rainfall','Hujan'],['slope','Lereng'],['inarisk','Banjir']];
 for(const [id] of layerPanels){const panel=document.querySelector('.'+id+'-panel');const tabs=document.createElement('nav');tabs.className='layer-panel-tabs';tabs.setAttribute('aria-label','Pengaturan layer');tabs.innerHTML=layerPanels.map(([target,label])=>`<button data-layer-panel="${target}" aria-current="${target===id}">${label}</button>`).join('');panel.prepend(tabs);}
 function showLayerPanel(target){
@@ -301,13 +301,6 @@ function showLayerPanel(target){
 document.addEventListener('click',event=>{const tab=event.target.closest('[data-layer-panel]');if(tab)showLayerPanel(tab.dataset.layerPanel);});
 document.querySelector('#risk-settings').onclick=()=>openLayerSettings('inarisk');
 document.querySelector('#layer-settings').onclick=()=>openLayerSettings('rainfall');
-let defaultLayersStarted=false;
-function startDefaultLayers(){
- if(defaultLayersStarted)return;
- defaultLayersStarted=true;
- rainfall.start();
- slope.start();
-}
 applyWorkspace();
 
 }

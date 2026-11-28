@@ -40,7 +40,9 @@ try {
     await page.goto(base + '/#peta');
     const markerToggle = page.getByRole('button', {name: 'Penanda berita'});
     await markerToggle.waitFor();
-    assert.equal(await markerToggle.getAttribute('aria-pressed'), 'true');
+    assert.equal(await markerToggle.getAttribute('aria-pressed'), 'false');
+    assert.equal(await page.locator('.news-city-marker').count(), 0);
+    await markerToggle.click();
     const semarang = page.getByRole('button', {name: 'Berita: Banjir di Semarang, 35 rumah terendam'});
     await semarang.waitFor();
     assert.equal(await page.locator('.news-city-marker').count(), 2);
@@ -142,6 +144,7 @@ try {
     fail = false;
     await page.locator('#watch-refresh').click();
     await page.locator('#watch-close').click();
+    await markerToggle.click();
     await page.getByRole('button', {name: 'Berita: Meulaboh'}).waitFor();
     await page.close();
     console.log('PASS: yellow markers, keyboard popup, article URLs, flood priorities and retained data', width);

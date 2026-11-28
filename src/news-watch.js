@@ -39,10 +39,10 @@ export function mountNewsWatch({map, locations, readiness, onActive}) {
   const dialog = toolbar.querySelector('#watch-dialog');
   const results = dialog.querySelector('#watch-results');
   const status = dialog.querySelector('#watch-status');
-  const layer = L.layerGroup().addTo(map);
+  const layer = L.layerGroup();
   const markers = new Map();
   map.createPane('newsCities').style.zIndex = '620';
-  let enabled = true, visible = null;
+  let enabled = false, visible = null;
   let snapshot = {data: null, loading: false, error: ''};
   const references = newsRegionReferences(locations);
   let cities = [], points = [], region = 'all';

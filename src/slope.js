@@ -85,5 +85,5 @@ export function mountSlope({map,bounds,refreshIcons,onOpen}){
  }
 
  button.onclick=()=>{if(desired)disable();else enable();};panel.querySelector('#slope-close').onclick=()=>panel.classList.add('hidden');panel.querySelector('#slope-retry').onclick=()=>enable();panel.querySelector('#slope-opacity').oninput=e=>{panel.querySelector('#slope-opacity-value').textContent=e.target.value+'%';layer?.setOpacity(Number(e.target.value)/100);};
- refreshIcons();return {start(){if(!desired)enable(false);},disable,closePanel(){panel.classList.add('hidden');}};
+ refreshIcons();return {disable,closePanel(){panel.classList.add('hidden');}};
 }

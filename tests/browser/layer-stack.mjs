@@ -22,11 +22,16 @@ try{for(const width of [1440,390]){
  const expectButtonColor=(key,color)=>page.waitForFunction(({key,color})=>
    getComputedStyle(document.querySelector('#'+key+'-toggle')).backgroundColor===color,{key,color},{timeout:4000});
  const count=key=>page.locator('.leaflet-'+pane[key]+'-pane>.leaflet-layer').count();
+ for(const key of keys){
+   assert.equal(await count(key),0);
+   assert.equal(await page.locator('#'+key+'-toggle').getAttribute('aria-pressed'),'false');
+ }
  for(const key of ['rainfall','slope']){
+   await page.locator('#'+key+'-toggle').click();
    await page.waitForFunction(id=>document.querySelector('#'+id+'-toggle')?.getAttribute('aria-pressed')==='true',key);
    assert.equal(await count(key),1);
    await expectButtonColor(key,'rgb(221, 226, 231)');
-   assert.equal(await page.locator('.'+key+'-panel').isHidden(),true);
+   await page.locator('#'+key+'-close').click();
  }
  assert.equal(await count('inarisk'),0);
  await expectButtonColor('inarisk','rgb(36, 73, 110)');
@@ -113,6 +118,8 @@ try{for(const width of [1440,390]){
  await fallbackPage.route('**/api/slope?mode=tile&*', r => r.fulfill({status:502,json:{error:'Earth Engine unavailable'}}));
  await fallbackPage.route('**/api/slope?mode=dem&*', r => r.fulfill({contentType:'image/png',body:Buffer.from(terrainFixture,'base64')}));
  await fallbackPage.goto(process.env.BASE_URL||'http://localhost:3002');
+ await fallbackPage.locator('#rainfall-toggle').click();
+ await fallbackPage.locator('#slope-toggle').click();
  await fallbackPage.locator('.leaflet-slopeOverlay-pane canvas[data-terrain="drawn"]').first().waitFor();
  await fallbackPage.getByText('Layer aktif · perkiraan dari elevasi cadangan').waitFor({state:'attached'});
  assert.match(await fallbackPage.locator('#slope-source').textContent(), /Mapzen/);
