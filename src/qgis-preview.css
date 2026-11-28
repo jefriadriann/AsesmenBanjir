@@ -1,15 +1,29 @@
+.network-popup.qgis-popup .leaflet-popup-content {
+  width: var(--qgis-popup-width) !important;
+}
 .qgis-preview {
   margin-block: 10px;
-  padding: 10px;
+  padding: 12px;
   background: #132a40;
   border: 1px solid #436780;
   border-radius: 9px;
   color: #edf7ff;
 }
-.qgis-preview h4 { margin: 0 0 5px; font-size: 13px; }
-.qgis-preview label { display: grid; gap: 4px; font-size: 11px; }
-.qgis-preview input { max-width: 100%; font-size: 11px; }
-.qgis-preview p { margin: 6px 0; color: #c6deef; font-size: 11px; }
-.qgis-viewport { width: 100%; height: 160px; background: #fff; border-radius: 6px; }
-.qgis-preview .qgis-reset { margin-top: 6px; font-size: 11px; color: #edf7ff; }
+.qgis-preview h4 { margin: 0 0 5px; font-size: 15px; }
+.qgis-preview p { margin: 6px 0; color: #c6deef; font-size: 12px; }
+.qgis-preview .qgis-viewport {
+  width: 100%;
+  height: clamp(155px, 37dvh, 330px);
+  background: transparent;
+  border: 1px solid #46657a;
+  border-radius: 6px;
+}
+.qgis-preview .qgis-reset {
+  margin-top: 8px;
+  padding: 5px 9px;
+  border: 1px solid #46657a;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #edf7ff;
+}
 .qgis-preview [hidden] { display: none; }

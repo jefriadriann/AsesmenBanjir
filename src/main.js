@@ -278,14 +278,22 @@ function openLocation(id){
  const content=document.createElement('div');content.className=`network-popup-card ${d.type}`;
  const name=d.type==='kpw'?`KPw ${d.name}`:d.type==='kas'?`Kas Titipan ${d.name}`:d.name;
  content.innerHTML=`<div class="popup-eyebrow"><span class="popup-type-symbol bank-brand-symbol">${bankLogo(d)}</span><span>${d.type==='kpw'?'KANTOR PERWAKILAN BI':d.type==='pusat'?'KANTOR PUSAT BI':'KAS TITIPAN'}</span></div><h3>${esc(name)}</h3><p class="popup-bank">${esc(d.type==='kpw'?d.city:d.bank||'Bank pengelola belum tersedia')}</p><div class="popup-meta"><span>${i('map-pin')}${esc(d.region)}</span><span>${esc(d.id)}</span></div>${d.type==='kas'?`<div class="popup-parent"><span>KPw induk</span><button class="popup-parent-network">${esc(d.kpw)} ${i('chevron-right')}</button></div>`:d.type==='kpw'?`<button class="popup-network-button">${i('network')}${childrenOf(data,d.id).length} kas titipan${i('chevron-right')}</button>`:''}${d.type==='kpw'?readiness.popupHtml(d.id):''}<div class="popup-accuracy coordinate-state ${d.status}"><b></b>${coordinateLabel(d)}</div><div class="popup-actions"><button class="popup-detail-button">Lihat detail ${i('arrow-right')}</button><button class="popup-area-button" aria-label="Perbesar titik pada peta">${i('zoom-in')}</button></div>`;
- const popup=L.popup({className:'network-popup',maxHeight:Math.max(220,map.getSize().y-150),maxWidth:310,minWidth:250,offset:[0,-12],autoPanPaddingTopLeft:[20,75],autoPanPaddingBottomRight:[20,80],closeButton:true,autoClose:true,closeOnClick:true}).setLatLng(mapCoords(d)).setContent(content);
+ const hasQgisPreview = d.id === 'KPW-04';
+ const popupWidth = hasQgisPreview ? Math.min(580,map.getSize().x-36) : 310;
+ const popup=L.popup({className:hasQgisPreview?'network-popup qgis-popup':'network-popup',maxHeight:Math.max(220,map.getSize().y-150),maxWidth:popupWidth,minWidth:hasQgisPreview?popupWidth:250,offset:[0,-12],autoPanPaddingTopLeft:[20,75],autoPanPaddingBottomRight:[20,80],closeButton:true,autoClose:true,closeOnClick:true}).setLatLng(mapCoords(d)).setContent(content);
  popup.on('remove',()=>{if(selected===id&&!document.querySelector('.explorer').classList.contains('detail-open')){selected=null;renderMarkers();}});
  content.querySelector('.popup-network-button')?.addEventListener('click',()=>showFamily(id));content.querySelector('.popup-parent-network')?.addEventListener('click',()=>{const parent=data.find(p=>p.type==='kpw'&&p.name===d.kpw);if(parent)showFamily(parent.id);});
  content.querySelector('.popup-readiness-button')?.addEventListener('click',()=>{location.hash='sarpras/'+id;});
  content.querySelector('.popup-detail-button').onclick=()=>openDetail(id);
  content.querySelector('.popup-area-button').setAttribute('aria-label','Perbesar titik pada peta');
  content.querySelector('.popup-area-button').onclick=()=>{setMapStyle('street');map.flyTo(mapCoords(d),12,{duration:.8});};
- if(d.id==='KPW-04')mountSibolgaPreview(content,popup);
+ if(hasQgisPreview){
+  popup.on('add',()=>{
+   popup.getElement().style.setProperty('--qgis-popup-width',popupWidth+'px');
+   popup.update();
+  });
+  mountSibolgaPreview(content,popup);
+ }
  popup.openOn(map);document.querySelector('#map-zoom-hint').classList.add('hidden');renderMarkers();refreshIcons();
 }
 function openDetail(id){const d=data.find(x=>x.id===id);if(!d)return;selected=id;document.querySelector('.explorer').classList.add('detail-open');map.closePopup();if(!panelOpen)setPanel(true);document.querySelector('#directory-list').classList.add('hidden');const detail=document.querySelector('#location-detail');detail.classList.remove('hidden');
