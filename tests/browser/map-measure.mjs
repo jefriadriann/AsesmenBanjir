@@ -21,7 +21,8 @@ try {
     markers.reduce((total, marker) => total + Number(marker.querySelector('.cluster-count')?.textContent ?? 1), 0));
   assert.equal(mapped, 134);
   assert.equal(await page.locator('.kpw-kas-link[stroke-dasharray]').count(), 0);
-  assert.equal(await page.locator('.kpw-kas-link[stroke-width="2"]').count(), 67);
+  assert.equal(await page.locator('.kpw-kas-link[stroke-width="1"]').count(), 43);
+  assert.equal(await page.locator('.kpw-kas-link[stroke-width="1.2"]').count(), linkCount - 43);
   await page.locator('.map-filters [data-type="kpw"]').click();
   assert.equal(await page.locator('.kpw-kas-link').count(), 0);
   await page.locator('.map-filters [data-type="all"]').click();

@@ -205,7 +205,7 @@ function render(){
    const approximate = isApproximate(parent) || isApproximate(child);
    L.polyline([mapCoords(parent), mapCoords(child)], {
      pane: 'officeConnections', className: 'kpw-kas-link', color: approximate ? '#468fb9' : '#2bb6ad',
-     weight: approximate ? 2 : 2.4, opacity: approximate ? .65 : .85,
+     weight: approximate ? 1 : 1.2, opacity: approximate ? .65 : .85,
      lineCap: 'round', interactive: false,
    }).addTo(connections);
  }
