@@ -5,14 +5,22 @@ const exports = import.meta.glob('./qgis-exports/sibolga.{png,webp}', {
   eager: true, query: '?url', import: 'default',
 });
 const sibolgaExport = Object.values(exports)[0];
+const preview = sibolgaExport ? {
+  title: 'Peta QGIS · Sibolga',
+  url: sibolgaExport,
+} : {
+  title: 'Risiko Banjir · Sibolga',
+  url: '/qgis/sibolga-inarisk.png',
+};
 
 export function mountSibolgaPreview(content, popup) {
   const section = document.createElement('section');
   section.className = 'qgis-preview';
   section.innerHTML = `
-    <h4>Peta QGIS · Sibolga</h4>
+    <h4>${preview.title}</h4>
+    ${sibolgaExport ? '' : '<p><a href="https://inarisk.bnpb.go.id/" target="_blank" rel="noopener noreferrer">Sumber: InaRISK BNPB</a> · cuplikan indeks risiko</p>'}
     <p role="status"></p>
-    <div class="qgis-viewport" aria-label="Pratinjau QGIS Sibolga" hidden></div>
+    <div class="qgis-viewport" aria-label="${preview.title}" hidden></div>
     <button type="button" class="qgis-reset" hidden>Pas ke bingkai</button>
   `;
   content.querySelector('.popup-meta').after(section);
@@ -24,18 +32,14 @@ export function mountSibolgaPreview(content, popup) {
   let viewer;
 
   popup.on('add', async () => {
-    if (!sibolgaExport) {
-      status.textContent = 'File ekspor QGIS Sibolga belum tersedia.';
-      return;
-    }
-    status.textContent = 'Memuat peta QGIS…';
+    status.textContent = 'Memuat pratinjau peta…';
     const image = new Image();
-    image.alt = 'Hasil ekspor QGIS Sibolga';
-    image.src = sibolgaExport;
+    image.alt = preview.title;
+    image.src = preview.url;
     try {
       await image.decode();
     } catch {
-      status.textContent = 'Peta QGIS gagal dimuat.';
+      status.textContent = 'Pratinjau peta gagal dimuat.';
       return;
     }
     if (!viewport.isConnected) return;

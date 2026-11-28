@@ -51,7 +51,7 @@ const regions=['Sumatera','Jawa','Kalimantan','Balinusra','Sulampua'];
 document.documentElement.dataset.theme='dark';
 document.querySelector('#app').innerHTML=`
 <aside class="sidebar" id="site-sidebar" aria-label="Navigasi utama">
- <a class="wordmark" href="/" aria-label="SEKAR BENCANA beranda"><span class="brand-symbol sekar-brand-symbol"><img src="/brand/sekar-bencana.png" alt="" width="44" height="44" decoding="async" fetchpriority="high"></span><span>SEKAR <small>BENCANA</small></span></a>
+ <a class="wordmark" href="/" aria-label="SEKAR BENCANA beranda"><span class="brand-symbol sekar-brand-symbol"><img src="/brand/sekar-badge.png" alt="" width="44" height="44" decoding="async" fetchpriority="high"></span><span>SEKAR <small>BENCANA</small></span></a>
  <div class="workspace-switch"><span class="workspace-symbol">BI</span><span>Jaringan kas Indonesia<small>Seluruh Indonesia</small></span><span class="workspace-status" title="Data lokal tersedia"></span></div>
 
  <a id="map-nav" aria-label="Asesmen Risiko Banjir" title="Asesmen Risiko Banjir" class="nav-item active" href="#peta" aria-current="page">${i('map')}<span>Asesmen Risiko Banjir</span></a>
