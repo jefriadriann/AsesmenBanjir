@@ -1,9 +1,11 @@
 import L from 'leaflet';
+import '@fontsource-variable/plus-jakarta-sans/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
 import './disaster-center.css';
 
 const bnpb = 'https://inarisk.bnpb.go.id/webgis-bi/';
 const labels = {Extreme:'Ekstrem',Severe:'Berat',Moderate:'Sedang',Minor:'Ringan'};
-const colors = {Extreme:'#ff5372',Severe:'#ff935a',Moderate:'#ffd263',Minor:'#73d4bd'};
+const colors = {Extreme:'#ef4444',Severe:'#f97316',Moderate:'#facc15',Minor:'#22c55e'};
 const time = new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',dateStyle:'medium',timeStyle:'short'});
 const wib = value => time.format(value)+' WIB';
 
@@ -64,8 +66,8 @@ export function mountDisasterCenter({map,offices,trigger}) {
    <section class="monitoring-hero" aria-label="Ringkasan peringatan BMKG">
      <h2 data-headline>Peringatan cuaca BMKG</h2>
      <p data-summary-status role="status"></p>
-     <div data-metrics class="monitoring-metrics"></div>
    </section>
+   <div data-metrics class="monitoring-metrics" aria-label="Filter peringatan aktif menurut tingkat"></div>
    <section class="monitoring-offices">
      <h2>Kantor BI dalam wilayah peringatan aktif</h2>
      <p>Berdasarkan irisan poligon CAP dengan koordinat kantor yang tersedia.</p>
@@ -79,7 +81,7 @@ export function mountDisasterCenter({map,offices,trigger}) {
  const notice=document.createElement('aside');
  notice.className='disaster-notice';
  notice.hidden=true;
- notice.innerHTML='<p role="status"></p><button type="button" data-open>Lihat peringatan</button><button type="button" data-dismiss aria-label="Tutup notifikasi">×</button>';
+ notice.innerHTML='<div class="disaster-notice-heading"><strong data-notice-level></strong><button type="button" data-dismiss aria-label="Tutup notifikasi">×</button></div><p role="status"></p><button type="button" data-open>Lihat peringatan</button>';
  document.querySelector('#app').append(notice);
  const status=dialog.querySelector('[data-status]');
  const results=dialog.querySelector('[data-results]');
@@ -147,7 +149,10 @@ export function mountDisasterCenter({map,offices,trigger}) {
   const fresh=active.filter(item=>item.rank>=3&&!seen.has(item.id));
   for (const item of fresh) seen.add(item.id);
   if (!dialog.open && fresh.length) {
-   notice.querySelector('p').textContent=`${fresh.length} peringatan cuaca berat atau ekstrem dari BMKG sedang berlaku.`;
+   const highest=fresh.some(item=>item.level==='Extreme')?'Extreme':'Severe';
+   notice.style.setProperty('--notice-accent',colors[highest]);
+   notice.querySelector('[data-notice-level]').textContent='Peringatan aktif · '+labels[highest];
+   notice.querySelector('p').textContent=`${fresh.length} peringatan BMKG sedang berlaku`;
    notice.hidden=false;
   }
   if (!active.some(item=>item.rank>=3)) notice.hidden=true;

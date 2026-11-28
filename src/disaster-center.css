@@ -68,3 +68,69 @@
 .monitoring-links { max-width: 1100px; margin: 0 auto; }
 .disaster-actions select { color:#eff6ff; background:#203b54; border:1px solid #58718b; border-radius:6px; }
 @media(max-width:640px){.monitoring-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.disaster-center,.disaster-notice,#monitoring-summary,#disaster-trigger {
+ font-family: 'Plus Jakarta Sans Variable', sans-serif;
+}
+.disaster-center {
+ background: #111f33; border-color: #314762;
+ box-shadow: 0 24px 75px #030916b0;
+}
+.disaster-center [data-view=alerts] > a { display: inline-block; margin-top: 10px; }
+.disaster-center [data-results] article { background: #15263e; border-color: #2c435e; border-left-color: var(--alert-color); }
+.disaster-center [data-status],#monitoring-summary [data-summary-status] {
+ font-family: 'JetBrains Mono Variable', monospace;
+ font-size: 12px; color: #b3c7df;
+}
+.topbar #disaster-trigger {
+ position: relative; display: inline-flex; align-items: center; gap: 7px;
+ min-height: 34px; padding: 6px 10px; color: #e9eff9; font-size: 12px; white-space: nowrap;
+ border: 1px solid #425976; border-radius: 999px; background: #14253d;
+}
+.topbar #disaster-trigger svg { width: 15px; height: 15px; color: #facc15; }
+.topbar #disaster-trigger:hover { background: #223958; border-color: #edbb36; }
+#disaster-trigger [data-count]:not([hidden]) {
+ display: grid; place-items: center; min-width: 20px; min-height: 20px;
+ padding-inline: 4px; margin: 0; font-size: 11px; background: #d2313a;
+ color: #fff; border-radius: 99px; font-variant-numeric: tabular-nums;
+}
+.disaster-notice {
+ --notice-accent: #f97316; top: 73px; width: min(365px,calc(100% - 24px));
+ color: #edf4fc; background: #101f32; border-color: #354963;
+ border-top: 3px solid var(--notice-accent);
+ padding: 13px 15px;
+}
+.disaster-notice-heading {
+ display: flex; align-items: center; justify-content: space-between; gap: 10px;
+ color: var(--notice-accent); font-size: 11px; text-transform: uppercase; letter-spacing: .075em;
+}
+.disaster-notice [data-dismiss] { padding: 0 6px; border: 0; background: transparent; color: #c8d6e6; font-size: 18px; }
+.disaster-notice p { font-size: 15px; font-weight: 750; margin: 4px 0 10px; }
+
+#monitoring-summary {
+ display: grid; align-content: start; grid-template-columns: minmax(0,1fr);
+ gap: 12px; background: #0b1423; padding: clamp(14px,2.5vw,32px);
+}
+#monitoring-summary[hidden] { display: none; }
+.monitoring-hero,.monitoring-offices,.monitoring-links,.monitoring-metrics { width: 100%; max-width: 1160px; margin: 0 auto; }
+.monitoring-hero {
+ padding: clamp(18px,3vw,36px); border-radius: 16px;
+ background: linear-gradient(115deg,#152c49,#101e33 75%); border-color: #2b425f;
+}
+.monitoring-hero h2 { font: 800 clamp(23px,3.2vw,40px)/1.16 'Plus Jakarta Sans Variable',sans-serif; letter-spacing: -.045em; }
+.monitoring-metrics { gap: 8px; }
+.monitoring-metrics button {
+ display: flex; align-items: center; justify-content: space-between; gap: 8px;
+ border: 1px solid #2f4560; border-left: 3px solid var(--metric-accent);
+ border-radius: 9px; background: #14243b;
+}
+.monitoring-metrics strong { font-size: 23px; }
+.monitoring-offices { background: #111f33; border-color: #30465f; }
+.monitoring-offices h2 { font-family: inherit; letter-spacing: -.02em; }
+.monitoring-offices a,.monitoring-links a { background: #182941; border-color: #344c67; }
+.monitoring-offices a { border-left-color: var(--metric-accent); }
+@media(max-width:640px){
+ .topbar #disaster-trigger { padding: 4px 6px; gap: 3px; min-height: 30px; }
+ #disaster-trigger [data-count]:not([hidden]) { min-width: 17px; min-height: 17px; font-size: 9px; }
+ .disaster-notice { top: 106px; }
+}
