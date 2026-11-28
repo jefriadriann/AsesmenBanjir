@@ -3,8 +3,10 @@ import chromium from '@sparticuz/chromium';
 import {chromium as playwright} from 'playwright-core';
 import {validSummary, webgisUrl} from '../lib/webgis-summary.js';
 
+import {observeDistricts,readMonitoringDetail,readOfficeRaster} from '../lib/webgis-observation.js';
+
 const refreshInterval = 15 * 60_000;
-let latest, pending, retryAfter = 0;
+const snapshots = {national:{}, raster:{}};
 const hosts = new Set([
  'inarisk.bnpb.go.id','inarisk1.bnpb.go.id','gis.bnpb.go.id','api.open-meteo.com','marine-api.open-meteo.com',
  'nowcasting.bmkg.go.id','www.bmkg.go.id','api.bmkg.go.id','datacuaca.bmkg.go.id','www.cpc.ncep.noaa.gov'
@@ -24,13 +26,14 @@ async function readGeography(url) {
 }
 
 // WebGIS computes the office matrix in its public page, after multiple asynchronous feeds finish.
-async function readSource() {
+async function readSource(raster) {
  chromium.setGraphicsMode = false;
  const executablePath = await chromium.executablePath();
  const browser = await playwright.launch({executablePath, args:['--no-sandbox','--no-zygote','--disable-webgl'],
   env:Object.fromEntries(['PATH','LD_LIBRARY_PATH','FONTCONFIG_PATH','LANG'].filter(key=>process.env[key]).map(key=>[key,process.env[key]]))});
  try {
   const page = await browser.newPage({locale:'id-ID',timezoneId:'Asia/Jakarta',serviceWorkers:'block'});
+  if (!raster) await page.addInitScript(observeDistricts);
   const geoFiles = new Map();
   await page.route('**/*', async route => {
    const request = route.request();
@@ -52,6 +55,7 @@ async function readSource() {
    return route.continue();
   });
   await page.goto(webgisUrl,{waitUntil:'domcontentloaded',timeout:30_000});
+  if (raster) return await readOfficeRaster(page);
   await page.waitForFunction(() => {
    const feed = id => document.querySelector('.feed[data-id="'+id+'"]');
    const required = ['inarisk','ce','fc','hist','marine','cap'];
@@ -102,28 +106,37 @@ async function readSource() {
   });
   if ([...await Promise.all(geoFiles.values())].some(body=>!body)) throw Error('Data administrasi WebGIS tidak lengkap');
   if (!validSummary(data)) throw Error('Kartu dan matriks kantor WebGIS belum selaras');
+  data.detail=await page.evaluate(readMonitoringDetail);
   return data;
  } finally { await browser.close(); }
 }
 
 export default async function handler(req,res) {
  if (req.method !== 'GET') return res.status(405).end();
+ const params=new URL(req.url,'https://localhost').searchParams;
+ const raster=params.get('view')==='raster';
+ const manual=!raster && params.get('refresh')==='1';
+ const state=snapshots[raster?'raster':'national'];
+ const key=raster?'office-raster-v1':'national-detail-v1';
  const cache=getCache({namespace:'webgis-bi'});
- if (!latest) {
-  const saved=await cache.get('national').catch(()=>null);
-  if (validSummary(saved)) latest=saved;
+ if (!state.latest) {
+  const saved=await cache.get(key).catch(()=>null);
+  if (raster?saved?.rows:validSummary(saved)&&saved.detail) state.latest=saved;
  }
- if ((!latest || Date.now()-Date.parse(latest.asOf)>=refreshInterval) && Date.now()>=retryAfter) {
-  pending ??= readSource().then(async data => {
-   latest=data;
-   await cache.set('national',data,{ttl:7*86400}).catch(()=>{});
-  }).catch(error => {
+ const interval=raster&&state.latest?.complete?86400_000:refreshInterval;
+ const age=()=>state.latest?Date.now()-Date.parse(state.latest.asOf):Infinity;
+ if (age()>=(manual?120_000:interval) && Date.now()>=(state.retryAfter||0)) {
+  state.pending ??= readSource(raster).then(async data=>{
+   state.latest=data;
+   await cache.set(key,data,{ttl:7*86400}).catch(()=>{});
+  }).catch(error=>{
    console.warn('Ringkasan WebGIS BI:',error.message);
-   retryAfter=Date.now()+120_000;
-  }).finally(()=>{pending=null;});
-  await pending;
+   state.retryAfter=Date.now()+120_000;
+  }).finally(()=>{state.pending=null;});
+  await state.pending;
  }
- const stale = !latest || Date.now()-Date.parse(latest.asOf)>=refreshInterval;
- res.setHeader('Cache-Control',stale?'public, max-age=0, s-maxage=120':'public, max-age=0, s-maxage=900, stale-while-revalidate=300, stale-if-error=86400');
- return latest ? res.status(200).json({data:latest,stale}) : res.status(503).json({error:'Ringkasan WebGIS BI belum termuat lengkap.'});
+ const stale=age()>=interval || Date.now()<(state.retryAfter||0);
+ const seconds=stale?120:Math.max(1,Math.floor((interval-age())/1000));
+ res.setHeader('Cache-Control',manual?'no-store':`public, max-age=0, s-maxage=${seconds}, stale-while-revalidate=60`);
+ return state.latest ? res.status(200).json({data:state.latest,stale}) : res.status(503).json({error:'Sumber WebGIS BI belum termuat lengkap.'});
 }
