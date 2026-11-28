@@ -206,7 +206,7 @@ function render(){
    L.polyline([mapCoords(parent), mapCoords(child)], {
      pane: 'officeConnections', className: 'kpw-kas-link', color: approximate ? '#468fb9' : '#2bb6ad',
      weight: approximate ? 1 : 1.2, opacity: approximate ? .65 : .85,
-     lineCap: 'round', interactive: false,
+     lineCap: 'round', dashArray: '4 4', interactive: false,
    }).addTo(connections);
  }
  directory.render(rows);renderMarkers();refreshIcons();

@@ -20,7 +20,7 @@ try {
   const mapped = await page.locator('.marker-container').evaluateAll(markers =>
     markers.reduce((total, marker) => total + Number(marker.querySelector('.cluster-count')?.textContent ?? 1), 0));
   assert.equal(mapped, 134);
-  assert.equal(await page.locator('.kpw-kas-link[stroke-dasharray]').count(), 0);
+  assert.equal(await page.locator('.kpw-kas-link[stroke-dasharray="4 4"]').count(), linkCount);
   assert.equal(await page.locator('.kpw-kas-link[stroke-width="1"]').count(), 43);
   assert.equal(await page.locator('.kpw-kas-link[stroke-width="1.2"]').count(), linkCount - 43);
   await page.locator('.map-filters [data-type="kpw"]').click();
