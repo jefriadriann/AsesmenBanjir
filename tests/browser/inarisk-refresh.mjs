@@ -27,6 +27,12 @@ try{
  const weather=page.getByRole('checkbox',{name:'Nowcasting aktif BMKG'});
  assert.equal(await page.getByRole('heading',{name:'Cuaca dan aliran air'}).isVisible(),true);
  const dasCard=page.locator('.monev-option').filter({has:das});
+ for(const [card,name] of [[dasCard,'das'],[page.locator('.monev-option').filter({has:weather}),'nowcasting']]){
+  const preview=card.locator('.monev-preview');
+  assert.equal(await preview.getAttribute('src'),'/monev-previews/'+name+'.webp');
+  await preview.scrollIntoViewIfNeeded();
+  await page.waitForFunction(src=>document.querySelector('img[src="'+src+'"]')?.naturalWidth>0,'/monev-previews/'+name+'.webp');
+ }
  await dasCard.getByText('Legenda',{exact:true}).click();
  await dasCard.getByText('Class 1',{exact:true}).waitFor();
  await dasCard.getByText('Legenda',{exact:true}).click();
