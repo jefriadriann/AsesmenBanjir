@@ -34,9 +34,12 @@ export function mountDisasterCenter({map,offices,trigger}) {
     <button type="button" data-tab="activity" aria-pressed="false">Kegiatan PRB</button>
   </nav>
   <section data-view="alerts">
+    <a href="#ringkasan" data-summary-link>Lihat ringkasan pantauan</a>
     <p data-status role="status">Memuat peringatan resmi BMKG…</p>
     <div class="disaster-actions">
+      <label><input type="checkbox" data-active> Hanya aktif</label>
       <label><input type="checkbox" data-offices> Hanya wilayah yang mencakup titik kantor</label>
+      <label>Tingkat <select data-severity><option value="">Semua tingkat</option><option value="Extreme">Ekstrem</option><option value="Severe">Berat</option><option value="Moderate">Sedang</option><option value="Minor">Ringan</option></select></label>
       <button type="button" data-refresh>Perbarui</button>
       <button type="button" data-clear>Tutup overlay BMKG</button>
     </div>
@@ -54,6 +57,25 @@ export function mountDisasterCenter({map,offices,trigger}) {
   </section>
   <footer><a href="${bnpb}" target="_blank" rel="noopener noreferrer">WebGIS BI BNPB ↗</a></footer>`;
  document.querySelector('#app').append(dialog);
+ const summary=document.createElement('main');
+ summary.id='monitoring-summary';
+ summary.hidden=true;
+ summary.innerHTML=`
+   <section class="monitoring-hero" aria-label="Ringkasan peringatan BMKG">
+     <h2 data-headline>Peringatan cuaca BMKG</h2>
+     <p data-summary-status role="status"></p>
+     <div data-metrics class="monitoring-metrics"></div>
+   </section>
+   <section class="monitoring-offices">
+     <h2>Kantor BI dalam wilayah peringatan aktif</h2>
+     <p>Berdasarkan irisan poligon CAP dengan koordinat kantor yang tersedia.</p>
+     <div data-office-list></div>
+   </section>
+   <nav class="monitoring-links" aria-label="Modul BNPB">
+     <a href="${bnpb}simulasi/index.html#banjir" target="_blank" rel="noopener noreferrer">Simulasi Banjir BNPB ↗</a>
+     <a href="${bnpb}simulasi/index.html#kegiatan" target="_blank" rel="noopener noreferrer">Kegiatan PRB BNPB ↗</a>
+   </nav>`;
+ document.querySelector('.app-main').append(summary);
  const notice=document.createElement('aside');
  notice.className='disaster-notice';
  notice.hidden=true;
@@ -62,6 +84,8 @@ export function mountDisasterCenter({map,offices,trigger}) {
  const status=dialog.querySelector('[data-status]');
  const results=dialog.querySelector('[data-results]');
  const officeFilter=dialog.querySelector('[data-offices]');
+ const activeFilter=dialog.querySelector('[data-active]');
+ const severityFilter=dialog.querySelector('[data-severity]');
  const count=trigger.querySelector('[data-count]');
  const layer=L.layerGroup().addTo(map);
  const pane=map.createPane('bmkgAlerts');
@@ -71,6 +95,43 @@ export function mountDisasterCenter({map,offices,trigger}) {
  const seen=new Set();
 
  function open() { notice.hidden=true; if(!dialog.open)dialog.showModal(); }
+ function renderSummary(active,matches) {
+  summary.querySelector('[data-headline]').textContent=snapshot
+   ? (active.length?`${active.length} peringatan cuaca aktif`:'Tidak ada peringatan cuaca aktif dalam feed')
+   : 'Peringatan cuaca BMKG';
+  summary.querySelector('[data-summary-status]').textContent=status.textContent;
+  const metrics=summary.querySelector('[data-metrics]');
+  metrics.replaceChildren();
+  for(const [level,label] of Object.entries(labels)){
+   const button=node('button','');
+   button.type='button';
+   button.style.setProperty('--metric-accent',colors[level]);
+   button.append(node('span',label),node('strong',snapshot?String(active.filter(item=>item.level===level).length):'—'));
+   button.onclick=()=>{
+    severityFilter.value=level;
+    officeFilter.checked=false;
+    activeFilter.checked=true;
+    dialog.querySelector('[data-tab=alerts]').click();
+    render();
+    open();
+   };
+   metrics.append(button);
+  }
+  const list=summary.querySelector('[data-office-list]');
+  list.replaceChildren();
+  for(const office of offices){
+   const match=active.find(item=>matches.get(item.id).includes(office));
+   if(!match)continue;
+   const link=node('a',office.name+' · '+(labels[match.level]||'Dalam area CAP'));
+   link.href='#peta/'+encodeURIComponent(office.id);
+   link.style.setProperty('--metric-accent',colors[match.level]||'#a9bdcd');
+   list.append(link);
+  }
+  summary.querySelector('.monitoring-offices h2').textContent=list.childElementCount
+   ? `${list.childElementCount} kantor BI dalam wilayah peringatan aktif`
+   : 'Kantor BI dalam wilayah peringatan aktif';
+  if(!list.childElementCount)list.append(node('p',snapshot?'Belum ada titik kantor yang tercakup dalam poligon aktif yang termuat.':status.textContent));
+ }
  function render() {
   const now=Date.now();
   const active=(snapshot?.items||[]).filter(item=>item.start<=now&&now<item.end);
@@ -90,10 +151,13 @@ export function mountDisasterCenter({map,offices,trigger}) {
    notice.hidden=false;
   }
   if (!active.some(item=>item.rank>=3)) notice.hidden=true;
+  const current=(snapshot?.items||[]).filter(item=>now<item.end);
+  const officeMatches=new Map(current.map(item=>[item.id,offices.filter(office=>item.polygons.some(polygon=>inPolygon(office.coords,polygon)))]));
+  renderSummary(active,officeMatches);
   results.replaceChildren();
-  for (const item of (snapshot?.items||[]).filter(item=>now<item.end)) {
-   const matches=offices.filter(office=>item.polygons.some(polygon=>inPolygon(office.coords,polygon)));
-   if (officeFilter.checked && !matches.length) continue;
+  for (const item of current) {
+   const matches=officeMatches.get(item.id);
+   if ((activeFilter.checked && item.start>now)||(officeFilter.checked && !matches.length)||(severityFilter.value&&item.level!==severityFilter.value)) continue;
    const card=node('article','');
    card.style.setProperty('--alert-color',colors[item.level]||'#a9bdcd');
    card.append(node('strong',(labels[item.level]||'Tingkat belum tersedia')+' · '+(item.start<=now?'Aktif':'Akan berlaku')),
@@ -144,11 +208,15 @@ export function mountDisasterCenter({map,offices,trigger}) {
  notice.querySelector('[data-open]').onclick=open;
  notice.querySelector('[data-dismiss]').onclick=()=>{notice.hidden=true;};
  officeFilter.onchange=render;
+ severityFilter.onchange=render;
+ activeFilter.onchange=render;
+ dialog.querySelector('[data-summary-link]').onclick=()=>dialog.close();
  for (const tab of dialog.querySelectorAll('[data-tab]')) tab.onclick=()=>{
   for (const button of dialog.querySelectorAll('[data-tab]')) button.setAttribute('aria-pressed',String(button===tab));
   for (const section of dialog.querySelectorAll('[data-view]')) section.hidden=section.dataset.view!==tab.dataset.tab;
  };
  const interval=120000;
+ render();
  refresh();
  setInterval(()=>{if(!document.hidden)refresh();},interval);
  document.addEventListener('visibilitychange',()=>{

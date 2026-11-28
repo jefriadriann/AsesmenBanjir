@@ -55,6 +55,7 @@ document.querySelector('#app').innerHTML=`
  <a class="wordmark" href="/" aria-label="SEKAR BENCANA beranda"><span class="brand-symbol sekar-brand-symbol"><img src="/brand/sekar-badge.png" alt="" width="44" height="44" decoding="async" fetchpriority="high"></span><span>SEKAR <small>BENCANA</small></span></a>
  <div class="workspace-switch"><span class="workspace-symbol">BI</span><span>Jaringan kas Indonesia<small>Seluruh Indonesia</small></span><span class="workspace-status" title="Data lokal tersedia"></span></div>
 
+ <a id="summary-nav" class="nav-item" aria-label="Ringkasan pantauan" title="Ringkasan pantauan" href="#ringkasan">${i('network')}<span>Ringkasan pantauan</span></a>
  <a id="map-nav" aria-label="Asesmen Risiko Banjir" title="Asesmen Risiko Banjir" class="nav-item active" href="#peta" aria-current="page">${i('map')}<span>Asesmen Risiko Banjir</span></a>
  <a class="nav-item" id="news-nav" aria-label="Berita kebencanaan" title="Berita kebencanaan" href="#berita">${i('file-spreadsheet')}<span>Berita kebencanaan</span></a><a class="nav-item" id="readiness-nav" aria-label="Kesiapan sarpras" title="Kesiapan sarpras" href="#sarpras">${i('shield-check')}<span>Kesiapan sarpras</span></a>
  <div class="sidebar-insight"><div class="insight-kicker">JARINGAN INDONESIA</div><div class="insight-total">133 <span>lokasi</span></div><div class="insight-bar"><b></b><b></b></div><div class="insight-legend"><span><b></b>46 KPw</span><span><b></b>87 Kas titipan</span></div><div class="insight-note">${i('globe')} 5 wilayah operasional</div></div><div class="sidebar-review"><span class="review-dot"></span><div>Verifikasi koordinat<small>${locatedCount}/133 tersedia · belum diverifikasi</small></div><button id="review-info" aria-label="Status verifikasi">${i('arrow-up-right')}</button></div><div class="sidebar-coverage"><span class="section-kicker">CAKUPAN NASIONAL</span><div class="coverage-value">133<span>titik jaringan</span></div><div class="coverage-bar"><span></span><span></span></div><div class="coverage-key"><span><b class="dot cyan"></b>46 KPw BI</span><span><b class="dot amber"></b>87 Kas titipan</span></div><div class="coverage-regions"><span>5</span> wilayah operasional ${i('arrow-up-right')}</div></div>
@@ -328,8 +329,36 @@ const watch = mountNewsWatch({
   map, locations: data, readiness: sourceReadiness,
   onActive: (active, refresh) => news.setMapActive(active, refresh),
 });
-function applyWorkspace(){const [view,id]=location.hash.slice(1).split('/');const isReadiness=view==='sarpras',isNews=view==='berita';document.querySelector('#news-nav').classList.toggle('active',isNews);document.querySelector('#news-nav').setAttribute('aria-current',isNews?'page':'false');watch.setVisible(!isReadiness&&!isNews);if(isNews)news.show();else news.hide();document.querySelector('#peta').classList.toggle('hidden',isReadiness||isNews);document.querySelector('.app-main').classList.toggle('readiness-active',isReadiness);document.querySelector('#map-nav').classList.toggle('active',!isReadiness&&!isNews);document.querySelector('#readiness-nav').classList.toggle('active',isReadiness);document.querySelector('#map-nav').setAttribute('aria-current',isReadiness||isNews?'false':'page');document.querySelector('#readiness-nav').setAttribute('aria-current',isReadiness?'page':'false');document.querySelector('.map-title h1').textContent=isNews?'Berita kebencanaan':isReadiness?'Kesiapan Sarpras':'Asesmen Risiko Banjir';document.querySelector('.title-tag').innerHTML=i('globe')+(isReadiness?'46 KPw':'Indonesia');
- if(isNews){toggleDistance(false);map.closePopup();readiness.hide();}else if(isReadiness){toggleDistance(false);map.closePopup();readiness.show(id);}else{readiness.hide();clearFilters();setPanel(false);requestAnimationFrame(()=>{map.invalidateSize({pan:false});if(id&&data.some(d=>d.id===id)){directoryParentId=null;directory.setParent(null);query='';document.querySelector('#search').value='';render();openLocation(id);}else if(!selected)nationalView();});}refreshIcons();}
+function applyWorkspace(){
+ const [view,id]=location.hash.slice(1).split('/');
+ const isReadiness=view==='sarpras', isNews=view==='berita', isSummary=view==='ringkasan';
+ const isMap=!(isReadiness||isNews||isSummary);
+ for(const [nav,active] of [['map',isMap],['news',isNews],['readiness',isReadiness],['summary',isSummary]]){
+  const link=document.querySelector('#'+nav+'-nav');
+  link.classList.toggle('active',active);
+  link.setAttribute('aria-current',active?'page':'false');
+ }
+ watch.setVisible(isMap);
+ if(isNews)news.show();else news.hide();
+ document.querySelector('#peta').classList.toggle('hidden',!isMap);
+ document.querySelector('#monitoring-summary').hidden=!isSummary;
+ document.querySelector('.app-main').classList.toggle('readiness-active',isReadiness);
+ document.querySelector('.map-title h1').textContent=isSummary?'Ringkasan Pantauan':isNews?'Berita kebencanaan':isReadiness?'Kesiapan Sarpras':'Asesmen Risiko Banjir';
+ document.querySelector('.title-tag').innerHTML=i('globe')+(isReadiness?'46 KPw':'Indonesia');
+ if(!isMap){
+  toggleDistance(false);map.closePopup();
+  if(isReadiness)readiness.show(id);else readiness.hide();
+ }else{
+  readiness.hide();clearFilters();setPanel(false);
+  requestAnimationFrame(()=>{
+   map.invalidateSize({pan:false});
+   if(id&&data.some(d=>d.id===id)){
+    directoryParentId=null;directory.setParent(null);query='';document.querySelector('#search').value='';render();openLocation(id);
+   }else if(!selected)nationalView();
+  });
+ }
+ refreshIcons();
+}
 window.addEventListener('hashchange',applyWorkspace);document.querySelector('#readiness-header').onclick=()=>{location.hash=location.hash.startsWith('#sarpras')?'peta':'sarpras';};
 // A restrained pointer glow on application chrome; map controls keep normal interactions.
 if(matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)').matches){let frame;document.addEventListener('pointermove',e=>{if(e.target.closest('.map-frame'))return;cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{document.documentElement.style.setProperty('--pointer-x',e.clientX+'px');document.documentElement.style.setProperty('--pointer-y',e.clientY+'px');});},{passive:true});}
@@ -365,12 +394,12 @@ function showLayerPanel(target){
 document.addEventListener('click',event=>{const tab=event.target.closest('[data-layer-panel]');if(tab)showLayerPanel(tab.dataset.layerPanel);});
 document.querySelector('#risk-settings').onclick=()=>openLayerSettings('inarisk');
 document.querySelector('#layer-settings').onclick=()=>openLayerSettings('rainfall');
-applyWorkspace();
 mountDisasterCenter({map,trigger:document.querySelector('#disaster-trigger'),
  offices:data.filter(office=>office.type!=='kas'&&hasOfficeCoords(office)).map(office=>({
-  name:office.type==='kpw'?'KPw '+office.name:office.name,coords:locationCoords(office),
+  id:office.id,name:office.type==='kpw'?'KPw '+office.name:office.name,coords:locationCoords(office),
  })),
 });
+applyWorkspace();
 const sidebarToggle = document.querySelector('#sidebar-toggle');
 sidebarToggle.onclick = () => {
  const compact = document.querySelector('#app').classList.toggle('sidebar-compact');
