@@ -6,6 +6,7 @@ import {mountSlope} from './slope.js';
 import {centralOffice,jakartaOfficeReferences} from './central-office.js';
 import {createDirectory,childrenOf} from './directory.js';
 import {mountInarisk} from './inarisk.js';
+import {mountSibolgaPreview} from './qgis-preview.js';
 import {createReadiness} from './readiness-source.js';
 import {locationCoords,isVerified} from './distance.js';
 import {bankLogo,bankBrand} from './banks.js';
@@ -284,6 +285,7 @@ function openLocation(id){
  content.querySelector('.popup-detail-button').onclick=()=>openDetail(id);
  content.querySelector('.popup-area-button').setAttribute('aria-label','Perbesar titik pada peta');
  content.querySelector('.popup-area-button').onclick=()=>{setMapStyle('street');map.flyTo(mapCoords(d),12,{duration:.8});};
+ if(d.id==='KPW-04')mountSibolgaPreview(content,popup);
  popup.openOn(map);document.querySelector('#map-zoom-hint').classList.add('hidden');renderMarkers();refreshIcons();
 }
 function openDetail(id){const d=data.find(x=>x.id===id);if(!d)return;selected=id;document.querySelector('.explorer').classList.add('detail-open');map.closePopup();if(!panelOpen)setPanel(true);document.querySelector('#directory-list').classList.add('hidden');const detail=document.querySelector('#location-detail');detail.classList.remove('hidden');
