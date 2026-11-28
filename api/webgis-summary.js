@@ -1,3 +1,4 @@
+import {getCache} from '@vercel/functions';
 import chromium from '@sparticuz/chromium';
 import {chromium as playwright} from 'playwright-core';
 import {validSummary, webgisUrl} from '../lib/webgis-summary.js';
@@ -9,6 +10,19 @@ const hosts = new Set([
  'nowcasting.bmkg.go.id','www.bmkg.go.id','api.bmkg.go.id','datacuaca.bmkg.go.id','www.cpc.ncep.noaa.gov'
 ]);
 
+async function readGeography(url) {
+ for (let attempt=0;attempt<2;attempt++) {
+  try {
+   const res=await fetch(url,{signal:AbortSignal.timeout(8500),redirect:'error'});
+   if (!res.ok) continue;
+   const body=await res.text();
+   const data=JSON.parse(body);
+   if (data.regions?.length || (data.kabs?.length && data.d?.length)) return body;
+  } catch { /* Retry transient source errors once within WebGIS's timeout. */ }
+ }
+ return null;
+}
+
 // WebGIS computes the office matrix in its public page, after multiple asynchronous feeds finish.
 async function readSource() {
  chromium.setGraphicsMode = false;
@@ -17,11 +31,25 @@ async function readSource() {
   env:Object.fromEntries(['PATH','LD_LIBRARY_PATH','FONTCONFIG_PATH','LANG'].filter(key=>process.env[key]).map(key=>[key,process.env[key]]))});
  try {
   const page = await browser.newPage({locale:'id-ID',timezoneId:'Asia/Jakarta',serviceWorkers:'block'});
-  await page.route('**/*', route => {
+  const geoFiles = new Map();
+  await page.route('**/*', async route => {
    const request = route.request();
    const url = new URL(request.url());
    const allowed = url.protocol === 'https:' && hosts.has(url.hostname) && !['image','media','font'].includes(request.resourceType());
-   return allowed ? route.continue() : route.abort();
+   if (!allowed) return route.abort();
+   // The reference page also looks up offices while initializing its map.
+   // Defer that lookup until its kab/kota table exists or it caches unmatched offices.
+   if (url.href === webgisUrl+'data/kantor_bi.json') {
+    try {await page.waitForSelector('.feed.ok[data-id="inarisk"]',{state:'attached',timeout:18_000});}
+    catch {return route.abort();}
+   }
+   if (url.origin === new URL(webgisUrl).origin && /^\/webgis-bi\/data\/impact\/(index|\d+)\.json$/.test(url.pathname)) {
+    // Several offices request the same index concurrently. Serve the same source bytes to each.
+    if (!geoFiles.has(url.href)) geoFiles.set(url.href, readGeography(url.href));
+    const body = await geoFiles.get(url.href);
+    return body ? route.fulfill({status:200,contentType:'application/json',body}) : route.abort();
+   }
+   return route.continue();
   });
   await page.goto(webgisUrl,{waitUntil:'domcontentloaded',timeout:30_000});
   await page.waitForFunction(() => {
@@ -53,6 +81,10 @@ async function readSource() {
    const rows = [...document.querySelectorAll('#biMatrix tbody tr')].map(row => ({
     id:row.dataset.id, name:row.querySelector('td b').textContent.trim(), status:row.cells[1].textContent.trim(),
    }));
+   const cells = [...document.querySelectorAll('#biMatrix tbody tr')];
+   const high = cells.filter(row => [...row.querySelectorAll('.bi-cell')].some(cell => cell.textContent.trim()==='T')).length;
+   if (high !== counts['Potensi Tinggi'] || ['Awas','Siaga','Waspada','Normal'].some(label => rows.filter(row=>row.status===label).length !== counts[label]))
+    throw Error('Kartu WebGIS berbeda dengan matriks kantor');
    const order = [...document.querySelectorAll('#biHeroList button[data-id]')].map(button => button.dataset.id);
    const priority = rows.filter(row => ['Awas','Siaga','Waspada'].includes(row.status));
    const ranked = [...order.map(id => priority.find(row => row.id===id)), ...priority.filter(row => !order.includes(row.id))];
@@ -60,6 +92,7 @@ async function readSource() {
     asOf:new Date().toISOString(), total:rows.length, counts, offices:ranked.map(({name,status})=>({name,status})),
     context:text('#heroText'), climate:{
      oni:text('#ensoVal'), oniPeriod:text('#ensoPhase'), iod:text('#iodVal'), iodPeriod:text('#iodPhase'),
+     guides:[...document.querySelectorAll('#oniSpark line')].map(line=>Number(line.getAttribute('y1'))),
      points:document.querySelector('#oniSpark polyline')?.getAttribute('points') || '',
      note:document.querySelector('#seasonNote')?.firstChild?.textContent.trim() || '',
      citation:text('#seasonNote a'), link:document.querySelector('#seasonNote a')?.href || '',
@@ -67,6 +100,7 @@ async function readSource() {
     feeds:[...document.querySelectorAll('#feedStatus .feed')].map(el => ({text:el.textContent.trim(),state:el.classList.contains('ok')?'ok':el.classList.contains('err')?'error':'pending'})),
    };
   });
+  if ([...await Promise.all(geoFiles.values())].some(body=>!body)) throw Error('Data administrasi WebGIS tidak lengkap');
   if (!validSummary(data)) throw Error('Kartu dan matriks kantor WebGIS belum selaras');
   return data;
  } finally { await browser.close(); }
@@ -74,8 +108,16 @@ async function readSource() {
 
 export default async function handler(req,res) {
  if (req.method !== 'GET') return res.status(405).end();
+ const cache=getCache({namespace:'webgis-bi'});
+ if (!latest) {
+  const saved=await cache.get('national').catch(()=>null);
+  if (validSummary(saved)) latest=saved;
+ }
  if ((!latest || Date.now()-Date.parse(latest.asOf)>=refreshInterval) && Date.now()>=retryAfter) {
-  pending ??= readSource().then(data => {latest=data;}).catch(error => {
+  pending ??= readSource().then(async data => {
+   latest=data;
+   await cache.set('national',data,{ttl:7*86400}).catch(()=>{});
+  }).catch(error => {
    console.warn('Ringkasan WebGIS BI:',error.message);
    retryAfter=Date.now()+120_000;
   }).finally(()=>{pending=null;});

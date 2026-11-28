@@ -3,7 +3,7 @@ import {levels, validSummary, webgisUrl} from '../lib/webgis-summary.js';
 
 const accents = ['#ef4444','#f97316','#facc15','#22c55e','#eebc36'];
 const wib = new Intl.DateTimeFormat('id-ID',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Jakarta'});
-const storageKey = 'sekar.webgis-bi.nasional.v1';
+const storageKey = 'sekar.webgis-bi.nasional.v2';
 const period = 15*60_000;
 
 function element(tag, text) {
@@ -26,7 +26,7 @@ export function mountWebgisSummary(summary, offices) {
     <section class="bi-climate"><h3 class="bi-eyebrow">Pengendali iklim global</h3>
      <div class="bi-indices"><div><small>ENSO (ONI)</small><strong data-oni></strong><span data-oni-period></span></div>
      <div><small>IOD</small><strong data-iod></strong><span data-iod-period></span></div></div>
-     <svg class="bi-trend" viewBox="0 0 240 46" preserveAspectRatio="none" role="img" aria-label="Tren indeks ONI NOAA"><polyline fill="none" stroke="#fbbf24" stroke-width="2"/></svg>
+     <svg class="bi-trend" viewBox="0 0 240 46" preserveAspectRatio="none" role="img" aria-label="Tren indeks ONI NOAA"><g data-guides></g><polyline fill="none" stroke="#fbbf24" stroke-width="2"/></svg>
      <p data-season></p>
     </section>
     <div class="bi-feeds" aria-label="Sumber data pada waktu ringkasan"></div>
@@ -90,6 +90,15 @@ export function mountWebgisSummary(summary, offices) {
   const points=climate.points||'';
   find('.bi-trend').style.display=points?'':'none';
   find('.bi-trend polyline').setAttribute('points',points);
+  const guides=find('[data-guides]');
+  guides.replaceChildren();
+  for (const [i,y] of (climate.guides || []).entries()) {
+   if (!Number.isFinite(y)) continue;
+   const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+   for (const [attr,value] of Object.entries({x1:0,x2:240,y1:y,y2:y,stroke:i===0?'#fb923c':'#38bdf8','stroke-dasharray':'3 3',opacity:0.5}))
+    line.setAttribute(attr,value);
+   guides.append(line);
+  }
   const season = find('[data-season]');
   season.replaceChildren(climate.note||'');
   if (/^https:\/\//.test(climate.link||'')) {

@@ -118,7 +118,7 @@
 .bi-indices small,.bi-climate p,.bi-summary-footer p {color:#94a6c1; font-size:11.5px}
 .bi-indices strong {font-size:26px; color:#fb923c; line-height:1.25}
 .bi-indices span {font-size:12px; color:#c7d5e9; font-weight:600}
-.bi-trend {width:100%; height:46px; display:block}
+#monitoring-summary .bi-trend {width:100%; height:46px; display:block}
 .bi-climate p {line-height:1.55; margin:9px 0 0}
 .bi-climate a,.bi-summary-footer a {color:#38bdf8; text-decoration:underline}
 .bi-feeds {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; margin-top:12px}
